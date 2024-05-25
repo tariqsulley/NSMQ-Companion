@@ -1,11 +1,8 @@
-"use client"
-import ThemeSwitch from "@/app/components/Theme/ThemeSwitch"
-
+import LoginForm from "@/app/components/Forms/LoginForm"
 export default function LoginPage() {
     return (
         <div>
-            <ThemeSwitch />
-            Login
+            <LoginForm />
         </div>
     )
 }
