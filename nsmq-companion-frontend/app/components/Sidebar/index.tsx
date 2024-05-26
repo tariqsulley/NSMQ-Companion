@@ -6,6 +6,7 @@ import { IoPeopleOutline } from "react-icons/io5";
 import { IoAnalyticsOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlBookOpen } from "react-icons/sl";
+import Link from 'next/link';
 
 export default function Sidebar() {
     return (
@@ -53,43 +54,49 @@ export default function Sidebar() {
                     </div>
                 </div>
             </nav>
-
             <aside id="logo-sidebar" className="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-white border-r border-gray-200 sm:translate-x-0 dark:bg-gray-800 dark:border-gray-700" aria-label="Sidebar">
                 <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
                     <ul className="space-y-2 font-medium">
                         <li>
-                            <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <MdOutlineDashboard size={25} />
-                                <span className="ms-3">Dashboard</span>
-                            </a>
+                            <Link href="/dashboard">
+                                <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <MdOutlineDashboard size={25} />
+                                    <span className="ms-3">Dashboard</span>
+                                </div>
+                            </Link>
                         </li>
                         <li>
-                            {"facilitator" ?
-                                <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-
+                            <Link href="/dashboard/students">
+                                <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                     <PiStudentDuotone size={25} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap"> Students </span>
-                                </a> : <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <SlBookOpen size={25} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap"> Practice</span>
-                                </a>}
+                                    <span className="flex-1 ms-3 whitespace-nowrap">Students</span>
+                                </div>
+                            </Link>
                         </li>
                         <li>
-                            {"facilitator" ?
-                                <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <IoAnalyticsOutline size={25} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap"> Analytics</span>
-                                </a> : <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                            <Link href="/dashboard/practice">
+                                <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                    <SlBookOpen size={25} />
+                                    <span className="flex-1 ms-3 whitespace-nowrap">Practice</span>
+                                </div>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link href="/dashboard/multiplayer">
+                                <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                     <IoPeopleOutline size={25} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap"> Multiplayer</span>
-                                </a>}
+                                    <span className="flex-1 ms-3 whitespace-nowrap">Multiplayer</span>
+                                </div>
+                            </Link>
                         </li>
                         <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
                             <li>
-                                <a href="#" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <IoSettingsOutline size={25} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap">Settings</span>
-                                </a>
+                                <Link href="/dashboard/settings">
+                                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <IoSettingsOutline size={25} />
+                                        <span className="flex-1 ms-3 whitespace-nowrap">Settings</span>
+                                    </div>
+                                </Link>
                             </li>
                         </ul>
                     </ul>
