@@ -1,6 +1,5 @@
 "use client"
 import winner from "../../../../public/images/winner.png"
-import bg_img from "../../../../public/images/bg.png"
 import Image from "next/image"
 import { TextInput } from '@tremor/react';
 import GoogleBtn from "../Buttons/GoogleBtn";
@@ -12,10 +11,7 @@ import API_BASE from "../../../utils/api"
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
-import { CgSpinner } from "react-icons/cg";
 import {
-    SearchSelect,
-    SearchSelectItem,
     Select,
     SelectItem,
 } from '@tremor/react';
@@ -46,7 +42,6 @@ export default function LoginForm() {
             });
             return false;
         }
-
         return true;
     };
 
