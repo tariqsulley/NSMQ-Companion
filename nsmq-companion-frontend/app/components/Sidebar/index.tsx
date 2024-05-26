@@ -65,30 +65,39 @@ export default function Sidebar() {
                                 </div>
                             </Link>
                         </li>
-                        <li>
-                            <Link href="/dashboard/students">
-                                <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <PiStudentDuotone size={25} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap">Students</span>
-                                </div>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/dashboard/practice">
-                                <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <SlBookOpen size={25} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap">Practice</span>
-                                </div>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link href="/dashboard/multiplayer">
-                                <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                    <IoPeopleOutline size={25} />
-                                    <span className="flex-1 ms-3 whitespace-nowrap">Multiplayer</span>
-                                </div>
-                            </Link>
-                        </li>
+                        {"facilitator" ?
+                            <li>
+                                <Link href="/dashboard/students">
+                                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <PiStudentDuotone size={25} />
+                                        <span className="flex-1 ms-3 whitespace-nowrap">Students</span>
+                                    </div>
+                                </Link>
+                            </li> :
+                            <li>
+                                <Link href="/dashboard/practice">
+                                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <SlBookOpen size={25} />
+                                        <span className="flex-1 ms-3 whitespace-nowrap">Practice</span>
+                                    </div>
+                                </Link>
+                            </li>}
+                        {"facilitator" ?
+                            <li>
+                                <Link href="/dashboard/multiplayer">
+                                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <IoAnalyticsOutline size={25} />
+                                        <span className="flex-1 ms-3 whitespace-nowrap">Analytics</span>
+                                    </div>
+                                </Link>
+                            </li> : <li>
+                                <Link href="/dashboard/multiplayer">
+                                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <IoPeopleOutline size={25} />
+                                        <span className="flex-1 ms-3 whitespace-nowrap">Multiplayer</span>
+                                    </div>
+                                </Link>
+                            </li>}
                         <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
                             <li>
                                 <Link href="/dashboard/settings">
@@ -105,3 +114,4 @@ export default function Sidebar() {
         </div>
     )
 }
+
