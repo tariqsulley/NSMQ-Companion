@@ -10,9 +10,9 @@ export default function RegisterForm() {
     return (
         <div className="flex bg-white sm:w-[90%] h-[90%] rounded-lg shadow-xl ">
 
-            <div className="sm:w-1/2 flex flex-col items-center justify-center">
-                <div className="p-10 w-full flex flex-col gap-2">
-                    <p className="text-xl font-bold">Sign Up As A Facilitator</p>
+            <div className="sm:w-1/2 flex flex-col  items-center justify-center">
+                <div className="p-10 w-full flex flex-col gap-4">
+                    <p className="text-3xl font-bold">Sign Up As A Facilitator</p>
                     <div className=" w-full">
                         <p>First Name</p>
                         <TextInput placeholder="Enter first name" className="w-full" />
