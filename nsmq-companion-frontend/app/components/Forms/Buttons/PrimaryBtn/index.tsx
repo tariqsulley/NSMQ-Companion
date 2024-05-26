@@ -4,13 +4,14 @@ import { CgSpinner } from "react-icons/cg";
 
 interface PrimaryBtnProps {
     loading: boolean;
+    txt: string;
 }
 
-const PrimaryBtn: React.FC<PrimaryBtnProps> = ({ loading }) => {
+const PrimaryBtn: React.FC<PrimaryBtnProps> = ({ loading, txt }) => {
     return (
         <button className="flex items-center justify-center mb-2 w-full 
         rounded-lg border bg-blue-500 p-2 hover:opacity-80">
-            <p className="text-white font-semibold"> {loading ? <CgSpinner className="animate-spin" size={30} /> : "Sign Up"} </p>
+            <p className="text-white font-semibold"> {loading ? <CgSpinner className="animate-spin" size={30} /> : txt} </p>
         </button>
     );
 };

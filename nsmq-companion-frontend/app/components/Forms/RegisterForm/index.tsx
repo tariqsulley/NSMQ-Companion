@@ -151,7 +151,7 @@ export default function RegisterForm() {
                             placeholder="Confirm password" required />
                     </div>
                     <div className="flex items-center justify-center mt-2">
-                        <PrimaryBtn loading={loading} />
+                        <PrimaryBtn txt="Sign Up" loading={loading} />
                     </div>
                     <div>
                         <p className="flex justify-center text-center my-2">
@@ -171,7 +171,7 @@ export default function RegisterForm() {
                     </div>
                     <div className="w-full text-center ">
                         <p className="text-[#6A6E73] font-semibold">Already have an account?
-                            <Link href={"#"} className="text-blue-500 font-semibold hover:underline mx-1">Sign In</Link></p>
+                            <Link href={"/auth/login"} className="text-blue-500 font-semibold hover:underline mx-1">Sign In</Link></p>
                     </div>
                 </div>
             </form>
