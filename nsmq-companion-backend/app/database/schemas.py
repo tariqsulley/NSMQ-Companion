@@ -43,7 +43,7 @@ class UserEmail(BaseModel):
 
 
 class EmailVerification(BaseModel):
-    user_uuid: UUID
+    facilitator_uuid: UUID
     verification_token: str
     expiry_date: str
 

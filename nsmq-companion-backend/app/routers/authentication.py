@@ -79,7 +79,7 @@ async def verify_token_route(
         if expiry_date > current_date:
             user_data = (
                 db.query(models.Facilitator)
-                .filter(models.Facilitator.uuid == user_token.user_uuid)
+                .filter(models.Facilitator.uuid == user_token.facilitator_uuid)
                 .first()
             )
             if not user_data:
@@ -123,17 +123,17 @@ async def verify_token_route(
 
 @router.post("/verify-email")
 async def verify_user_email(
-    user: schemas.UserEmailVerification, db: Session = Depends(get_db)
+    facilitator: schemas.UserEmailVerification, db: Session = Depends(get_db)
 ):
     # check if user already verified
     # expiry_time = datetime.now() + timedelta(minutes=VERIFY_TOKEN_EXPIRE_DAYS)
-    db_user = db.query(models.Facilitator).filter(models.Facilitator.uuid == user.uuid).first()
+    db_user = db.query(models.Facilitator).filter(models.Facilitator.uuid == facilitator.uuid).first()
     if db_user:
         if db_user.verifiedAt is None:
             # check if token already generated
             verified_user = (
                 db.query(models.EmailVerification)
-                .filter(models.EmailVerification.user_uuid == user.uuid)
+                .filter(models.EmailVerification.facilitator_uuid == facilitator.uuid)
                 .first()
             )
 
@@ -142,13 +142,13 @@ async def verify_user_email(
                 verify_token = generate_verification_token()
 
                 token_detail = {
-                    "user_uuid": user.uuid,
+                    "facilitator_uuid": facilitator.uuid,
                     "verification_token": verify_token,
                     # "expiry_date": expiry_time  # Save the expiry time to the database
                 }
 
                 # save generated token into db
-                return create_verification_token(db, user, token_detail)
+                return create_verification_token(db, facilitator, token_detail)
             else:
                 raise HTTPException(
                     status_code=409,
@@ -161,10 +161,10 @@ async def verify_user_email(
 
 
 @router.post("/login", response_model=None)
-async def login_handler(user: schemas.FacilitatorLogin, db: Session = Depends(get_db)):
+async def login_handler(facilitator: schemas.FacilitatorLogin, db: Session = Depends(get_db)):
     db_user = (
         db.query(models.Facilitator)
-        .filter(models.Facilitator.email_address == user.email_address)
+        .filter(models.Facilitator.email_address == facilitator.email_address)
         .first()
     )
     if db_user is None:

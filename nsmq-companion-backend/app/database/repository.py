@@ -93,7 +93,7 @@ def create_verification_token(
         # return user_verify
 
         db_verify = models.EmailVerification(
-            user_uuid=user_verify.uuid,
+            facilitator_uuid=user_verify.uuid,
             verification_token=verification_token["verification_token"],
             expiry_date=current_date + timedelta(days=VERIFY_TOKEN_EXPIRE_DAYS),
         )
@@ -102,7 +102,7 @@ def create_verification_token(
         db.commit()
 
         db_user = (
-            db.query(models.User).filter(models.User.uuid == user_verify.uuid).first()
+            db.query(models.Facilitator).filter(models.Facilitator.uuid == user_verify.uuid).first()
         )
 
         # return result

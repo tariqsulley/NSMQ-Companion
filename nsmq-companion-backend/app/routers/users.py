@@ -29,7 +29,7 @@ async def create_facilitator_handler(user: schemas.Facilitator, db: Session = De
 
 @router.get("/", response_model=List[schemas.Facilitator])
 async def get_users_handler(
-    db: Session = Depends(get_db), user: schemas.Facilitator = Depends(get_current_user)
+    db: Session = Depends(get_db), user: schemas.Facilitator = Depends(get_db)
 ):
     return get_all_users(db=db)
 
