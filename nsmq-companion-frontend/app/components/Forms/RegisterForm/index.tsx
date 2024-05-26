@@ -8,6 +8,9 @@ import PrimaryBtn from "../Buttons/PrimaryBtn";
 import axios from "axios";
 import { useState } from "react";
 import Link from "next/link";
+import API_BASE from "../../../utils/api"
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function RegisterForm() {
@@ -17,17 +20,78 @@ export default function RegisterForm() {
     const [schoolName, setSchoolName] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const [confirmPassword, setConfirmPassword] = useState<string>("")
+    const [emailError, setEmailError] = useState<string>("")
 
-    const handleSignUp = async (e) => {
-        e.preventDefault()
-        // const ressponse = await axios.post({
+    const isValidEmail = (email: string): boolean => {
+        return /\S+@\S+\.\S+/.test(email);
+    };
 
-        // })
-    }
+    const handleContinue = (): boolean => {
+        if (!isValidEmail(emailAddress)) {
+            toast.error("Please enter a valid email address", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            });
+            return false;
+        }
+        if (password !== confirmPassword) {
+            toast.error("Passwords do not match", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            });
+            return false;
+        }
+
+        return true;
+    };
+
+    const handleSignUp = async (e: any): Promise<void> => {
+        e.preventDefault();
+        if (!handleContinue()) return;
+
+        try {
+            const response = await axios.post(`${API_BASE}/facilitators/create`, {
+                first_name: firstName,
+                last_name: lastName,
+                school: schoolName,
+                email_address: emailAddress,
+                password: password
+            });
+            console.log(response.data);
+        } catch (error: any) {
+            console.error("An error occurred during registration:", error);
+            toast.error("Registration failed", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            });
+        }
+    };
+
 
     return (
-        <div className="flex bg-white sm:w-[90%] h-[90%] rounded-lg shadow-xl ">
-
+        <div className="flex bg-white sm:w-[90%] h-[95%] rounded-lg shadow-xl ">
+            <ToastContainer />
             <form onSubmit={handleSignUp} className="sm:w-1/2 flex flex-col  items-center justify-center">
                 <div className="p-10 w-full flex flex-col gap-4">
                     <p className="text-3xl font-bold">Sign Up As A Facilitator</p>
@@ -61,6 +125,22 @@ export default function RegisterForm() {
                             value={schoolName}
                             onValueChange={(value: string) => setSchoolName(value)}
                             placeholder="Enter name of affiliated school" required />
+                    </div>
+                    <div>
+                        <p>Password</p>
+                        <TextInput
+                            value={password}
+                            type="password"
+                            onValueChange={(value: string) => setPassword(value)}
+                            placeholder="Enter password" required />
+                    </div>
+                    <div>
+                        <p>Confirm Password</p>
+                        <TextInput
+                            value={confirmPassword}
+                            type="password"
+                            onValueChange={(value: string) => setConfirmPassword(value)}
+                            placeholder="Confirm password" required />
                     </div>
                     <div className="flex items-center justify-center mt-2">
                         <PrimaryBtn />
