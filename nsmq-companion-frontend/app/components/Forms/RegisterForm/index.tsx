@@ -11,7 +11,8 @@ import Link from "next/link";
 import API_BASE from "../../../utils/api"
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { useRouter } from "next/navigation";
+import { CgSpinner } from "react-icons/cg";
 
 export default function RegisterForm() {
     const [firstName, setFirstName] = useState<string>("")
@@ -21,6 +22,8 @@ export default function RegisterForm() {
     const [password, setPassword] = useState<string>("")
     const [confirmPassword, setConfirmPassword] = useState<string>("")
     const [emailError, setEmailError] = useState<string>("")
+    const [loading, setLoading] = useState<boolean>(false)
+    const router = useRouter()
 
     const isValidEmail = (email: string): boolean => {
         return /\S+@\S+\.\S+/.test(email);
@@ -64,14 +67,17 @@ export default function RegisterForm() {
         if (!handleContinue()) return;
 
         try {
+            setLoading(true)
             const response = await axios.post(`${API_BASE}/facilitators/create`, {
                 first_name: firstName,
                 last_name: lastName,
                 school: schoolName,
                 email_address: emailAddress,
-                password: password
+                password: password,
+                account_type: "facilitator"
             });
             console.log(response.data);
+            router.push("/dashboard")
         } catch (error: any) {
             console.error("An error occurred during registration:", error);
             toast.error("Registration failed", {
@@ -85,6 +91,8 @@ export default function RegisterForm() {
                 theme: "colored",
                 transition: Slide,
             });
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -143,7 +151,7 @@ export default function RegisterForm() {
                             placeholder="Confirm password" required />
                     </div>
                     <div className="flex items-center justify-center mt-2">
-                        <PrimaryBtn />
+                        <PrimaryBtn loading={loading} />
                     </div>
                     <div>
                         <p className="flex justify-center text-center my-2">
