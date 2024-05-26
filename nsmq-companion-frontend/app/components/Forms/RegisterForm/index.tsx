@@ -98,27 +98,29 @@ export default function RegisterForm() {
 
 
     return (
-        <div className="flex bg-white sm:w-[90%] h-[95%] rounded-lg shadow-xl ">
+        <div className="flex bg-white z-0 sm:w-[90%] h-[95%] rounded-lg shadow-xl overflow-y-scroll ">
             <ToastContainer />
-            <form onSubmit={handleSignUp} className="sm:w-1/2 flex flex-col  items-center justify-center">
-                <div className="p-10 w-full flex flex-col gap-4">
+            <form onSubmit={handleSignUp} className="md:w-1/2 z-0 flex flex-col  items-center justify-center">
+                <div className="p-10 w-full flex flex-col gap-2">
                     <p className="text-3xl font-bold">Sign Up As A Facilitator</p>
-                    <div className=" w-full">
-                        <p>First Name</p>
-                        <TextInput
-                            value={firstName}
-                            onValueChange={(value: string) => setFirstName(value)}
-                            className="w-full "
-                            placeholder="Enter first name"
-                            required />
-                    </div>
+                    <div className="flex w-full justify-between items-center">
+                        <div className="flex flex-col w-[45%]">
+                            <p>First Name</p>
+                            <TextInput
+                                value={firstName}
+                                onValueChange={(value: string) => setFirstName(value)}
+                                className="w-full "
+                                placeholder="Enter first name"
+                                required />
+                        </div>
 
-                    <div>
-                        <p>Last Name</p>
-                        <TextInput
-                            value={lastName}
-                            onValueChange={(value: string) => setLastName(value)}
-                            placeholder="Enter last name" required />
+                        <div className="flex flex-col w-[45%]">
+                            <p>Last Name</p>
+                            <TextInput
+                                value={lastName}
+                                onValueChange={(value: string) => setLastName(value)}
+                                placeholder="Enter last name" required />
+                        </div>
                     </div>
                     <div>
                         <p>Email Address</p>
@@ -176,7 +178,7 @@ export default function RegisterForm() {
                 </div>
             </form>
 
-            <div className="hidden sm:block w-1/2 relative">
+            <div className="hidden md:block w-1/2 relative">
                 <Image
                     src={winner}
                     alt="image"
