@@ -19,8 +19,8 @@ class BaseModel(Base):
     updated_at = Column(DateTime(timezone=True), nullable=True, onupdate=func.now())
 
 
-class User(BaseModel):
-    __tablename__ = "users"
+class Facilitator(BaseModel):
+    __tablename__ = "Facilitators"
     uuid = Column(
         UUID(as_uuid=True),
         primary_key=True,
@@ -36,8 +36,8 @@ class User(BaseModel):
     password = Column(String(length=200), nullable=False)
     verifiedAt = Column(String(length=100), nullable=True, default=None, index=True)
     account_type = Column(String(length=50), nullable=True, index=True)
-    user_verification = relationship(
-        "EmailVerification", uselist=False, back_populates="user"
+    facilitator_verification = relationship(
+        "EmailVerification", uselist=False, back_populates="facilitator"
     )
 
 
@@ -50,7 +50,7 @@ class TokenTable(Base):
         unique=True,
         nullable=False,
     )
-    user_uuid = Column(UUID(as_uuid=True), ForeignKey("users.uuid"), nullable=False)
+    facilitator_uuid = Column(UUID(as_uuid=True), ForeignKey("Facilitators.uuid"), nullable=False)
     access_toke = Column(String(450), primary_key=True)
     refresh_toke = Column(String(450), nullable=False)
     status = Column(Boolean)
@@ -66,15 +66,15 @@ class EmailVerification(Base):
         unique=True,
         nullable=False,
     )
-    user_uuid = Column(
+    facilitator_uuid = Column(
         UUID(as_uuid=True),
-        ForeignKey("users.uuid"),
+        ForeignKey("Facilitators.uuid"),
         primary_key=True,
         unique=True,
         nullable=False,
     )
     verification_token = Column(String(450))
     expiry_date = Column(String(450), nullable=False)
-    user = relationship("User", back_populates="user_verification")
+    facilitator = relationship("Facilitator", back_populates="facilitator_verification")
 
 

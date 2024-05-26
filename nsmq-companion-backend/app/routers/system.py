@@ -10,7 +10,7 @@ router = APIRouter(
 
 
 @router.get("/health")
-async def health_check(get_current_user: schemas.User = Depends(get_current_user)):
+async def health_check(get_current_user: schemas.Facilitator = Depends(get_current_user)):
     return {
         "name": "NSMQ Companion",
         "version": "0.0.1",

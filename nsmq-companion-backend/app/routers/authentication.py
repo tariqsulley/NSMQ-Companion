@@ -78,8 +78,8 @@ async def verify_token_route(
         # check if token has expired
         if expiry_date > current_date:
             user_data = (
-                db.query(models.User)
-                .filter(models.User.uuid == user_token.user_uuid)
+                db.query(models.Facilitator)
+                .filter(models.Facilitator.uuid == user_token.user_uuid)
                 .first()
             )
             if not user_data:
@@ -127,7 +127,7 @@ async def verify_user_email(
 ):
     # check if user already verified
     # expiry_time = datetime.now() + timedelta(minutes=VERIFY_TOKEN_EXPIRE_DAYS)
-    db_user = db.query(models.User).filter(models.User.uuid == user.uuid).first()
+    db_user = db.query(models.Facilitator).filter(models.Facilitator.uuid == user.uuid).first()
     if db_user:
         if db_user.verifiedAt is None:
             # check if token already generated
@@ -161,10 +161,10 @@ async def verify_user_email(
 
 
 @router.post("/login", response_model=None)
-async def login_handler(user: schemas.UserLogin, db: Session = Depends(get_db)):
+async def login_handler(user: schemas.FacilitatorLogin, db: Session = Depends(get_db)):
     db_user = (
-        db.query(models.User)
-        .filter(models.User.email_address == user.email_address)
+        db.query(models.Facilitator)
+        .filter(models.Facilitator.email_address == user.email_address)
         .first()
     )
     if db_user is None:

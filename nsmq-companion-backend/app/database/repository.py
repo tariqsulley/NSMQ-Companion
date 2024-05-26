@@ -8,14 +8,15 @@ from app.utils.email import send_email
 from app.utils.hashing import VERIFY_TOKEN_EXPIRE_DAYS, hash_user_password
 
 from . import models, schemas
+import logging
 
 
 def get_all_users(db: Session):
-    return get_all_items(db, models.User)
+    return get_all_items(db, models.Facilitator)
 
 
 def update_user_by_uuid(db: Session, uuid: str, user: schemas.UpdateUser):
-    user_to_update = db.query(models.User).filter(models.User.uuid == uuid).first()
+    user_to_update = db.query(models.User).filter(models.Facilitator.uuid == uuid).first()
     user_to_update.phone_number = user.phone_number
     user_to_update.address = user.address
     user_to_update.location = user.location
@@ -26,17 +27,19 @@ def update_user_by_uuid(db: Session, uuid: str, user: schemas.UpdateUser):
 
 
 def get_user_by_email_address(email: str, db: Session):
-    try:
-        user = db.query(models.User).filter(models.User.email_address == email).first()
-        if user:
-            return user
-    except Exception:
-        raise HTTPException(status_code=400, detail="User not found")
+    user = db.query(models.Facilitator).filter(models.Facilitator.email_address == email).first()
+    return user 
+    # try:
+    #     user = db.query(models.Facilitator).filter(models.Facilitator.email_address == email).first()
+    #     if user:
+    #         return user
+    # except Exception:
+    #     raise HTTPException(status_code=400, detail="User not found")
 
 
 def get_user_by_phone_number(db: Session, phone_number: str):
     return (
-        db.query(models.User).filter(models.User.phone_number == phone_number).first()
+        db.query(models.User).filter(models.Facilitator.phone_number == phone_number).first()
     )
 
 
@@ -45,13 +48,12 @@ def get_user_by_phone_number(db: Session, phone_number: str):
 #     return pwd_context.hash(password)
 
 
-def create_user(db: Session, user: schemas.User):
+def create_user(db: Session, user: schemas.Facilitator):
     try:
-        db_user = models.User(
+        db_user = models.Facilitator(
             first_name=user.first_name,
             last_name=user.last_name,
-            location=user.location,
-            address=user.address,
+            school = user.school,
             phone_number=user.phone_number,
             email_address=user.email_address,
             password=hash_user_password(user.password),
@@ -59,11 +61,11 @@ def create_user(db: Session, user: schemas.User):
 
         db.add(db_user)
         db.commit()
-        # db.refresh(db_user)
+        db.refresh(db_user)
 
         created_user = (
-            db.query(models.User)
-            .filter(models.User.email_address == db_user.email_address)
+            db.query(models.Facilitator)
+            .filter(models.Facilitator.email_address == db_user.email_address)
             .first()
         )
 
@@ -77,6 +79,7 @@ def create_user(db: Session, user: schemas.User):
 
         return returned_user
     except Exception as e:
+        logging.error(f"Failed to create user: {e}")
         raise HTTPException(status_code=400, detail=f"{e}")
 
 

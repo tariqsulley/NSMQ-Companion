@@ -58,7 +58,7 @@ def generate_token_for_new_user(
 
 
 def generate_token_for_existing_user(
-    user: schemas.UserLogin, db_user, db: Session = Depends(get_db)
+    user: schemas.FacilitatorLogin, db_user, db: Session = Depends(get_db)
 ) -> str:
     """
     Generate an access token for a user logging in.

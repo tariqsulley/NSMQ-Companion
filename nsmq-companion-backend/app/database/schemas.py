@@ -6,10 +6,10 @@ from pydantic import BaseModel, EmailStr
 
 
 
-class User(BaseModel):
+class Facilitator(BaseModel):
     first_name: str
     last_name: str
-    address: Optional[str]
+    school:str
     phone_number: Optional[str]
     email_address: EmailStr
     password: str
@@ -27,7 +27,7 @@ class UpdateUser(BaseModel):
         orm_model = True
 
 
-class UserLogin(BaseModel):
+class FacilitatorLogin(BaseModel):
     email_address: EmailStr
     password: str
 
