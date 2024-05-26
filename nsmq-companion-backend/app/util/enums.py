@@ -25,3 +25,9 @@ class ActiveStatus(str, Enum):
     ACTIVE = "active"
     INACTIVE = "inactive"
     DEACTIVATED = "deactivated"
+
+class FileFormat(str, Enum):
+    PDF = "pdf"
+    PNG = "png"
+    JPEG = "jpeg"
+    JPG = "jpg"
