@@ -1,2 +1,0 @@
-CUSTOMER_USER_ROLE = "customer"
-ADMIN_USER_ROLE = "admin"
