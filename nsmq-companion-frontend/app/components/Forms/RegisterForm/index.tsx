@@ -185,6 +185,7 @@ export default function RegisterForm() {
                     layout="fill"
                     objectFit="cover"
                     className="rounded-tr-lg rounded-br-lg"
+                    priority={true}
                 />
             </div>
 

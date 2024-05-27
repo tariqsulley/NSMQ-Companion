@@ -151,6 +151,7 @@ export default function LoginForm() {
                     layout="fill"
                     objectFit="cover"
                     className="rounded-tr-lg rounded-br-lg"
+                    priority={true}
                 />
             </div>
 
