@@ -98,7 +98,7 @@ export default function LoginForm() {
                             defaultValue="0"
                             required
                         >
-                            <SelectItem value="Facilitator">Facilitator</SelectItem>
+                            <SelectItem value="facilitator">Facilitator</SelectItem>
                             <SelectItem value="Student">Student</SelectItem>
                         </Select>
                     </div>
