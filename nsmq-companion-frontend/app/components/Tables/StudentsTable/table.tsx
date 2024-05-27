@@ -19,12 +19,11 @@ interface TableHeader {
 }
 
 interface StudentData {
-    firstName: string;
-    lastName: string;
+    first_name: string;
+    last_name: string;
     year: string;
-    email: string;
-    status: string;
-    dateCreated: string;
+    email_address: string;
+
 }
 
 interface TableProps {
@@ -53,10 +52,6 @@ const Table: React.FC<TableProps> = ({ filter }) => {
         { label: '', className: 'rounded-tr-xl' },
     ];
 
-    // const fetcher = async (url: any) => {
-    //     const response = await axios.get(url);
-    //     return response;
-    // };
 
     const fetcher = (url: string) => {
         return fetch(url, {
@@ -65,16 +60,6 @@ const Table: React.FC<TableProps> = ({ filter }) => {
     };
 
 
-    // const { allStudents, error, isLoading } = useSWR(
-    //     `${API_BASE}/facilitators/students/65e56afe-2a6a-49e8-9ecb-dd78aebba52c`,
-    //     fetcher,
-    //     {
-    //         revalidateIfStale: true,
-    //         revalidateOnFocus: true,
-    //         revalidateOnReconnect: true,
-    //         refreshInterval: 1000
-    //     } as SWROptions
-    // );
 
     const { data, error, isLoading } = useSWR(
         `${API_BASE}/facilitators/students/${Data?.uuid}`,
@@ -86,56 +71,7 @@ const Table: React.FC<TableProps> = ({ filter }) => {
         } as SWROptions
     );
 
-    // const students = allStudents;
 
-    // const request = async () => {
-    //     try {
-    //         const response = await axios.get(`${API_BASE}/facilitators/students/${data?.uuid}`)
-    //         console.log("res", response.data)
-    //     } catch (e) {
-    //         console.log("error", e)
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     request()
-    // }, [])
-
-    const dummyData: StudentData[] = [
-        {
-            firstName: 'Prince',
-            lastName: 'Debrah',
-            year: '3',
-            email: 'debrah@gmail.com',
-            status: "active",
-            dateCreated: '2023-05-01',
-        },
-        {
-            firstName: 'Percy',
-            lastName: 'Amoani',
-            year: '3',
-            email: 'percy@gmail.com',
-            status: "active",
-            dateCreated: '2023-05-01',
-        },
-        {
-            firstName: 'Henry',
-            lastName: 'Otumfuor',
-            year: '3',
-            email: 'henry@gmail.com',
-            status: "active",
-            dateCreated: '2023-05-01',
-        },
-    ];
-
-    // const filteredData = students?.filter(student =>
-    //     student.firstName.toLowerCase().includes(filter.toLowerCase()) ||
-    //     student.lastName.toLowerCase().includes(filter.toLowerCase()) ||
-    //     student.year.toLowerCase().includes(filter.toLowerCase()) ||
-    //     student.email.toLowerCase().includes(filter.toLowerCase()) ||
-    //     student.status.toLowerCase().includes(filter.toLowerCase()) ||
-    //     student.dateCreated.includes(filter)
-    // );
 
     const filteredData = useMemo(() => {
         if (!isLoading && data) {
@@ -146,14 +82,15 @@ const Table: React.FC<TableProps> = ({ filter }) => {
                 const islastNameMatch = item?.last_name
                     .toLowerCase()
                     .includes(filter.toLowerCase());
-                // const isYearMatch = item?.year
-                //     .toLowerCase()
-                //     .includes(filter.toLowerCase());
+                const isYearMatch = String(item?.year)
+                    .toLowerCase()
+                    .includes(filter.toLowerCase());
                 const isemailMatch = item?.email_address
                     .toLowerCase()
                     .includes(filter.toLowerCase());
                 return (
                     isfirstNameMatch ||
+                    isYearMatch ||
                     islastNameMatch ||
                     isemailMatch
                 );
@@ -193,16 +130,12 @@ const Table: React.FC<TableProps> = ({ filter }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {filteredData?.map((student, index) => (
+                    {filteredData?.map((student: StudentData, index: number) => (
                         <tr key={index} className='hover:bg-gray-100 bg-white border-t-[1px] border-t-[#edeef0]'>
                             <td className="px-6 py-4">{student.first_name}</td>
                             <td className="px-6 py-4">{student.last_name}</td>
                             <td className="px-6 py-4">{student.year}</td>
                             <td className="px-6 py-4">{student.email_address}</td>
-                            {/* <td className="flex items-center justify-center px-6 py-4 text-[#05b60b] ">
-                                <p className='bg-[#edfaf1] rounded-lg px-3'>{student.status}</p>
-                            </td> */}
-                            {/* <td className="px-6 py-4">{student.dateCreated}</td> */}
                             <td className="px-6 py-4">
                                 <button
                                     onClick={() => openModal(student)}
