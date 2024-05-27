@@ -24,7 +24,8 @@ class StudentBase(BaseModel):
     first_name: str
     last_name: str
     year: int
-    email: EmailStr
+    email_address: EmailStr
+    account_type:str
 
 class StudentCreate(StudentBase):
     facilitator_uuid: UUID
@@ -47,7 +48,7 @@ class UpdateUser(BaseModel):
         orm_model = True
 
 
-class FacilitatorLogin(BaseModel):
+class Login(BaseModel):
     email_address: EmailStr
     account_type:str
     password: str

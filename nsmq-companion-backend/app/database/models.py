@@ -45,8 +45,9 @@ class Student(BaseModel):
     first_name = Column(String(length=30), nullable=False)
     last_name = Column(String(length=30), nullable=False)
     year = Column(Integer, nullable=False)
-    email = Column(String(length=100), unique=True, nullable=False)
+    email_address = Column(String(length=100), unique=True, nullable=False)
     password = Column(String(length=200), nullable=False)
+    account_type = Column(String(length=200), nullable=False)
     facilitator_uuid = Column(UUID(as_uuid=True), ForeignKey('Facilitators.uuid'))
     facilitator = relationship("Facilitator", back_populates="students")
     

@@ -12,6 +12,8 @@ from app.utils.auth import (
     generate_token_for_new_user,
     generate_verification_token,
     verify_token_frontend,
+    verify_password,
+    generate_access_token
 )
 from app.utils.hashing import ALGORITHM, SECRET_KEY
 
@@ -161,14 +163,19 @@ async def verify_user_email(
 
 
 @router.post("/login", response_model=None)
-async def login_handler(facilitator: schemas.FacilitatorLogin, db: Session = Depends(get_db)):
-    db_user = (
-        db.query(models.Facilitator)
-        .filter(models.Facilitator.email_address == facilitator.email_address)
-        .first()
-    )
-    if db_user is None:
+async def login_handler(login: schemas.Login, db: Session = Depends(get_db)):
+    if login.account_type == "facilitator":
+        user = db.query(models.Facilitator).filter(models.Facilitator.email_address == login.email_address).first()
+    elif login.account_type == "student":
+        user = db.query(models.Student).filter(models.Student.email_address == login.email_address).first()
+    else:
+        raise HTTPException(status_code=400, detail="Invalid account type specified")
+
+    if user is None:
         raise HTTPException(status_code=404, detail="User not found")
-    user_dict = extract_user_data(db_user)
-    access_token = generate_token_for_existing_user(facilitator, db_user)
-    return {"access_token": access_token, "user": user_dict, "permission": ""}
+
+    if not verify_password(login.password, user.password):
+        raise HTTPException(status_code=401, detail="Incorrect password")
+
+    access_token = generate_access_token(email=login.email_address)
+    return {"access_token": access_token, "user": extract_user_data(user), "permission": ""}

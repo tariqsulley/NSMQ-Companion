@@ -128,8 +128,9 @@ def create_student(db: Session, student: schemas.StudentCreate):
         first_name=student.first_name,
         last_name=student.last_name,
         year=student.year,
-        email=student.email,
+        email_address=student.email_address,
         password=hashed_password,
+        account_type = "student",
         facilitator_uuid=student.facilitator_uuid
     )
     db.add(db_student)
