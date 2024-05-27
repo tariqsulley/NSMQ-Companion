@@ -2,7 +2,11 @@
 import Image from "next/image"
 import nsmq_logo from '../../../../public/images/nsmq_logo.png'
 
-export default function PracticeCard({ year }) {
+interface PracticeCardProps {
+    year: string;
+}
+
+export default function PracticeCard({ year }: PracticeCardProps) {
     return (
         <div className="rounded-t-xl bg-white shadow ">
             <Image src={nsmq_logo} alt="image" className="rounded-t-xl" />
