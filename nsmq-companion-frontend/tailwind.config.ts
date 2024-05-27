@@ -30,7 +30,9 @@ const config = {
         primaryBtn: "#263576",
         bgMain: "#f8f8f8",
         primaryBlue: "#263576",
-
+        darkBgLight: "#35393d",
+        darkBgDeep: "#1d1f21",
+        darkBgBtn: "#b6bcc0",
         tremor: {
           brand: {
             faint: colors.blue[50],
@@ -73,7 +75,7 @@ const config = {
           background: {
             muted: "#131A2B",
             subtle: colors.gray[800],
-            DEFAULT: colors.gray[900],
+            DEFAULT: "#1d1f21",
             emphasis: colors.gray[300],
           },
           border: {

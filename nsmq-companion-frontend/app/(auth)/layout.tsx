@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { AuthProvider } from "../context/AuthContext";
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
     title: "Create Next App",
@@ -16,7 +14,7 @@ export default function AuthLayout({
     return (
         <html lang="en">
             <AuthProvider>
-                <body className={inter.className}>{children}</body>
+                {children}
             </AuthProvider>
         </html>
 

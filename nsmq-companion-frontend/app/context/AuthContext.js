@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.remove("access_token");
         Cookies.remove("uuid");
         localStorage.removeItem("isFirstTimeUser");
-        router.replace("/auth/login");
+        router.push("/auth/login");
     };
 
     const fetchUserData = async (url) => {

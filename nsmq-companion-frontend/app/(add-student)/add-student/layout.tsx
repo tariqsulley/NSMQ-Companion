@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-const inter = Inter({ subsets: ["latin"] });
 import { AuthProvider } from "@/app/context/AuthContext";
 import WithAuth from "../../middleware/ProtectedRoute"
 
@@ -18,7 +16,7 @@ export default function AddStudentLayout({
         <html lang="en">
             <WithAuth>
                 <AuthProvider>
-                    <body className={inter.className}>{children}</body>
+                    {children}
                 </AuthProvider>
             </WithAuth>
         </html>

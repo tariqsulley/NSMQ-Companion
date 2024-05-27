@@ -4,7 +4,7 @@ export default function StudentsPage() {
     return (
         <div className="flex h-screen">
             <Sidebar />
-            <div className="bg-bgMain sm:ml-[256px] w-full flex justify-center">
+            <div className="bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full flex justify-center">
                 <StudentsTable />
             </div>
         </div>

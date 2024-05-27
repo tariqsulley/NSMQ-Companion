@@ -116,7 +116,7 @@ const Table: React.FC<TableProps> = ({ filter }) => {
     return (
         <div className="mt-3 overflow-x-auto rounded-xl">
             <table className="min-w-full text-left shadow">
-                <thead className="sticky top-0 bg-white rounded-t-xl">
+                <thead className="sticky top-0 bg-white dark:bg-darkBgDeep rounded-t-xl">
                     <tr>
                         {tableHeaders.map((header, index) => (
                             <th
@@ -130,7 +130,7 @@ const Table: React.FC<TableProps> = ({ filter }) => {
                 </thead>
                 <tbody>
                     {filteredData?.map((student: StudentData, index: number) => (
-                        <tr key={index} className='hover:bg-gray-100 bg-white border-t-[1px] border-t-[#edeef0]'>
+                        <tr key={index} className='hover:bg-gray-100 bg-white dark:bg-darkBgDeep  border-t-[1px] border-t-[#edeef0]'>
                             <td className="px-6 py-4">{student.first_name}</td>
                             <td className="px-6 py-4">{student.last_name}</td>
                             <td className="px-6 py-4">{student.year}</td>
@@ -138,7 +138,7 @@ const Table: React.FC<TableProps> = ({ filter }) => {
                             <td className="px-6 py-4">
                                 <button
                                     onClick={() => openModal(student)}
-                                    className="w-[74px] h-7 px-3.5 py-1 bg-white rounded-lg border border-zinc-300 justify-center items-center text-xs md:text-sm "
+                                    className="w-[74px] h-7 px-3.5 py-1 bg-white dark:bg-darkBgBtn dark:text-gray-700 rounded-lg border border-zinc-300 justify-center items-center text-xs md:text-sm "
                                 >
                                     View
                                 </button>
