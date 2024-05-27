@@ -1,5 +1,5 @@
 "use client"
-import googlelogo from "../../../../../public/icons/google-logo.png"
+import googlelogo from "../../../../public/icons/google-logo.png"
 import Image from "next/image";
 // import { signIn } from "next-auth/react";
 import { useState } from "react";

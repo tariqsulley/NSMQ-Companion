@@ -2,8 +2,8 @@
 import winner from "../../../../public/images/winner.png"
 import Image from "next/image"
 import { TextInput } from '@tremor/react';
-import GoogleBtn from "../Buttons/GoogleBtn";
-import PrimaryBtn from "../Buttons/PrimaryBtn";
+import GoogleBtn from "../../Buttons/GoogleBtn";
+import PrimaryBtn from "../../Buttons/PrimaryBtn";
 import axios from "axios";
 import { useState } from "react";
 import Link from "next/link";
@@ -96,6 +96,7 @@ export default function LoginForm() {
                             value={accountType}
                             onValueChange={setAccountType}
                             defaultValue="0"
+                            required
                         >
                             <SelectItem value="Facilitator">Facilitator</SelectItem>
                             <SelectItem value="Student">Student</SelectItem>

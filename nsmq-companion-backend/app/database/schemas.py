@@ -2,7 +2,9 @@ from typing import List, Optional, Union
 
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, validator
+import random
+import string
 
 
 
@@ -10,14 +12,32 @@ class Facilitator(BaseModel):
     first_name: str
     last_name: str
     school:str
-    phone_number: Optional[str]
     email_address: EmailStr
+    account_type:str
     password: str
 
     class Config:
         orm_model = True
 
 
+class StudentBase(BaseModel):
+    first_name: str
+    last_name: str
+    year: int
+    email: EmailStr
+
+class StudentCreate(StudentBase):
+    facilitator_uuid: UUID
+
+    # @validator('email')
+    # def email_must_be_unique(cls, value, session: Session):
+    #     if session.query(Student).filter(Student.email == value).first():
+    #         raise ValueError('Email already registered')
+    #     return value
+
+    def generate_password():
+        return ''.join(random.choices(string.ascii_letters + string.digits, k=10))
+    
 class UpdateUser(BaseModel):
     location: Optional[str]
     address: Optional[str]
@@ -29,6 +49,7 @@ class UpdateUser(BaseModel):
 
 class FacilitatorLogin(BaseModel):
     email_address: EmailStr
+    account_type:str
     password: str
 
     class Config:

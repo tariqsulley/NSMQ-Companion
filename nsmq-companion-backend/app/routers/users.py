@@ -2,10 +2,13 @@ from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy.dialects.postgresql import UUID
 
 from app.database import schemas
 from app.database.repository import (
     create_user,
+    create_student,
+    get_students_by_facilitator_uuid,
     get_all_users,
     get_user_by_email_address,
     update_user_by_uuid,
@@ -47,3 +50,12 @@ async def update_user(
 @router.get("/{email_address}", response_model=schemas.UserEmail)
 async def get_user_by_email(email: str, db: Session = Depends(get_db)):
     return get_user_by_email_address(email, db=db)
+
+@router.post("/students/create", response_model=schemas.StudentBase)
+async def create_student_handler(student: schemas.StudentCreate, db: Session = Depends(get_db)):
+    return create_student(db, student)
+
+@router.get("/students/{facilitator_uuid}", response_model=List[schemas.StudentBase])
+async def get_students_for_facilitator(facilitator_uuid: str, db: Session = Depends(get_db)):
+    students = get_students_by_facilitator_uuid(db, facilitator_uuid)
+    return students

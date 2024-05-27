@@ -12,6 +12,7 @@
     "@headlessui/react": "^2.0.4",
     "@headlessui/tailwindcss": "^0.2.0",
     "@tremor/react": "^3.17.2",
+    "aws-sdk": "^2.1628.0",
     "axios": "^1.7.2",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.9.0",

@@ -30,8 +30,7 @@ class Facilitator(BaseModel):
     )
     first_name = Column(String(length=30), nullable=False, default="", index=True)
     last_name = Column(String(length=30), nullable=False, default="", index=True)
-    phone_number = Column(String(length=20), nullable=False, default="", index=True)
-    school = Column(String(length=20), nullable=False, default="", index=True)
+    school = Column(String(length=200), nullable=False, default="", index=True)
     email_address = Column(String(length=100), nullable=False, default="", index=True)
     password = Column(String(length=200), nullable=False)
     verifiedAt = Column(String(length=100), nullable=True, default=None, index=True)
@@ -39,6 +38,19 @@ class Facilitator(BaseModel):
     facilitator_verification = relationship(
         "EmailVerification", uselist=False, back_populates="facilitator"
     )
+
+class Student(BaseModel):
+    __tablename__ = "students"
+    uuid = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4, unique=True, nullable=False)
+    first_name = Column(String(length=30), nullable=False)
+    last_name = Column(String(length=30), nullable=False)
+    year = Column(Integer, nullable=False)
+    email = Column(String(length=100), unique=True, nullable=False)
+    password = Column(String(length=200), nullable=False)
+    facilitator_uuid = Column(UUID(as_uuid=True), ForeignKey('Facilitators.uuid'))
+    facilitator = relationship("Facilitator", back_populates="students")
+    
+Facilitator.students = relationship("Student", order_by=Student.id, back_populates="facilitator")
 
 
 class TokenTable(Base):

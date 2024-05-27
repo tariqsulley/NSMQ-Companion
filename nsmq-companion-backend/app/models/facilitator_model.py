@@ -10,3 +10,11 @@ class Teacher(Base):
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     school = Column(String)
+
+class Student(Base):
+    __tablename__ = "students"
+    id = Column(Integer,primary_key=True,index=True)
+    first_name = Column(String)
+    last_name= Column(String)
+    email = Column(String,unique=True,index=True)
+    year = Column(String)

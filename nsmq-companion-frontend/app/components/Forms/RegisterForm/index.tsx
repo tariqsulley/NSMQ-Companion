@@ -3,8 +3,8 @@ import winner from "../../../../public/images/winner.png"
 import bg_img from "../../../../public/images/bg.png"
 import Image from "next/image"
 import { TextInput } from '@tremor/react';
-import GoogleBtn from "../Buttons/GoogleBtn";
-import PrimaryBtn from "../Buttons/PrimaryBtn";
+import GoogleBtn from "../../Buttons/GoogleBtn";
+import PrimaryBtn from "../../Buttons/PrimaryBtn";
 import axios from "axios";
 import { useState } from "react";
 import Link from "next/link";

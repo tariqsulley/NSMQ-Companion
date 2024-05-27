@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session
 from app.database.helpers import get_all_items
 from app.utils.email import send_email
 from app.utils.hashing import VERIFY_TOKEN_EXPIRE_DAYS, hash_user_password
+from sqlalchemy.dialects.postgresql import UUID
 
 from . import models, schemas
 import logging
@@ -54,8 +55,8 @@ def create_user(db: Session, user: schemas.Facilitator):
             first_name=user.first_name,
             last_name=user.last_name,
             school = user.school,
-            phone_number=user.phone_number,
             email_address=user.email_address,
+            account_type = user.account_type,
             password=hash_user_password(user.password),
         )
 
@@ -72,8 +73,8 @@ def create_user(db: Session, user: schemas.Facilitator):
         returned_user = {
             "first_name": created_user.first_name,
             "last_name": created_user.last_name,
-            "phone_number": created_user.phone_number,
             "email_address": created_user.email_address,
+            "account_type":created_user.account_type,
             "uuid": created_user.uuid,
         }
 
@@ -120,3 +121,22 @@ def create_verification_token(
         )
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"{e}")
+    
+def create_student(db: Session, student: schemas.StudentCreate):
+    hashed_password = hash_user_password("password")
+    db_student = models.Student(
+        first_name=student.first_name,
+        last_name=student.last_name,
+        year=student.year,
+        email=student.email,
+        password=hashed_password,
+        facilitator_uuid=student.facilitator_uuid
+    )
+    db.add(db_student)
+    db.commit()
+    db.refresh(db_student)
+    return db_student
+
+def get_students_by_facilitator_uuid(db: Session, uuid: UUID):
+    return db.query(models.Student).filter(models.Student.facilitator_uuid == uuid).all()
+

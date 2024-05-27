@@ -41,7 +41,7 @@ export default function StudentsTable() {
                         />
                     </button> */}
                     <Link
-                        href={"/add-asset/assets"}
+                        href={"/add-student"}
                         className="bg-primaryBtn text-white md:px-4 px-2 py-2 mr-2 rounded-lg flex items-center justify-center hover:opacity-80"
                     >
                         <p>Add Student</p>
