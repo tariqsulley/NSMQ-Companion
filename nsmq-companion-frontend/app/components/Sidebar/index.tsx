@@ -10,10 +10,16 @@ import Link from 'next/link';
 import { useAuth } from '@/app/context/AuthContext';
 // import Cookie from "js-cookie";
 import { useRouter } from "next/navigation";
+import { initFlowbite } from "flowbite";
+import { useEffect } from 'react';
 
 export default function Sidebar() {
     const { logout } = useAuth()
     const router = useRouter();
+
+    useEffect(() => {
+        initFlowbite();
+    }, []);
 
     const handleLogout = async () => {
         logout();

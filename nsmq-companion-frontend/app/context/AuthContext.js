@@ -8,6 +8,8 @@ import useSWR from "swr";
 import Cookies from "js-cookie";
 
 import API_BASE from "@/app/utils/api";
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();
 
