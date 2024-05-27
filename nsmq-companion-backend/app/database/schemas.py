@@ -2,13 +2,14 @@ from typing import List, Optional, Union
 
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr, validator
+from pydantic import BaseModel, EmailStr, validator,UUID4
 import random
 import string
 
 
 
 class Facilitator(BaseModel):
+    # uuid: UUID4
     first_name: str
     last_name: str
     school:str
@@ -21,6 +22,7 @@ class Facilitator(BaseModel):
 
 
 class StudentBase(BaseModel):
+    # uuid: UUID4
     first_name: str
     last_name: str
     year: int

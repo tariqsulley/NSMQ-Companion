@@ -15,13 +15,15 @@ import {
     Select,
     SelectItem,
 } from '@tremor/react';
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function LoginForm() {
     const [emailAddress, setEmailAddress] = useState<string>("")
     const [password, setPassword] = useState<string>("")
-    const [loading, setLoading] = useState<boolean>(false)
+    // const [loading, setLoading] = useState<boolean>(false)
     const [accountType, setAccountType] = useState<string>("")
     const router = useRouter()
+    const { login, error, loading } = useAuth();
 
     const isValidEmail = (email: string): boolean => {
         return /\S+@\S+\.\S+/.test(email);
@@ -45,37 +47,42 @@ export default function LoginForm() {
         return true;
     };
 
+    // const handleSignIn = async (e: any): Promise<void> => {
+    //     e.preventDefault();
+    //     if (!handleContinue()) return;
+
+    //     try {
+    //         setLoading(true)
+    //         const response = await axios.post(`${API_BASE}/login`, {
+    //             email_address: emailAddress,
+    //             password: password,
+    //             account_type: accountType
+    //         });
+    //         console.log(response.data);
+    //         router.push("/dashboard")
+    //     } catch (error: any) {
+    //         console.error("An error occurred during registration:", error);
+    // toast.error("Registration failed", {
+    //     position: "top-center",
+    //     autoClose: 5000,
+    //     hideProgressBar: true,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //     theme: "colored",
+    //     transition: Slide,
+    // });
+    //     } finally {
+    //         setLoading(false)
+    //     }
+    // };
+
     const handleSignIn = async (e: any): Promise<void> => {
-        e.preventDefault();
+        e.preventDefault()
         if (!handleContinue()) return;
-
-        try {
-            setLoading(true)
-            const response = await axios.post(`${API_BASE}/login`, {
-                email_address: emailAddress,
-                password: password,
-                account_type: accountType
-            });
-            console.log(response.data);
-            router.push("/dashboard")
-        } catch (error: any) {
-            console.error("An error occurred during registration:", error);
-            toast.error("Registration failed", {
-                position: "top-center",
-                autoClose: 5000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Slide,
-            });
-        } finally {
-            setLoading(false)
-        }
-    };
-
+        await login(emailAddress, accountType, password);
+    }
 
     return (
         <div className="flex bg-white sm:w-[90%] h-[95%] rounded-lg shadow-xl ">

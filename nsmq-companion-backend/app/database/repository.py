@@ -141,3 +141,17 @@ def create_student(db: Session, student: schemas.StudentCreate):
 def get_students_by_facilitator_uuid(db: Session, uuid: UUID):
     return db.query(models.Student).filter(models.Student.facilitator_uuid == uuid).all()
 
+
+def get_user_by_uuid(db: Session, user_uuid: UUID):
+    # First try to fetch the user from the Facilitator table
+    user = db.query(models.Facilitator).filter(models.Facilitator.uuid == user_uuid).first()
+    if user:
+        return user
+
+    # If not found, try to fetch from the Student table
+    user = db.query(models.Student).filter(models.Student.uuid == user_uuid).first()
+    if user:
+        return user
+
+    # If no user is found in any table
+    return None

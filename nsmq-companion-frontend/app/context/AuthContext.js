@@ -30,7 +30,7 @@ export const AuthProvider = ({ children }) => {
     const router = useRouter();
     const [verifyEmail, setVerifyEmail] = useState("");
 
-    const login = async (email, password, account_type) => {
+    const login = async (email, account_type, password,) => {
         setError(null);
         try {
             setLoading(true);
@@ -62,11 +62,13 @@ export const AuthProvider = ({ children }) => {
             const callbackUrl = new URL(window.location.href).searchParams.get(
                 "callbackUrl"
             );
+
             const redirectUrl =
                 callbackUrl ||
-                (userInfo.user.role === "customer"
-                    ? "/dashboard/onboarding"
-                    : "/authentication/login");
+                (userInfo.user.account_type === "facilitator" || userInfo.user.account_type === "student"
+                    ? "/dashboard"
+                    : "/auth/login");
+
             router.replace(redirectUrl);
 
             const token = Cookies.get("access_token");
@@ -77,6 +79,17 @@ export const AuthProvider = ({ children }) => {
             // router.push(redirectPath);
         } catch (error) {
             const { response } = error;
+            toast.error("Registration failed", {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            });
             if (response) {
                 setError(response.data.userMsg || "An error occurred during login");
             } else {
@@ -94,7 +107,7 @@ export const AuthProvider = ({ children }) => {
         Cookies.remove("access_token");
         Cookies.remove("uuid");
         localStorage.removeItem("isFirstTimeUser");
-        router.replace("/authentication/login");
+        router.replace("/auth/login");
     };
 
     const fetchUserData = async (url) => {

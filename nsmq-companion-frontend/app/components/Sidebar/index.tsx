@@ -7,8 +7,22 @@ import { IoAnalyticsOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { SlBookOpen } from "react-icons/sl";
 import Link from 'next/link';
+import { useAuth } from '@/app/context/AuthContext';
+// import Cookie from "js-cookie";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
+    const { logout } = useAuth()
+    const router = useRouter();
+
+    const handleLogout = async () => {
+        logout();
+        // Cookie.remove("access_token");
+        // sessionStorage.removeItem("userData");
+        // localStorage.removeItem("isFirstTimeUser");
+        // router.push("/authentication/login");
+    };
+
     return (
         <div>
             <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -43,11 +57,12 @@ export default function Sidebar() {
                                             tariqsulley3c@gmail.com
                                         </p>
                                     </div>
-                                    <ul className="py-1" role="none">
-                                        <li>
-                                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</a>
-                                        </li>
-                                    </ul>
+                                    <div className="py-1" >
+                                        <button onClick={handleLogout}>
+                                            <p
+                                                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-600 dark:hover:text-white" role="menuitem">Sign out</p>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

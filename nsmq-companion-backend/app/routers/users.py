@@ -1,4 +1,4 @@
-from typing import List
+from typing import List,Union
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -12,6 +12,7 @@ from app.database.repository import (
     get_all_users,
     get_user_by_email_address,
     update_user_by_uuid,
+    get_user_by_uuid
 )
 from app.utils.auth import get_current_user
 
@@ -59,3 +60,10 @@ async def create_student_handler(student: schemas.StudentCreate, db: Session = D
 async def get_students_for_facilitator(facilitator_uuid: str, db: Session = Depends(get_db)):
     students = get_students_by_facilitator_uuid(db, facilitator_uuid)
     return students
+
+@router.get("/{user_uuid}", response_model=None)
+async def get_user_by_uuid_endpoint(user_uuid: str, db: Session = Depends(get_db)):
+    user = get_user_by_uuid(db, user_uuid)
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return user
