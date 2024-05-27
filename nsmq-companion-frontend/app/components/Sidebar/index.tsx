@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { initFlowbite } from "flowbite";
 import { useEffect } from 'react';
 import ThemeSwitch from '../Theme/ThemeSwitch';
+import { LiaTrophySolid } from "react-icons/lia";
 
 export default function Sidebar() {
     const { logout, Data } = useAuth()
@@ -108,6 +109,16 @@ export default function Sidebar() {
                                     </div>
                                 </Link>
                             </li>}
+                        {Data?.account_type == "student" ?
+                            <li>
+                                <Link href="/dashboard/champion-challenge">
+                                    <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                        <LiaTrophySolid size={25} />
+                                        <span className="flex-1 ms-3 whitespace-nowrap">Champion Challenge</span>
+                                    </div>
+                                </Link>
+                            </li> :
+                            null}
                         {Data?.account_type == "facilitator" ?
                             <li>
                                 <Link href="/dashboard/analytics">
