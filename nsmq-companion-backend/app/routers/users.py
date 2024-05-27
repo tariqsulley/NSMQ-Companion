@@ -12,7 +12,8 @@ from app.database.repository import (
     get_all_users,
     get_user_by_email_address,
     update_user_by_uuid,
-    get_user_by_uuid
+    get_user_by_uuid,
+    delete_student_by_uuid
 )
 from app.utils.auth import get_current_user
 
@@ -67,3 +68,10 @@ async def get_user_by_uuid_endpoint(user_uuid: str, db: Session = Depends(get_db
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
     return user
+
+@router.delete("/facilitators/{facilitator_uuid}/students/{student_uuid}", response_model=None)
+async def delete_student(facilitator_uuid: str, student_uuid: str, db: Session = Depends(get_db)):
+    result = delete_student_by_uuid(db, facilitator_uuid, student_uuid)
+    if not result:
+        raise HTTPException(status_code=404, detail="Student not found or not associated with this facilitator")
+    return {"detail": "Student deleted successfully"}

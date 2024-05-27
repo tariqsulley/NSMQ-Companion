@@ -1,7 +1,12 @@
 "use client"
 import 'flowbite';
-
+import { initFlowbite } from "flowbite";
+import { useEffect } from 'react';
 export default function Navbar() {
+    useEffect(() => {
+        initFlowbite();
+    }, []);
+
     return (
         <nav className="bg-white z-50 border-gray-200 dark:bg-gray-900 dark:border-gray-700">
             <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">

@@ -61,11 +61,10 @@ export default function Sidebar() {
                                 <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                                     <div className="px-4 py-3" role="none">
                                         <p className="text-sm text-gray-900 dark:text-white" role="none">
-                                            Tariq Sulley
-
+                                            {`${Data?.first_name} ${Data?.last_name}`}
                                         </p>
                                         <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                            tariqsulley3c@gmail.com
+                                            {`${Data?.email_address}`}
                                         </p>
                                     </div>
                                     <div className="py-1" >

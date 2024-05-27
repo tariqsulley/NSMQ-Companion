@@ -155,3 +155,11 @@ def get_user_by_uuid(db: Session, user_uuid: UUID):
 
     # If no user is found in any table
     return None
+
+def delete_student_by_uuid(db: Session, facilitator_uuid: UUID, student_uuid: UUID):
+    student = db.query(models.Student).filter(models.Student.uuid == student_uuid, models.Student.facilitator_uuid == facilitator_uuid).first()
+    if not student:
+        return None
+    db.delete(student)
+    db.commit()
+    return True
