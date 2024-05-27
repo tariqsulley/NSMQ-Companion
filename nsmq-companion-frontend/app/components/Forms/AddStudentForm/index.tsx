@@ -42,31 +42,31 @@ export default function AddStudentForm() {
                     facilitator_uuid: Data?.uuid
                 })
             console.log("res", response)
-            toast.success("Student Created Successfully!", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Slide,
-            });
+            // toast.success("Student Created Successfully!", {
+            //     position: "top-center",
+            //     autoClose: 3000,
+            //     hideProgressBar: true,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            //     progress: undefined,
+            //     theme: "colored",
+            //     transition: Slide,
+            // });
             router.push("/dashboard/students")
         } catch (e) {
             console.log(e)
-            toast.error("Error Creating Student", {
-                position: "top-center",
-                autoClose: 3000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "colored",
-                transition: Slide,
-            });
+            // toast.error("Error Creating Student", {
+            //     position: "top-center",
+            //     autoClose: 3000,
+            //     hideProgressBar: true,
+            //     closeOnClick: true,
+            //     pauseOnHover: true,
+            //     draggable: true,
+            //     progress: undefined,
+            //     theme: "colored",
+            //     transition: Slide,
+            // });
         } finally {
             setCreatingStundet(false)
         }

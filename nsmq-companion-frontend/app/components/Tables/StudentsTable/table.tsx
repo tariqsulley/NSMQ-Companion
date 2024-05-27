@@ -98,7 +98,7 @@ const Table: React.FC<TableProps> = ({ filter }) => {
             });
         }
         return [];
-    }, [isLoading, Data, filter]);
+    }, [isLoading, data, filter]);
 
 
 
