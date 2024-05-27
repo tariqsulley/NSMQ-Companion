@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react';
 import useSWR from 'swr';
 import API_BASE from '@/app/utils/api';
 import { useAuth } from '@/app/context/AuthContext';
-import axios from 'axios';
+import TableSkeleton from '../../Skeleton/TableSkeleton';
 
 interface SWROptions {
     revalidateIfStale: boolean;
@@ -68,6 +68,7 @@ const Table: React.FC<TableProps> = ({ filter }) => {
             revalidateIfStale: true,
             revalidateOnFocus: true,
             revalidateOnReconnect: true,
+            refreshInterval: 1000
         } as SWROptions
     );
 
@@ -102,15 +103,13 @@ const Table: React.FC<TableProps> = ({ filter }) => {
 
 
     if (error) {
-        return <div>Error loading data</div>;
+        return <div></div>;
     }
 
 
     if (isLoading) {
         return (
-            <div>
-                Loading
-            </div>
+            <TableSkeleton />
         )
     }
 

@@ -23,13 +23,14 @@ app.include_router(authentication.router)
 
 app.add_middleware(
     CORSMiddleware,
-    # allow_origins=[
-    #     "http://localhost:8000",
-    #     "https://localhost:8000",
-    #     "http://localhost:3000",
-    #     "http://localhost",
-    # ],
-    allow_origins=["*"],
+    allow_origins=[
+        "http://localhost:8000",
+        "https://localhost:8000",
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://localhost",
+    ],
+    # allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

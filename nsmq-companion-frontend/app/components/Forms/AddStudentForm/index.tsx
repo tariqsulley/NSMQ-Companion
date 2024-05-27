@@ -34,10 +34,10 @@ export default function AddStudentForm() {
             setCreatingStundet(true)
             const response = await axios.post(`${API_BASE}/facilitators/students/create`,
                 {
-                    firstName: firstName,
-                    lastName: lastName,
-                    year: year,
-                    email: email,
+                    first_name: firstName,
+                    last_name: lastName,
+                    year: parseInt(year, 10),
+                    email_address: email,
                     account_type: "student",
                     facilitator_uuid: Data?.uuid
                 })
@@ -53,7 +53,7 @@ export default function AddStudentForm() {
                 theme: "colored",
                 transition: Slide,
             });
-            router.push("/dashboard")
+            router.push("/dashboard/students")
         } catch (e) {
             console.log(e)
             toast.error("Error Creating Student", {
@@ -105,9 +105,9 @@ export default function AddStudentForm() {
                     onValueChange={setYear}
                     defaultValue="0"
                 >
-                    <SelectItem value="0">Year 1</SelectItem>
-                    <SelectItem value="commercial">Year 2</SelectItem>
-                    <SelectItem value="private">Year 3</SelectItem>
+                    <SelectItem value="1">Year 1</SelectItem>
+                    <SelectItem value="2">Year 2</SelectItem>
+                    <SelectItem value="3">Year 3</SelectItem>
                 </Select>
             </div>
 
