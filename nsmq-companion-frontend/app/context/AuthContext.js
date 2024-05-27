@@ -13,21 +13,19 @@ import "react-toastify/dist/ReactToastify.css";
 
 const AuthContext = createContext();
 
-const fetcher = (url) => {
-    const token = Cookies.get("access_token");
-    return fetch(url, {
-        method: "GET",
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-        },
-    }).then((res) => res.json());
+const fetcher = async (url) => {
+    const response = await axios.get(url, {
+        //   headers: {
+        //     Authorization: `Bearer ${accessToken}`,
+        //   },
+    });
+    return response?.data;
 };
 
 export const AuthProvider = ({ children }) => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [userData, setUserData] = useState(null);
-    const [error, setError] = useState(null);
+    const [Error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const [verifyEmail, setVerifyEmail] = useState("");
@@ -42,8 +40,8 @@ export const AuthProvider = ({ children }) => {
                 account_type: account_type
             });
 
-            const userInfo = response.data;
-            // console.log(userInfo);
+            const userInfo = response?.data;
+            console.log("userinfo", userInfo);
 
             setIsLoggedIn(true);
             setUserData(userInfo);
@@ -61,6 +59,7 @@ export const AuthProvider = ({ children }) => {
                 path: "/",
                 sameSite: "strict",
             });
+
             const callbackUrl = new URL(window.location.href).searchParams.get(
                 "callbackUrl"
             );
@@ -122,16 +121,16 @@ export const AuthProvider = ({ children }) => {
     const uuid = Cookies.get("uuid");
     const decodedToken = token ? jwt.decode(token) : null;
 
-    const { data, isLoading } = useSWR(
-        `${API_BASE}/facilitator/${uuid}`,
+    const { data, error, isLoading } = useSWR(
+        `${API_BASE}/facilitators/${uuid}/find`,
         fetcher,
-
         {
             revalidateIfStale: true,
             revalidateOnFocus: true,
             revalidateOnReconnect: true,
         }
     );
+
 
     const handleEmailVerification = (email) => {
         setVerifyEmail(email);
@@ -149,7 +148,7 @@ export const AuthProvider = ({ children }) => {
     const value = {
         isLoggedIn,
         userData,
-        error,
+        Error,
         loading,
         data,
         login,

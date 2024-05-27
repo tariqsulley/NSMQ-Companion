@@ -14,7 +14,7 @@ import { initFlowbite } from "flowbite";
 import { useEffect } from 'react';
 
 export default function Sidebar() {
-    const { logout } = useAuth()
+    const { logout, data } = useAuth()
     const router = useRouter();
 
     useEffect(() => {
@@ -58,6 +58,7 @@ export default function Sidebar() {
                                     <div className="px-4 py-3" role="none">
                                         <p className="text-sm text-gray-900 dark:text-white" role="none">
                                             Tariq Sulley
+
                                         </p>
                                         <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
                                             tariqsulley3c@gmail.com
@@ -83,10 +84,11 @@ export default function Sidebar() {
                                 <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                     <MdOutlineDashboard size={25} />
                                     <span className="ms-3">Dashboard</span>
+
                                 </div>
                             </Link>
                         </li>
-                        {"facilitator" ?
+                        {data?.account_type == "facilitator" ?
                             <li>
                                 <Link href="/dashboard/students">
                                     <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -103,7 +105,7 @@ export default function Sidebar() {
                                     </div>
                                 </Link>
                             </li>}
-                        {"facilitator" ?
+                        {data?.account_type == "facilitator" ?
                             <li>
                                 <Link href="/dashboard/analytics">
                                     <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">

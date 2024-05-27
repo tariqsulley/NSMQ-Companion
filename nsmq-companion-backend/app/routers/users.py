@@ -61,7 +61,7 @@ async def get_students_for_facilitator(facilitator_uuid: str, db: Session = Depe
     students = get_students_by_facilitator_uuid(db, facilitator_uuid)
     return students
 
-@router.get("/{user_uuid}", response_model=None)
+@router.get("/{user_uuid}/find", response_model=None)
 async def get_user_by_uuid_endpoint(user_uuid: str, db: Session = Depends(get_db)):
     user = get_user_by_uuid(db, user_uuid)
     if not user:
