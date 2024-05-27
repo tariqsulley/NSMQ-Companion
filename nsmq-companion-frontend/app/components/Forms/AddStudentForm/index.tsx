@@ -11,7 +11,8 @@ import { useRouter } from "next/navigation";
 import { Slide, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
-
+import API_BASE from "@/app/utils/api";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function AddStudentForm() {
     const [firstName, setFirstName] = useState<string>("")
@@ -20,6 +21,7 @@ export default function AddStudentForm() {
     const [year, setYear] = useState<string>("")
     const [studentImage, setStudentImage] = useState<File | string>("")
     const [creatingStudent, setCreatingStundet] = useState<boolean>(false)
+    const { Data } = useAuth()
     const router = useRouter()
 
     const isFormValid = (): boolean => {
@@ -30,16 +32,17 @@ export default function AddStudentForm() {
         e.preventDefault()
         try {
             setCreatingStundet(true)
-            const response = await axios.post(``,
+            const response = await axios.post(`${API_BASE}/facilitators/students/create`,
                 {
                     firstName: firstName,
                     lastName: lastName,
                     year: year,
                     email: email,
-                    stundentImage: studentImage
+                    account_type: "student",
+                    facilitator_uuid: Data?.uuid
                 })
             console.log("res", response)
-            toast.success("Asset Created Successfully!", {
+            toast.success("Student Created Successfully!", {
                 position: "top-center",
                 autoClose: 3000,
                 hideProgressBar: true,

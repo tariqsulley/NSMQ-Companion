@@ -121,7 +121,7 @@ export const AuthProvider = ({ children }) => {
     const uuid = Cookies.get("uuid");
     const decodedToken = token ? jwt.decode(token) : null;
 
-    const { data, error, isLoading } = useSWR(
+    const { data: Data, error, isLoading } = useSWR(
         `${API_BASE}/facilitators/${uuid}/find`,
         fetcher,
         {
@@ -139,18 +139,18 @@ export const AuthProvider = ({ children }) => {
     // console.log(data);
 
     useEffect(() => {
-        if (data) {
+        if (Data) {
             // console.log(data);
-            setUserData(data?.data);
+            setUserData(Data?.data);
         }
-    }, [data]);
+    }, [Data]);
 
     const value = {
         isLoggedIn,
         userData,
         Error,
         loading,
-        data,
+        Data,
         login,
         logout,
         verifyEmail,

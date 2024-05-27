@@ -14,7 +14,7 @@ import { initFlowbite } from "flowbite";
 import { useEffect } from 'react';
 
 export default function Sidebar() {
-    const { logout, data } = useAuth()
+    const { logout, Data } = useAuth()
     const router = useRouter();
 
     useEffect(() => {
@@ -88,7 +88,7 @@ export default function Sidebar() {
                                 </div>
                             </Link>
                         </li>
-                        {data?.account_type == "facilitator" ?
+                        {Data?.account_type == "facilitator" ?
                             <li>
                                 <Link href="/dashboard/students">
                                     <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -105,7 +105,7 @@ export default function Sidebar() {
                                     </div>
                                 </Link>
                             </li>}
-                        {data?.account_type == "facilitator" ?
+                        {Data?.account_type == "facilitator" ?
                             <li>
                                 <Link href="/dashboard/analytics">
                                     <div className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
