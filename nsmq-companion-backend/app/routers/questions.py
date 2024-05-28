@@ -2,6 +2,14 @@ from fastapi import APIRouter, Query, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from typing import List, Optional
+from fastapi import FastAPI, HTTPException
+from fastapi.responses import StreamingResponse
+from pydantic import BaseModel
+import io
+
+from TTS.tts.configs.vits_config import VitsConfig
+from TTS.tts.models.vits import Vits
+import numpy as np
 
 from .shared import get_db
 import re
@@ -32,3 +40,4 @@ async def query_table_data(
         return [{"S/N": row['S/N'], "Preamble Text": row['Preamble Text'], "Question": row['Question'], "Subject": row['Subject'],  "Answer": row['Answer']} for row in result_list]
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
