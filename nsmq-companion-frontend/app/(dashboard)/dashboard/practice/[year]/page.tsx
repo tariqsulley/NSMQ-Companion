@@ -1,5 +1,6 @@
 "use client";
 import { useState, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import Navbar from "@/app/components/Navbar";
 import PracticeNavBar from "@/app/components/PracticeNavBar";
 import { useSearchParams } from "next/navigation";
@@ -17,6 +18,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const { year } = params;
     const searchParams = useSearchParams();
     const type = parseInt(searchParams.get("nums") ?? "0");
+    const [selectedContest, setSelectedContest] = useState("");
+    const router = useRouter();
 
     const contests = useMemo(() => {
         // Check if the year and nums from URL exist in ContestData
@@ -26,6 +29,11 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         }
         return Array.from({ length: type }, (_, index) => `Contest ${index + 1}`);
     }, [year, type]);
+
+    const handleContestClick = (contest: any) => {
+        setSelectedContest(contest);
+        router.push(`/dashboard/practice/${year}?nums=${type}&contest=${contest}`);
+    }
 
     if (!contests) {
         return (
@@ -49,9 +57,9 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                     <ContestCard
                         key={contest}
                         contest_name={contest}
-                        bg_color="bg-[#edf3fe]"
-                        border_colour="bg-[#34a26e]"
-                        is_active={true}
+                        bg_color="bg-gray-200"
+                        is_active={selectedContest === contest}
+                        onClick={() => handleContestClick(contest)}
                     />
                 ))}
             </div>

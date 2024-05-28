@@ -1,22 +1,18 @@
-
 interface ContestCardProps {
     contest_name: string;
     bg_color: string;
-    border_colour: string;
-    is_active: boolean
+    is_active: boolean;
+    onClick: () => void;
 }
 
-export default function ContestCard({ contest_name, bg_color, border_colour, is_active }: ContestCardProps) {
+export default function ContestCard({ contest_name, bg_color, is_active, onClick }: ContestCardProps) {
     return (
-        <div>
+        <div onClick={onClick}>
             <div className=" border-[1px] "></div>
-            <div className={`shadow m-5 p-4 bg-${bg_color}  border-l-2 border-l-${border_colour}`}>
+            <div className={`shadow m-5 p-4 ${is_active ? `bg-[#edf3fe] border-l-[5px] border-l-[#1964f1]` : bg_color} `}>
                 <p className="font-semibold">{contest_name} </p>
             </div>
             <div className=" border-[1px] "></div>
         </div>
     )
 }
-
-// bg-[#edf3fe] 
-// bg-[#34a26e]
