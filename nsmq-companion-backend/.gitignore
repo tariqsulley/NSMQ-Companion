@@ -3,3 +3,6 @@
 .venv
 env/
 venv/
+
+*.onnx
+nsmq-companion-backend/app/utils/tts_files/quizmistress.onnx
