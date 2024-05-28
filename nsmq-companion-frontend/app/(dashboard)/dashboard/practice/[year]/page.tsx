@@ -5,6 +5,7 @@ import PracticeNavBar from "@/app/components/PracticeNavBar";
 import { useSearchParams } from "next/navigation";
 import ContestCard from "@/app/components/Cards/ContestCard";
 import ContestData from "@/app/utils/NSMQContests";
+import questions from "../../../../utils/Questions/NSMQ_2021/contest1/round1"
 
 interface PracticeYearProps {
     params: {
@@ -20,6 +21,9 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const [contestValue, setContestValue] = useState("");
     const router = useRouter();
 
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const currentQuestion = questions[currentQuestionIndex];
+
     const contests = useMemo(() => {
         const contestExists = ContestData.some(cd => cd.year === year && cd.contest_nums === type.toString());
         if (!contestExists) {
@@ -33,6 +37,9 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         router.push(`/dashboard/practice/${year}?nums=${type}`);
     }
 
+    const handleNextQuestion = () => {
+        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+    };
 
     if (!contests) {
         return (
@@ -61,7 +68,23 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                         onClick={() => handleContestClick(contest)}
                     />
                 ))}
+
             </div>
+            <div className="ml-[400px]">
+                <div>
+                    <h2>{currentQuestion["S/N"]}</h2>
+                    <h2>{currentQuestion["Subject"]}</h2>
+                    <h2>{currentQuestion["Question"]}</h2>
+                    <p>{currentQuestion["Preamble Text"] || ""}</p>
+                </div>
+                <button
+                    disabled={currentQuestionIndex === questions.length - 1}
+                    onClick={handleNextQuestion}
+                >
+                    Next
+                </button>
+            </div>
+
         </div>
     );
 }
