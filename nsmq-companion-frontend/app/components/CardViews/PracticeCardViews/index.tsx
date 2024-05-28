@@ -2,14 +2,31 @@
 import { useState, FC } from "react";
 import PracticeCard from "../../Cards/PracticeCard";
 import ContestData from "@/app/utils/NSMQContests";
+import { TextInput } from '@tremor/react';
+import { CiSearch } from "react-icons/ci";
+import {
+    SearchSelect,
+    SearchSelectItem,
+    Select,
+    SelectItem,
+} from '@tremor/react';
 
 type Contest = {
     year: string;
     file: string;
+    contest_nums: string;
 }
 
+const years = [
+    { value: "2021", title: "2021" },
+    { value: "2020", title: "2020" },
+    { value: "2019", title: "2019" }
+];
+
 const PracticeCardView: FC = () => {
-    const totalCards = ContestData.length;
+    const [year, setYear] = useState<string>("")
+    const filteredData = year ? ContestData.filter(contest => contest.year === year) : ContestData;
+    const totalCards = filteredData.length;
 
     const cardsPerPage = 4;
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -17,8 +34,8 @@ const PracticeCardView: FC = () => {
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
 
-    const currentCards = ContestData.slice(indexOfFirstCard, indexOfLastCard).map((contest: Contest, index: number) => (
-        <PracticeCard key={index} year={contest.year} />
+    const currentCards = filteredData.slice(indexOfFirstCard, indexOfLastCard).map((contest: Contest, index: number) => (
+        <PracticeCard key={index} year={contest.year} contest_nums={contest.contest_nums} />
     ));
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
@@ -37,6 +54,20 @@ const PracticeCardView: FC = () => {
 
     return (
         <div>
+            {/* <div className="mb-4 w-[30%] mx-4">
+                <p className="text-[#354055]">Year</p>
+                <SearchSelect
+                    value={year}
+                    onValueChange={setYear}
+                >
+                    {years.map(({ value, title }) => (
+                        <SearchSelectItem key={value} value={value}>
+                            {title}
+                        </SearchSelectItem>
+                    ))}
+                </SearchSelect>
+            </div> */}
+
             <div className="flex justify-evenly flex-wrap gap-5">
                 {currentCards}
             </div>

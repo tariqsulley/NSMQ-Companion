@@ -1,47 +1,58 @@
 const ContestData = [
     {
         "year": "2021",
-        "file": ""
+        "file": "",
+        "contest_nums": "40"
     },
     {
         "year": "2020",
-        "file": ""
+        "file": "",
+        "contest_nums": "40"
     },
     {
         "year": "2019",
-        "file": ""
+        "file": "",
+        "contest_nums": "40"
     },
     {
         "year": "2018",
-        "file": ""
+        "file": "",
+        "contest_nums": "40"
     },
     {
         "year": "2017",
-        "file": ""
+        "file": "",
+        "contest_nums": "40"
     },
     {
         "year": "2016",
-        "file": ""
+        "file": "",
+        "contest_nums": "40"
     },
     {
         "year": "2015",
-        "file": ""
+        "file": "",
+        "contest_nums": "67"
     },
     {
         "year": "2014",
-        "file": ""
+        "file": "",
+        "contest_nums": "67"
     },
     {
         "year": "2013",
-        "file": ""
+        "file": "",
+        "contest_nums": "40"
     },
     {
         "year": "2012",
-        "file": ""
+        "file": "",
+        "contest_nums": "37"
     },
     {
         "year": "2009",
-        "file": ""
+        "file": "",
+        "contest_nums": "22"
     },
 ]
 

@@ -21,6 +21,8 @@
     "next": "14.2.3",
     "next-auth": "^4.24.7",
     "next-themes": "^0.3.0",
+    "next-usequerystate": "^1.17.4",
+    "nuqs": "^1.17.4",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
