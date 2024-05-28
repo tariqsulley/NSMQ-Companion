@@ -1,76 +1,6 @@
-// "use client";
-// import { useState, useMemo } from "react";
-// import { useRouter } from "next/navigation";
-// import Navbar from "@/app/components/Navbar";
-// import PracticeNavBar from "@/app/components/PracticeNavBar";
-// import { useSearchParams } from "next/navigation";
-// import ContestCard from "@/app/components/Cards/ContestCard";
-// import ContestData from "@/app/utils/NSMQContests";
-// import { useQueryState } from 'nuqs'
-
-// interface PracticeYearProps {
-//     params: {
-//         year: string;
-//     };
-// }
-
-// export default function PracticeYear({ params }: PracticeYearProps) {
-//     const { year } = params;
-//     const searchParams = useSearchParams();
-//     const type = parseInt(searchParams.get("nums") ?? "0");
-//     const contest_value = parseInt(searchParams.get("contest") ?? "0");
-//     const [selectedContest, setSelectedContest] = useState("");
-//     const router = useRouter();
-
-//     const contests = useMemo(() => {
-//         // Check if the year and nums from URL exist in ContestData
-//         const contestExists = ContestData.some(cd => cd.year === year && cd.contest_nums === type.toString());
-//         if (!contestExists) {
-//             return null;
-//         }
-//         return Array.from({ length: type }, (_, index) => `Contest ${index + 1}`);
-//     }, [year, type]);
-
-//     const handleContestClick = (contest: any) => {
-//         setSelectedContest(contest);
-//         router.push(`/dashboard/practice/${year}?nums=${type}?contest=${contest}`);
-//     }
-
-//     if (!contests) {
-//         return (
-//             <div className="bg-bgMain h-screen">
-//                 <PracticeNavBar />
-//                 <div className="text-center mt-20">
-//                     <div>Unavailable contest on the page</div>
-//                 </div>
-//             </div>
-//         );
-//     }
-
-//     return (
-//         <div className="bg-bgMain h-screen">
-//             <PracticeNavBar />
-//             <h1 className="text-2xl font-semibold text-center mt-6">
-//                 Practice for Year: {year} - Number of Contests: {type} Contest {contest_value}
-//             </h1>
-//             <div className="h-screen bg-white fixed left-0 top-0 overflow-y-scroll w-[20%] mt-[57px] border-r-2 pb-10">
-//                 {contests.map(contest => (
-//                     <ContestCard
-//                         key={contest}
-//                         contest_name={contest}
-//                         bg_color="bg-gray-200"
-//                         is_active={selectedContest === contest}
-//                         onClick={() => handleContestClick(contest)}
-//                     />
-//                 ))}
-//             </div>
-//         </div>
-//     );
-// }
 "use client";
 import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import Navbar from "@/app/components/Navbar";
 import PracticeNavBar from "@/app/components/PracticeNavBar";
 import { useSearchParams } from "next/navigation";
 import ContestCard from "@/app/components/Cards/ContestCard";
@@ -100,14 +30,9 @@ export default function PracticeYear({ params }: PracticeYearProps) {
 
     const handleContestClick = (contest: any) => {
         setSelectedContest(contest);
-        router.push(`/dashboard/practice/${year}?nums=${type}&contest=${contest}`);
+        router.push(`/dashboard/practice/${year}?nums=${type}`);
     }
 
-    useEffect(() => {
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const contestValueFromURL = urlSearchParams.get("contest") || "";
-        setContestValue(contestValueFromURL);
-    }, [window.location.search]);
 
     if (!contests) {
         return (
@@ -124,7 +49,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         <div className="bg-bgMain h-screen">
             <PracticeNavBar />
             <h1 className="text-2xl font-semibold text-center mt-6">
-                Practice for Year: {year} - Number of Contests: {type}  {contestValue}
+                Practice for Year: {year} - Number of Contests: {type}  {selectedContest}
             </h1>
             <div className="h-screen bg-white fixed left-0 top-0 overflow-y-scroll w-[50%] sm:w-[20%] mt-[57px] border-r-2 pb-10">
                 {contests.map(contest => (
