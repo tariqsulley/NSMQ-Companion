@@ -57,6 +57,9 @@ class Login(BaseModel):
 
     class Config:
         orm_model = True
+        
+class TextModel(BaseModel):
+    text:str
 
 
 class UserEmail(BaseModel):
