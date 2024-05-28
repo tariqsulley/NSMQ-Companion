@@ -5,7 +5,7 @@ from app.database.core import init_db
 from app.routers import (
  
     authentication,
-  
+    questions,
     system,
     users,
 )
@@ -20,6 +20,7 @@ app = FastAPI(
 app.include_router(system.router)
 app.include_router(users.router)
 app.include_router(authentication.router)
+app.include_router(questions.router)
 
 app.add_middleware(
     CORSMiddleware,

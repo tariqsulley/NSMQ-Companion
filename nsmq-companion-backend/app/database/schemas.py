@@ -30,7 +30,7 @@ class StudentBase(BaseModel):
     account_type:str
 
 class StudentCreate(StudentBase):
-    facilitator_uuid: UUID
+    facilitator_uuid: str
 
     # @validator('email')
     # def email_must_be_unique(cls, value, session: Session):
