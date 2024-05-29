@@ -137,7 +137,46 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     };
 
+    const sendAudioToBackend = async (audioBlob: any) => {
+        try {
+            const formData = new FormData();
+            formData.append('audio', audioBlob, 'audio.webm');
 
+            const response = await axios.post(`${API_BASE}/questions/get-transcript`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            console.log('Transcript:', response.data.transcript);
+        } catch (error) {
+            console.error('Error sending audio to backend:', error);
+        }
+    };
+
+    const handleRecordAudio = async () => {
+        try {
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            const mediaRecorder = new MediaRecorder(stream);
+            const chunks: any = [];
+
+            mediaRecorder.addEventListener('dataavailable', (event) => {
+                chunks.push(event.data);
+            });
+
+            mediaRecorder.addEventListener('stop', () => {
+                const audioBlob = new Blob(chunks, { type: 'audio/webm' });
+                sendAudioToBackend(audioBlob);
+            });
+
+            mediaRecorder.start();
+            setTimeout(() => {
+                mediaRecorder.stop();
+            }, 5000); // Stop recording after 10 seconds
+        } catch (error) {
+            console.error('Error recording audio:', error);
+        }
+    };
 
     if (!contests) {
         return (
@@ -192,6 +231,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                 <button onClick={play}>
                     play
                 </button>
+                <button onClick={handleRecordAudio}>Start Recording</button>
+
             </div>
 
         </div>

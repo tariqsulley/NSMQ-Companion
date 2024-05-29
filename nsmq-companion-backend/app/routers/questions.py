@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query, Depends, HTTPException
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 from typing import List, Optional
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, File,UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import io
@@ -116,18 +116,29 @@ def transcribe(path_to_audio):
 
 
 
+# @router.post("/get-transcript")
+# async def get_transcript(audio: AudioBytes):
+#     decoded_data = base64.b64decode(audio.data)
+#     audio_filename = audio.filename
+#     with open(audio_filename, 'wb') as file:
+#         file.write(decoded_data)
+
+#     transcript = transcribe(audio_filename)
+#     os.remove(audio_filename)
+#     return {"transcript": transcript}
+
+
 @router.post("/get-transcript")
-async def get_transcript(audio: AudioBytes):
-    decoded_data = base64.b64decode(audio.data)
-    audio_filename = audio.filename
-    with open(audio_filename, 'wb') as file:
-        file.write(decoded_data)
-
-    transcript = transcribe(audio_filename)
-    os.remove(audio_filename)
-    return {"transcript": transcript}
-
-
-
+async def get_transcript(audio: UploadFile = File(...)):
+    try:
+        audio_bytes = await audio.read()
+        audio_filename = audio.filename
+        with open(audio_filename, 'wb') as file:
+            file.write(audio_bytes)
+        transcript = transcribe(audio_filename)
+        os.remove(audio_filename)
+        return {"transcript": transcript}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 
