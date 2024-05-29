@@ -6,7 +6,7 @@ from fastapi import FastAPI, HTTPException, File,UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import io
-from app.database.schemas import TextModel
+from app.database.schemas import TextModel,SimilarityRequest,SimilarityResponse
 from TTS.tts.configs.vits_config import VitsConfig
 from TTS.tts.models.vits import Vits
 from TTS.utils.audio.numpy_transforms import save_wav
@@ -35,6 +35,7 @@ from torch import nn, Tensor
 import numpy as np
 from .shared import get_db
 import re
+from sentence_transformers import SentenceTransformer
 
 router = APIRouter(
     prefix="/questions",
@@ -89,18 +90,12 @@ async def create_audio(text_model: TextModel):
     
 
 
-class AudioBytes(BaseModel):
-    data: str  # Base64 string
-    filename: str
-
-
 whisper.load_model("medium.en")
 torch.cuda.is_available()
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+device = torch.device("mps")
 
 model = whisper.load_model("medium.en", device = DEVICE) # Select whisper model size (tiny, base, small, medium, large)
-
-
 
 def transcribe(path_to_audio):
   """Loads whisper model to transcribe audio"""
@@ -114,20 +109,6 @@ def transcribe(path_to_audio):
   # Print transcript
   return result["text"]
 
-
-
-# @router.post("/get-transcript")
-# async def get_transcript(audio: AudioBytes):
-#     decoded_data = base64.b64decode(audio.data)
-#     audio_filename = audio.filename
-#     with open(audio_filename, 'wb') as file:
-#         file.write(decoded_data)
-
-#     transcript = transcribe(audio_filename)
-#     os.remove(audio_filename)
-#     return {"transcript": transcript}
-
-
 @router.post("/get-transcript")
 async def get_transcript(audio: UploadFile = File(...)):
     try:
@@ -140,5 +121,27 @@ async def get_transcript(audio: UploadFile = File(...)):
         return {"transcript": transcript}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
 
+@router.on_event("startup")
+def load_model():
+    global st_model
+    st_model = SentenceTransformer("all-MiniLM-L6-v2")
+
+@router.post("/calculate-similarity", response_model=None)
+async def calculate_similarity(request: SimilarityRequest):
+    try:
+        # Compute embeddings for both sentences
+        embeddings1 = st_model.encode([request.question_answer])
+        embeddings2 = st_model.encode([request.student_answer])
+
+        # Compute cosine similarities using the built-in method
+        similarities = st_model.similarity(embeddings1, embeddings2)
+
+        # Get the similarity score for the first and only pair
+        similarity_score = similarities[0][0]
+
+        return SimilarityResponse(similarity=similarity_score)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 

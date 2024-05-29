@@ -50,6 +50,13 @@ class UpdateUser(BaseModel):
         orm_model = True
 
 
+class SimilarityRequest(BaseModel):
+    question_answer: str
+    student_answer: str
+
+class SimilarityResponse(BaseModel):
+    similarity: float
+
 class Login(BaseModel):
     email_address: EmailStr
     account_type:str
@@ -103,3 +110,6 @@ class Token(BaseModel):
     class Config:
         orm_model = True
 
+class AudioBytes(BaseModel):
+    data: str 
+    filename: str
