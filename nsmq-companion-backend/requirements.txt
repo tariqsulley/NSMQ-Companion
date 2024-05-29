@@ -106,6 +106,7 @@ numba==0.59.1
 numpy==1.22.0
 onnx==1.16.1
 onnxruntime==1.18.0
+openai-whisper @ git+https://github.com/openai/whisper.git@ba3f3cd54b0e5b8ce1ab3de13e32122d0d5f98ab
 orjson==3.9.5
 packaging==23.1
 pandas==1.5.3
@@ -172,6 +173,7 @@ tensorboard==2.16.2
 tensorboard-data-server==0.7.2
 thinc==8.2.3
 threadpoolctl==3.5.0
+tiktoken==0.7.0
 tokenizers==0.19.1
 tomli==2.0.1
 torch==2.3.0
@@ -195,7 +197,6 @@ watchfiles==0.20.0
 weasel==0.3.4
 websockets==11.0.3
 Werkzeug==3.0.3
-whisper==1.1.10
 wrapt==1.16.0
 yarl==1.9.4
 zipp==3.19.0

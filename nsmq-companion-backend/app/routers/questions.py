@@ -87,7 +87,6 @@ async def create_audio(text_model: TextModel):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
-    from fastapi import FastAPI, HTTPException
 
 
 class AudioBytes(BaseModel):
@@ -95,6 +94,7 @@ class AudioBytes(BaseModel):
     filename: str
 
 
+whisper.load_model("medium.en")
 torch.cuda.is_available()
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
