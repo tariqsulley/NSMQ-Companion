@@ -34,12 +34,14 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const [transcribedText, setTranscribedText] = useState('');
     const [isRecording, setIsRecording] = useState(false);
     const [isBellPlaying, setIsBellPlaying] = useState(false);
+    const [transcribingAudio, setTranscibingAudio] = useState<boolean>(false)
 
     const handleCircleClick = () => {
         if (!isBellPlaying) {
             setIsBellPlaying(true);
             setIsCircleGreen(true);
             play();
+            handleRecordAudio()
 
             setTimeout(() => {
                 setIsCircleGreen(false);
@@ -104,6 +106,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
 
     const sendAudioToBackend = async (audioBlob: any) => {
         try {
+            setTranscibingAudio(true)
             const formData = new FormData();
             formData.append('audio', audioBlob, 'audio.webm');
 
@@ -117,6 +120,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
             setTranscribedText(response.data.transcript);
         } catch (error) {
             console.error('Error sending audio to backend:', error);
+        } finally {
+            setTranscibingAudio(false)
         }
     };
 
@@ -202,6 +207,9 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                 </button>
                 <button onClick={play}>
                     play
+                </button>
+                <button>
+                    {transcribingAudio ? "Transcribing" : "Done"}
                 </button>
                 <button onClick={handleRecordAudio}>
                     {isRecording ? 'Recording...' : 'Start Recording'}
