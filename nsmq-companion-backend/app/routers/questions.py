@@ -10,6 +10,27 @@ from app.database.schemas import TextModel
 from TTS.tts.configs.vits_config import VitsConfig
 from TTS.tts.models.vits import Vits
 from TTS.utils.audio.numpy_transforms import save_wav
+from fastapi.middleware.cors import CORSMiddleware
+import base64
+import os
+from io import BytesIO
+import wave
+
+import torch
+import numpy as np
+import whisper
+import jiwer
+import time
+import pandas as pd
+from tabulate import tabulate
+from pydub import AudioSegment
+import os
+import joblib
+import re
+from transformers import BertTokenizer, BertModel
+import torch
+import torch.nn.functional as F
+from torch import nn, Tensor
 
 import numpy as np
 from .shared import get_db
@@ -65,6 +86,50 @@ async def create_audio(text_model: TextModel):
         return StreamingResponse(byte_io, media_type="audio/wav")
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+    
+    from fastapi import FastAPI, HTTPException
+
+
+class AudioBytes(BaseModel):
+    data: str  # Base64 string
+    filename: str
+
+
+torch.cuda.is_available()
+DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+
+model = whisper.load_model("medium.en", device = DEVICE) # Select whisper model size (tiny, base, small, medium, large)
+
+
+
+def transcribe(path_to_audio):
+  """Loads whisper model to transcribe audio"""
+
+  # Load audio
+  audio = whisper.load_audio(path_to_audio)
+
+  # Transcribe audio
+  result = model.transcribe(audio)
+
+  # Print transcript
+  return result["text"]
+
+
+
+@router.post("/get-transcript")
+async def get_transcript(audio: AudioBytes):
+    decoded_data = base64.b64decode(audio.data)
+    audio_filename = audio.filename
+    with open(audio_filename, 'wb') as file:
+        file.write(decoded_data)
+
+    # Assume transcribe is a function you've defined to handle speech recognition
+    transcript = transcribe(audio_filename)
+    os.remove(audio_filename)
+    return {"transcript": transcript}
+
+# You might need to add the transcribe function here that uses Whisper or any other STT model.
+
 
 
 
