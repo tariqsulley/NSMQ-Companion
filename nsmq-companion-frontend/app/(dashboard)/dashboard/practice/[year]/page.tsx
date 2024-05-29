@@ -31,28 +31,37 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const [audio] = useState(new Audio(''));
     const [isCircleGreen, setIsCircleGreen] = useState(false);
     const [play] = useSound('/Sounds/bell.wav');
+    const [transcribedText, setTranscribedText] = useState('');
+    const [isRecording, setIsRecording] = useState(false);
+    const [isBellPlaying, setIsBellPlaying] = useState(false);
 
     const handleCircleClick = () => {
-        setIsCircleGreen(true);
-        play();
-        setTimeout(() => {
-            setIsCircleGreen(false);
-        }, 1000);
-    }
+        if (!isBellPlaying) {
+            setIsBellPlaying(true);
+            setIsCircleGreen(true);
+            play();
+
+            setTimeout(() => {
+                setIsCircleGreen(false);
+                setIsBellPlaying(false);
+            }, 2000); // Stop the bell sound after 2 seconds
+        }
+    };
+
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key.toLowerCase() === 'b') {
+            if (event.key.toLowerCase() === 'b' && !isBellPlaying) {
                 handleCircleClick();
             }
-        }
+        };
 
         window.addEventListener('keydown', handleKeyDown);
 
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
-        }
-    }, [handleCircleClick]);
+        };
+    }, [handleCircleClick, isBellPlaying]);
 
     const contests = useMemo(() => {
         const contestExists = ContestData.some(cd => cd.year === year && cd.contest_nums === type.toString());
@@ -67,35 +76,6 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         router.push(`/dashboard/practice/${year}?nums=${type}`);
     }
 
-    // const handleNextQuestion = () => {
-    //     setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    // };
-
-    // const synthesizeText = async (text: string) => {
-    //     try {
-    //         setloading(true)
-    //         // const response = await fetch(`${API_BASE}/synthesize/`, {
-    //         //     method: 'POST',
-    //         //     body: text
-    //         // });
-    //         const response = await axios.post(`${API_BASE}/questions/synthesize/`, {
-    //             text: text
-    //         })
-
-    //         // if (!response.ok) {
-    //         //     throw new Error('Failed to synthesize text');
-    //         // }
-
-    //         const audioBlob = await response.blob();
-    //         const audioUrl = URL.createObjectURL(audioBlob);
-    //         const audio = new Audio(audioUrl);
-    //         audio.play();
-    //     } catch (error) {
-    //         console.error('Error synthesizing text:', error);
-    //     } finally {
-    //         setloading(false)
-    //     }
-    // };
     const synthesizeText = async (text: string) => {
         try {
             setloading(true);
@@ -116,21 +96,6 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         }
     };
 
-    // useEffect(() => {
-    //     const playAudioAndMoveToNextQuestion = () => {
-    //         if (currentQuestion) {
-    //             synthesizeText(currentQuestion["Question"]);
-    //             console.log('synthesizing');
-
-    //             // Wait for 5 seconds after the audio finishes playing
-    //             setTimeout(() => {
-    //                 setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    //             }, 20000);
-    //         }
-    //     };
-
-    //     playAudioAndMoveToNextQuestion();
-    // }, [currentQuestionIndex]);
 
     const handleNextQuestion = () => {
         synthesizeText(currentQuestion["Question"]);
@@ -149,6 +114,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
             });
 
             console.log('Transcript:', response.data.transcript);
+            setTranscribedText(response.data.transcript);
         } catch (error) {
             console.error('Error sending audio to backend:', error);
         }
@@ -156,6 +122,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
 
     const handleRecordAudio = async () => {
         try {
+            setIsRecording(true);
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             const mediaRecorder = new MediaRecorder(stream);
             const chunks: any = [];
@@ -165,6 +132,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
             });
 
             mediaRecorder.addEventListener('stop', () => {
+                setIsRecording(false);
                 const audioBlob = new Blob(chunks, { type: 'audio/webm' });
                 sendAudioToBackend(audioBlob);
             });
@@ -172,7 +140,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
             mediaRecorder.start();
             setTimeout(() => {
                 mediaRecorder.stop();
-            }, 5000); // Stop recording after 10 seconds
+            }, 5000); // Stop recording after 5 seconds
         } catch (error) {
             console.error('Error recording audio:', error);
         }
@@ -218,6 +186,10 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                     <p> Preamble: {currentQuestion["Preamble Text"] || ""}</p>
                     <h2>{currentQuestion["Question"]}</h2>
                 </div>
+                <div>
+                    <h2>Transcribed Text:</h2>
+                    <p>{transcribedText}</p>
+                </div>
                 <div
                     className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
                     onClick={handleCircleClick}
@@ -231,7 +203,9 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                 <button onClick={play}>
                     play
                 </button>
-                <button onClick={handleRecordAudio}>Start Recording</button>
+                <button onClick={handleRecordAudio}>
+                    {isRecording ? 'Recording...' : 'Start Recording'}
+                </button>
 
             </div>
 
