@@ -123,12 +123,10 @@ async def get_transcript(audio: AudioBytes):
     with open(audio_filename, 'wb') as file:
         file.write(decoded_data)
 
-    # Assume transcribe is a function you've defined to handle speech recognition
     transcript = transcribe(audio_filename)
     os.remove(audio_filename)
     return {"transcript": transcript}
 
-# You might need to add the transcribe function here that uses Whisper or any other STT model.
 
 
 
