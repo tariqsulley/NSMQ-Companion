@@ -35,6 +35,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const [isRecording, setIsRecording] = useState(false);
     const [isBellPlaying, setIsBellPlaying] = useState(false);
     const [transcribingAudio, setTranscibingAudio] = useState<boolean>(false)
+    const [checkingAnswer, setCheckingAnswer] = useState<boolean>(false)
+    const [similarityScore, setSimilarityScore] = useState()
 
     const handleCircleClick = () => {
         if (!isBellPlaying) {
@@ -145,11 +147,39 @@ export default function PracticeYear({ params }: PracticeYearProps) {
             mediaRecorder.start();
             setTimeout(() => {
                 mediaRecorder.stop();
-            }, 5000); // Stop recording after 5 seconds
+            }, 10000); // Stop recording after 5 seconds
         } catch (error) {
             console.error('Error recording audio:', error);
         }
     };
+
+    const handleCalculateSimilarity = async () => {
+        try {
+            setCheckingAnswer(true);
+            const response = await axios.post(`${API_BASE}/questions/calculate-similarity`, {
+                question_answer: currentQuestion["Answer"],
+                student_answer: transcribedText,
+            });
+
+            const similarityScore = response.data.similarity;
+            console.log(`Similarity Score: ${similarityScore}`);
+            setSimilarityScore(similarityScore);
+
+            if (similarityScore > 0.1) {
+                synthesizeText("yes you are right");
+            }
+        } catch (error) {
+            console.error('Error calculating similarity:', error);
+        } finally {
+            setCheckingAnswer(false);
+        }
+    };
+
+    useEffect(() => {
+        if (transcribedText) {
+            handleCalculateSimilarity();
+        }
+    }, [transcribedText]);
 
     if (!contests) {
         return (
@@ -188,6 +218,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                 <div>
                     <p> Question {currentQuestion["S/N"]} </p>
                     <h2>{currentQuestion["Subject"]}</h2>
+                    <p>{currentQuestion["Answer"]}</p>
                     <p> Preamble: {currentQuestion["Preamble Text"] || ""}</p>
                     <h2>{currentQuestion["Question"]}</h2>
                 </div>
@@ -214,7 +245,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                 <button onClick={handleRecordAudio}>
                     {isRecording ? 'Recording...' : 'Start Recording'}
                 </button>
-
+                <p> {checkingAnswer ? "Checking" : "Done checking"}</p>
+                <p>Similarity:{similarityScore}</p>
             </div>
 
         </div>
