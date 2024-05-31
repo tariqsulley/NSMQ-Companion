@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
             // router.push(redirectPath);
         } catch (error) {
             const { response } = error;
-            toast.error("Registration failed", {
+            toast.error("Invalid login credentials", {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: true,
