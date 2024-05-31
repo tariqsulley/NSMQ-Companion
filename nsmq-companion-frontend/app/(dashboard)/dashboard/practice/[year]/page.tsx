@@ -41,6 +41,10 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const [quizStarted, setQuizStarted] = useState(false);
     const sidebarRef = useRef<HTMLDivElement>(null);
     const [sidebarWidth, setSidebarWidth] = useState(0);
+    const cardsPerPage = 5;
+    const [currentPage, setCurrentPage] = useState(1);
+    const indexOfLastCard = currentPage * cardsPerPage;
+    const indexOfFirstCard = indexOfLastCard - cardsPerPage;
 
     useEffect(() => {
         if (sidebarRef.current) {
@@ -51,7 +55,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
 
     const handleStartQuiz = () => {
         setQuizStarted(true);
-        playQuestionAudio(1); // Play the first question
+        playQuestionAudio(1);
     };
 
     const handleCircleClick = () => {
@@ -90,6 +94,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         }
         return Array.from({ length: type }, (_, index) => `Contest ${index + 1}`);
     }, [year, type]);
+    const currentContests = contests.slice(indexOfFirstCard, indexOfLastCard);
+
 
     const handleContestClick = (contest: any) => {
         setSelectedContest(contest);
@@ -300,7 +306,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                     ))}
                 </div> */}
                 <div className="w-full flex flex-col items-center justify-center">
-                    {contests.map(contest => (
+                    {currentContests.map(contest => (
                         <ContestCard
                             key={contest}
                             contest_name={contest}
@@ -309,7 +315,30 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                             onClick={() => handleContestClick(contest)}
                         />
                     ))}
+                    <div className="flex  justify-center my-4">
+                        <button
+                            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-l"
+                            onClick={() => setCurrentPage(currentPage - 1)}
+                            disabled={currentPage === 1}
+                        >
+                            Previous
+                        </button>
+                        <button
+                            className="px-4 py-2 bg-gray-300 text-gray-800"
+                            disabled
+                        >
+                            {currentPage}
+                        </button>
+                        <button
+                            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-r"
+                            onClick={() => setCurrentPage(currentPage + 1)}
+                            disabled={indexOfLastCard >= contests.length}
+                        >
+                            Next
+                        </button>
+                    </div>
                 </div>
+
                 {/* <div className="md:ml-[400px]">
                     <div className="bg-red-100">
                         <p> Question: {currentQuestionIndex} </p>
