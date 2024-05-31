@@ -20,7 +20,6 @@ import { useAuth } from "@/app/context/AuthContext";
 export default function LoginForm() {
     const [emailAddress, setEmailAddress] = useState<string>("")
     const [password, setPassword] = useState<string>("")
-    // const [loading, setLoading] = useState<boolean>(false)
     const [accountType, setAccountType] = useState<string>("")
     const router = useRouter()
     const { login, error, loading } = useAuth();
@@ -47,36 +46,7 @@ export default function LoginForm() {
         return true;
     };
 
-    // const handleSignIn = async (e: any): Promise<void> => {
-    //     e.preventDefault();
-    //     if (!handleContinue()) return;
 
-    //     try {
-    //         setLoading(true)
-    //         const response = await axios.post(`${API_BASE}/login`, {
-    //             email_address: emailAddress,
-    //             password: password,
-    //             account_type: accountType
-    //         });
-    //         console.log(response.data);
-    //         router.push("/dashboard")
-    //     } catch (error: any) {
-    //         console.error("An error occurred during registration:", error);
-    // toast.error("Registration failed", {
-    //     position: "top-center",
-    //     autoClose: 5000,
-    //     hideProgressBar: true,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "colored",
-    //     transition: Slide,
-    // });
-    //     } finally {
-    //         setLoading(false)
-    //     }
-    // };
 
     const handleSignIn = async (e: any): Promise<void> => {
         e.preventDefault()
@@ -85,11 +55,13 @@ export default function LoginForm() {
     }
 
     return (
-        <div className="flex bg-white sm:w-[90%] h-[95%] rounded-lg shadow-xl ">
+        <div className="flex bg-white w-full h-screen rounded-lg shadow-xl  ">
             <ToastContainer />
-            <form onSubmit={handleSignIn} className="sm:w-1/2 flex flex-col  items-center justify-center">
-                <div className="p-10 w-full flex flex-col gap-4">
+            <form onSubmit={handleSignIn} className="w-full 
+                overflow-y-scroll md:w-1/2  z-0 flex flex-col  items-center justify-center">
+                <div className="w-3/4 flex flex-col gap-2">
                     <p className="text-3xl font-bold">Login</p>
+                    <p className="text-[#475569]">Log in to access your account</p>
                     <div>
                         <p>Email Address</p>
                         <TextInput
