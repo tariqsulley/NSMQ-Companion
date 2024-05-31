@@ -315,7 +315,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                         </>
                     ))} */}
                     {currentContests?.map((contest) => (
-                        <div key={contest} className="w-3/4 flex flex-col items-center justify-center">
+                        <div key={contest} className="w-[90%] sm:w-3/4 flex flex-col items-center justify-center">
 
                             <ContestCard
                                 key={contest}
@@ -326,7 +326,27 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                             />
                             {selectedContest === contest && (
                                 <>
-                                    <div>Percentage Completed:</div>
+                                    <div className="font-semibold">Percentage Completed: 33%</div>
+                                    <div className="flex gap-4">
+                                        <button className="text-white rounded-lg shadow
+                                         bg-primaryBtn px-6 py-1 m-1">
+                                            <p>
+                                                Set 1
+                                            </p>
+                                        </button>
+                                        <button className="text-white rounded-lg shadow
+                                         bg-primaryBtn px-6 py-1 m-1">
+                                            <p>
+                                                Set 2
+                                            </p>
+                                        </button>
+                                        <button className="text-white rounded-lg shadow 
+                                        bg-primaryBtn px-6 py-1 m-1">
+                                            <p>
+                                                Set 3
+                                            </p>
+                                        </button>
+                                    </div>
                                 </>
                             )}
                         </div>
