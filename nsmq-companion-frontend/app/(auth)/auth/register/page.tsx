@@ -1,5 +1,4 @@
 import RegisterForm from "@/app/components/Forms/RegisterForm"
-import Navbar from "@/app/components/Navbar"
 
 export default function Register() {
     return (
