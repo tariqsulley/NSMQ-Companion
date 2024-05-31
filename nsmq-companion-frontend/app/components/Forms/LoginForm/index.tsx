@@ -59,7 +59,7 @@ export default function LoginForm() {
             <ToastContainer />
             <form onSubmit={handleSignIn} className="w-full 
                 overflow-y-scroll md:w-1/2  z-0 flex flex-col  items-center justify-center">
-                <div className="w-3/4 flex flex-col gap-2">
+                <div className="w-3/4 flex flex-col gap-3">
                     <p className="text-3xl font-bold">Login</p>
                     <p className="text-[#475569]">Log in to access your account</p>
                     <div>

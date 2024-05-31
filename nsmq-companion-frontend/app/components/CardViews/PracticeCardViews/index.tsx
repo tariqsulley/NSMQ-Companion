@@ -28,7 +28,7 @@ const PracticeCardView: FC = () => {
     const filteredData = year ? ContestData.filter(contest => contest.year === year) : ContestData;
     const totalCards = filteredData.length;
 
-    const cardsPerPage = 4;
+    const cardsPerPage = 3;
     const [currentPage, setCurrentPage] = useState<number>(1);
 
     const indexOfLastCard = currentPage * cardsPerPage;
@@ -54,35 +54,22 @@ const PracticeCardView: FC = () => {
 
     return (
         <div>
-            {/* <div className="mb-4 w-[30%] mx-4">
-                <p className="text-[#354055]">Year</p>
-                <SearchSelect
-                    value={year}
-                    onValueChange={setYear}
-                >
-                    {years.map(({ value, title }) => (
-                        <SearchSelectItem key={value} value={value}>
-                            {title}
-                        </SearchSelectItem>
-                    ))}
-                </SearchSelect>
-            </div> */}
 
-            <div className="flex justify-evenly flex-wrap gap-5">
+            <div className="flex flex-col items-center sm:flex-row justify-evenly flex-wrap gap-5">
                 {currentCards}
             </div>
-            <div className='pagination flex justify-center space-x-2 mt-4'>
-                <button className={`px-4 py-2 text-white rounded ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 cursor-pointer'}`} onClick={prevPage} disabled={currentPage === 1}>Previous</button>
+            <div className='flex justify-center space-x-2 mt-4'>
+                <button className={`px-4 py-2 text-white rounded ${currentPage === 1 ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-800 cursor-pointer'}`} onClick={prevPage} disabled={currentPage === 1}>Previous</button>
                 {[...Array(Math.ceil(totalCards / cardsPerPage))].map((_, index) => (
                     <button
                         key={index}
                         onClick={() => paginate(index + 1)}
-                        className={`px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'}`}
+                        className={`px-4 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-800 text-white' : 'bg-gray-200 text-black'}`}
                     >
                         {index + 1}
                     </button>
                 ))}
-                <button className={`px-4 py-2 text-white rounded ${currentPage === Math.ceil(totalCards / cardsPerPage) ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 cursor-pointer'}`} onClick={nextPage} disabled={currentPage === Math.ceil(totalCards / cardsPerPage)}>Next</button>
+                <button className={`px-4 py-2 text-white rounded ${currentPage === Math.ceil(totalCards / cardsPerPage) ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-800 cursor-pointer'}`} onClick={nextPage} disabled={currentPage === Math.ceil(totalCards / cardsPerPage)}>Next</button>
             </div>
         </div>
     );
