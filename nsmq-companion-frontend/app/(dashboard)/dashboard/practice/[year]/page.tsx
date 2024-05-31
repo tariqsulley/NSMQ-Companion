@@ -1,14 +1,15 @@
 "use client";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import PracticeNavBar from "@/app/components/PracticeNavBar";
 import { useSearchParams } from "next/navigation";
 import ContestCard from "@/app/components/Cards/ContestCard";
 import ContestData from "@/app/utils/NSMQContests";
-import questions from "../../../../utils/Questions/NSMQ_2021/contest39/round1"
+import questions from "../../../../utils/Questions/NSMQ_2021/contest40/round1"
 import API_BASE from "@/app/utils/api";
 // @ts-ignore
 import useSound from 'use-sound';
+import { FaMicrophoneAlt } from "react-icons/fa";
 
 import axios from "axios";
 interface PracticeYearProps {
@@ -37,6 +38,21 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const [transcribingAudio, setTranscibingAudio] = useState<boolean>(false)
     const [checkingAnswer, setCheckingAnswer] = useState<boolean>(false)
     const [similarityScore, setSimilarityScore] = useState()
+    const [quizStarted, setQuizStarted] = useState(false);
+    const sidebarRef = useRef<HTMLDivElement>(null);
+    const [sidebarWidth, setSidebarWidth] = useState(0);
+
+    useEffect(() => {
+        if (sidebarRef.current) {
+            const width = sidebarRef.current.offsetWidth;
+            setSidebarWidth(width);
+        }
+    }, [])
+
+    const handleStartQuiz = () => {
+        setQuizStarted(true);
+        playQuestionAudio(1); // Play the first question
+    };
 
     const handleCircleClick = () => {
         if (!isBellPlaying) {
@@ -101,10 +117,75 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     };
 
 
-    const handleNextQuestion = () => {
-        synthesizeText(currentQuestion["Question"]);
-        setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+
+    // const handleNextQuestion = () => {
+    //     setCurrentQuestionIndex((prevIndex) => {
+    //         const newIndex = prevIndex + 1;
+    //         playQuestionAudio(newIndex);
+    //         return newIndex;
+    //     });
+    // };
+
+    // const playQuestionAudio = (questionIndex: any) => {
+    //     const audioUrl = `/Sounds/2021/Contest40/q1_set${questionIndex}.wav`;
+    //     const audio = new Audio(audioUrl);
+    //     audio.play();
+    // };
+
+    const playQuestionAudio = (questionIndex: any) => {
+        // Construct the URLs for the question and preamble audio files
+        const questionAudioUrl = `/Sounds/2021/Contest40/q1_set${questionIndex}.wav`;
+        const preambleAudioUrl = `/Sounds/2021/Contest40/preamble_q${questionIndex}.wav`;
+
+        // Function to play audio
+        const playAudio = (url: any) => {
+            const audio = new Audio(url);
+            audio.play();
+            return audio;
+        };
+
+        // Check if there is preamble text for this question and play it first
+        if (currentQuestion["Preamble Text"]) {
+            const preambleAudio = playAudio(preambleAudioUrl);
+            preambleAudio.onended = () => {
+                playAudio(questionAudioUrl);
+            };
+        } else {
+            playAudio(questionAudioUrl); // If no preamble, just play the question
+        }
     };
+
+    // const handleNextQuestion = () => {
+    //     setCurrentQuestionIndex((prevIndex) => {
+    //         const newIndex = prevIndex + 1;
+    //         if (newIndex < questions.length) {
+    //             playQuestionAudio(newIndex);
+    //             return newIndex;
+    //         }
+    //         return prevIndex; // Stay on the last question if no more questions are left
+    //     });
+    // };
+
+    const handleNextQuestion = () => {
+        setCurrentQuestionIndex((prevIndex) => {
+            const newIndex = prevIndex + 1;
+            if (newIndex < questions.length) {
+                playQuestionAudio(newIndex);
+                return newIndex;
+            } else {
+                setQuizStarted(false); // Reset quizStarted state if the last question is reached
+                return prevIndex;
+            }
+        });
+    };
+
+    // useEffect(() => {
+    //     if (currentQuestionIndex === 0) {
+    //         playQuestionAudio(1);
+    //     }
+    // }, [selectedContest]);
+
+
 
     const sendAudioToBackend = async (audioBlob: any) => {
         try {
@@ -165,8 +246,10 @@ export default function PracticeYear({ params }: PracticeYearProps) {
             console.log(`Similarity Score: ${similarityScore}`);
             setSimilarityScore(similarityScore);
 
-            if (similarityScore > 0.1) {
+            if (similarityScore > 0.6) {
                 synthesizeText("yes you are right");
+            } else {
+                synthesizeText("I'm not accepting that")
             }
         } catch (error) {
             console.error('Error calculating similarity:', error);
@@ -195,6 +278,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     return (
         <div className="bg-bgMain h-screen">
             <PracticeNavBar />
+
             <h1 className="text-2xl font-semibold text-center mt-6">
                 Practice for Year: {year} - Number of Contests: {type}  {selectedContest}
 
@@ -202,53 +286,71 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                     {loading ? "loading" : "done"}
                 </div>
             </h1>
-            <div className="h-screen bg-white fixed left-0 top-0 overflow-y-scroll w-[50%] sm:w-[20%] mt-[57px] border-r-2 pb-10">
-                {contests.map(contest => (
-                    <ContestCard
-                        key={contest}
-                        contest_name={contest}
-                        bg_color="bg-gray-200"
-                        is_active={selectedContest === contest}
-                        onClick={() => handleContestClick(contest)}
-                    />
-                ))}
-
-            </div>
-            <div className="ml-[400px]">
-                <div>
-                    <p> Question {currentQuestion["S/N"]} </p>
-                    <h2>{currentQuestion["Subject"]}</h2>
-                    <p>{currentQuestion["Answer"]}</p>
+            <div className="flex justify-between  ">
+                {/* <div className="h-screen hidden bg-white md:block sm:fixed sm:left-0 
+            top-0 overflow-y-scroll w-[50%] sm:w-[20%] mt-[57px] border-r-2 sm:pb-10" ref={sidebarRef}>
+                    {contests.map(contest => (
+                        <ContestCard
+                            key={contest}
+                            contest_name={contest}
+                            bg_color="bg-gray-200"
+                            is_active={selectedContest === contest}
+                            onClick={() => handleContestClick(contest)}
+                        />
+                    ))}
+                </div> */}
+                <div className="w-full flex flex-col items-center justify-center">
+                    {contests.map(contest => (
+                        <ContestCard
+                            key={contest}
+                            contest_name={contest}
+                            bg_color="bg-gray-200"
+                            is_active={selectedContest === contest}
+                            onClick={() => handleContestClick(contest)}
+                        />
+                    ))}
+                </div>
+                {/* <div className="md:ml-[400px]">
+                    <div className="bg-red-100">
+                        <p> Question: {currentQuestionIndex} </p>
+                        <h2>Subject: {currentQuestion["Subject"]}</h2>
                     <p> Preamble: {currentQuestion["Preamble Text"] || ""}</p>
-                    <h2>{currentQuestion["Question"]}</h2>
-                </div>
-                <div>
-                    <h2>Transcribed Text:</h2>
-                    <p>{transcribedText}</p>
-                </div>
-                <div
-                    className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
-                    onClick={handleCircleClick}
-                />
-                <button
-                    disabled={currentQuestionIndex === questions.length - 1}
-                    onClick={handleNextQuestion}
-                >
-                    Next
-                </button>
-                <button onClick={play}>
-                    play
-                </button>
-                <button>
-                    {transcribingAudio ? "Transcribing" : "Done"}
-                </button>
-                <button onClick={handleRecordAudio}>
-                    {isRecording ? 'Recording...' : 'Start Recording'}
-                </button>
-                <p> {checkingAnswer ? "Checking" : "Done checking"}</p>
-                <p>Similarity:{similarityScore}</p>
+                        <h2>Question: {currentQuestion["Question"]}</h2>
+                        <p>Answer: {currentQuestion["Answer"]}</p>
+                    </div>
+                    <div>
+                        <h2>Transcribed Text:</h2>
+                        <p>{transcribedText}</p>
+                    </div>
+                    <div
+                        className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
+                        onClick={handleCircleClick}
+                    />
+                  
+                    <div>
+                        {!quizStarted ? (
+                            <button onClick={handleStartQuiz}>Start Quiz</button>
+                        ) : (
+                            <button onClick={handleNextQuestion}>Next Question</button>
+                        )}
+                    </div>
+                    <button onClick={play}>
+                        play
+                    </button>
+                    <button>
+                        {transcribingAudio ? "Transcribing" : "Done"}
+                    </button>
+                    <button onClick={handleRecordAudio}>
+                        {isRecording ? <div>
+                            <p>Recording</p>
+                            <FaMicrophoneAlt className="text-red-500" size={25} />
+                        </div> :
+                            <FaMicrophoneAlt size={25} />}
+                    </button>
+                    <p> {checkingAnswer ? "Checking" : "Done checking"}</p>
+                    <p>Similarity:{similarityScore}</p>
+                </div> */}
             </div>
-
         </div>
     );
 }
