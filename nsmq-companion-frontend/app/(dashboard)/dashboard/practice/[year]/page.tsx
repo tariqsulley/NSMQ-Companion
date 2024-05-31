@@ -68,7 +68,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
             setTimeout(() => {
                 setIsCircleGreen(false);
                 setIsBellPlaying(false);
-            }, 2000); // Stop the bell sound after 2 seconds
+            }, 2000);
         }
     };
 
@@ -101,6 +101,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const handleContestClick = (contest: any) => {
         setSelectedContest(contest);
         router.push(`/dashboard/practice/${year}?nums=${type}`);
+        setSelectedContest(contest);
+        setContestValue(contest);
     }
 
     const synthesizeText = async (text: string) => {
@@ -140,25 +142,22 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     // };
 
     const playQuestionAudio = (questionIndex: any) => {
-        // Construct the URLs for the question and preamble audio files
         const questionAudioUrl = `/Sounds/2021/Contest40/q1_set${questionIndex}.wav`;
         const preambleAudioUrl = `/Sounds/2021/Contest40/preamble_q${questionIndex}.wav`;
 
-        // Function to play audio
         const playAudio = (url: any) => {
             const audio = new Audio(url);
             audio.play();
             return audio;
         };
 
-        // Check if there is preamble text for this question and play it first
         if (currentQuestion["Preamble Text"]) {
             const preambleAudio = playAudio(preambleAudioUrl);
             preambleAudio.onended = () => {
                 playAudio(questionAudioUrl);
             };
         } else {
-            playAudio(questionAudioUrl); // If no preamble, just play the question
+            playAudio(questionAudioUrl);
         }
     };
 
@@ -169,7 +168,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     //             playQuestionAudio(newIndex);
     //             return newIndex;
     //         }
-    //         return prevIndex; // Stay on the last question if no more questions are left
+    //         return prevIndex; 
     //     });
     // };
 
@@ -180,7 +179,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                 playQuestionAudio(newIndex);
                 return newIndex;
             } else {
-                setQuizStarted(false); // Reset quizStarted state if the last question is reached
+                setQuizStarted(false);
                 return prevIndex;
             }
         });
@@ -287,11 +286,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
             <PracticeNavBar />
 
             <h1 className="text-2xl font-semibold text-center mt-6">
-                Practice for Year: {year} - Number of Contests: {type}  {selectedContest}
-
-                <div>
-                    {loading ? "loading" : "done"}
-                </div>
+                Year: {year} - Number of Contests: {type}  {selectedContest}
             </h1>
             <div className="flex justify-between  ">
                 {/* <div className="h-screen hidden bg-white md:block sm:fixed sm:left-0 
@@ -306,16 +301,37 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                         />
                     ))}
                 </div> */}
-                <div className="w-full flex flex-col items-center justify-center">
-                    {currentContests?.map(contest => (
-                        <ContestCard
-                            key={contest}
-                            contest_name={contest}
-                            bg_color="bg-gray-200"
-                            is_active={selectedContest === contest}
-                            onClick={() => handleContestClick(contest)}
-                        />
+                <div className="w-full flex flex-col items-center  justify-center">
+                    {/* {currentContests?.map(contest => (
+                        <>
+                            <ContestCard
+                                key={contest}
+                                contest_name={contest}
+                                bg_color="bg-gray-200"
+                                is_active={selectedContest === contest}
+                                onClick={() => handleContestClick(contest)}
+                            />
+                            <div>Percentage Completed:</div>
+                        </>
+                    ))} */}
+                    {currentContests?.map((contest) => (
+                        <div key={contest} className="w-3/4 flex flex-col items-center justify-center">
+
+                            <ContestCard
+                                key={contest}
+                                contest_name={contest}
+                                bg_color="bg-gray-200"
+                                is_active={selectedContest === contest}
+                                onClick={() => handleContestClick(contest)}
+                            />
+                            {selectedContest === contest && (
+                                <>
+                                    <div>Percentage Completed:</div>
+                                </>
+                            )}
+                        </div>
                     ))}
+
                     <div className="flex  justify-center my-4">
                         <button
                             className="px-4 py-2 bg-gray-300 text-gray-800 rounded-l"
