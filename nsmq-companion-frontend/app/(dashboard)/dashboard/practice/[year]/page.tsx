@@ -94,7 +94,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         }
         return Array.from({ length: type }, (_, index) => `Contest ${index + 1}`);
     }, [year, type]);
-    const currentContests = contests.slice(indexOfFirstCard, indexOfLastCard);
+
+    const currentContests = contests?.slice(indexOfFirstCard, indexOfLastCard);
 
 
     const handleContestClick = (contest: any) => {
@@ -306,7 +307,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                     ))}
                 </div> */}
                 <div className="w-full flex flex-col items-center justify-center">
-                    {currentContests.map(contest => (
+                    {currentContests?.map(contest => (
                         <ContestCard
                             key={contest}
                             contest_name={contest}
