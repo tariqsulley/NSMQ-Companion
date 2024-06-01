@@ -284,7 +284,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     return (
         <div className="bg-bgMain h-screen">
             <PracticeNavBar />
-            <div className="bg-white shadow rounded-b-xl mt-[-20px]">
+            <div className="bg-white shadow rounded-b-xl mt-20">
                 <h1 className="text-2xl font-semibold text-center mt-6">
                     Year: {year} - Number of Contests: {type}  {selectedContest}
                 </h1>

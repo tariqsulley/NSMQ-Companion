@@ -25,10 +25,6 @@ export default function Sidebar() {
 
     const handleLogout = async () => {
         logout();
-        // Cookie.remove("access_token");
-        // sessionStorage.removeItem("userData");
-        // localStorage.removeItem("isFirstTimeUser");
-        // router.push("/authentication/login");
     };
 
     return (
