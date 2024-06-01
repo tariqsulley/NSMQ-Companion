@@ -41,6 +41,7 @@ export default function ContestPage({ params }: any) {
     const [quizStarted, setQuizStarted] = useState(false);
     const [introskipped, setIntroSkipper] = useState(false)
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
+    const [SimilarityScore, SetSimilarityScore] = useState(Array(contest_40_1.length).fill(null));
 
     const [introStarted, setIntroStarted] = useState(false)
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
@@ -240,6 +241,11 @@ export default function ContestPage({ params }: any) {
 
             const similarityScore = response.data.similarity;
             console.log(`Similarity Score: ${similarityScore}`);
+            SetSimilarityScore((prevScores) => {
+                const newScores = [...prevScores];
+                newScores[currentQuestionIndex] = similarityScore;
+                return newScores;
+            });
             setSimilarityScore(similarityScore);
 
             if (similarityScore > 0.6) {
@@ -247,6 +253,7 @@ export default function ContestPage({ params }: any) {
                 setRoundScore(round_score + 3)
             } else {
                 synthesizeText("I'm not accepting that")
+                // synthesizeText("The right answer I was looking for is")
             }
         } catch (error) {
             console.error('Error calculating similarity:', error);
@@ -377,10 +384,25 @@ export default function ContestPage({ params }: any) {
             </div>
             <div className="flex flex-wrap items-center justify-center mt-10 gap-4 m-2">
 
-                {contest_40_1.map((_, index) => (
+                {/* {contest_40_1.map((_, index) => (
                     <p
                         key={index}
                         className={`rounded-full text-white w-[50px] h-[50px] text-center flex items-center justify-center ${index === currentQuestionIndex ? 'bg-blue-700' : 'bg-gray-700'}`}
+                    >
+                        {index + 1}
+                    </p>
+                ))} */}
+                {contest_40_1.map((_, index) => (
+                    <p
+                        key={index}
+                        className={`rounded-full text-white w-[50px] h-[50px] text-center flex items-center justify-center ${index === currentQuestionIndex
+                            ? 'bg-blue-800'
+                            : index < currentQuestionIndex
+                                ? SimilarityScore && SimilarityScore[index] > 0.6
+                                    ? 'bg-green-500'
+                                    : 'bg-red-500'
+                                : 'bg-gray-400'
+                            }`}
                     >
                         {index + 1}
                     </p>
