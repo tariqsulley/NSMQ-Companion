@@ -64,7 +64,6 @@ export default function ContestPage({ params }: any) {
     const timerRef = useRef<any>(null);
 
 
-
     const handleStartQuiz = () => {
         setQuizStarted(true);
         playQuestionAudio(1);
@@ -134,19 +133,19 @@ export default function ContestPage({ params }: any) {
     };
 
     const playQuestionAudio = (questionIndex: any) => {
-        const questionAudioUrl = `/Sounds/2021/Contest40/q1_set${questionIndex}.wav`;
+        const questionAudioUrl = `/Sounds/2021/Contest40/q${questionIndex}.wav`;
         const preambleAudioUrl = `/Sounds/2021/Contest40/preamble_q${questionIndex}.wav`;
 
-        const playAudio = (url: any, onEnded: () => void) => {
+        const playAudio = (url: any, onEnded: any) => {
             const audio = new Audio(url);
             audio.play();
             audio.onended = onEnded;
         };
 
-        if (currentQuestion["Preamble Text"]) {
+        if (questions[questionIndex - 1]?.["Preamble Text"] && questions[questionIndex - 1]?.["S/N"] === 1) {
             playAudio(preambleAudioUrl, () => {
                 playAudio(questionAudioUrl, () => {
-                    setTimeLeft(currentQuestion["Subject"] === "Mathematics" ? 30 : 10);
+                    setTimeLeft(questions[questionIndex - 1]["Subject"] === "Mathematics" ? 30 : 10);
                     timerRef.current = setInterval(() => {
                         setTimeLeft((prevTimeLeft) => {
                             const newTimeLeft = prevTimeLeft - 1;
@@ -161,7 +160,7 @@ export default function ContestPage({ params }: any) {
             });
         } else {
             playAudio(questionAudioUrl, () => {
-                setTimeLeft(currentQuestion["Subject"] === "Mathematics" ? 30 : 10);
+                setTimeLeft(questions[questionIndex - 1]["Subject"] === "Mathematics" ? 30 : 10);
                 timerRef.current = setInterval(() => {
                     setTimeLeft((prevTimeLeft) => {
                         const newTimeLeft = prevTimeLeft - 1;
@@ -175,7 +174,6 @@ export default function ContestPage({ params }: any) {
             });
         }
     };
-
     useEffect(() => {
         return () => {
             clearInterval(timerRef.current);
@@ -187,7 +185,7 @@ export default function ContestPage({ params }: any) {
         setCurrentQuestionIndex((prevIndex) => {
             const newIndex = prevIndex + 1;
             if (newIndex < questions.length) {
-                playQuestionAudio(newIndex);
+                playQuestionAudio(newIndex + 1);
                 const newQuestion = questions[newIndex];
                 setTimeLeft(newQuestion["Subject"] === "Mathematics" ? 30 : 10);
                 return newIndex;
@@ -323,7 +321,7 @@ export default function ContestPage({ params }: any) {
                 {introskipped &&
                     <div className="m-10">
                         <div className="">
-                            <p> Question: {currentQuestionIndex} </p>
+                            <p> Question: {currentQuestion["S/N"]} </p>
                             <h2>Subject: {currentQuestion["Subject"]}</h2>
                             {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
                                 || currentQuestion.Subject === "Chemistry" ? (
