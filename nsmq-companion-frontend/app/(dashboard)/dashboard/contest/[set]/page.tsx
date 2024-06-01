@@ -60,6 +60,7 @@ export default function ContestPage({ params }: any) {
     const [timeLeft, setTimeLeft] = useState(
         currentQuestion["Subject"] === "Mathematics" ? 30 : 10
     );
+
     const timerRef = useRef<any>(null);
 
 
@@ -135,23 +136,51 @@ export default function ContestPage({ params }: any) {
     const playQuestionAudio = (questionIndex: any) => {
         const questionAudioUrl = `/Sounds/2021/Contest40/q1_set${questionIndex}.wav`;
         const preambleAudioUrl = `/Sounds/2021/Contest40/preamble_q${questionIndex}.wav`;
-        const round1AudioUrl = '/Sounds/remarks/round1_intro.wav'
 
-        const playAudio = (url: any) => {
+        const playAudio = (url: any, onEnded: () => void) => {
             const audio = new Audio(url);
             audio.play();
-            return audio;
+            audio.onended = onEnded;
         };
 
         if (currentQuestion["Preamble Text"]) {
-            const preambleAudio = playAudio(preambleAudioUrl);
-            preambleAudio.onended = () => {
-                playAudio(questionAudioUrl);
-            };
+            playAudio(preambleAudioUrl, () => {
+                playAudio(questionAudioUrl, () => {
+                    setTimeLeft(currentQuestion["Subject"] === "Mathematics" ? 30 : 10);
+                    timerRef.current = setInterval(() => {
+                        setTimeLeft((prevTimeLeft) => {
+                            const newTimeLeft = prevTimeLeft - 1;
+                            if (newTimeLeft < 0) {
+                                clearInterval(timerRef.current);
+                                return 0;
+                            }
+                            return newTimeLeft;
+                        });
+                    }, 1000);
+                });
+            });
         } else {
-            playAudio(questionAudioUrl);
+            playAudio(questionAudioUrl, () => {
+                setTimeLeft(currentQuestion["Subject"] === "Mathematics" ? 30 : 10);
+                timerRef.current = setInterval(() => {
+                    setTimeLeft((prevTimeLeft) => {
+                        const newTimeLeft = prevTimeLeft - 1;
+                        if (newTimeLeft < 0) {
+                            clearInterval(timerRef.current);
+                            return 0;
+                        }
+                        return newTimeLeft;
+                    });
+                }, 1000);
+            });
         }
     };
+
+    useEffect(() => {
+        return () => {
+            clearInterval(timerRef.current);
+        };
+    }, [quizStarted]);
 
     const handleNextQuestion = () => {
         resetTranscript();
@@ -168,21 +197,6 @@ export default function ContestPage({ params }: any) {
             }
         });
     };
-
-    useEffect(() => {
-        if (timeLeft > 0 && quizStarted) {
-            timerRef.current = setInterval(() => {
-                setTimeLeft((prevTimeLeft) => prevTimeLeft - 1);
-            }, 1000);
-        } else {
-            clearInterval(timerRef.current);
-        }
-
-        return () => {
-            clearInterval(timerRef.current);
-            timerRef.current = null;
-        };
-    }, [timeLeft, quizStarted]);
 
     const sendAudioToBackend = async (audioBlob: any) => {
         try {
@@ -395,7 +409,7 @@ export default function ContestPage({ params }: any) {
                 {contest_40_1.map((_, index) => (
                     <p
                         key={index}
-                        className={`rounded-full text-white w-[50px] h-[50px] text-center flex items-center justify-center ${index === currentQuestionIndex
+                        className={`rounded-full text-white w-[30px] h-[30px] text-center flex items-center justify-center ${index === currentQuestionIndex
                             ? 'bg-blue-800'
                             : index < currentQuestionIndex
                                 ? SimilarityScore && SimilarityScore[index] > 0.6
