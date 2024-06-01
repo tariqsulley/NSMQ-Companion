@@ -8,9 +8,10 @@ import { LuArrowUpRightSquare } from "react-icons/lu";
 interface PracticeCardProps {
     year: string;
     contest_nums: string;
+    sub_text: string;
 }
 
-export default function PracticeCard({ year, contest_nums }: PracticeCardProps) {
+export default function PracticeCard({ year, contest_nums, sub_text }: PracticeCardProps) {
     const router = useRouter();
 
     const handleClick = () => {
@@ -18,7 +19,7 @@ export default function PracticeCard({ year, contest_nums }: PracticeCardProps) 
     }
 
     return (
-        <div className="rounded-lg bg-white shadow cursor-pointer sm:w-[30%]" onClick={handleClick}>
+        <div className="rounded-lg bg-white shadow cursor-pointer sm:w-[30%]  hover:border-[1px] hover:border-blue-800" onClick={handleClick}>
             <div className="relative overflow-hidden group">
                 <Image src={nsmq_logo} alt="image"
                     className="rounded-t-xl transition-transform duration-300 transform group-hover:scale-110" />
@@ -33,7 +34,7 @@ export default function PracticeCard({ year, contest_nums }: PracticeCardProps) 
                 <div className="p-2">
                     <div>
                         <p className="font-bold text-lg">Competition Year: {year}</p>
-                        <p className="text-[#475569]">Flex your science and math muscles with NSMQ 2021 questions</p>
+                        <p className="text-[#475569] text-[15px]">{sub_text}</p>
                     </div>
                     <div>
                         <p className="font-semibold">  40 contests </p>
@@ -43,7 +44,7 @@ export default function PracticeCard({ year, contest_nums }: PracticeCardProps) 
                     bg-opacity-10 rounded-full px-2 mt-2 "> ● 2 complete </p>
                     </div>
 
-                    <button className="flex shadow justify-center items-center px-6 py-2 gap-1 bg-gray-100 rounded-lg mt-5">
+                    <button className="flex shadow justify-center items-center px-6 py-2 gap-1 bg-gray-200 rounded-lg mt-5">
                         <p className="font-bold">View</p>
                         <LuArrowUpRightSquare size={20} />
                     </button>

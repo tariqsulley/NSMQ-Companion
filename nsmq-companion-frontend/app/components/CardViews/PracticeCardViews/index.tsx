@@ -15,6 +15,7 @@ type Contest = {
     year: string;
     file: string;
     contest_nums: string;
+    sub_text: string;
 }
 
 const years = [
@@ -35,7 +36,7 @@ const PracticeCardView: FC = () => {
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
 
     const currentCards = filteredData.slice(indexOfFirstCard, indexOfLastCard).map((contest: Contest, index: number) => (
-        <PracticeCard key={index} year={contest.year} contest_nums={contest.contest_nums} />
+        <PracticeCard key={index} year={contest.year} contest_nums={contest.contest_nums} sub_text={contest.sub_text} />
     ));
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
