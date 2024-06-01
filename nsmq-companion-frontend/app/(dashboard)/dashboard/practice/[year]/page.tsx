@@ -110,18 +110,6 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                                     Start Contest
                                                 </p>
                                             </button>
-                                            {/* <button className="text-white rounded-lg shadow
-                                         bg-primaryBtn px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=2`)}>
-                                                <p>
-                                                    Set 2
-                                                </p>
-                                            </button>
-                                            <button className="text-white rounded-lg shadow
-                                         bg-primaryBtn px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=3`)}>
-                                                <p>
-                                                    Set 3
-                                                </p>
-                                            </button> */}
                                         </div>
                                     </>
                                 )}

@@ -45,6 +45,9 @@ export default function ContestPage({ params }: any) {
     const [introStarted, setIntroStarted] = useState(false)
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
     const [isReadyToCalculate, setIsReadyToCalculate] = useState(false);
+    const [round_score, setRoundScore] = useState(0)
+    const student_analytics = []
+
 
     const handleTranscriptUpdate = () => {
         setTranscribedText(transcript);
@@ -241,6 +244,7 @@ export default function ContestPage({ params }: any) {
 
             if (similarityScore > 0.6) {
                 synthesizeText("yes you are right");
+                setRoundScore(round_score + 3)
             } else {
                 synthesizeText("I'm not accepting that")
             }
@@ -282,9 +286,17 @@ export default function ContestPage({ params }: any) {
                         Skip Intro
                     </button>}
 
-                <div className="flex items-center gap-1 p-2 w-full justify-end">
-                    <Image src={clock_icon} alt="clock icon" width={20} height={20} />
-                    <p className="font-semibold">Time left: {timeLeft}s</p>
+                <div className="flex w-full">
+
+                    <div className="flex items-center gap-1 p-2 w-full justify-start">
+                        <p className="font-semibold">Points: {round_score}</p>
+                    </div>
+
+
+                    <div className="flex items-center gap-1 p-2 w-full justify-end">
+                        <Image src={clock_icon} alt="clock icon" width={20} height={20} />
+                        <p className="font-semibold">Time left: {timeLeft}s</p>
+                    </div>
                 </div>
 
                 {introskipped &&
