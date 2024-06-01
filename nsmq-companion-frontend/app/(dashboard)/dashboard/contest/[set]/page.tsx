@@ -11,6 +11,7 @@ import axios from "axios";
 import { FaMicrophoneAlt } from "react-icons/fa";
 import clock_icon from "../../../../../public/icons/clock.svg"
 import Image from "next/image";
+import { MathJax, MathJaxContext } from "better-react-mathjax";
 
 export default function ContestPage({ params }: any) {
     const { set } = params;
@@ -239,6 +240,14 @@ export default function ContestPage({ params }: any) {
         }
     }, [transcribedText]);
 
+    const config = {
+        loader: { load: ['input/tex', 'output/svg'] },
+        tex: {
+            inlineMath: [['$', '$']],
+            displayMath: [['$$', '$$']]
+        }
+    };
+
     return (
         <div>
             <PracticeNavBar />
@@ -271,9 +280,34 @@ export default function ContestPage({ params }: any) {
                         <div className="bg-red-100">
                             <p> Question: {currentQuestionIndex} </p>
                             <h2>Subject: {currentQuestion["Subject"]}</h2>
-                            <p> Preamble: {currentQuestion["Preamble Text"] || ""}</p>
-                            <h2>Question: {currentQuestion["Question"]}</h2>
-                            <p>Answer: {currentQuestion["Answer"]}</p>
+                            {currentQuestion.Subject === "Mathematics" ? (
+                                <MathJaxContext config={config}>
+                                    <MathJax>
+                                        Preamble:  {currentQuestion["Preamble Text"]}
+                                    </MathJax>
+                                </MathJaxContext>) :
+                                <h2>Preamble: {currentQuestion["Preamble Text"]}</h2>
+                            }
+
+
+                            {currentQuestion.Subject === "Mathematics" ? (
+                                <MathJaxContext config={config}>
+                                    <MathJax>
+                                        Question:  {currentQuestion["Question"]}
+                                    </MathJax>
+                                </MathJaxContext>) :
+                                <h2>Question: {currentQuestion["Question"]}</h2>
+                            }
+
+
+                            {currentQuestion.Subject === "Mathematics" ? (
+                                <MathJaxContext config={config}>
+                                    <MathJax>
+                                        Answer: {currentQuestion["Answer"]}
+                                    </MathJax>
+                                </MathJaxContext>) :
+                                <h2>Answer: {currentQuestion["Answer"]}</h2>
+                            }
                         </div>
                         <div>
                             <h2>Transcribed Text:</h2>
