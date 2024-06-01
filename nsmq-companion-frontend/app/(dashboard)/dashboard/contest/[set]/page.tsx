@@ -12,8 +12,12 @@ import { FaMicrophoneAlt } from "react-icons/fa";
 import clock_icon from "../../../../../public/icons/clock.svg"
 import Image from "next/image";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import ContestData from "@/app/utils/NSMQContests";
+import contest_40_1 from "../../../../utils/Questions/NSMQ_2021/contest40/round1";
 
 export default function ContestPage({ params }: any) {
+
     const { set } = params;
     const { year } = params;
     const searchParams = useSearchParams();
@@ -39,7 +43,15 @@ export default function ContestPage({ params }: any) {
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
 
     const [introStarted, setIntroStarted] = useState(false)
+    const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
+    const [isReadyToCalculate, setIsReadyToCalculate] = useState(false);
 
+    const handleTranscriptUpdate = () => {
+        setTranscribedText(transcript);
+        if (!listening) {
+            setIsReadyToCalculate(true);
+        }
+    };
 
     const [timeLeft, setTimeLeft] = useState(
         currentQuestion["Subject"] === "Mathematics" ? 30 : 10
@@ -64,19 +76,23 @@ export default function ContestPage({ params }: any) {
     };
 
     const handleCircleClick = () => {
-        if (!isBellPlaying) {
+        if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
             setIsCircleGreen(true);
             play();
-            handleRecordAudio()
+            SpeechRecognition.startListening({ continuous: true });
 
             setTimeout(() => {
                 setIsCircleGreen(false);
                 setIsBellPlaying(false);
-            }, 2000);
+                SpeechRecognition.stopListening();
+            }, 10000);
         }
     };
 
+    useEffect(() => {
+        handleTranscriptUpdate();
+    }, [transcript, listening]);
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -134,6 +150,7 @@ export default function ContestPage({ params }: any) {
     };
 
     const handleNextQuestion = () => {
+        resetTranscript();
         setCurrentQuestionIndex((prevIndex) => {
             const newIndex = prevIndex + 1;
             if (newIndex < questions.length) {
@@ -209,6 +226,7 @@ export default function ContestPage({ params }: any) {
             console.error('Error recording audio:', error);
         }
     };
+
     const handleCalculateSimilarity = async () => {
         try {
             setCheckingAnswer(true);
@@ -230,15 +248,10 @@ export default function ContestPage({ params }: any) {
             console.error('Error calculating similarity:', error);
         } finally {
             setCheckingAnswer(false);
+            setIsReadyToCalculate(false);
         }
     };
 
-
-    useEffect(() => {
-        if (transcribedText) {
-            handleCalculateSimilarity();
-        }
-    }, [transcribedText]);
 
     const config = {
         loader: { load: ['input/tex', 'output/svg'] },
@@ -249,18 +262,18 @@ export default function ContestPage({ params }: any) {
     };
 
     return (
-        <div>
+        <div className="bg-bgMain h-screen">
             <PracticeNavBar />
-            <div className="mt-20 m-10 flex flex-col items-center justify-center">
+            <div className="mt-[100px] md:h-1/2 flex flex-col w-full items-center justify-center bg-white shadow rounded-b-xl 
+             dark:bg-darkBgLight">
 
                 {!introskipped ?
-                    <p>Welcome to round number 1. This round is the round for fundamental concepts.
+                    <p className="font-semibold m-2">Welcome to round number 1. This round is the round for fundamental concepts.
                         The questions are simple and direct so I'm expecting simple and direct answers from you.
                         For questions which require calculation, you have 30 seconds to present your answer and if there
                         are no calculations you have 10 seconds to do so. All questions are to be attempted once only.
                         Best wishes to you
                     </p> : ""}
-
                 {!introStarted ?
                     <button onClick={handleStartIntro}>
                         Start Intro
@@ -272,12 +285,11 @@ export default function ContestPage({ params }: any) {
                 <div className="flex items-center gap-1 p-2 w-full justify-end">
                     <Image src={clock_icon} alt="clock icon" width={20} height={20} />
                     <p className="font-semibold">Time left: {timeLeft}s</p>
-
                 </div>
 
                 {introskipped &&
                     <div className="m-10">
-                        <div className="bg-red-100">
+                        <div className="">
                             <p> Question: {currentQuestionIndex} </p>
                             <h2>Subject: {currentQuestion["Subject"]}</h2>
                             {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
@@ -302,7 +314,7 @@ export default function ContestPage({ params }: any) {
                             }
 
 
-                            {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
+                            {/* {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
                                 || currentQuestion.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
                                     <MathJax key={currentQuestionIndex}>
@@ -310,7 +322,7 @@ export default function ContestPage({ params }: any) {
                                     </MathJax>
                                 </MathJaxContext>) :
                                 <h2>Answer: {currentQuestion["Answer"]}</h2>
-                            }
+                            } */}
                         </div>
                         <div>
                             <h2>Transcribed Text:</h2>
@@ -334,6 +346,12 @@ export default function ContestPage({ params }: any) {
                         <button>
                             {transcribingAudio ? "Transcribing" : "Done"}
                         </button>
+                        <button
+                            onClick={handleCalculateSimilarity}
+                            disabled={!isReadyToCalculate}
+                        >
+                            Calculate Similarity
+                        </button>
                         <button onClick={handleRecordAudio}>
                             {isRecording ? <div>
                                 <p>Recording</p>
@@ -344,6 +362,17 @@ export default function ContestPage({ params }: any) {
                         <p> {checkingAnswer ? "Checking" : "Done checking"}</p>
                         <p>Similarity:{similarityScore}</p>
                     </div>}
+            </div>
+            <div className="flex flex-wrap items-center justify-center mt-10 gap-4 m-2">
+
+                {contest_40_1.map((_, index) => (
+                    <p
+                        key={index}
+                        className={`rounded-full text-white w-[50px] h-[50px] text-center flex items-center justify-center ${index === currentQuestionIndex ? 'bg-blue-700' : 'bg-gray-700'}`}
+                    >
+                        {index + 1}
+                    </p>
+                ))}
             </div>
         </div>
     )

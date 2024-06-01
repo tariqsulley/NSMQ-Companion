@@ -105,12 +105,12 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                         <div className="font-semibold">Percentage Completed: 0%</div>
                                         <div className="flex gap-4">
                                             <button className="text-white rounded-lg shadow
-                                         bg-primaryBtn px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=1`)}>
+                                         bg-blue-800 px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=1`)}>
                                                 <p>
-                                                    Set 1
+                                                    Start Contest
                                                 </p>
                                             </button>
-                                            <button className="text-white rounded-lg shadow
+                                            {/* <button className="text-white rounded-lg shadow
                                          bg-primaryBtn px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=2`)}>
                                                 <p>
                                                     Set 2
@@ -121,7 +121,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                                 <p>
                                                     Set 3
                                                 </p>
-                                            </button>
+                                            </button> */}
                                         </div>
                                     </>
                                 )}

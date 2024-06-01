@@ -1,4 +1,4 @@
-const questions = [
+const contest_40_1 = [
     {
         "S/N": 1,
         "Preamble Text": "The genetic code is a set of rules defining how the four-letter code of DNA is translated into the 20-letter code of amino acids, which are the building blocks of proteins. Explain the following properties of genetic code",
@@ -253,4 +253,4 @@ const questions = [
     }
 ]
 
-export default questions
+export default contest_40_1
