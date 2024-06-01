@@ -280,9 +280,10 @@ export default function ContestPage({ params }: any) {
                         <div className="bg-red-100">
                             <p> Question: {currentQuestionIndex} </p>
                             <h2>Subject: {currentQuestion["Subject"]}</h2>
-                            {currentQuestion.Subject === "Mathematics" ? (
+                            {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
+                                || currentQuestion.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
-                                    <MathJax>
+                                    <MathJax key={currentQuestionIndex}>
                                         Preamble:  {currentQuestion["Preamble Text"]}
                                     </MathJax>
                                 </MathJaxContext>) :
@@ -290,9 +291,10 @@ export default function ContestPage({ params }: any) {
                             }
 
 
-                            {currentQuestion.Subject === "Mathematics" ? (
+                            {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
+                                || currentQuestion.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
-                                    <MathJax>
+                                    <MathJax key={currentQuestionIndex}>
                                         Question:  {currentQuestion["Question"]}
                                     </MathJax>
                                 </MathJaxContext>) :
@@ -300,9 +302,10 @@ export default function ContestPage({ params }: any) {
                             }
 
 
-                            {currentQuestion.Subject === "Mathematics" ? (
+                            {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
+                                || currentQuestion.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
-                                    <MathJax>
+                                    <MathJax key={currentQuestionIndex}>
                                         Answer: {currentQuestion["Answer"]}
                                     </MathJax>
                                 </MathJaxContext>) :
