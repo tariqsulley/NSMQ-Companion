@@ -19,14 +19,15 @@ export default function PracticeCard({ year, contest_nums, sub_text }: PracticeC
     }
 
     return (
-        <div className="rounded-lg bg-white shadow cursor-pointer sm:w-[30%]  hover:border-[1px] hover:border-blue-800" onClick={handleClick}>
+        <div className="border  border-gray-100 hover:border-primary transition duration-300 rounded-md
+         shadow-md shadow-slate-200 p-[17px] w-11/12  bg-white " onClick={handleClick}>
             <div className="relative overflow-hidden group">
                 <Image src={nsmq_logo} alt="image"
                     className="rounded-t-xl transition-transform duration-300 transform group-hover:scale-110" />
             </div>
             <div className="bg-gray-100">
                 <div className=" p-2 " >
-                    <div className="bg-blue-800 rounded-lg m-2 flex items-center justify-center w-[12%] p-2 left-0">
+                    <div className="bg-blue-800 rounded-lg  flex items-center justify-center w-[5%] p-2 left-0">
                         <GiMaterialsScience size={20} className="text-white" />
                     </div>
                 </div>
