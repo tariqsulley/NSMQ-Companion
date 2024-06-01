@@ -10,6 +10,8 @@ import API_BASE from "@/app/utils/api";
 // @ts-ignore
 import useSound from 'use-sound';
 import { FaMicrophoneAlt } from "react-icons/fa";
+import { IoReturnUpBack } from "react-icons/io5";
+import Link from "next/link";
 
 import axios from "axios";
 interface PracticeYearProps {
@@ -284,7 +286,16 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     return (
         <div className="bg-bgMain h-screen">
             <PracticeNavBar />
+            <div>
+
+            </div>
             <div className="bg-white shadow rounded-b-xl mt-20">
+                <Link href={"/dashboard/practice"} className="flex bg-white sm:w-[15%] items-center justify-center gap-1 
+                border-2 px-5 py-2 rounded-lg mx-10 mt-5 shadow">
+                    <p className="font-semibold">Back to Dashboard </p>
+                    <IoReturnUpBack size={20} />
+                </Link>
+
                 <h1 className="text-2xl font-semibold text-center mt-6">
                     Year: {year} - Number of Contests: {type}  {selectedContest}
                 </h1>
@@ -326,22 +337,22 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                 />
                                 {selectedContest === contest && (
                                     <>
-                                        <div className="font-semibold">Percentage Completed: 33%</div>
+                                        <div className="font-semibold">Percentage Completed: 0%</div>
                                         <div className="flex gap-4">
                                             <button className="text-white rounded-lg shadow
-                                         bg-primaryBtn px-6 py-1 m-1">
+                                         bg-primaryBtn px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=1`)}>
                                                 <p>
                                                     Set 1
                                                 </p>
                                             </button>
                                             <button className="text-white rounded-lg shadow
-                                         bg-primaryBtn px-6 py-1 m-1">
+                                         bg-primaryBtn px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=2`)}>
                                                 <p>
                                                     Set 2
                                                 </p>
                                             </button>
-                                            <button className="text-white rounded-lg shadow 
-                                        bg-primaryBtn px-6 py-1 m-1">
+                                            <button className="text-white rounded-lg shadow
+                                         bg-primaryBtn px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=3`)}>
                                                 <p>
                                                     Set 3
                                                 </p>

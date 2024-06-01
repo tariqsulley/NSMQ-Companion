@@ -9,7 +9,11 @@ export default function ThemeSwitch() {
     const [mounted, setMounted] = useState(false)
     const { setTheme, resolvedTheme } = useTheme()
 
-    useEffect(() => setMounted(true), [])
+    useEffect(() => setMounted(true), [resolvedTheme])
+
+    // useEffect(() => {
+    //     localStorage.setItem('theme', resolvedTheme);
+    // }, [resolvedTheme]);
 
     if (!mounted) return (
         <Image
