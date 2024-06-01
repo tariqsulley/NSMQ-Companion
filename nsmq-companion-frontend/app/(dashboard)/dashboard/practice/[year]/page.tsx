@@ -284,12 +284,12 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     return (
         <div className="bg-bgMain h-screen">
             <PracticeNavBar />
-
-            <h1 className="text-2xl font-semibold text-center mt-6">
-                Year: {year} - Number of Contests: {type}  {selectedContest}
-            </h1>
-            <div className="flex justify-between  ">
-                {/* <div className="h-screen hidden bg-white md:block sm:fixed sm:left-0 
+            <div className="bg-white shadow rounded-b-xl mt-[-20px]">
+                <h1 className="text-2xl font-semibold text-center mt-6">
+                    Year: {year} - Number of Contests: {type}  {selectedContest}
+                </h1>
+                <div className="flex justify-between  ">
+                    {/* <div className="h-screen hidden bg-white md:block sm:fixed sm:left-0 
             top-0 overflow-y-scroll w-[50%] sm:w-[20%] mt-[57px] border-r-2 sm:pb-10" ref={sidebarRef}>
                     {contests.map(contest => (
                         <ContestCard
@@ -301,8 +301,8 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                         />
                     ))}
                 </div> */}
-                <div className="w-full flex flex-col items-center  justify-center">
-                    {/* {currentContests?.map(contest => (
+                    <div className="w-full flex flex-col items-center  justify-center">
+                        {/* {currentContests?.map(contest => (
                         <>
                             <ContestCard
                                 key={contest}
@@ -314,69 +314,69 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                             <div>Percentage Completed:</div>
                         </>
                     ))} */}
-                    {currentContests?.map((contest) => (
-                        <div key={contest} className="w-[90%] sm:w-3/4 flex flex-col items-center justify-center">
+                        {currentContests?.map((contest) => (
+                            <div key={contest} className="w-[90%] sm:w-3/4 flex flex-col items-center justify-center">
 
-                            <ContestCard
-                                key={contest}
-                                contest_name={contest}
-                                bg_color="bg-gray-200"
-                                is_active={selectedContest === contest}
-                                onClick={() => handleContestClick(contest)}
-                            />
-                            {selectedContest === contest && (
-                                <>
-                                    <div className="font-semibold">Percentage Completed: 33%</div>
-                                    <div className="flex gap-4">
-                                        <button className="text-white rounded-lg shadow
+                                <ContestCard
+                                    key={contest}
+                                    contest_name={contest}
+                                    bg_color="bg-gray-200"
+                                    is_active={selectedContest === contest}
+                                    onClick={() => handleContestClick(contest)}
+                                />
+                                {selectedContest === contest && (
+                                    <>
+                                        <div className="font-semibold">Percentage Completed: 33%</div>
+                                        <div className="flex gap-4">
+                                            <button className="text-white rounded-lg shadow
                                          bg-primaryBtn px-6 py-1 m-1">
-                                            <p>
-                                                Set 1
-                                            </p>
-                                        </button>
-                                        <button className="text-white rounded-lg shadow
+                                                <p>
+                                                    Set 1
+                                                </p>
+                                            </button>
+                                            <button className="text-white rounded-lg shadow
                                          bg-primaryBtn px-6 py-1 m-1">
-                                            <p>
-                                                Set 2
-                                            </p>
-                                        </button>
-                                        <button className="text-white rounded-lg shadow 
+                                                <p>
+                                                    Set 2
+                                                </p>
+                                            </button>
+                                            <button className="text-white rounded-lg shadow 
                                         bg-primaryBtn px-6 py-1 m-1">
-                                            <p>
-                                                Set 3
-                                            </p>
-                                        </button>
-                                    </div>
-                                </>
-                            )}
+                                                <p>
+                                                    Set 3
+                                                </p>
+                                            </button>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        ))}
+
+                        <div className="flex  justify-center my-4">
+                            <button
+                                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-l"
+                                onClick={() => setCurrentPage(currentPage - 1)}
+                                disabled={currentPage === 1}
+                            >
+                                Previous
+                            </button>
+                            <button
+                                className="px-4 py-2 bg-gray-300 text-gray-800"
+                                disabled
+                            >
+                                {currentPage}
+                            </button>
+                            <button
+                                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-r"
+                                onClick={() => setCurrentPage(currentPage + 1)}
+                                disabled={indexOfLastCard >= contests.length}
+                            >
+                                Next
+                            </button>
                         </div>
-                    ))}
-
-                    <div className="flex  justify-center my-4">
-                        <button
-                            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-l"
-                            onClick={() => setCurrentPage(currentPage - 1)}
-                            disabled={currentPage === 1}
-                        >
-                            Previous
-                        </button>
-                        <button
-                            className="px-4 py-2 bg-gray-300 text-gray-800"
-                            disabled
-                        >
-                            {currentPage}
-                        </button>
-                        <button
-                            className="px-4 py-2 bg-gray-300 text-gray-800 rounded-r"
-                            onClick={() => setCurrentPage(currentPage + 1)}
-                            disabled={indexOfLastCard >= contests.length}
-                        >
-                            Next
-                        </button>
                     </div>
-                </div>
 
-                {/* <div className="md:ml-[400px]">
+                    {/* <div className="md:ml-[400px]">
                     <div className="bg-red-100">
                         <p> Question: {currentQuestionIndex} </p>
                         <h2>Subject: {currentQuestion["Subject"]}</h2>
@@ -416,6 +416,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                     <p> {checkingAnswer ? "Checking" : "Done checking"}</p>
                     <p>Similarity:{similarityScore}</p>
                 </div> */}
+                </div>
             </div>
         </div>
     );
