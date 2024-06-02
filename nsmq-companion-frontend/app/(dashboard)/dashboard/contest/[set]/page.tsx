@@ -42,6 +42,8 @@ export default function ContestPage({ params }: any) {
     const [introskipped, setIntroSkipper] = useState(false)
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
     const [SimilarityScore, SetSimilarityScore] = useState(Array(contest_40_1.length).fill(null));
+    const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+
 
     const [introStarted, setIntroStarted] = useState(false)
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
@@ -132,53 +134,77 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+    let audioInstance: any;
+
     const playQuestionAudio = (questionIndex: any) => {
         const questionAudioUrl = `/Sounds/2021/Contest40/q${questionIndex}.wav`;
         const preambleAudioUrl = `/Sounds/2021/Contest40/preamble_q${questionIndex}.wav`;
 
         const playAudio = (url: any, onEnded: any) => {
-            const audio = new Audio(url);
-            audio.play();
-            audio.onended = onEnded;
+            if (!audioInstance) {
+                audioInstance = new Audio(url);
+            } else {
+                audioInstance.src = url;
+            }
+            setIsAudioPlaying(true);
+            audioInstance.play();
+            audioInstance.onended = () => {
+                onEnded();
+                setIsAudioPlaying(false);
+                startTimer(questions[questionIndex - 1]["Subject"]);
+            };
+        };
+
+        const onQuestionEnded = () => {
+            const subject = questions[questionIndex - 1]["Subject"];
+            const timeLimit = subject === "Mathematics" ? 30 : 10;
+            clearInterval(timerRef.current);
+            setTimeLeft(timeLimit);
+            timerRef.current = setInterval(() => {
+                setTimeLeft((prevTimeLeft) => {
+                    const newTimeLeft = prevTimeLeft - 1;
+                    if (newTimeLeft < 0) {
+                        clearInterval(timerRef.current);
+                        return 0;
+                    }
+                    return newTimeLeft;
+                });
+            }, 1000);
         };
 
         if (questions[questionIndex - 1]?.["Preamble Text"] && questions[questionIndex - 1]?.["S/N"] === 1) {
             playAudio(preambleAudioUrl, () => {
-                playAudio(questionAudioUrl, () => {
-                    setTimeLeft(questions[questionIndex - 1]["Subject"] === "Mathematics" ? 30 : 10);
-                    timerRef.current = setInterval(() => {
-                        setTimeLeft((prevTimeLeft) => {
-                            const newTimeLeft = prevTimeLeft - 1;
-                            if (newTimeLeft < 0) {
-                                clearInterval(timerRef.current);
-                                return 0;
-                            }
-                            return newTimeLeft;
-                        });
-                    }, 1000);
-                });
+                playAudio(questionAudioUrl, onQuestionEnded);
             });
         } else {
-            playAudio(questionAudioUrl, () => {
-                setTimeLeft(questions[questionIndex - 1]["Subject"] === "Mathematics" ? 30 : 10);
-                timerRef.current = setInterval(() => {
-                    setTimeLeft((prevTimeLeft) => {
-                        const newTimeLeft = prevTimeLeft - 1;
-                        if (newTimeLeft < 0) {
-                            clearInterval(timerRef.current);
-                            return 0;
-                        }
-                        return newTimeLeft;
-                    });
-                }, 1000);
-            });
+            playAudio(questionAudioUrl, onQuestionEnded);
         }
     };
+
+
+    const startTimer = (subject: any) => {
+        clearInterval(timerRef.current);
+        const timeLimit = subject === "Mathematics" ? 30 : 10;
+        setTimeLeft(timeLimit);
+        timerRef.current = setInterval(() => {
+            setTimeLeft((prevTimeLeft) => {
+                const newTimeLeft = prevTimeLeft - 1;
+                if (newTimeLeft < 0) {
+                    clearInterval(timerRef.current);
+                    return 0;
+                }
+                return newTimeLeft;
+            });
+        }, 1000);
+    };
+
+
     useEffect(() => {
         return () => {
             clearInterval(timerRef.current);
         };
     }, [quizStarted]);
+
 
     const handleNextQuestion = () => {
         resetTranscript();
@@ -186,8 +212,6 @@ export default function ContestPage({ params }: any) {
             const newIndex = prevIndex + 1;
             if (newIndex < questions.length) {
                 playQuestionAudio(newIndex + 1);
-                const newQuestion = questions[newIndex];
-                setTimeLeft(newQuestion["Subject"] === "Mathematics" ? 30 : 10);
                 return newIndex;
             } else {
                 setQuizStarted(false);
@@ -195,7 +219,6 @@ export default function ContestPage({ params }: any) {
             }
         });
     };
-
     const sendAudioToBackend = async (audioBlob: any) => {
         try {
             setTranscibingAudio(true)
@@ -311,11 +334,14 @@ export default function ContestPage({ params }: any) {
                         <p className="font-semibold">Points: {round_score}</p>
                     </div>
 
-
-                    <div className="flex items-center gap-1 p-2 w-full justify-end">
+                    {isAudioPlaying ? <div className="flex items-center gap-1 p-2 w-full justify-end">
+                        <Image src={clock_icon} alt="clock icon" width={20} height={20} />
+                        <p className="font-semibold">Time left:</p>
+                    </div> : <div className="flex items-center gap-1 p-2 w-full justify-end">
                         <Image src={clock_icon} alt="clock icon" width={20} height={20} />
                         <p className="font-semibold">Time left: {timeLeft}s</p>
                     </div>
+                    }
                 </div>
 
                 {introskipped &&
@@ -395,15 +421,6 @@ export default function ContestPage({ params }: any) {
                     </div>}
             </div>
             <div className="flex flex-wrap items-center justify-center mt-10 gap-4 m-2">
-
-                {/* {contest_40_1.map((_, index) => (
-                    <p
-                        key={index}
-                        className={`rounded-full text-white w-[50px] h-[50px] text-center flex items-center justify-center ${index === currentQuestionIndex ? 'bg-blue-700' : 'bg-gray-700'}`}
-                    >
-                        {index + 1}
-                    </p>
-                ))} */}
                 {contest_40_1.map((_, index) => (
                     <p
                         key={index}
