@@ -15,6 +15,7 @@ import { MathJax, MathJaxContext } from "better-react-mathjax";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import ContestData from "@/app/utils/NSMQContests";
 import contest_40_1 from "../../../../utils/Questions/NSMQ_2021/contest40/round1";
+import { CgSpinner } from "react-icons/cg";
 
 export default function ContestPage({ params }: any) {
 
@@ -50,7 +51,7 @@ export default function ContestPage({ params }: any) {
     const [isReadyToCalculate, setIsReadyToCalculate] = useState(false);
     const [round_score, setRoundScore] = useState(0)
     const student_analytics = []
-
+    const [timeRemainingPercentage, setTimeRemainingPercentage] = useState(Array(questions.length).fill(null));
 
     const handleTranscriptUpdate = () => {
         setTranscribedText(transcript);
@@ -81,12 +82,35 @@ export default function ContestPage({ params }: any) {
         setIntroSkipper(true);
     };
 
+    // const handleCircleClick = () => {
+    //     if (!isBellPlaying && browserSupportsSpeechRecognition) {
+    //         setIsBellPlaying(true);
+    //         setIsCircleGreen(true);
+    //         play();
+    //         SpeechRecognition.startListening({ continuous: true });
+
+    //         setTimeout(() => {
+    //             setIsCircleGreen(false);
+    //             setIsBellPlaying(false);
+    //             SpeechRecognition.stopListening();
+    //         }, 10000);
+    //     }
+    // };
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
             setIsCircleGreen(true);
             play();
             SpeechRecognition.startListening({ continuous: true });
+
+            setTimeRemainingPercentage((prevPercentage) => {
+                const newPercentage = [...prevPercentage];
+                const currentQuestion = questions[currentQuestionIndex];
+                const timeLimit = currentQuestion["Subject"] === "Mathematics" ? 30 : 10;
+                const timeRemaining = timeLeft;
+                newPercentage[currentQuestionIndex] = (timeRemaining / timeLimit) * 100; // Store the percentage of time remaining
+                return newPercentage;
+            });
 
             setTimeout(() => {
                 setIsCircleGreen(false);
@@ -104,6 +128,14 @@ export default function ContestPage({ params }: any) {
         const handleKeyDown = (event: KeyboardEvent) => {
             if (event.key.toLowerCase() === 'b' && !isBellPlaying) {
                 handleCircleClick();
+                setTimeRemainingPercentage((prevPercentage) => {
+                    const newPercentage = [...prevPercentage];
+                    const currentQuestion = questions[currentQuestionIndex];
+                    const timeLimit = currentQuestion["Subject"] === "Mathematics" ? 30 : 10;
+                    const timeRemaining = timeLeft;
+                    newPercentage[currentQuestionIndex] = (timeRemaining / timeLimit) * 100; // Store the percentage of time remaining
+                    return newPercentage;
+                });
             }
         };
 
@@ -112,7 +144,21 @@ export default function ContestPage({ params }: any) {
         return () => {
             window.removeEventListener('keydown', handleKeyDown);
         };
-    }, [handleCircleClick, isBellPlaying]);
+    }, [handleCircleClick, isBellPlaying, currentQuestionIndex, timeLeft]);
+
+    // useEffect(() => {
+    //     const handleKeyDown = (event: KeyboardEvent) => {
+    //         if (event.key.toLowerCase() === 'b' && !isBellPlaying) {
+    //             handleCircleClick();
+    //         }
+    //     };
+
+    //     window.addEventListener('keydown', handleKeyDown);
+
+    //     return () => {
+    //         window.removeEventListener('keydown', handleKeyDown);
+    //     };
+    // }, [handleCircleClick, isBellPlaying]);
 
     const synthesizeText = async (text: string) => {
         try {
@@ -308,7 +354,7 @@ export default function ContestPage({ params }: any) {
     };
 
     return (
-        <div className="bg-bgMain h-screen">
+        <div className="bg-bgMain dark:bg-darkBgDeep h-screen">
             <PracticeNavBar />
             <div className="mt-[100px] md:h-1/2 flex flex-col w-full items-center justify-center bg-white shadow rounded-b-xl 
              dark:bg-darkBgLight">
@@ -345,10 +391,10 @@ export default function ContestPage({ params }: any) {
                 </div>
 
                 {introskipped &&
-                    <div className="m-10">
+                    <div className="m-10  flex flex-col justify-center items-center">
                         <div className="">
-                            <p> Question: {currentQuestion["S/N"]} </p>
-                            <h2>Subject: {currentQuestion["Subject"]}</h2>
+                            {/* <p> Question: {currentQuestion["S/N"]} </p> */}
+                            <h2 className="font-bold">Subject: {currentQuestion["Subject"]}</h2>
                             {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
                                 || currentQuestion.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
@@ -356,7 +402,7 @@ export default function ContestPage({ params }: any) {
                                         Preamble:  {currentQuestion["Preamble Text"]}
                                     </MathJax>
                                 </MathJaxContext>) :
-                                <h2>Preamble: {currentQuestion["Preamble Text"]}</h2>
+                                <h2 className="font-semibold text-[#475569]">Preamble: {currentQuestion["Preamble Text"]}</h2>
                             }
 
 
@@ -364,13 +410,16 @@ export default function ContestPage({ params }: any) {
                                 || currentQuestion.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
                                     <MathJax key={currentQuestionIndex}>
-                                        Question:  {currentQuestion["Question"]}
+                                        {currentQuestion["Question"]}
                                     </MathJax>
                                 </MathJaxContext>) :
-                                <h2>Question: {currentQuestion["Question"]}</h2>
+                                <h2 className="font-bold">Question: {currentQuestion["Question"]}</h2>
                             }
 
-
+                            <div>
+                                <h2 className="font-semibold">Transcribed Answer:</h2>
+                                <p className="font-semibold text-[#475569]">{transcribedText}</p>
+                            </div>
                             {/* {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
                                 || currentQuestion.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
@@ -381,44 +430,46 @@ export default function ContestPage({ params }: any) {
                                 <h2>Answer: {currentQuestion["Answer"]}</h2>
                             } */}
                         </div>
-                        <div>
-                            <h2>Transcribed Text:</h2>
-                            <p>{transcribedText}</p>
-                        </div>
+
                         <div
                             className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
                             onClick={handleCircleClick}
                         />
 
-                        <div>
-                            {!quizStarted ? (
-                                <button onClick={handleStartQuiz}>Start Quiz</button>
-                            ) : (
-                                <button onClick={handleNextQuestion}>Next Question</button>
-                            )}
-                        </div>
-                        <button onClick={play}>
-                            play
-                        </button>
-                        <button>
-                            {transcribingAudio ? "Transcribing" : "Done"}
-                        </button>
-                        <button
-                            onClick={handleCalculateSimilarity}
-                            disabled={!isReadyToCalculate}
-                        >
-                            Calculate Similarity
-                        </button>
-                        <button onClick={handleRecordAudio}>
+                        <div className=" w-full justify-between flex gap-2 items-center mt-2">
+
+                            <button
+                                onClick={handleCalculateSimilarity}
+                                disabled={!isReadyToCalculate}
+                                className="bg-green-400 dar px-6 py-1 rounded-lg"
+                            >
+                                <p className="font-semibold text-white"> {checkingAnswer ? <CgSpinner size={25} className="animate-spin text-white" /> : "Submit Answer"} </p>
+                            </button>
+
+                            <div>
+                                {!quizStarted ? (
+                                    <button onClick={handleStartQuiz}
+                                        className="bg-[#4a6cc3] px-6 py-1 rounded-lg">
+                                        <p className="font-semibold text-white">Start Quiz</p></button>
+                                ) : (
+                                    <button onClick={handleNextQuestion}
+                                        className="bg-[#4a6cc3] px-6 py-1 rounded-lg">
+                                        <p className="font-semibold text-white">Next Question</p></button>
+                                )}
+                            </div>
+
+                            {/* <button onClick={handleRecordAudio}>
                             {isRecording ? <div>
                                 <p>Recording</p>
                                 <FaMicrophoneAlt className="text-red-500" size={25} />
                             </div> :
                                 <FaMicrophoneAlt size={25} />}
-                        </button>
-                        <p> {checkingAnswer ? "Checking" : "Done checking"}</p>
-                        <p>Similarity:{similarityScore}</p>
+                        </button> */}
+                            {/* <p> {checkingAnswer ? "Checking" : "Done checking"}</p> */}
+                            <p>Similarity:{similarityScore}</p>
+                        </div>
                     </div>}
+
             </div>
             <div className="flex flex-wrap items-center justify-center mt-10 gap-4 m-2">
                 {contest_40_1.map((_, index) => (

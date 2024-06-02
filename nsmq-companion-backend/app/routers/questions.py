@@ -90,37 +90,37 @@ async def create_audio(text_model: TextModel):
     
 
 
-whisper.load_model("medium.en")
-torch.cuda.is_available()
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-device = torch.device("mps")
+# whisper.load_model("medium.en")
+# torch.cuda.is_available()
+# DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+# device = torch.device("mps")
 
-model = whisper.load_model("medium.en", device = DEVICE) # Select whisper model size (tiny, base, small, medium, large)
+# model = whisper.load_model("medium.en", device = DEVICE)
 
-def transcribe(path_to_audio):
-  """Loads whisper model to transcribe audio"""
+# def transcribe(path_to_audio):
+#   """Loads whisper model to transcribe audio"""
 
-  # Load audio
-  audio = whisper.load_audio(path_to_audio)
+#   # Load audio
+#   audio = whisper.load_audio(path_to_audio)
 
-  # Transcribe audio
-  result = model.transcribe(audio)
+#   # Transcribe audio
+#   result = model.transcribe(audio)
 
-  # Print transcript
-  return result["text"]
+#   # Print transcript
+#   return result["text"]
 
-@router.post("/get-transcript")
-async def get_transcript(audio: UploadFile = File(...)):
-    try:
-        audio_bytes = await audio.read()
-        audio_filename = audio.filename
-        with open(audio_filename, 'wb') as file:
-            file.write(audio_bytes)
-        transcript = transcribe(audio_filename)
-        os.remove(audio_filename)
-        return {"transcript": transcript}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# @router.post("/get-transcript")
+# async def get_transcript(audio: UploadFile = File(...)):
+#     try:
+#         audio_bytes = await audio.read()
+#         audio_filename = audio.filename
+#         with open(audio_filename, 'wb') as file:
+#             file.write(audio_bytes)
+#         transcript = transcribe(audio_filename)
+#         os.remove(audio_filename)
+#         return {"transcript": transcript}
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
     
 
 @router.on_event("startup")
