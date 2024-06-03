@@ -57,6 +57,7 @@ def create_user(db: Session, user: Facilitator):
         }
 
         return returned_user
+    
     except Exception as e:
         logging.error(f"Failed to create user: {e}")
         raise HTTPException(status_code=400, detail=f"{e}")

@@ -5,8 +5,7 @@ from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 
-from app.models.base_model import BaseModel
-
+from app.models.base_model import Base
 class TokenTable(Base):
     __tablename__ = "token"
     uuid = Column(

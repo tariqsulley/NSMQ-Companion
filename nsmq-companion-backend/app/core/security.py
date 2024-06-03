@@ -15,7 +15,6 @@ from app.utils.hashing import (
     ACCESS_TOKEN_EXPIRE_MINUTES,
     ALGORITHM,
     SECRET_KEY,
-    verify_password,
 )
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -103,6 +102,9 @@ async def get_current_user(
         headers={"WWW-Authenticate": "Bearer"},
     )
     return verify_token(token, credentials_exception)
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return pwd_context.verify(plain_password, hashed_password)
 
 def extract_user_data(user) -> Dict[str, str]:
     return {

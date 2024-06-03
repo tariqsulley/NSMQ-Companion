@@ -40,15 +40,15 @@ export default function MultiplayerPage() {
         }
     }, [socket]);
 
-    useEffect((): any => {
-        // Connect to the Socket.IO server
-        const newSocket = io('http://localhost:8000/ws'); // Update the URL to include '/ws'
-        setSocket(newSocket);
-        socketRef.current = newSocket;
+    // useEffect((): any => {
+    //     // Connect to the Socket.IO server
+    //     const newSocket = io('http://localhost:8000/ws'); // Update the URL to include '/ws'
+    //     setSocket(newSocket);
+    //     socketRef.current = newSocket;
 
-        // Clean up the socket connection on component unmount
-        return () => newSocket.disconnect();
-    }, []);
+    //     // Clean up the socket connection on component unmount
+    //     return () => newSocket.disconnect();
+    // }, []);
 
     useEffect(() => {
         if (socket) {
