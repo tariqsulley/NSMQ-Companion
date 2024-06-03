@@ -8,6 +8,7 @@ from app.routers import (
     questions,
     system,
     users,
+    multiplayer
 )
 
 app = FastAPI(
@@ -21,6 +22,7 @@ app.include_router(system.router)
 app.include_router(users.router)
 app.include_router(authentication.router)
 app.include_router(questions.router)
+app.include_router(multiplayer.router)
 
 app.add_middleware(
     CORSMiddleware,

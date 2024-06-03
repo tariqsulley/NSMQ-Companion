@@ -4,10 +4,15 @@ from fastapi import APIRouter, Depends, HTTPException
 from jose import jwt
 from sqlalchemy.orm import Session
 
-from app.database import models, schemas
+from app.models.facilitator import Facilitator
+from app.models.student import Student
+from app.models.email_verification import EmailVerification
 from app.database.repository import create_verification_token, get_user_by_email_address
-from app.utils.auth import (
-    extract_user_data,
+from app.schemas.email_verification import EmailVerification,UserEmailVerification
+from app.schemas.student import Login
+from app.schemas.token import VerifyToken
+from app.core.security import(
+     extract_user_data,
     generate_token_for_existing_user,
     generate_token_for_new_user,
     generate_verification_token,
@@ -34,7 +39,7 @@ password = "ae4bfeca11542d"
 
 @router.post("/decode-token")
 async def decode_access_token(
-    token_data: schemas.VerifyToken, db: Session = Depends(get_db)
+    token_data: VerifyToken, db: Session = Depends(get_db)
 ):
     payload = jwt.decode(token_data.Token, SECRET_KEY, algorithms=[ALGORITHM])
     email = payload.get("sub")
@@ -49,7 +54,7 @@ async def decode_access_token(
 # To ensure the legitimacy of the token and prevent unauthorized generation of tokens,
 # the token within the cookie undergoes a verification process.
 @router.post("/verify-token-frontend")
-async def verify_token_route_front(token_data: schemas.VerifyToken):
+async def verify_token_route_front(token_data: VerifyToken):
     if verify_token_frontend(token_data.Token):
         return {"message": "Token is valid"}
     else:
@@ -58,7 +63,7 @@ async def verify_token_route_front(token_data: schemas.VerifyToken):
 
 @router.post("/verify-token")
 async def verify_token_route(
-    token_data: schemas.VerifyToken, db: Session = Depends(get_db)
+    token_data: VerifyToken, db: Session = Depends(get_db)
 ):
     # check if token exist
     current_datetime = datetime.now()
@@ -66,8 +71,8 @@ async def verify_token_route(
     #     raise HTTPException(status_code=404, detail="Verification code expired")
 
     user_token = (
-        db.query(models.EmailVerification)
-        .filter(models.EmailVerification.verification_token == token_data.Token)
+        db.query(EmailVerification)
+        .filter(EmailVerification.verification_token == token_data.Token)
         .first()
     )
 
@@ -80,8 +85,8 @@ async def verify_token_route(
         # check if token has expired
         if expiry_date > current_date:
             user_data = (
-                db.query(models.Facilitator)
-                .filter(models.Facilitator.uuid == user_token.facilitator_uuid)
+                db.query(Facilitator)
+                .filter(Facilitator.uuid == user_token.facilitator_uuid)
                 .first()
             )
             if not user_data:
@@ -97,8 +102,8 @@ async def verify_token_route(
             db.commit()
 
             # delete user token from token table
-            db.query(models.EmailVerification).filter(
-                models.EmailVerification.verification_token == token_data.Token
+            db.query(EmailVerification).filter(
+                EmailVerification.verification_token == token_data.Token
             ).delete()
             db.commit()
 
@@ -113,8 +118,8 @@ async def verify_token_route(
         else:
             # delete expired verification token
             user_token = (
-                db.query(models.EmailVerification)
-                .filter(models.EmailVerification.verification_token == token_data.Token)
+                db.query(EmailVerification)
+                .filter(EmailVerification.verification_token == token_data.Token)
                 .delete()
             )
 
@@ -125,17 +130,17 @@ async def verify_token_route(
 
 @router.post("/verify-email")
 async def verify_user_email(
-    facilitator: schemas.UserEmailVerification, db: Session = Depends(get_db)
+    facilitator: UserEmailVerification, db: Session = Depends(get_db)
 ):
     # check if user already verified
     # expiry_time = datetime.now() + timedelta(minutes=VERIFY_TOKEN_EXPIRE_DAYS)
-    db_user = db.query(models.Facilitator).filter(models.Facilitator.uuid == facilitator.uuid).first()
+    db_user = db.query(facilitator).filter(facilitator.uuid == facilitator.uuid).first()
     if db_user:
         if db_user.verifiedAt is None:
             # check if token already generated
             verified_user = (
-                db.query(models.EmailVerification)
-                .filter(models.EmailVerification.facilitator_uuid == facilitator.uuid)
+                db.query(EmailVerification)
+                .filter(EmailVerification.facilitator_uuid == facilitator.uuid)
                 .first()
             )
 
@@ -163,11 +168,11 @@ async def verify_user_email(
 
 
 @router.post("/login", response_model=None)
-async def login_handler(login: schemas.Login, db: Session = Depends(get_db)):
+async def login_handler(login: Login, db: Session = Depends(get_db)):
     if login.account_type == "facilitator":
-        user = db.query(models.Facilitator).filter(models.Facilitator.email_address == login.email_address).first()
+        user = db.query(Facilitator).filter(Facilitator.email_address == login.email_address).first()
     elif login.account_type == "student":
-        user = db.query(models.Student).filter(models.Student.email_address == login.email_address).first()
+        user = db.query(Student).filter(Student.email_address == login.email_address).first()
     else:
         raise HTTPException(status_code=400, detail="Invalid account type specified")
 

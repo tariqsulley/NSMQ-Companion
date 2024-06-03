@@ -1,7 +1,4 @@
-from fastapi import APIRouter, Depends
-
-from app.database import schemas
-from app.utils.auth import get_current_user
+from fastapi import APIRouter
 
 router = APIRouter(
     prefix="/system",
@@ -10,7 +7,7 @@ router = APIRouter(
 
 
 @router.get("/health")
-async def health_check(get_current_user: schemas.Facilitator = Depends(get_current_user)):
+async def health_check():
     return {
         "name": "NSMQ Companion",
         "version": "0.0.1",

@@ -6,7 +6,9 @@ from fastapi import FastAPI, HTTPException, File,UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 import io
-from app.database.schemas import TextModel,SimilarityRequest,SimilarityResponse
+from app.schemas.text import TextModel
+from app.schemas.similarity_res import SimilarityRequest,SimilarityResponse
+
 from TTS.tts.configs.vits_config import VitsConfig
 from TTS.tts.models.vits import Vits
 from TTS.utils.audio.numpy_transforms import save_wav
@@ -62,7 +64,6 @@ async def query_table_data(
     FROM {safe_table_name}
     """
     try:
-
         result = db.execute(text(query))
         result_list = result.mappings().all()
         return [{"S/N": row['S/N'], "Preamble Text": row['Preamble Text'], "Question": row['Question'], "Subject": row['Subject'],  "Answer": row['Answer']} for row in result_list]
