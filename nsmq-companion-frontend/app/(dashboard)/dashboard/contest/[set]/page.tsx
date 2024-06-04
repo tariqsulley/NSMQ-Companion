@@ -315,7 +315,7 @@ export default function ContestPage({ params }: any) {
     const handleCalculateSimilarity = async () => {
         try {
             setCheckingAnswer(true);
-            const response = await axios.post(`${API_BASE}/questions/calculate-similarity`, {
+            const response = await axios.post(`${API_BASE}/language_services/calculate-similarity`, {
                 question_answer: currentQuestion["Answer"],
                 student_answer: transcribedText,
             });
