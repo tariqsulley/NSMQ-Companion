@@ -90,17 +90,7 @@ class Settings(BaseSettings):
     )
     AWS_REGION: str = os.getenv("AWS_REGION", "us-east-2")
 
-
-    # echo parrot
-    ECHO_PARROT_HOST: str = os.getenv("ECHO_PARROT_HOST", "localhost")
-    ECHO_PARROT_PORT: int = os.getenv("ECHO_PARROT_PORT", 80)
-    SMS_SENDER_ID: str = os.getenv("SMS_SENDER_ID", "MoneyBQ")
-    SMS_SENDER_APP: str = os.getenv("SMS_SENDER_APP", "MVI")
-    SENDER_EMAIL: str = os.getenv(
-        "SENDER_EMAIL", "NSMQ Companion <info@nsmqcompanion.net>"
-    )
-    SENDER_NAME: str = os.getenv("SENDER_NAME", "NSMQ Companion")
-
+  
     # find query
     PAGE: int = 1
     PAGE_SIZE: int = 20
