@@ -11,6 +11,8 @@ from app.repository.user_repository import UserRepository
 from app.service.base_service import BaseService
 from app.schemas.facilitator import Facilitator
 from app.schemas.student import StudentCreate
+from sqlalchemy.orm import Session
+from app.models.student import Student
 
 class UserService(BaseService):
     def __init__(
@@ -26,9 +28,20 @@ class UserService(BaseService):
     def get_all_users(self):
         return self.user_repository.get_all_users()
 
-    def get_user_by_uuid(self,user_uuid):
-        return self.user_repository.get_user_by_uuid(user_uuid)
-    
+
+
+    def get_user_by_uuid(self, user_uuid: str):
+        user = self.user_repository.get_user_by_uuid(user_uuid)
+        if user:
+            return user
+        else:
+            student = (
+                self.session_factory().query(Student)
+                .filter(Student.uuid == user_uuid)
+                .first()
+            )
+            return student
+        
     def get_user_by_email_address(self, email: EmailStr):
         try:
             user = self.user_repository.get_user_by_email_address(email)

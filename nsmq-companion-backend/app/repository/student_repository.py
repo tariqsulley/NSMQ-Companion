@@ -55,3 +55,11 @@ class StudentRepository(BaseRepository):
                 logging.error(f"Failed to find facilitator: {e}")
                 raise HTTPException(status_code=404, detail=str(e))
             
+    def get_student_by_uuid(self, student_uuid: str):
+        with self.session_factory() as session:
+            student = (
+            session.query(Student)
+            .filter(Student.uuid == student_uuid)
+            .first()
+        )
+        return student
