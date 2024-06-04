@@ -3,6 +3,7 @@ from TTS.tts.configs.vits_config import VitsConfig
 from TTS.tts.models.vits import Vits
 import numpy as np
 from sentence_transformers import SentenceTransformer
+import torch
 
 class LanguageService(BaseService):
     def __init__(self):
@@ -17,8 +18,13 @@ class LanguageService(BaseService):
         tts_model.load_onnx('app/utils/tts_files/quizmistress.onnx')
         return tts_model
 
+    # def load_sentence_transformer_model(self):
+    #     return SentenceTransformer("all-MiniLM-L6-v2")
+
     def load_sentence_transformer_model(self):
-        return SentenceTransformer("all-MiniLM-L6-v2")
+        model = SentenceTransformer("all-MiniLM-L6-v2")
+        model = model.to(torch.device("mps" if torch.backends.mps.is_available() else "cpu")) 
+        return model
 
     async def synthesize_text(self, text):
         text_inputs = np.asarray(
@@ -28,12 +34,19 @@ class LanguageService(BaseService):
         audio = self.tts_model.inference_onnx(text_inputs, speaker_id=0)[0]
         return audio
 
-    async def calculate_similarity(self, question_answer, student_answer):
-        if not self.sentence_transformer_model:
-            raise ValueError("Sentence transformer model not loaded")
+    # async def calculate_similarity(self, question_answer, student_answer):
+    #     embeddings1 = self.sentence_transformer_model.encode([question_answer])
+    #     embeddings2 = self.sentence_transformer_model.encode([student_answer])
+    #     similarities = self.sentence_transformer_model.similarity(embeddings1, embeddings2)
+    #     similarity_score = similarities[0][0]
+    #     return similarity_score
 
-        embeddings1 = self.sentence_transformer_model.encode([question_answer])
-        embeddings2 = self.sentence_transformer_model.encode([student_answer])
-        similarities = self.sentence_transformer_model.similarity(embeddings1, embeddings2)
-        similarity_score = similarities[0][0]
-        return similarity_score
+    async def calculate_similarity(self, question_answer, student_answer):
+        embeddings1 = self.sentence_transformer_model.encode([question_answer], convert_to_tensor=True)
+        embeddings2 = self.sentence_transformer_model.encode([student_answer], convert_to_tensor=True)
+        
+        embeddings1 = embeddings1.to(torch.device("mps" if torch.backends.mps.is_available() else "cpu"))
+        embeddings2 = embeddings2.to(torch.device("mps" if torch.backends.mps.is_available() else "cpu"))
+
+        similarities = torch.cosine_similarity(embeddings1, embeddings2).item()
+        return similarities

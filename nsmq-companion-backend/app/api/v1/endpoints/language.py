@@ -67,10 +67,10 @@ async def create_audio(text_model: TextModel, service: LanguageService = Depends
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.on_event("startup")
-def load_model():
-    global st_model
-    st_model = SentenceTransformer("all-MiniLM-L6-v2")
+# @router.on_event("startup")
+# def load_model():
+#     global st_model
+#     st_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 @router.post("/calculate-similarity", response_model=None)
 @inject
