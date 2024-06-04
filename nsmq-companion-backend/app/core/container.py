@@ -34,7 +34,7 @@ class Container(containers.DeclarativeContainer):
     auth_service = providers.Factory(
         auth_service.AuthService,
         user_repository=user_repository,
-        student_repository=student_repository
+        # student_repository=student_repository
     )
 
     user_service = providers.Factory(

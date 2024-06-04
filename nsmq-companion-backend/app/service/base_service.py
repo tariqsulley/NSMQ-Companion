@@ -6,6 +6,7 @@ class BaseService:
     def __init__(self, repository) -> None:
         self._repository = repository
 
+
     def get_list(self):
         return self._repository.read_all()
 

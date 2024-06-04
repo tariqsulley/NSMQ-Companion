@@ -85,6 +85,7 @@ async def get_user_by_email(
         msg = f"Failed to retrieve user with email: {email_address}"
         return send_internal_server_error(user_msg=msg, error=e)
 
+
 @router.post("/create", response_model=StudentBase)
 @inject
 async def create_student_handler(

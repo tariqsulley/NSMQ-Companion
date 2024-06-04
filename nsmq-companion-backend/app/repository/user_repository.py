@@ -15,6 +15,7 @@ from app.models.facilitator import Facilitator
 from app.models.email_verification import EmailVerification
 from app.schemas.email_verification import UserEmailVerification
 from app.schemas.student import StudentCreate
+from app.models.student import Student
 import logging
 
 
@@ -32,13 +33,30 @@ class UserRepository(BaseRepository):
                 raise HTTPException(status_code=500, detail="Error retrieving users")
             
     
+    # def get_user_by_email_address(self, email: str):
+    #     with self.session_factory() as session:
+    #         return (
+    #             session.query(self.model)
+    #             .filter(self.model.email_address == email)
+    #             .first()
+    #         )
+
     def get_user_by_email_address(self, email: str):
         with self.session_factory() as session:
-            return (
-                session.query(self.model)
-                .filter(self.model.email_address == email)
+            facilitator = (
+                session.query(Facilitator)
+                .filter(Facilitator.email_address == email)
                 .first()
             )
+            if facilitator:
+                return facilitator
+
+            student = (
+                session.query(Student)
+                .filter(Student.email_address == email)
+                .first()
+            )
+            return student
 
     def create_user(self, user: Facilitator):
         with self.session_factory() as session:

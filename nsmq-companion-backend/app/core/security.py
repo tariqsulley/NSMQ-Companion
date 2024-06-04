@@ -23,7 +23,7 @@ from fastapi.security import (
 )
 from app.core.exceptions import AuthError, NotVerifiedError
 from fastapi import HTTPException, Request, status
-
+from app.models.facilitator import Facilitator
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
@@ -47,6 +47,25 @@ def create_access_token(
 def generate_access_token(email: str) -> str:
     access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     return create_access_token(data={"sub": email}, expires_delta=access_token_expires)
+
+
+def get_user_by_email_address(email: str, db: Session):
+    try:
+        user = db.query(Facilitator).filter(Facilitator.email_address == email).first()
+        if user:
+            return user
+    except Exception:
+        raise HTTPException(status_code=400, detail="User not found")
+    
+
+def decode_access_token(
+    token_data, db: Session = Depends(get_db)):
+    payload = jwt.decode(token_data, SECRET_KEY, algorithms=[ALGORITHM])
+    email = payload.get("sub")
+    user = get_user_by_email_address(email=email,db=db)
+    if user is None:
+        raise HTTPException(status_code=404, detail="User not found")
+    return extract_user_data(user)
 
 
 def generate_token_for_new_user(
@@ -98,9 +117,9 @@ def verify_token(token: str, credentials_exception: HTTPException):
 def verify_token_frontend(token: str) -> bool:
     try:
         jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        return True
+        return "Token Valid"
     except JWTError:
-        return False
+        return "Invalid Token"
 
 
 async def get_current_user(

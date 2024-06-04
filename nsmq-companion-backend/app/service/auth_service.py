@@ -18,11 +18,13 @@ from app.core.security import (
     generate_verification_token,
 )
 from app.core.settings import settings
-
+from app.core.security import verify_password
 from app.repository.user_repository import UserRepository
-
+from app.repository.student_repository import StudentRepository
 # from app.schema.user_schema import UserLogin
 from app.service.base_service import BaseService
+from app.models.facilitator import Facilitator
+from app.models.student import Student
 
 log = get_logger()
 
@@ -33,39 +35,39 @@ class AuthService(BaseService):
         user_repository: UserRepository,
     ):
         self.user_repository = user_repository
-   
         super().__init__(user_repository)
 
-    def login(self, login_info):
+    def login_user(self, login_info):
         try:
-            db_user = self.user_repository.get_user_by_email_address(
-                login_info.email_address
-            )
-            log.info("User found", extra={"user": db_user})
-            if db_user is None:
+            if login_info.account_type == "facilitator":
+                user = self.user_repository.get_user_by_email_address(
+                    login_info.email_address
+                )
+            elif login_info.account_type == "student":
+                user = self.user_repository.get_user_by_email_address(
+                    login_info.email_address
+                )
+            else:
+                raise ValueError("Invalid account type specified")
+
+            if user is None:
                 raise NotFoundError(detail="User not found")
-            if db_user.verifiedAt is None:
-                raise NotVerifiedError(detail="User email not verified")
 
-            user = extract_user_data(db_user)
-
-            access_token, expiration_datetime = generate_token_for_existing_user(
-                login_info, db_user
-            )
-
-            log.info("Access token generated successfully")
-
+            if not verify_password(login_info.password, user.password):
+                 raise AuthError(detail="Incorrect password")
+                           
+            access_token = generate_token_for_existing_user(login_info, user)
 
             login_result = {
                 "access_token": access_token,
-                "expiration": expiration_datetime,
-                "user": user,
+                # "expiration": expiration_datetime,
+                "user": extract_user_data(user),
                 "permission": "",
             }
             return login_result
         except Exception as e:
             raise e
-
+        
     def decode_access_token(self, token_data):
         try:
             payload = jwt.decode(
