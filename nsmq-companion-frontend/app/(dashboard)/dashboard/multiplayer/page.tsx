@@ -1,23 +1,39 @@
-
 "use client"
 import Sidebar from "@/app/components/Sidebar"
-
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import io, { Socket } from 'socket.io-client';
 import { useAuth } from "@/app/context/AuthContext";
+import API_BASE from "@/app/utils/api";
 
 export default function MultiplayerPage() {
     const [socket, setSocket] = useState<Socket | null>(null);
-    const socketRef = useRef<Socket | null>(null);
     const [waitingRoomStatus, setWaitingRoomStatus] = useState<'idle' | 'searching' | 'paired'>('idle');
     const [pairedStudent, setPairedStudent] = useState<string | null>(null);
     const { Data } = useAuth()
+
     const joinWaitingRoom = () => {
+        const newSocket = io('ws://127.0.0.1:8000/api/v1/users/multiplayer/ws', {
+            extraHeaders: {
+                'player-id': Data?.user?.uuid
+            }
+        });
+        setSocket(newSocket);
 
+        newSocket.on('connect', () => {
+            console.log('Connected to WebSocket server');
+            setWaitingRoomStatus('searching');
+            newSocket.emit('join_waiting_room');
+        });
+
+        newSocket.on('disconnect', () => {
+            console.log('Disconnected from WebSocket server');
+        });
+
+        newSocket.on('start_game', (data) => {
+            setWaitingRoomStatus('paired');
+            setPairedStudent('Opponent');
+        });
     };
-
-
-
 
     return (
         <div className="flex h-screen">
@@ -34,7 +50,6 @@ export default function MultiplayerPage() {
                     )}
                 </div>
             </div>
-
         </div>
     );
 }
