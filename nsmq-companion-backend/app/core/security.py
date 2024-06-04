@@ -56,7 +56,7 @@ def get_user_by_email_address(email: str, db: Session):
             return user
     except Exception:
         raise HTTPException(status_code=400, detail="User not found")
-    
+        
 
 def decode_access_token(
     token_data, db: Session = Depends(get_db)):
