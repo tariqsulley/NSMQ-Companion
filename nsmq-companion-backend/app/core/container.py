@@ -3,12 +3,13 @@ from app.core.database import Database
 from app.core.settings import settings
 from app.repository import (
     user_repository,
-    student_repository
+    student_repository,
 )
 from app.service import (
     user_service,
     auth_service,
-    student_service
+    student_service,
+    language_service
 )
 
 
@@ -17,12 +18,12 @@ class Container(containers.DeclarativeContainer):
         modules=[
             "app.api.v1.endpoints.authentication",
             "app.api.v1.endpoints.users",
+            "app.api.v1.endpoints.language"
         ]
     )
 
     db = providers.Singleton(Database, db_url=settings.DATABASE_URI)
 
-    # Repositories
     user_repository = providers.Factory(
         user_repository.UserRepository, session_factory=db.provided.session
     )
@@ -45,6 +46,10 @@ class Container(containers.DeclarativeContainer):
     student_service = providers.Factory(
         student_service.StudentService,
         student_repository = student_repository
+    )
+
+    language_service = providers.Factory(
+        language_service.LanguageService,
     )
 
 
