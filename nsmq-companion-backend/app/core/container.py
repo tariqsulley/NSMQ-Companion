@@ -1,15 +1,14 @@
 from dependency_injector import containers, providers
 from app.core.database import Database
-from dependency_injector import containers, providers
-
-
-from app.core.database import Database
 from app.core.settings import settings
 from app.repository import (
     user_repository,
+    student_repository
 )
 from app.service import (
     user_service,
+    auth_service,
+    student_service
 )
 
 
@@ -28,17 +27,24 @@ class Container(containers.DeclarativeContainer):
         user_repository.UserRepository, session_factory=db.provided.session
     )
 
-    #     auth_service = providers.Factory(
-    #     auth_service.AuthService,
-    #     user_repository=user_repository,
-    #     email_verification_repository=email_verfication_repository,
-    #     user_subscription_repository=user_subscription_repository,
-    #     subscription_repository=subscription_repository,
-    # )
-    # user_service = providers.Factory(
-    #     user_service.UserService,
-    #     user_repository=user_repository,
-    #     user_subscription_repository=user_subscription_repository,
-    #     subscription_repository=subscription_repository,
-    #     invitation_repository=team_member_invitation_repository,
-    # )
+    student_repository = providers.Factory(
+        student_repository.StudentRepository, session_factory=db.provided.session
+    )
+
+    auth_service = providers.Factory(
+        auth_service.AuthService,
+        user_repository=user_repository,
+        student_repository=student_repository
+    )
+
+    user_service = providers.Factory(
+        user_service.UserService,
+        user_repository=user_repository,
+    )
+
+    student_service = providers.Factory(
+        student_service.StudentService,
+        student_repository = student_repository
+    )
+
+

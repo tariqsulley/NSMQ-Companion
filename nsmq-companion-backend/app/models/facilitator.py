@@ -27,4 +27,5 @@ class Facilitator(BaseModel):
     facilitator_verification = relationship(
         "EmailVerification", uselist=False, back_populates="facilitator"
     )
+
 Facilitator.students = relationship("Student", order_by=Student.id, back_populates="facilitator")

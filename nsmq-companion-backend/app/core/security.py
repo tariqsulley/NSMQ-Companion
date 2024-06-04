@@ -1,7 +1,7 @@
 import random
 import string
 from datetime import datetime, timedelta
-from typing import Annotated, Dict, Union
+from typing import Annotated, Dict, Union,List
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -16,10 +16,20 @@ from app.utils.hashing import (
     ALGORITHM,
     SECRET_KEY,
 )
+from fastapi.security import (
+    HTTPAuthorizationCredentials,
+    HTTPBearer,
+    OAuth2PasswordBearer,
+)
+from app.core.exceptions import AuthError, NotVerifiedError
+from fastapi import HTTPException, Request, status
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
+
+def hash_user_password(password: str) -> str:
+    return pwd_context.hash(password)
 
 def create_access_token(
     data: dict, expires_delta: Union[timedelta, None] = None
@@ -106,6 +116,24 @@ async def get_current_user(
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
+class JWTBearer(HTTPBearer):
+    def __init__(self, allowed_roles: List, auto_error: bool = True):
+        super(JWTBearer, self).__init__(auto_error=auto_error)
+        self.allowed_roles = allowed_roles
+
+    async def __call__(self, request: Request):
+        credentials: HTTPAuthorizationCredentials = await super(
+            JWTBearer, self
+        ).__call__(request)
+        if credentials:
+            if not credentials.scheme == "Bearer":
+                raise AuthError(detail="Invalid authentication scheme.")
+            if not self.verify_jwt(credentials.credentials):
+                raise AuthError(detail="Invalid token or expired token.")
+            return credentials.credentials
+        else:
+            raise AuthError(detail="Invalid authorization code.")
+        
 def extract_user_data(user) -> Dict[str, str]:
     return {
         "first_name": user.first_name,

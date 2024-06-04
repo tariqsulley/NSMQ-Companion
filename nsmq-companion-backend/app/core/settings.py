@@ -32,11 +32,11 @@ class Settings(BaseSettings):
     )
 
     # database
-    DB_USER: str = os.getenv("DB_USER", "mvi_tracking_user")
-    DB_PASSWORD: str = os.getenv("DB_PASSWORD", "mvi_tracking_pass")
-    DB_HOST: str = os.getenv("DB_HOST", "localhost")
-    DB_PORT: str = os.getenv("DB_PORT", "5432")
-    DB_NAME: str = os.getenv("DB_NAME", "mvi_tracking_db")
+    DB_USER: str = "postgres"
+    DB_PASSWORD: str =  "Dragovic12!"
+    DB_HOST: str = "nsmq-companion-database.cb2gw6s82ebd.eu-north-1.rds.amazonaws.com"
+    DB_PORT: str = "5432"
+    DB_NAME: str = "nsmqcompaniondb"
     DB_ENGINE: str = os.getenv("DB", "postgresql")
 
     DATABASE_URI: str = (

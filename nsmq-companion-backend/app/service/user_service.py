@@ -23,6 +23,12 @@ class UserService(BaseService):
     def create_user(self, payload:Facilitator):
         return self.user_repository.create_user(payload)
     
+    def get_all_users(self):
+        return self.user_repository.get_all_users()
+
+    def get_user_by_uuid(self,user_uuid):
+        return self.user_repository.get_user_by_uuid(user_uuid)
+   
     def get_user_by_email_address(self, email: EmailStr):
         try:
             user = self.user_repository.get_user_by_email_address(email)
@@ -41,12 +47,11 @@ class UserService(BaseService):
             return self.user_repository.change_password(
                 user_uuid, old_password, new_password, password_confirmation
             )
-
         except Exception as e:
             raise e
+        
     def update_user_avatar(self, user_id: str, avatar_url: str):
         try:
             return self.user_repository.update_user_avatar(user_id, avatar_url)
         except Exception as e:
             raise e
-        

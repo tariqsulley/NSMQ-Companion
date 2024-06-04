@@ -21,7 +21,7 @@ from app.schemas.facilitator import(
 )
 
 from app.service.user_service import UserService
-
+from app.service.student_service import StudentService
 from app.utils.utils import (
     send_client_side_error,
     send_data,
@@ -34,7 +34,6 @@ router = APIRouter(
     tags=["users"],
 )
 msg_prefix = "user"
-
 
 
 @router.post("/", response_class=ORJSONResponse)
@@ -50,7 +49,7 @@ async def create_facilitator_handler(
                 user_msg=f"User already exists: {payload.email_address}",
             )
 
-        user = service.create_facilitator(payload)
+        user = service.create_user(payload)
         return send_data(user)
     except Exception as e:
         msg = "Failed to create facilitator"
@@ -63,7 +62,7 @@ async def get_users_handler(
      service: UserService = Depends(Provide[Container.user_service]),
 ):
     try:
-        facilitators = service.get_all_facilitators()
+        facilitators = service.get_all_users()
         return send_data(facilitators)
     except Exception as e:
         msg = "Failed to retrieve facilitators"
@@ -90,7 +89,7 @@ async def get_user_by_email(
 @inject
 async def create_student_handler(
     student: StudentCreate,
-     service: UserService = Depends(Provide[Container.user_service]),
+     service: StudentService = Depends(Provide[Container.student_service]),
 ):
     try:
         created_student = service.create_student(student)
@@ -102,7 +101,7 @@ async def create_student_handler(
 
 @router.get("/{user_uuid}/find", response_model=Facilitator)
 @inject
-async def get_user_by_uuid_endpoint(
+async def get_user_by_uuid(
     user_uuid: str,
      service: UserService = Depends(Provide[Container.user_service]),
 ):
@@ -118,4 +117,17 @@ async def get_user_by_uuid_endpoint(
         return send_internal_server_error(user_msg=msg, error=e)
     
 
-
+@router.get("/students/{facilitator_uuid}",response_model=None)
+@inject
+async def get_students_for_facilitator(facilitator_uuid:str,
+                                       service:StudentService = Depends(Provide[Container.student_service])):
+    try:
+        student = service.get_facilitator(facilitator_uuid)
+        if student is None:
+            return send_client_side_error(
+                user_msg=f"Facilitator not found: {facilitator_uuid}"
+            )
+        return send_data(student)
+    except Exception as e:
+        msg = f"Failed to retrieve facilitator: {facilitator_uuid}"
+        return send_internal_server_error(user_msg=msg,error=e)

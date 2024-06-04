@@ -8,6 +8,11 @@ class StudentBase(BaseModel):
     account_type:str
 
 class StudentCreate(StudentBase):
+    first_name: str
+    last_name: str
+    year: int
+    email_address: EmailStr
+    account_type:str
     facilitator_uuid: str
 
 

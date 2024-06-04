@@ -11,8 +11,35 @@ from app.client.s3_client import S3Client
 from app.core.logger import get_logger
 from app.core.settings import settings
 from app.utils.enums import  FileFormat
+from app.core.constants import ADMIN_USER_ROLE, CUSTOMER_USER_ROLE
+from app.core.security import JWTBearer
 
 log = get_logger()
+
+allow_admins_only = Depends(
+    JWTBearer(
+        allowed_roles=[
+            ADMIN_USER_ROLE,
+        ]
+    )
+)
+
+allow_customers_only = Depends(
+    JWTBearer(
+        allowed_roles=[
+            CUSTOMER_USER_ROLE,
+        ]
+    )
+)
+
+allow_admins_and_customers = Depends(
+    JWTBearer(
+        allowed_roles=[
+            ADMIN_USER_ROLE,
+            CUSTOMER_USER_ROLE,
+        ]
+    )
+)
 
 def generate_uuid() -> str:
     return str(uuid.uuid4())

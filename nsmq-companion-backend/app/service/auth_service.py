@@ -21,7 +21,7 @@ from app.core.settings import settings
 
 from app.repository.user_repository import UserRepository
 
-from app.schema.user_schema import UserLogin
+# from app.schema.user_schema import UserLogin
 from app.service.base_service import BaseService
 
 log = get_logger()
@@ -36,7 +36,7 @@ class AuthService(BaseService):
    
         super().__init__(user_repository)
 
-    def login(self, login_info: UserLogin):
+    def login(self, login_info):
         try:
             db_user = self.user_repository.get_user_by_email_address(
                 login_info.email_address
@@ -66,7 +66,7 @@ class AuthService(BaseService):
         except Exception as e:
             raise e
 
-    def decode_access_token(self, token_data: VerifyToken):
+    def decode_access_token(self, token_data):
         try:
             payload = jwt.decode(
                 token_data.Token,
@@ -89,7 +89,7 @@ class AuthService(BaseService):
 
         return extract_user_data(user)
 
-    def verify_token(self, token_data: VerifyToken):
+    def verify_token(self, token_data):
         user_token = self.email_verification_repository.get_by_token(token_data.Token)
 
         if user_token:
@@ -140,7 +140,7 @@ class AuthService(BaseService):
         else:
             raise NotFoundError(detail="Verification token not found")
 
-    def verify_user_email(self, user: UserEmailVerification):
+    def verify_user_email(self, user):
         try:
             # check if user already verified
             db_user = self.user_repository.read_by_uuid(user.uuid)
