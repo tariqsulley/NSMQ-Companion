@@ -14,6 +14,10 @@ from app.service.auth_service import AuthService
 from app.utils.utils import send_data, send_info, send_internal_server_error
 from app.schemas.student import Login
 from app.core.security import decode_access_token
+from sqlalchemy.orm import Session
+from app.routers.shared import get_db
+from app.core.security import extract_user_data
+from app.schemas.token import VerifyToken
 router = APIRouter(
     prefix="",
     tags=["authentication"],
@@ -22,30 +26,41 @@ router = APIRouter(
 log = get_logger()
 
 
+# @router.post("/decode_token", response_class=ORJSONResponse)
+# @inject
+# async def decode_access_token_endpoint(
+#     token_data,
+#     service: AuthService = Depends(Provide[Container.auth_service]),
+# ):
+#     try:
+#         result = decode_access_token(token_data)
+#         return send_data(result)
+#     except Exception as e:
+#         return send_internal_server_error(user_msg="Could not decode token", error=e)
+
 @router.post("/decode_token", response_class=ORJSONResponse)
 @inject
 async def decode_access_token_endpoint(
     token_data,
     service: AuthService = Depends(Provide[Container.auth_service]),
+    db: Session = Depends(get_db),
 ):
     try:
-        result = decode_access_token(token_data)
-        return send_data(result)
+        user = decode_access_token(token_data, db)
+        return send_data(extract_user_data(user))
     except Exception as e:
         return send_internal_server_error(user_msg="Could not decode token", error=e)
+    
 
 
 
-@router.post("/verify_token_frontend", response_class=ORJSONResponse)
-@inject
-async def verify_token_frontend_handler(token_data):
-    try:
-        token_status  = verify_token_frontend(token_data)
-        return send_data(token_status)
-    except Exception as e:
-        msg= "Invalid Token"
-        return send_internal_server_error(user_msg=msg,error=e)
   
+@router.post("/verify_token_frontend")
+async def verify_token_route_front(token_data: VerifyToken):
+    if verify_token_frontend(token_data.Token):
+        return {"message": "Token is valid"}
+    else:
+        raise HTTPException(status_code=401, detail="Token is invalid or expired")
 
 @router.post("/verify_token", response_class=ORJSONResponse)
 @inject

@@ -28,7 +28,7 @@ class UserService(BaseService):
 
     def get_user_by_uuid(self,user_uuid):
         return self.user_repository.get_user_by_uuid(user_uuid)
-   
+    
     def get_user_by_email_address(self, email: EmailStr):
         try:
             user = self.user_repository.get_user_by_email_address(email)

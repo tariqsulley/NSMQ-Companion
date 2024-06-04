@@ -163,7 +163,7 @@ export default function ContestPage({ params }: any) {
     const synthesizeText = async (text: string) => {
         try {
             setloading(true);
-            const response = await axios.post(`${API_BASE}/questions/synthesize/`, {
+            const response = await axios.post(`${API_BASE}/language_services/synthesize/`, {
                 text: text
             }, {
                 responseType: 'arraybuffer'
@@ -271,7 +271,7 @@ export default function ContestPage({ params }: any) {
             const formData = new FormData();
             formData.append('audio', audioBlob, 'audio.webm');
 
-            const response = await axios.post(`${API_BASE}/questions/get-transcript`, formData, {
+            const response = await axios.post(`${API_BASE}/language_services/get-transcript`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

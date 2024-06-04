@@ -62,13 +62,13 @@ const Table: React.FC<TableProps> = ({ filter }) => {
 
 
     const { data, error, isLoading } = useSWR(
-        `${API_BASE}/facilitators/students/${Data?.uuid}`,
+        `${API_BASE}/users/students/${Data?.data?.uuid}/`,
         fetcher,
         {
             revalidateIfStale: true,
             revalidateOnFocus: true,
             revalidateOnReconnect: true,
-            refreshInterval: 1000
+            // refreshInterval: 1000
         } as SWROptions
     );
 
@@ -76,7 +76,7 @@ const Table: React.FC<TableProps> = ({ filter }) => {
 
     const filteredData = useMemo(() => {
         if (!isLoading && data) {
-            return data?.filter((item: any) => {
+            return data?.data?.filter((item: any) => {
                 const isfirstNameMatch = item?.first_name
                     .toLowerCase()
                     .includes(filter.toLowerCase());

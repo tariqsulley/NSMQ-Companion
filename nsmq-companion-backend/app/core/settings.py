@@ -51,7 +51,12 @@ class Settings(BaseSettings):
     )
 
     # CORS
-    BACKEND_CORS_ORIGINS: List[str] = ["*"]
+    BACKEND_CORS_ORIGINS: List[str] = [ 
+        "http://localhost:8000",
+        "https://localhost:8000",
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://localhost",]
 
     # email
     MAIL_VERIFICATION_MESSAGE: str = os.getenv(

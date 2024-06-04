@@ -32,14 +32,14 @@ export default function AddStudentForm() {
         e.preventDefault()
         try {
             setCreatingStundet(true)
-            const response = await axios.post(`${API_BASE}/facilitators/students/create`,
+            const response = await axios.post(`${API_BASE}/users/create/`,
                 {
                     first_name: firstName,
                     last_name: lastName,
                     year: parseInt(year, 10),
                     email_address: email,
                     account_type: "student",
-                    facilitator_uuid: Data?.uuid
+                    facilitator_uuid: Data?.data?.uuid
                 })
             console.log("res", response)
             // toast.success("Student Created Successfully!", {

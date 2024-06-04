@@ -65,7 +65,7 @@ def decode_access_token(
     user = get_user_by_email_address(email=email,db=db)
     if user is None:
         raise HTTPException(status_code=404, detail="User not found")
-    return extract_user_data(user)
+    return user
 
 
 def generate_token_for_new_user(
@@ -114,7 +114,7 @@ def verify_token(token: str, credentials_exception: HTTPException):
         raise credentials_exception
 
 
-def verify_token_frontend(token: str) -> bool:
+def verify_token_frontend(token: str) -> str:
     try:
         jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         return "Token Valid"
