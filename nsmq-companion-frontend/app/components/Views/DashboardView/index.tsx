@@ -6,7 +6,7 @@ export default function DashboardView() {
     const { Data } = useAuth()
     return (
         <div className="flex flex-col gap-2">
-            <p> Good Evening {Data?.data?.first_name}</p>
+            <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
             <EmptyDashboardCard />
         </div>
     )

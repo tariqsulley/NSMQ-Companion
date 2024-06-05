@@ -6,8 +6,7 @@ export default function Dashboard() {
         <div className="flex h-screen">
             <Sidebar />
             <div className="bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full flex flex-col items-center">
-                <div className="w-11/12">
-                    <p className="mt-[100px]"> Welcome to the nsmq companion Dashboard</p>
+                <div className="w-11/12 mt-[100px]">
                     <DashboardView />
                 </div>
             </div>
