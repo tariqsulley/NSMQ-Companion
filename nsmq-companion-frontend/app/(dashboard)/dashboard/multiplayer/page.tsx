@@ -24,7 +24,7 @@ export default function MultiplayerPage() {
             const data = JSON.parse(event.data);
             if (data.action === 'start_game') {
                 setWaitingRoomStatus('paired');
-                setPairedStudent('Opponent'); // Update this part according to the data received.
+                setPairedStudent('Opponent');
             }
         };
 

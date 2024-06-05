@@ -138,16 +138,18 @@ async def websocket_endpoint(websocket: WebSocket):
                     )
                     db.add(game_session)
                     db.commit()
-                    # Notify the clients that the game session has started
-                await websocket.send_json({
+                    await websocket.send_json({
                         "event": "start_game",
                         "game_session_uuid": game_session.uuid
                     })
-                
-            data = await websocket.receive_json()
-            if data.get("action") == "disconnect_quiz":
+                    
+                data = await websocket.receive_json()
+                if data.get("action") == "disconnect_quiz":
+                    student = db.query(Student).filter(Student.uuid == player_uuid).first()
+                    if student and student.waiting_room_data:
+                        db.delete(student.waiting_room_data[0])
+                        db.commit()
                 # Remove the player from the quiz session
-                with SessionLocal() as db:
                     quiz_session = db.query(QuizSession).filter(
                         (QuizSession.player1_uuid == player_uuid) |
                         (QuizSession.player2_uuid == player_uuid)
@@ -156,13 +158,9 @@ async def websocket_endpoint(websocket: WebSocket):
                         db.delete(quiz_session)
                         db.commit()
                         await websocket.send_json({"event": "quiz_disconnected"})
-
-                # Remove the player from the waiting room
-                with SessionLocal() as db:
-                    student = db.query(Student).filter(Student.uuid == player_uuid).first()
-                    if student and student.waiting_room_data:
-                        db.delete(student.waiting_room_data[0])
-                        db.commit()
+                    # Notify the clients that the game session has started
+               
+                           
 
                 # Close the WebSocket connection
                 await websocket.close()
