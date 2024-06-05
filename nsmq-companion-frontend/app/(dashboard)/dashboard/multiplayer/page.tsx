@@ -1,38 +1,41 @@
 "use client"
 import Sidebar from "@/app/components/Sidebar"
 import { useState } from 'react';
-import io, { Socket } from 'socket.io-client';
 import { useAuth } from "@/app/context/AuthContext";
-import API_BASE from "@/app/utils/api";
 
 export default function MultiplayerPage() {
-    const [socket, setSocket] = useState<Socket | null>(null);
+    const [socket, setSocket] = useState<WebSocket | null>(null);
     const [waitingRoomStatus, setWaitingRoomStatus] = useState<'idle' | 'searching' | 'paired'>('idle');
     const [pairedStudent, setPairedStudent] = useState<string | null>(null);
     const { Data } = useAuth()
 
     const joinWaitingRoom = () => {
-        const newSocket = io('ws://127.0.0.1:8000/api/v1/users/multiplayer/ws', {
-            extraHeaders: {
-                'player-id': Data?.user?.uuid
-            }
-        });
+        const newSocket = new WebSocket('ws://127.0.0.1:8000/api/v1/multiplayer/ws');
         setSocket(newSocket);
 
-        newSocket.on('connect', () => {
+        newSocket.onopen = () => {
+            newSocket.send("Hello, WebSocket Server!");
             console.log('Connected to WebSocket server');
             setWaitingRoomStatus('searching');
-            newSocket.emit('join_waiting_room');
-        });
+            newSocket.send(JSON.stringify({ action: 'join_waiting_room', playerId: Data?.data?.uuid }));
+        };
 
-        newSocket.on('disconnect', () => {
+        newSocket.onmessage = (event) => {
+            console.log("Server says: " + event.data);
+            const data = JSON.parse(event.data);
+            if (data.action === 'start_game') {
+                setWaitingRoomStatus('paired');
+                setPairedStudent('Opponent'); // Update this part according to the data received.
+            }
+        };
+
+        newSocket.onclose = () => {
             console.log('Disconnected from WebSocket server');
-        });
+        };
 
-        newSocket.on('start_game', (data) => {
-            setWaitingRoomStatus('paired');
-            setPairedStudent('Opponent');
-        });
+        newSocket.onerror = (error) => {
+            console.error('WebSocket error:', error);
+        };
     };
 
     return (

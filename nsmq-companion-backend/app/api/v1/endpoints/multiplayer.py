@@ -18,20 +18,20 @@ async def websocket_endpoint(websocket: WebSocket):
 
     # Add the player to the waiting room
     player_uuid = str(uuid.uuid4())
-    async with SessionLocal() as db:
+    with SessionLocal() as db:
         waiting_room_entry = WaitingRoom(
             uuid=player_uuid,
-            student_uuid=websocket.headers.get("player-id")
+            student_uuid="29fc2bed-78da-46c7-9beb-11aaacbfa860"
         )
         db.add(waiting_room_entry)
-        await db.commit()
+        db.commit()
 
     try:
         # Monitor the waiting room and match players
         while True:
             # Check if there are two available players in the waiting room
-            async with SessionLocal() as db:
-                players = await db.execute(select(WaitingRoom).filter_by(connected=True, matched=False))
+            with SessionLocal() as db:
+                players = db.execute(select(WaitingRoom).filter_by(connected=True, matched=False))
                 players = players.scalars().all()
                 if len(players) >= 2:
                     # Match the two players and create a new game session
@@ -47,7 +47,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         player2_uuid=player2.student_uuid
                     )
                     db.add(game_session)
-                    await db.commit()
+                    db.commit()
 
                     # Notify the clients that the game session has started
                     await websocket.send_json({
@@ -60,7 +60,7 @@ async def websocket_endpoint(websocket: WebSocket):
 
     except WebSocketDisconnect:
         # Remove the player from the waiting room
-        async with SessionLocal() as db:
+        with SessionLocal() as db:
             waiting_room_entry = await db.get(WaitingRoom, player_uuid)
             if waiting_room_entry:
                 db.delete(waiting_room_entry)
