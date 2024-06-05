@@ -133,16 +133,17 @@ async def websocket_endpoint(websocket: WebSocket):
                     player2.opponent_uuid = player1.student_uuid
                     game_session = QuizSession(
                         uuid=str(uuid.uuid4()),
-                        player1_uuid=player1.student_uuid,
-                        player2_uuid=player2.student_uuid
+                        player1_uuid=str(player1.student_uuid),
+                        player2_uuid=str(player2.student_uuid)
                     )
                     db.add(game_session)
                     db.commit()
                     await websocket.send_json({
                         "event": "start_game",
-                        "game_session_uuid": game_session.uuid
+                        "game_session_uuid": str(game_session.uuid)  
+
                     })
-                    
+
                 data = await websocket.receive_json()
                 if data.get("action") == "disconnect_quiz":
                     student = db.query(Student).filter(Student.uuid == player_uuid).first()
@@ -161,14 +162,13 @@ async def websocket_endpoint(websocket: WebSocket):
                     # Notify the clients that the game session has started
                
                            
-
                 # Close the WebSocket connection
                 await websocket.close()
                 break
 
         
             # Wait for the next WebSocket message
-            await websocket.receive_text()
+        await websocket.receive_text()
 
     except WebSocketDisconnect:
         # Remove the player from the waiting room
