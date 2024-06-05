@@ -5,7 +5,7 @@ import { useAuth } from "@/app/context/AuthContext";
 
 export default function MultiplayerPage() {
     const [socket, setSocket] = useState<WebSocket | null>(null);
-    const [waitingRoomStatus, setWaitingRoomStatus] = useState<'idle' | 'searching' | 'paired'>('idle');
+    const [waitingRoomStatus, setWaitingRoomStatus] = useState('idle');
     const [pairedStudent, setPairedStudent] = useState<string | null>(null);
     const { Data } = useAuth()
 
@@ -14,7 +14,6 @@ export default function MultiplayerPage() {
         setSocket(newSocket);
 
         newSocket.onopen = () => {
-            newSocket.send("Hello, WebSocket Server!");
             console.log('Connected to WebSocket server');
             setWaitingRoomStatus('searching');
             newSocket.send(JSON.stringify({ action: 'join_waiting_room', playerId: Data?.data?.uuid }));
@@ -31,6 +30,7 @@ export default function MultiplayerPage() {
 
         newSocket.onclose = () => {
             console.log('Disconnected from WebSocket server');
+            setWaitingRoomStatus("Disconnected from waiting room")
         };
 
         newSocket.onerror = (error) => {
@@ -38,19 +38,33 @@ export default function MultiplayerPage() {
         };
     };
 
+    const disconnectFromQuiz = () => {
+        if (socket) {
+            socket.send(JSON.stringify({ action: 'disconnect_quiz' }));
+            socket.close();
+            setSocket(null);
+            setWaitingRoomStatus('idle');
+            setPairedStudent(null);
+        }
+    };
+
+
     return (
         <div className="flex h-screen">
             <Sidebar />
             <div className="bg-bgMain sm:ml-[256px] w-full">
                 <p className="mt-[100px]">Compete against friends in fast paced quizzes</p>
                 <div>
-                    {waitingRoomStatus === 'idle' && (
-                        <button onClick={joinWaitingRoom}>Join Waiting Room</button>
-                    )}
+                    <button onClick={joinWaitingRoom}>Join Waiting Room</button>
+                    {/* {waitingRoomStatus === 'idle' && (
+                    )} */}
                     {waitingRoomStatus === 'searching' && <p>Searching for an opponent...</p>}
                     {waitingRoomStatus === 'paired' && (
-                        <p>You have been paired with {pairedStudent}</p>
+                        <>
+                            <p>You have been paired with {pairedStudent}</p>
+                        </>
                     )}
+                    <button onClick={disconnectFromQuiz}>Disconnect</button>
                 </div>
             </div>
         </div>
