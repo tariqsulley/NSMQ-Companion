@@ -1,95 +1,3 @@
-# from fastapi import APIRouter, WebSocket, WebSocketDisconnect
-# from app.models.student import WaitingRoom
-# from app.models.quiz_session import QuizSession
-# from app.database.core import SessionLocal
-# from sqlalchemy import select
-# from sqlalchemy.orm import Session
-# import uuid
-
-# router = APIRouter(
-#     prefix="/multiplayer",
-#     tags=["multiplayer"],
-# )
-
-# # WebSocket connection for real-time communication
-# @router.websocket("/ws")
-# async def websocket_endpoint(websocket: WebSocket):
-#     await websocket.accept()
-#     message = await websocket.receive_json()
-#     player_uuid = message.get("playerId")
-#     # Add the player to the waiting room
-#     _uuid = str(uuid.uuid4())
-#     with SessionLocal() as db:
-#         waiting_room_entry = WaitingRoom(
-#             uuid=_uuid,
-#             student_uuid=player_uuid
-#         )
-#         db.add(waiting_room_entry)
-#         db.commit()
-
-#     try:
-#         while True:
-#             data = await websocket.receive_json()
-#             if data.get("action") == "disconnect_quiz":
-#                 # Remove the player from the quiz session
-#                 with SessionLocal() as db:
-#                     quiz_session = db.query(QuizSession).filter(
-#                         (QuizSession.player1_uuid == player_uuid) |
-#                         (QuizSession.player2_uuid == player_uuid)
-#                     ).first()
-#                     if quiz_session:
-#                         db.delete(quiz_session)
-#                         db.commit()
-#                         await websocket.send_json({"event": "quiz_disconnected"})
-
-#                 # Remove the player from the waiting room
-#                 with SessionLocal() as db:
-#                     waiting_room_entry = await db.get(WaitingRoom, _uuid)
-#                     if waiting_room_entry:
-#                         db.delete(waiting_room_entry)
-#                         db.commit()
-
-#                 # Close the WebSocket connection
-#                 await websocket.close()
-#                 break
-
-#             # Check if there are two available players in the waiting room
-#             with SessionLocal() as db:
-#                 players = db.execute(select(WaitingRoom).filter_by(connected=True, matched=False))
-#                 players = players.scalars().all()
-#                 if len(players) >= 2:
-#                     # Match the two players and create a new game session
-#                     player1 = players[0]
-#                     player2 = players[1]
-#                     player1.matched = True
-#                     player2.matched = True
-#                     player1.opponent_uuid = player2.uuid
-#                     player2.opponent_uuid = player1.uuid
-#                     game_session = QuizSession(
-#                         uuid=str(uuid.uuid4()),
-#                         player1_uuid=player1.student_uuid,
-#                         player2_uuid=player2.student_uuid
-#                     )
-#                     db.add(game_session)
-#                     db.commit()
-
-#                     # Notify the clients that the game session has started
-#                     await websocket.send_json({
-#                         "event": "start_game",
-#                         "game_session_uuid": game_session.uuid
-#                     })
-
-#             # Wait for the next WebSocket message
-#             await websocket.receive_text()
-
-#     except WebSocketDisconnect:
-#         # Remove the player from the waiting room
-#         with SessionLocal() as db:
-#             waiting_room_entry = await db.get(WaitingRoom, player_uuid)
-#             if waiting_room_entry:
-#                 db.delete(waiting_room_entry)
-#                 await db.commit()
-
 from fastapi import APIRouter, WebSocket, WebSocketDisconnect
 from app.models.student import WaitingRoomData, Student
 from app.models.quiz_session import QuizSession
@@ -101,6 +9,9 @@ router = APIRouter(
     prefix="/multiplayer",
     tags=["multiplayer"],
 )
+
+# Store WebSocket connections mapped to player UUIDs
+player_connections = {}
 
 # WebSocket connection for real-time communication
 @router.websocket("/ws")
@@ -115,7 +26,12 @@ async def websocket_endpoint(websocket: WebSocket):
         if student:
             waiting_room_data = WaitingRoomData(student_uuid=player_uuid)
             student.waiting_room_data.append(waiting_room_data)
+            # Store the WebSocket connection for this player
+            print("uuid:",player_uuid)
+            player_connections[player_uuid] = websocket
+            print("data:",player_connections)
             db.commit()
+
 
     try:
         while True:
@@ -131,6 +47,14 @@ async def websocket_endpoint(websocket: WebSocket):
                     player2.matched = True
                     player1.opponent_uuid = player2.student_uuid
                     player2.opponent_uuid = player1.student_uuid
+                    # Get the names of the paired students
+                    student1 = db.query(Student).filter(Student.uuid == player1.student_uuid).first()
+                    student2 = db.query(Student).filter(Student.uuid == player2.student_uuid).first()
+
+                    # Concatenate first name and last name
+                    student1_name = f"{student1.first_name} {student1.last_name}"
+                    student2_name = f"{student2.first_name} {student2.last_name}"
+
                     game_session = QuizSession(
                         uuid=str(uuid.uuid4()),
                         player1_uuid=str(player1.student_uuid),
@@ -138,10 +62,22 @@ async def websocket_endpoint(websocket: WebSocket):
                     )
                     db.add(game_session)
                     db.commit()
-                    await websocket.send_json({
-                        "event": "start_game",
-                        "game_session_uuid": str(game_session.uuid)  
+                    # Retrieve the WebSocket connections for the matched players
+                    websocket1 = player_connections[str(player1.student_uuid)]
+                    websocket2 = player_connections[str(player2.student_uuid)]
 
+                    # Send start_game event to player 1
+                    await websocket1.send_json({
+                        "event": "start_game",
+                        "game_session_uuid": str(game_session.uuid),
+                        "opponent_name": student2_name
+                    })
+
+                    # Send start_game event to player 2
+                    await websocket2.send_json({
+                        "event": "start_game",
+                        "game_session_uuid": str(game_session.uuid),
+                        "opponent_name": student1_name
                     })
 
                 data = await websocket.receive_json()
@@ -150,7 +86,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     if student and student.waiting_room_data:
                         db.delete(student.waiting_room_data[0])
                         db.commit()
-                # Remove the player from the quiz session
+                    # Remove the player from the quiz session
                     quiz_session = db.query(QuizSession).filter(
                         (QuizSession.player1_uuid == player_uuid) |
                         (QuizSession.player2_uuid == player_uuid)
@@ -159,15 +95,15 @@ async def websocket_endpoint(websocket: WebSocket):
                         db.delete(quiz_session)
                         db.commit()
                         await websocket.send_json({"event": "quiz_disconnected"})
-                    # Notify the clients that the game session has started
-               
-                           
-                # Close the WebSocket connection
-                await websocket.close()
-                break
 
-        
-            # Wait for the next WebSocket message
+                        # Remove the player's WebSocket connection
+                        del player_connections[player_uuid]
+
+                    # Close the WebSocket connection
+                    await websocket.close()
+                    break
+
+        # Wait for the next WebSocket message
         await websocket.receive_text()
 
     except WebSocketDisconnect:
@@ -177,3 +113,6 @@ async def websocket_endpoint(websocket: WebSocket):
             if student and student.waiting_room_data:
                 db.delete(student.waiting_room_data[0])
                 db.commit()
+
+                # Remove the player's WebSocket connection
+                del player_connections[player_uuid]

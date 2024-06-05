@@ -20,31 +20,7 @@ class Student(BaseModel):
     # waiting_room_entry = relationship("WaitingRoom", back_populates="student", uselist=False, cascade="all, delete-orphan")
     waiting_room_data = relationship("WaitingRoomData", back_populates="student", cascade="all, delete-orphan")
 
-# class WaitingRoom(BaseModel):
-#     __tablename__ = "waiting_room"
 
-#     uuid = Column(
-#         UUID(as_uuid=True),
-#         primary_key=True,
-#         unique=True,
-#         nullable=False
-#     )
-#     student_uuid = Column(
-#         UUID(as_uuid=True),
-#         ForeignKey("students.uuid"),
-#         nullable=False
-#     )
-#     student = relationship("Student", back_populates="waiting_room_entry")
-#     joined_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now())
-#     connected = Column(Boolean, nullable=False, default=True)
-#     matched = Column(Boolean, nullable=False, default=False)
-#     opponent_uuid = Column(
-#         UUID(as_uuid=True),
-#         ForeignKey("waiting_room.uuid"),
-#         nullable=True
-#     )
-#     opponent = relationship("WaitingRoom", foreign_keys=[opponent_uuid], remote_side=[uuid])
-    
 class WaitingRoomData(BaseModel):
     __tablename__ = "waiting_room_data"
 

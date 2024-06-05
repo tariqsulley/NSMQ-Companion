@@ -7,6 +7,7 @@ export default function MultiplayerPage() {
     const [socket, setSocket] = useState<WebSocket | null>(null);
     const [waitingRoomStatus, setWaitingRoomStatus] = useState('idle');
     const [pairedStudent, setPairedStudent] = useState<string | null>(null);
+    const [connecting, setConnecting] = useState("")
     const { Data } = useAuth()
 
     const joinWaitingRoom = () => {
@@ -15,16 +16,16 @@ export default function MultiplayerPage() {
 
         newSocket.onopen = () => {
             console.log('Connected to WebSocket server');
-            setWaitingRoomStatus('searching');
+            setConnecting("searching")
             newSocket.send(JSON.stringify({ action: 'join_waiting_room', playerId: Data?.data?.uuid }));
         };
 
         newSocket.onmessage = (event) => {
             console.log("Server says: " + event.data);
             const data = JSON.parse(event.data);
-            if (data.action === 'start_game') {
+            if (data.event === 'start_game') {
                 setWaitingRoomStatus('paired');
-                setPairedStudent('Opponent');
+                setPairedStudent(data.opponent_name);
             }
         };
 
@@ -56,6 +57,7 @@ export default function MultiplayerPage() {
                 <p className="mt-[100px]">Compete against friends in fast paced quizzes</p>
                 <div>
                     <button onClick={joinWaitingRoom}>Join Waiting Room</button>
+                    {connecting && (<div>{connecting}</div>)}
                     {/* {waitingRoomStatus === 'idle' && (
                     )} */}
                     {waitingRoomStatus === 'searching' && <p>Searching for an opponent...</p>}
