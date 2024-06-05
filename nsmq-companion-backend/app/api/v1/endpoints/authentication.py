@@ -18,6 +18,7 @@ from sqlalchemy.orm import Session
 from app.routers.shared import get_db
 from app.core.security import extract_user_data
 from app.schemas.token import VerifyToken
+
 router = APIRouter(
     prefix="",
     tags=["authentication"],

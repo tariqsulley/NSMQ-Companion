@@ -11,6 +11,7 @@ from app.core.security import extract_user_data
 from app.core.settings import settings
 from app.models.facilitator import Facilitator
 from app.models.student import Student
+from app.core.dependencies import get_current_user
 
 from app.schemas.student import (
    StudentCreate,
@@ -41,6 +42,7 @@ msg_prefix = "user"
 async def create_facilitator_handler(
     payload: Facilitator,
     service: UserService = Depends(Provide[Container.user_service]),
+    current_user: Student = Depends(get_current_user),
 ):
     try:
         found_user = service.get_user_by_email_address(payload.email_address)
