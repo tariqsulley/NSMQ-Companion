@@ -4,6 +4,51 @@ import EmptyDashboardCard from "@/app/components/Cards/EmptyCard/Dashboard"
 import { AreaChart } from '@tremor/react';
 import { BarChart } from '@tremor/react';
 import { SearchSelect, SearchSelectItem } from '@tremor/react';
+import {
+    Chart as ChartJS,
+    RadialLinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    Tooltip,
+    Legend,
+} from 'chart.js';
+import { Radar } from 'react-chartjs-2';
+
+ChartJS.register(
+    RadialLinearScale,
+    PointElement,
+    LineElement,
+    Filler,
+    Tooltip,
+    Legend
+);
+
+export const data = {
+    labels: ['Maths', 'Biology', 'Physics', 'Chemistry'],
+    datasets: [
+        {
+            label: 'Strength Graph',
+            data: [84, 72, 65, 78],
+            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 3,
+        },
+    ],
+};
+
+
+const options = {
+    scales: {
+        r: {
+            angleLines: {
+                display: true
+            },
+            suggestedMin: 0,
+            suggestedMax: 100
+        }
+    }
+};
 
 const bar_data = [
     {
@@ -141,6 +186,9 @@ export default function DashboardView() {
                     yAxisWidth={48}
                     showAnimation={true}
                 />
+            </div>
+            <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
+                <Radar data={data} options={options} />
             </div>
         </div>
     )
