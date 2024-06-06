@@ -3,6 +3,7 @@ import { useAuth } from "@/app/context/AuthContext"
 import EmptyDashboardCard from "@/app/components/Cards/EmptyCard/Dashboard"
 import { AreaChart } from '@tremor/react';
 import { BarChart } from '@tremor/react';
+import { SearchSelect, SearchSelectItem } from '@tremor/react';
 
 const bar_data = [
     {
@@ -77,6 +78,14 @@ export default function DashboardView() {
     return (
         <div className="flex flex-col gap-2">
             <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
+            <div>
+                <SearchSelect>
+                    <SearchSelectItem value="1">Option 1</SearchSelectItem>
+                    <SearchSelectItem value="2">Option 2</SearchSelectItem>
+                    <SearchSelectItem value="3">Option 3</SearchSelectItem>
+                </SearchSelect>
+
+            </div>
             {/* <EmptyDashboardCard /> */}
             <div className="bg-white p-2 dark:bg-darkBgDeep rounded-lg shadow">
                 <p className="mx-10 text-xl font-semibold">2021</p>
