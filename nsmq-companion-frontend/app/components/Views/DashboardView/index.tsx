@@ -187,7 +187,7 @@ export default function DashboardView() {
                     showAnimation={true}
                 />
             </div>
-            <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
+            <div className="bg-white dark:bg-darkBgDeep rounded-xl shadow flex items-center justify-center" style={{ height: '400px' }}>
                 <Radar data={data} options={options} />
             </div>
         </div>
