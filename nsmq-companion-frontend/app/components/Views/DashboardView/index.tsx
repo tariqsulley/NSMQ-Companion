@@ -2,6 +2,41 @@
 import { useAuth } from "@/app/context/AuthContext"
 import EmptyDashboardCard from "@/app/components/Cards/EmptyCard/Dashboard"
 import { AreaChart } from '@tremor/react';
+import { BarChart } from '@tremor/react';
+
+const bar_data = [
+    {
+        name: 'Round 1',
+        'Maths': 890,
+        'Biology': 338,
+        'Chemistry': 538,
+        'Physics': 396,
+
+    },
+    {
+        name: 'Round 2',
+        'Maths': 289,
+        'Biology': 233,
+        'Chemistry': 253,
+        'Physics': 333,
+    },
+    {
+        name: 'Round 3',
+        'Maths': 380,
+        'Biology': 535,
+        'Chemistry': 352,
+        'Physics': 718,
+    },
+    {
+        name: 'Round 4',
+        'Maths': 90,
+        'Biology': 98,
+        'Chemistry': 28,
+        'Physics': 33,
+    },
+];
+
+
 const chartdata = [
     {
         date: 'Contest 1',
@@ -74,7 +109,23 @@ export default function DashboardView() {
                     showAnimation={true}
                 />
             </div>
-
+            <div className="bg-white p-2 dark:bg-darkBgDeep rounded-lg shadow">
+                <p className="mx-10 text-xl font-semibold">Contest 1</p>
+                <BarChart
+                    className="mt-6"
+                    data={bar_data}
+                    index="name"
+                    categories={[
+                        'Maths',
+                        'Biology',
+                        'Chemistry',
+                        'Physics',
+                    ]}
+                    colors={['blue', 'teal', 'amber', 'rose', 'indigo', 'emerald']}
+                    yAxisWidth={48}
+                    showAnimation={true}
+                />
+            </div>
         </div>
     )
 }

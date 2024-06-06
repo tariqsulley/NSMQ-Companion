@@ -113,7 +113,7 @@ export default function Sidebar() {
                                     </div>
                                 </Link>
                             </li>}
-                        {Data?.data?.ccount_type == "student" ?
+                        {Data?.data?.account_type == "student" ?
                             <li>
                                 <Link href="/dashboard/champion-challenge">
                                     <div className={`flex items-center p-2 rounded-lg group ${isActive("/dashboard/champion-challenge")}`}>
@@ -155,4 +155,3 @@ export default function Sidebar() {
         </div>
     )
 }
-
