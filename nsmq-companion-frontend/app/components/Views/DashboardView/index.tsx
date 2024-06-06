@@ -76,18 +76,25 @@ export default function DashboardView() {
 
     const { Data } = useAuth()
     return (
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-4">
             <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
-            <div>
+            <div className="flex items-center gap-3">
+                <div>
+                    <SearchSelect>
+                        <SearchSelectItem value="1">2021</SearchSelectItem>
+                        <SearchSelectItem value="2">2020</SearchSelectItem>
+                        <SearchSelectItem value="3">2019</SearchSelectItem>
+                    </SearchSelect>
+                </div>
+                <div></div>
                 <SearchSelect>
-                    <SearchSelectItem value="1">Option 1</SearchSelectItem>
-                    <SearchSelectItem value="2">Option 2</SearchSelectItem>
-                    <SearchSelectItem value="3">Option 3</SearchSelectItem>
+                    <SearchSelectItem value="1">Contest 1</SearchSelectItem>
+                    <SearchSelectItem value="2">Contest 2</SearchSelectItem>
+                    <SearchSelectItem value="3">Contest 3</SearchSelectItem>
                 </SearchSelect>
-
             </div>
             {/* <EmptyDashboardCard /> */}
-            <div className="bg-white p-2 dark:bg-darkBgDeep rounded-lg shadow">
+            <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
                 <p className="mx-10 text-xl font-semibold">2021</p>
                 <div className="flex flex-col sm:flex-row items-center gap-10 mx-10 mt-2">
                     <div className="flex flex-col gap-2">
@@ -118,7 +125,7 @@ export default function DashboardView() {
                     showAnimation={true}
                 />
             </div>
-            <div className="bg-white p-2 dark:bg-darkBgDeep rounded-lg shadow">
+            <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
                 <p className="mx-10 text-xl font-semibold">Contest 1</p>
                 <BarChart
                     className="mt-6"
