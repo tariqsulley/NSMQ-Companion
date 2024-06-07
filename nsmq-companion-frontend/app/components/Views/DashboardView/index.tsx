@@ -163,11 +163,13 @@ export default function DashboardView() {
                     className="h-80"
                     data={chartdata}
                     index="date"
+                    curveType="monotone"
+                    yAxisWidth={30}
                     categories={['Round 1', 'Round 2', 'Round 3', 'Round 4']}
                     colors={['indigo', 'rose', 'green', 'orange']}
-                    yAxisWidth={60}
                     onValueChange={(v) => console.log(v)}
                     showAnimation={true}
+
                 />
             </div>
             <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
