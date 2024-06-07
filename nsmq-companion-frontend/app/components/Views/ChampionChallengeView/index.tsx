@@ -7,6 +7,29 @@ import winner_2017 from "../../../../public/images/2017-winner.png"
 import winner_2016 from "../../../../public/images/2016-winner.png"
 import { FaStar } from "react-icons/fa6";
 
+interface StarRatingProps {
+    rating: number;
+}
+
+const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
+    const totalStars = 2;
+
+    // Create an array of stars with correct mapping function syntax
+    const stars = Array.from({ length: totalStars }, (_, i) => {
+        return i < Math.floor(rating) ? 'full' : i === Math.floor(rating) && rating % 1 !== 0 ? 'half' : 'empty';
+    });
+
+    return (
+        <div className="flex">
+            {stars.map((star, index) => (
+                <span key={index} className={`text-yellow-400 text-5xl ${star === 'full' ? 'text-yellow-400' : star === 'half' ? 'text-yellow-400' : 'text-gray-300'}`}>
+                    {star === 'full' ? '★' : star === 'half' ? '★' : '☆'}
+                </span>
+            ))}
+        </div>
+    );
+};
+
 import Image from "next/image"
 export default function ChampionChallengeView() {
     return (
@@ -23,26 +46,32 @@ export default function ChampionChallengeView() {
                         <p className="font-semibold">Prempeh College</p>
                     </div>
                 </div>
-                <div className="flex flex-col items-center justify-center mt-10 gap-2">
-                    <div>
-                        <button className="bg-green-500 p-6 sm:p-10 ml-[0px] border-b-4 border-green-800 rounded-full">
-                            <FaStar size={25} className="text-white font-semibold" />
-                        </button>
+                <div className="relative">
+                    <div className="absolute top-[200px] md:mx-20">
+                        <StarRating rating={2} />
                     </div>
-                    <div>
-                        <button className="bg-green-500 p-6 sm:p-10 mr-[70px] border-b-4 border-green-800 rounded-full">
-                            <FaStar size={25} className="text-white font-semibold" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className="bg-green-500 mr-[10px] p-6 sm:p-10 border-b-4 border-green-800 rounded-full">
-                            <FaStar size={25} className="text-white font-semibold" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className="bg-green-500 ml-[50px] p-6 sm:p-10 border-b-4 border-green-800 rounded-full">
-                            <FaStar size={25} className="text-white font-semibold" />
-                        </button>
+
+                    <div className="flex flex-col items-center justify-center mt-10 gap-2">
+                        <div>
+                            <button className="bg-green-500 p-6 sm:p-10 ml-[0px] border-b-4 border-green-800 rounded-full">
+                                <FaStar size={25} className="text-white font-semibold" />
+                            </button>
+                        </div>
+                        <div>
+                            <button className="bg-green-500 p-6 sm:p-10 mr-[70px] border-b-4 border-green-800 rounded-full">
+                                <FaStar size={25} className="text-white font-semibold" />
+                            </button>
+                        </div>
+                        <div>
+                            <button className="bg-green-500 mr-[10px] p-6 sm:p-10 border-b-4 border-green-800 rounded-full">
+                                <FaStar size={25} className="text-white font-semibold" />
+                            </button>
+                        </div>
+                        <div>
+                            <button className="bg-green-500 ml-[50px] p-6 sm:p-10 border-b-4 border-green-800 rounded-full">
+                                <FaStar size={25} className="text-white font-semibold" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,30 +85,35 @@ export default function ChampionChallengeView() {
                         <p className="font-semibold">Presec Legon</p>
                     </div>
                 </div>
-                <div className="flex flex-col items-center justify-center mt-10 gap-2">
-                    <div>
-                        <button className="bg-blue-500 p-6 sm:p-10 ml-[0px] border-b-4 border-blue-800 rounded-full">
-                            <FaStar size={25} className="text-white font-semibold" />
-                        </button>
+                <div className="relative">
+                    <div className="absolute top-[200px] md:mx-20">
+                        <StarRating rating={0} />
                     </div>
-                    <div>
-                        <button className="bg-blue-500 p-6 sm:p-10 mr-[-70px] border-b-4 border-blue-800 rounded-full">
-                            <FaStar size={25} className="text-white font-semibold" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className="bg-blue-500 mr-[-10px] p-6 sm:p-10 border-b-4 border-blue-800 rounded-full">
-                            <FaStar size={25} className="text-white font-semibold" />
-                        </button>
-                    </div>
-                    <div>
-                        <button className="bg-blue-500 ml-[-50px] p-6 sm:p-10 border-b-4 border-blue-800 rounded-full">
-                            <FaStar size={25} className="text-white font-semibold" />
-                        </button>
+
+                    <div className="flex flex-col items-center justify-center mt-10 gap-2">
+                        <div>
+                            <button className="bg-blue-500 p-6 sm:p-10 ml-[0px] border-b-4 border-blue-800 rounded-full">
+                                <FaStar size={25} className="text-white font-semibold" />
+                            </button>
+                        </div>
+                        <div>
+                            <button className="bg-blue-500 p-6 sm:p-10 mr-[-70px] border-b-4 border-blue-800 rounded-full">
+                                <FaStar size={25} className="text-white font-semibold" />
+                            </button>
+                        </div>
+                        <div>
+                            <button className="bg-blue-500 mr-[-10px] p-6 sm:p-10 border-b-4 border-blue-800 rounded-full">
+                                <FaStar size={25} className="text-white font-semibold" />
+                            </button>
+                        </div>
+                        <div>
+                            <button className="bg-blue-500 ml-[-50px] p-6 sm:p-10 border-b-4 border-blue-800 rounded-full">
+                                <FaStar size={25} className="text-white font-semibold" />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
