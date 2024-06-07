@@ -86,7 +86,7 @@ export default function ChampionChallengeView() {
                     </div>
                 </div>
                 <div className="relative">
-                    <div className="absolute top-[200px] md:mx-20">
+                    <div className="absolute top-[200px] right-0 md:right-[100px] ">
                         <StarRating rating={0} />
                     </div>
 
