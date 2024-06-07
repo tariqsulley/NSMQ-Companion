@@ -48,7 +48,7 @@ export default function ChampionChallengeView() {
                 </div>
                 <div className="relative">
                     <div className="absolute top-[200px] md:mx-20">
-                        <StarRating rating={2} />
+                        <StarRating rating={0} />
                     </div>
 
                     <div className="flex flex-col items-center justify-center mt-10 gap-2">
@@ -58,17 +58,17 @@ export default function ChampionChallengeView() {
                             </button>
                         </div>
                         <div>
-                            <button className="bg-green-500 p-6 sm:p-10 mr-[70px] border-b-4 border-green-800 rounded-full">
+                            <button className="bg-green-500 bg-opacity-50 border-opacity-50  p-6 sm:p-10 mr-[70px] border-b-4 border-green-800 rounded-full">
                                 <FaStar size={25} className="text-white font-semibold" />
                             </button>
                         </div>
                         <div>
-                            <button className="bg-green-500 mr-[10px] p-6 sm:p-10 border-b-4 border-green-800 rounded-full">
+                            <button className="bg-green-500 bg-opacity-50 border-opacity-50  mr-[10px] p-6 sm:p-10 border-b-4 border-green-800 rounded-full">
                                 <FaStar size={25} className="text-white font-semibold" />
                             </button>
                         </div>
                         <div>
-                            <button className="bg-green-500 ml-[50px] p-6 sm:p-10 border-b-4 border-green-800 rounded-full">
+                            <button className="bg-green-500 bg-opacity-50 border-opacity-50  ml-[50px] p-6 sm:p-10 border-b-4 border-green-800 rounded-full">
                                 <FaStar size={25} className="text-white font-semibold" />
                             </button>
                         </div>
@@ -92,22 +92,22 @@ export default function ChampionChallengeView() {
 
                     <div className="flex flex-col items-center justify-center mt-10 gap-2">
                         <div>
-                            <button className="bg-blue-500 p-6 sm:p-10 ml-[0px] border-b-4 border-blue-800 rounded-full">
+                            <button className="bg-blue-500 bg-opacity-50 border-opacity-50 p-6 sm:p-10 ml-[0px] border-b-4 border-blue-800 rounded-full">
                                 <FaStar size={25} className="text-white font-semibold" />
                             </button>
                         </div>
                         <div>
-                            <button className="bg-blue-500 p-6 sm:p-10 mr-[-70px] border-b-4 border-blue-800 rounded-full">
+                            <button className="bg-blue-500 bg-opacity-50 border-opacity-50  p-6 sm:p-10 mr-[-70px] border-b-4 border-blue-800 rounded-full">
                                 <FaStar size={25} className="text-white font-semibold" />
                             </button>
                         </div>
                         <div>
-                            <button className="bg-blue-500 mr-[-10px] p-6 sm:p-10 border-b-4 border-blue-800 rounded-full">
+                            <button className="bg-blue-500 bg-opacity-50 border-opacity-50  mr-[-10px] p-6 sm:p-10 border-b-4 border-blue-800 rounded-full">
                                 <FaStar size={25} className="text-white font-semibold" />
                             </button>
                         </div>
                         <div>
-                            <button className="bg-blue-500 ml-[-50px] p-6 sm:p-10 border-b-4 border-blue-800 rounded-full">
+                            <button className="bg-blue-500 bg-opacity-50 border-opacity-50  ml-[-50px] p-6 sm:p-10 border-b-4 border-blue-800 rounded-full">
                                 <FaStar size={25} className="text-white font-semibold" />
                             </button>
                         </div>
