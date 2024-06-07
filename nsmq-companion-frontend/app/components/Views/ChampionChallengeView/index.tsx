@@ -1,6 +1,6 @@
 "use client"
-import winner_2021 from "../../../../public/images/2021-winner.jpg"
-import winner_2020 from "../../../../public/images/2020-winner.png"
+import winner_2021 from "../../../../public/images/prempeh.jpg"
+import winner_2020 from "../../../../public/images/presec.jpg"
 import winner_2019 from "../../../../public/images/2019-winner.jpg"
 import winner_2018 from "../../../../public/images/2018-winner.png"
 import winner_2017 from "../../../../public/images/2017-winner.png"
@@ -10,12 +10,13 @@ import { FaStar } from "react-icons/fa6";
 import Image from "next/image"
 export default function ChampionChallengeView() {
     return (
-        <div className="flex flex-col w-full  ">
+        <div className="flex flex-col w-full bg-gray-200 dark:bg-gray-700 ">
 
             <div>
-                <div className="bg-white shadow">
+                <div className="bg-white dark:bg-darkBgDeep shadow">
                     <div className="bg p-2 shadow  relative overflow-hidden group">
-                        <Image src={winner_2021} alt="image" className="h-[120px]  rounded-t-xl transition-transform duration-300 transform group-hover:scale-110 " />
+                        <Image src={winner_2021} alt="image" className=" w-[20%] rounded-t-xl
+                         transition-transform duration-300 transform group-hover:scale-110 " />
                     </div>
                     <div className="mx-2">
                         <p className="font-bold text-xl">2021</p>
@@ -46,9 +47,9 @@ export default function ChampionChallengeView() {
                 </div>
             </div>
             <div>
-                <div className="bg-white shadow">
+                <div className="bg-white dark:bg-darkBgDeep shadow">
                     <div className="bg p-2 shadow  relative overflow-hidden group">
-                        <Image src={winner_2020} alt="image" className="h-[120px]  rounded-t-xl transition-transform duration-300 transform group-hover:scale-110 " />
+                        <Image src={winner_2020} alt="image" className="w-[15%] rounded-t-xl transition-transform duration-300 transform group-hover:scale-110 " />
                     </div>
                     <div className="mx-2">
                         <p className="font-bold text-xl">2020</p>
