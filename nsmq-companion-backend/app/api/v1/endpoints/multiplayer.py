@@ -4,7 +4,8 @@ from app.models.quiz_session import QuizSession
 from app.database.core import SessionLocal
 from sqlalchemy import select
 import uuid
-
+from sqlalchemy import select, func
+import random
 router = APIRouter(
     prefix="/multiplayer",
     tags=["multiplayer"],
@@ -54,30 +55,34 @@ async def websocket_endpoint(websocket: WebSocket):
                     # Concatenate first name and last name
                     student1_name = f"{student1.first_name} {student1.last_name}"
                     student2_name = f"{student2.first_name} {student2.last_name}"
+                  
 
                     game_session = QuizSession(
                         uuid=str(uuid.uuid4()),
                         player1_uuid=str(player1.student_uuid),
-                        player2_uuid=str(player2.student_uuid)
+                        player2_uuid=str(player2.student_uuid),
                     )
                     db.add(game_session)
                     db.commit()
                     # Retrieve the WebSocket connections for the matched players
                     websocket1 = player_connections[str(player1.student_uuid)]
                     websocket2 = player_connections[str(player2.student_uuid)]
+                    random_num = random.randrange(0,10)
 
                     # Send start_game event to player 1
                     await websocket1.send_json({
                         "event": "start_game",
                         "game_session_uuid": str(game_session.uuid),
-                        "opponent_name": student2_name
+                        "opponent_name": student2_name,
+                        'random_number': 1
                     })
 
                     # Send start_game event to player 2
                     await websocket2.send_json({
                         "event": "start_game",
                         "game_session_uuid": str(game_session.uuid),
-                        "opponent_name": student1_name
+                        "opponent_name": student1_name,
+                        'random_number': 1
                     })
 
                 data = await websocket.receive_json()
@@ -102,6 +107,29 @@ async def websocket_endpoint(websocket: WebSocket):
                     # Close the WebSocket connection
                     await websocket.close()
                     break
+                elif data.get("action") == "pause_audio":
+                # Get the opponent's WebSocket connection
+                    opponent_uuid = None
+                    with SessionLocal() as db:
+                        waiting_room_data = db.query(WaitingRoomData).filter_by(student_uuid=player_uuid).first()
+                        if waiting_room_data:
+                            opponent_uuid = waiting_room_data.opponent_uuid
+
+                    if opponent_uuid and opponent_uuid in player_connections:
+                        opponent_websocket = player_connections[str(opponent_uuid)]
+                        await opponent_websocket.send_json({"action": "pause_audio"})
+                        
+                elif data.get("action") == "resume_audio":
+                # Get the opponent's WebSocket connection
+                    opponent_uuid = None
+                    with SessionLocal() as db:
+                        waiting_room_data = db.query(WaitingRoomData).filter_by(student_uuid=player_uuid).first()
+                        if waiting_room_data:
+                            opponent_uuid = waiting_room_data.opponent_uuid
+
+                    if opponent_uuid and opponent_uuid in player_connections:
+                        opponent_websocket = player_connections[opponent_uuid]
+                        await opponent_websocket.send_json({"action": "resume_audio"})
 
         # Wait for the next WebSocket message
         await websocket.receive_text()

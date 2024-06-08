@@ -24,6 +24,7 @@ class Facilitator(BaseModel):
     password = Column(String(length=200), nullable=False)
     verifiedAt = Column(String(length=100), nullable=True, default=None, index=True)
     account_type = Column(String(length=50), nullable=True, index=True)
+    avatar_url = Column(String(length=200), nullable=True)
     facilitator_verification = relationship(
         "EmailVerification", uselist=False, back_populates="facilitator"
     )

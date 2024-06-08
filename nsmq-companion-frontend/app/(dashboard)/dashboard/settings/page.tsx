@@ -1,5 +1,5 @@
 import Sidebar from "@/app/components/Sidebar"
-import SettingsView from "@/app/components/Views/SettingsView/index"
+import SettingsView from "@/app/components/Views/SettingsView"
 
 export default function SettingsPage() {
     return (

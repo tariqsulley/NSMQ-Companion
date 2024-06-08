@@ -17,6 +17,9 @@ import ContestData from "@/app/utils/NSMQContests";
 import contest_40_1 from "../../../../utils/Questions/NSMQ_2021/contest40/round1";
 import { CgSpinner } from "react-icons/cg";
 
+// const nums = [2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35, 36]
+
+
 export default function ContestPage({ params }: any) {
 
     const { set } = params;
@@ -82,25 +85,16 @@ export default function ContestPage({ params }: any) {
         setIntroSkipper(true);
     };
 
-    // const handleCircleClick = () => {
-    //     if (!isBellPlaying && browserSupportsSpeechRecognition) {
-    //         setIsBellPlaying(true);
-    //         setIsCircleGreen(true);
-    //         play();
-    //         SpeechRecognition.startListening({ continuous: true });
 
-    //         setTimeout(() => {
-    //             setIsCircleGreen(false);
-    //             setIsBellPlaying(false);
-    //             SpeechRecognition.stopListening();
-    //         }, 10000);
-    //     }
-    // };
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
             setIsCircleGreen(true);
             play();
+            if (audioInstance && audioInstance.currentTime > 0) {
+                audioInstance.pause();
+                audioInstance.currentTime = 0;
+            }
             SpeechRecognition.startListening({ continuous: true });
 
             setTimeRemainingPercentage((prevPercentage) => {
@@ -265,6 +259,7 @@ export default function ContestPage({ params }: any) {
             }
         });
     };
+
     const sendAudioToBackend = async (audioBlob: any) => {
         try {
             setTranscibingAudio(true)
@@ -331,9 +326,16 @@ export default function ContestPage({ params }: any) {
 
             if (similarityScore > 0.6) {
                 synthesizeText("yes you are right");
-                setRoundScore(round_score + 3)
+                handleNextQuestion()
+                setTimeout(() => {
+                    handleNextQuestion();
+                    setRoundScore(round_score + 3);
+                }, 3000);
             } else {
                 synthesizeText("I'm not accepting that")
+                setTimeout(() => {
+                    handleNextQuestion();
+                }, 3000);
                 // synthesizeText("The right answer I was looking for is")
             }
         } catch (error) {

@@ -15,6 +15,7 @@ class Student(BaseModel):
     email_address = Column(String(length=100), unique=True, nullable=False)
     password = Column(String(length=200), nullable=True)
     account_type = Column(String(length=200), nullable=False)
+    avatar_url = Column(String(length=200), nullable=True)
     facilitator_uuid = Column(UUID(as_uuid=True), ForeignKey('Facilitators.uuid'))
     facilitator = relationship("Facilitator", back_populates="students")
     # waiting_room_entry = relationship("WaitingRoom", back_populates="student", uselist=False, cascade="all, delete-orphan")
