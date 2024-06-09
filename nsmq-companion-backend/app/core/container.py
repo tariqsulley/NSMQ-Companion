@@ -23,6 +23,7 @@ class Container(containers.DeclarativeContainer):
     )
 
     db = providers.Singleton(Database, db_url=settings.DATABASE_URI)
+   
 
     user_repository = providers.Factory(
         user_repository.UserRepository, session_factory=db.provided.session

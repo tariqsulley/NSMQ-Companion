@@ -24,9 +24,14 @@ from fastapi.security import (
 from app.core.exceptions import AuthError, NotVerifiedError
 from fastapi import HTTPException, Request, status
 from app.models.facilitator import Facilitator
+from app.models.email_verification import EmailVerification
+from app.schemas.email_verification import EmailVerificationPayload
+from app.utils.email import send_email
+from app.schemas.email_verification import UserEmailVerification
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
+VERIFY_TOKEN_EXPIRE_DAYS = 3
 
 def hash_user_password(password: str) -> str:
     return pwd_context.hash(password)
@@ -122,6 +127,45 @@ def verify_token_frontend(token: str) -> str:
         return "Invalid Token"
 
 
+def create_verification_token(
+    db: Session,
+    user_verify: UserEmailVerification,
+    verification_token: EmailVerificationPayload,
+):
+    try:
+        current_date = datetime.now()
+        # return user_verify
+
+        db_verify = EmailVerification(
+            facilitator_uuid=user_verify.facilitator_uuid,
+            verification_token=verification_token["verification_token"],
+            expiry_date=current_date + timedelta(days=VERIFY_TOKEN_EXPIRE_DAYS),
+        )
+
+        db.add(db_verify)
+        db.commit()
+
+        db_user = (
+            db.query(Facilitator).filter(Facilitator.uuid == user_verify.facilitator_uuid).first()
+        )
+
+        # return result
+        # send email
+        subject = "NSMQ Companion tracking email verification"
+
+        message = "Please use the button link below to verify your account and get started with the NSMQ Companion"
+
+        return send_email(
+            subject=subject,
+            recipient=db_user.first_name,
+            email=db_user.email_address,
+            message=message,
+            token=db_verify.verification_token,
+        )
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"{e}")
+    
+    
 async def get_current_user(
     token: Annotated[str, Depends(oauth2_scheme)]
 ) -> Union[TokenData, HTTPException]:

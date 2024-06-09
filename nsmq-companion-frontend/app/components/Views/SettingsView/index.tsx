@@ -164,14 +164,12 @@ export default function SettingsView() {
                             />
                         )}
                     </div>
-
                     {uploading && (
                         <div className="flex gap-3 items-center">
                             <CgSpinner className="animate-spin text-primaryBlue" />
                             <div className="text-lg font-semibold text-primaryBlue">{`${uploadProgress}%`}</div>
                         </div>
                     )}
-
                     <label htmlFor="imageInput" className="cursor-pointer">
                         <span className="text-center pt-2 text-[#00458D]">Edit</span>
                         <input
@@ -181,8 +179,8 @@ export default function SettingsView() {
                             className="hidden"
                             onChange={handleFileChange}
                         />
-                    </label>                </div>
-
+                    </label>
+                </div>
             </div>
             <div className='w-full mx-10 '>
                 <div className=' sm:w-1/2' >

@@ -52,10 +52,12 @@ async def websocket_endpoint(websocket: WebSocket):
                     student1 = db.query(Student).filter(Student.uuid == player1.student_uuid).first()
                     student2 = db.query(Student).filter(Student.uuid == player2.student_uuid).first()
 
+
                     # Concatenate first name and last name
                     student1_name = f"{student1.first_name} {student1.last_name}"
                     student2_name = f"{student2.first_name} {student2.last_name}"
-                  
+                    stundet1_avatar = f"{student1.avatar_url}"
+                    student2_avatar = f"{student2.avatar_url}"
 
                     game_session = QuizSession(
                         uuid=str(uuid.uuid4()),
@@ -74,6 +76,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         "event": "start_game",
                         "game_session_uuid": str(game_session.uuid),
                         "opponent_name": student2_name,
+                        "opponent_image":student2_avatar,
                         'random_number': 1
                     })
 
@@ -82,6 +85,7 @@ async def websocket_endpoint(websocket: WebSocket):
                         "event": "start_game",
                         "game_session_uuid": str(game_session.uuid),
                         "opponent_name": student1_name,
+                        "opponent_image":stundet1_avatar,
                         'random_number': 1
                     })
 
@@ -118,7 +122,7 @@ async def websocket_endpoint(websocket: WebSocket):
                     if opponent_uuid and opponent_uuid in player_connections:
                         opponent_websocket = player_connections[str(opponent_uuid)]
                         await opponent_websocket.send_json({"action": "pause_audio"})
-                        
+
                 elif data.get("action") == "resume_audio":
                 # Get the opponent's WebSocket connection
                     opponent_uuid = None

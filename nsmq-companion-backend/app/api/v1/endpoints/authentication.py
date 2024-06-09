@@ -18,6 +18,16 @@ from sqlalchemy.orm import Session
 from app.routers.shared import get_db
 from app.core.security import extract_user_data
 from app.schemas.token import VerifyToken
+from app.core.security import (
+    generate_token_for_existing_user,
+    generate_token_for_new_user,
+    generate_verification_token,
+    create_verification_token
+)
+from app.models.facilitator import Facilitator
+from app.models.email_verification import EmailVerification
+from app.schemas.email_verification import UserEmailVerification
+from datetime import datetime,timedelta
 
 router = APIRouter(
     prefix="",
@@ -75,40 +85,44 @@ async def verify_token(
         return send_internal_server_error(user_msg="Could not verify token", error=e)
 
 
-# @router.post("/verify_email", response_class=ORJSONResponse)
-# @inject
-# async def verify_user_email(
-#     user,
-#     service: AuthService = Depends(Provide[Container.auth_service]),
-# ):
-#     try:
-#         token_detail = service.verify_user_email(user)
-#         # save generated token into db
-#         user, token = service.user_repository.create_verification_token(
-#             user_verify=user, verification_token=token_detail
-#         )
-#         log.info("User email verified", extra={"email_address": user.email_address})
-#         if user and token:
-#             try:
-#                 # send verification email
-#                 await send_email_verification(
-#                     recipient_name=user.first_name,
-#                     email=user.email_address,
-#                     message=settings.MAIL_VERIFICATION_MESSAGE,
-#                     url=settings.VERIFY_EMAIL_URL,
-#                     btn=settings.VERIFY_BTN,
-#                     token=token,
-#                 )
-#             except Exception as e:
-#                 return send_internal_server_error(
-#                     user_msg="Could not send verification email", error=e
-#                 )
-#         return send_info("Verification token generated successfully")
-#     except Exception as e:
-#         return send_internal_server_error(
-#             user_msg="Could not generate verification token", error=e
-#         )
+@router.post("/verify-email")
+async def verify_user_email(
+    user: UserEmailVerification, db: Session = Depends(get_db)
+):
+    # check if user already verified
+    expiry_time = datetime.now() + timedelta(minutes=3)
+    db_user = db.query(Facilitator).filter(Facilitator.uuid == user.facilitator_uuid).first()
+    if db_user:
+        if db_user.verifiedAt is None:
+            # check if token already generated
+            verified_user = (
+                db.query(EmailVerification)
+                .filter(EmailVerification.facilitator_uuid == user.facilitator_uuid)
+                .first()
+            )
 
+            if verified_user is None:
+                # Generate token
+                verify_token = generate_verification_token()
+
+                token_detail = {
+                    "facilitator_uuid": user.facilitator_uuid,
+                    "verification_token": verify_token,
+                    "expiry_date": expiry_time.isoformat() # Save the expiry time to the database
+                }
+
+                # save generated token into db
+                return create_verification_token(db, user, token_detail)
+            else:
+                raise HTTPException(
+                    status_code=409,
+                    detail="Verification code already generated, please check email to verify",
+                )
+        else:
+            raise HTTPException(status_code=409, detail="User already verified")
+    else:
+        raise HTTPException(status_code=404, detail="User not found")
+    
 
 
 @router.post("/login", response_model=None)

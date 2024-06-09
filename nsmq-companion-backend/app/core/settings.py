@@ -89,8 +89,8 @@ class Settings(BaseSettings):
         "AWS_SECRET_ACCESS_KEY", "aws_secret_access_key"
     )
     AWS_REGION: str = os.getenv("AWS_REGION", "us-east-2")
-
-  
+    
+    
     # find query
     PAGE: int = 1
     PAGE_SIZE: int = 20

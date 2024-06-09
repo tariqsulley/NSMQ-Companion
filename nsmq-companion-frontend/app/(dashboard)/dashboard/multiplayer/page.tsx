@@ -8,7 +8,10 @@ import useSound from 'use-sound';
 import API_BASE from "@/app/utils/api";
 import axios from "axios";
 import { CgSpinner } from "react-icons/cg";
-
+import Image from "next/image"
+import img1 from "../../../../public/images/2018-winner.png"
+import img2 from "../../../../public/images/2021-winner.png"
+import ProfilePic from "../../../../public/images/avatar.svg"
 
 const riddles: any = {
     "riddle_1": {
@@ -20,6 +23,7 @@ const riddles: any = {
         "answer": "Aluminium chloride"
     }
 };
+
 
 export default function MultiplayerPage() {
     const [socket, setSocket] = useState<WebSocket | null>(null);
@@ -37,22 +41,9 @@ export default function MultiplayerPage() {
     const [isBellPlaying, setIsBellPlaying] = useState(false);
     const [play] = useSound('/Sounds/bell.wav');
     const [isAudioPaused, setIsAudioPaused] = useState(false);
+    const [opponentImage, setOpponentimage] = useState("")
 
-    // const handleCircleClick = () => {
-    //     if (!isBellPlaying && browserSupportsSpeechRecognition) {
-    //         setIsBellPlaying(true);
-    //         setIsCircleGreen(true);
-    //         play();
 
-    //         SpeechRecognition.startListening({ continuous: true });
-
-    //         setTimeout(() => {
-    //             setIsCircleGreen(false);
-    //             setIsBellPlaying(false);
-    //             SpeechRecognition.stopListening();
-    //         }, 10000);
-    //     }
-    // };
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
@@ -229,15 +220,14 @@ export default function MultiplayerPage() {
 
 
     return (
-        <div className="flex h-screen">
+        <div className="flex min-h-screen">
             <Sidebar />
-            <div className="bg-bgMain sm:ml-[256px] w-full">
-                <p className="mt-[100px]">Compete against friends in fast paced quizzes</p>
-                <div>
+            <div className="flex justify-center bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full">
+                {/* <p className="mt-[100px]">Compete against friends in fast paced quizzes</p> */}
+                {/* <div>
                     <button onClick={joinWaitingRoom}>Join Waiting Room</button>
                     {connecting && (<div>{connecting}</div>)}
-                    {/* {waitingRoomStatus === 'idle' && (
-                    )} */}
+
                     {waitingRoomStatus === 'searching' && <p>Searching for an opponent...</p>}
                     {waitingRoomStatus === 'paired' && (
                         <>
@@ -251,22 +241,65 @@ export default function MultiplayerPage() {
                         </>
                     )}
                     <button onClick={disconnectFromQuiz}>Disconnect</button>
-                </div>
-                <div
+                </div> */}
+                {/* <div
                     className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
                     onClick={handleCircleClick}
                 />
                 <div>
                     <h2 className="font-semibold">Transcribed Answer:</h2>
                     <p className="font-semibold text-[#475569]">{transcribedText}</p>
-                </div>
-                <button
+                </div> */}
+                {/* <button
                     onClick={handleCalculateSimilarity}
                     disabled={!isReadyToCalculate}
                     className="bg-green-400 dar px-6 py-1 rounded-lg"
                 >
                     <p className="font-semibold text-white"> {checkingAnswer ? <CgSpinner size={25} className="animate-spin text-white" /> : "Submit Answer"} </p>
-                </button>
+                </button> */}
+                <div className="bg-blue-100 rounded-xl w-11/12 shadow-xl mt-[80px] p-3">
+                    <div className="flex items-center justify-evenly">
+                        <div className="flex items-center gap-2">
+                            <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                                <Image
+                                    src={ProfilePic}
+                                    width={64}
+                                    height={64}
+                                    alt="Preview"
+                                    className="rounded-full sm:w-full sm:h-full  object-cover"
+                                />
+                            </div>
+                            <div className="flex flex-col">
+                                <p>Jared Amoako</p>
+                                <p>Points: 15</p>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center">
+                            <p className="sm:text-3xl">VS</p>
+                        </div>
+
+                        <div className="flex items-center sm:gap-2">
+                            <div className="flex flex-col">
+                                <p>Jared Amoako</p>
+                                <p>Points: 15</p>
+                            </div>
+                            <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                                <Image
+                                    src={ProfilePic}
+                                    width={64}
+                                    height={64}
+                                    alt="Preview"
+                                    className="rounded-full sm:w-full sm:h-full  object-cover"
+                                />
+                            </div>
+
+                        </div>
+                    </div>
+                    <div className="flex flex-col items-center justify-center">
+                        <p className="text-xl">I am a metal halide</p>
+                    </div>
+                </div>
             </div>
         </div>
     );
