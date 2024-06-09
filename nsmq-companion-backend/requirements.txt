@@ -107,7 +107,7 @@ numba==0.59.1
 numpy==1.22.0
 onnx==1.16.1
 onnxruntime==1.18.0
-openai-whisper @ git+https://github.com/openai/whisper.git@ba3f3cd54b0e5b8ce1ab3de13e32122d0d5f98ab
+# openai-whisper @ git+https://github.com/openai/whisper.git@ba3f3cd54b0e5b8ce1ab3de13e32122d0d5f98ab
 orjson==3.9.5
 packaging==23.1
 pandas==1.5.3
@@ -186,7 +186,7 @@ torchaudio==2.3.0
 tqdm==4.66.4
 trainer==0.0.36
 transformers==4.41.1
-TTS==0.22.0
+# TTS==0.22.0
 typeguard==4.3.0
 typer==0.12.3
 typing_extensions==4.12.0

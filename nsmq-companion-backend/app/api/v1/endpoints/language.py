@@ -111,7 +111,7 @@ router = APIRouter(
     tags=["Language Services"],
 )
 
-model_config = VitsConfig()
+# model_config = VitsConfig()
 # model_config.load_json('app/utils/tts_files/quizmistressConfig.json')
 # tts_model = Vits.init_from_config(model_config)
 # tts_model.load_onnx('app/utils/tts_files/quizmistress.onnx')
@@ -142,27 +142,27 @@ model_config = VitsConfig()
 # DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 # device = torch.device("mps")
 
-model = whisper.load_model("medium.en", device = "cpu") 
+# model = whisper.load_model("medium.en", device = "cpu") 
 
-def transcribe(path_to_audio):
-  """Loads whisper model to transcribe audio"""
+# def transcribe(path_to_audio):
+#   """Loads whisper model to transcribe audio"""
 
-  audio = whisper.load_audio(path_to_audio)
-  result = model.transcribe(audio)
-  return result["text"]
+#   audio = whisper.load_audio(path_to_audio)
+#   result = model.transcribe(audio)
+#   return result["text"]
 
-@router.post("/get-transcript")
-async def get_transcript(audio: UploadFile = File(...)):
-    try:
-        audio_bytes = await audio.read()
-        audio_filename = audio.filename
-        with open(audio_filename, 'wb') as file:
-            file.write(audio_bytes)
-        transcript = transcribe(audio_filename)
-        os.remove(audio_filename)
-        return {"transcript": transcript}
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+# @router.post("/get-transcript")
+# async def get_transcript(audio: UploadFile = File(...)):
+#     try:
+#         audio_bytes = await audio.read()
+#         audio_filename = audio.filename
+#         with open(audio_filename, 'wb') as file:
+#             file.write(audio_bytes)
+#         transcript = transcribe(audio_filename)
+#         os.remove(audio_filename)
+#         return {"transcript": transcript}
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
     
 
 @router.on_event("startup")
