@@ -54,7 +54,7 @@ frozenlist==1.4.1
 fsspec==2024.5.0
 g2pkk==0.1.2
 grpcio==1.64.0
-gruut==2.2.3
+gruut==2.3.4
 gruut-ipa==0.13.0
 gruut_lang_de==2.0.0
 gruut_lang_en==2.0.0
@@ -104,7 +104,7 @@ networkx==2.8.8
 nltk==3.8.1
 num2words==0.5.13
 numba==0.59.1
-numpy==1.22.0
+numpy==1.26.4
 onnx==1.16.1
 onnxruntime==1.18.0
 # openai-whisper @ git+https://github.com/openai/whisper.git@ba3f3cd54b0e5b8ce1ab3de13e32122d0d5f98ab
