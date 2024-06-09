@@ -315,7 +315,7 @@ export default function MultiplayerPage() {
                                     <p className="text-xl">{riddleQuestion}</p>
                                 )}
                                 <div>
-                                    <h2 className="font-semibold">Transcribed Answer:</h2>
+                                    <h2 className="font-semibold">Transcribed Answer</h2>
                                     <p className="font-semibold text-black">{transcribedText}</p>
                                 </div>
                             </div>
