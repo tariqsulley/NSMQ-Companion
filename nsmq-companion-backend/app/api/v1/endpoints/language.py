@@ -112,28 +112,28 @@ router = APIRouter(
 )
 
 model_config = VitsConfig()
-model_config.load_json('app/utils/tts_files/quizmistressConfig.json')
-tts_model = Vits.init_from_config(model_config)
-tts_model.load_onnx('app/utils/tts_files/quizmistress.onnx')
+# model_config.load_json('app/utils/tts_files/quizmistressConfig.json')
+# tts_model = Vits.init_from_config(model_config)
+# tts_model.load_onnx('app/utils/tts_files/quizmistress.onnx')
 
 
-@router.post("/synthesize/")
-async def create_audio(text_model: TextModel):
-    text = text_model.text
-    try:
-        text_inputs = np.asarray(
-            tts_model.tokenizer.text_to_ids(text, language="en"),
-            dtype=np.int64,
-        )[None, :]
-        audio = tts_model.inference_onnx(text_inputs, speaker_id=0)[0]
+# @router.post("/synthesize/")
+# async def create_audio(text_model: TextModel):
+#     text = text_model.text
+#     try:
+#         text_inputs = np.asarray(
+#             tts_model.tokenizer.text_to_ids(text, language="en"),
+#             dtype=np.int64,
+#         )[None, :]
+#         audio = tts_model.inference_onnx(text_inputs, speaker_id=0)[0]
 
-        # Convert numpy audio array to a bytes stream
-        byte_io = io.BytesIO()
-        save_wav(wav=audio, path=byte_io, sample_rate=22050)
-        byte_io.seek(0)  # Move to the beginning of the stream
-        return StreamingResponse(byte_io, media_type="audio/wav")
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+#         # Convert numpy audio array to a bytes stream
+#         byte_io = io.BytesIO()
+#         save_wav(wav=audio, path=byte_io, sample_rate=22050)
+#         byte_io.seek(0)  # Move to the beginning of the stream
+#         return StreamingResponse(byte_io, media_type="audio/wav")
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=str(e))
     
 
 
