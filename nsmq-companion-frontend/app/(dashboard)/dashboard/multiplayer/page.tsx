@@ -41,9 +41,24 @@ export default function MultiplayerPage() {
     const [isBellPlaying, setIsBellPlaying] = useState(false);
     const [play] = useSound('/Sounds/bell.wav');
     const [isAudioPaused, setIsAudioPaused] = useState(false);
-    const [opponentImage, setOpponentimage] = useState("")
+    const [quizStarted, setQuizStarted] = useState(false)
+    const [opponentImage, setOpponentImage] = useState(""
+    )
 
-
+    const [countdown, setCountdown] = useState(3); // Initialize countdown to 3 seconds
+    const startCountdown = () => {
+        const countdownInterval = setInterval(() => {
+            setCountdown((prevCountdown) => {
+                if (prevCountdown === 1) {
+                    clearInterval(countdownInterval);
+                    setQuizStarted(true); // Start the quiz immediately when countdown reaches 0
+                    playRiddle(1); // Start the riddle
+                    return 0; // Return 0 to prevent going into negative values
+                }
+                return prevCountdown - 1;
+            });
+        }, 1000);
+    };
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
@@ -97,7 +112,7 @@ export default function MultiplayerPage() {
 
         newSocket.onopen = () => {
             console.log('Connected to WebSocket server');
-            setConnecting("searching")
+            setWaitingRoomStatus("searching")
             newSocket.send(JSON.stringify({ action: 'join_waiting_room', playerId: Data?.data?.uuid }));
         };
 
@@ -108,7 +123,8 @@ export default function MultiplayerPage() {
                 setWaitingRoomStatus('paired');
                 setPairedStudent(data.opponent_name);
                 setRiddleQuestion(data.random_number);
-                playRiddle(data.random_number);
+                setOpponentImage(data.opponent_image)
+                startCountdown();
             } else if (data.action === 'pause_audio') {
                 if (currentAudio) {
                     currentAudio.pause();
@@ -135,8 +151,13 @@ export default function MultiplayerPage() {
             socket.send(JSON.stringify({ action: 'disconnect_quiz' }));
             socket.close();
             setSocket(null);
-            setWaitingRoomStatus('idle');
+            setWaitingRoomStatus('');
             setPairedStudent(null);
+            setQuizStarted(false)
+            setOpponentImage("")
+        }
+        if (currentAudio) {
+            currentAudio.pause();
         }
     };
 
@@ -224,82 +245,93 @@ export default function MultiplayerPage() {
             <Sidebar />
             <div className="flex justify-center bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full">
                 {/* <p className="mt-[100px]">Compete against friends in fast paced quizzes</p> */}
-                {/* <div>
-                    <button onClick={joinWaitingRoom}>Join Waiting Room</button>
-                    {connecting && (<div>{connecting}</div>)}
-
-                    {waitingRoomStatus === 'searching' && <p>Searching for an opponent...</p>}
-                    {waitingRoomStatus === 'paired' && (
-                        <>
-                            <p>You have been paired with {pairedStudent}</p>
-                            {riddleQuestion && (
-                                <div>
-                                    <h2>Riddle Question:</h2>
-                                    <p>{riddleQuestion}</p>
+                <div className="bg-blue-100 rounded-xl w-11/12 shadow-xl mt-[80px] p-3">
+                    {!quizStarted ?
+                        <div>
+                            {waitingRoomStatus === 'searching' ? (
+                                <p>Searching for an opponent...</p>
+                            ) : waitingRoomStatus === 'paired' ? (
+                                <p>Quiz starts in {countdown} seconds...</p>
+                            ) : (
+                                <div className="flex gap-2 items-center justify-center  h-screen">
+                                    <button onClick={joinWaitingRoom}
+                                        className="bg-blue-800 text-white rounded-lg px-5 py-2">
+                                        Join Waiting Room</button>
+                                    <div>
+                                        <button
+                                            className="bg-blue-800 text-white rounded-lg px-5 py-2">
+                                            View LeaderBoard</button>
+                                    </div>
                                 </div>
                             )}
-                        </>
-                    )}
-                    <button onClick={disconnectFromQuiz}>Disconnect</button>
-                </div> */}
-                {/* <div
-                    className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
-                    onClick={handleCircleClick}
-                />
-                <div>
-                    <h2 className="font-semibold">Transcribed Answer:</h2>
-                    <p className="font-semibold text-[#475569]">{transcribedText}</p>
-                </div> */}
-                {/* <button
-                    onClick={handleCalculateSimilarity}
-                    disabled={!isReadyToCalculate}
-                    className="bg-green-400 dar px-6 py-1 rounded-lg"
-                >
-                    <p className="font-semibold text-white"> {checkingAnswer ? <CgSpinner size={25} className="animate-spin text-white" /> : "Submit Answer"} </p>
-                </button> */}
-                <div className="bg-blue-100 rounded-xl w-11/12 shadow-xl mt-[80px] p-3">
-                    <div className="flex items-center justify-evenly">
-                        <div className="flex items-center gap-2">
-                            <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
-                                <Image
-                                    src={ProfilePic}
-                                    width={64}
-                                    height={64}
-                                    alt="Preview"
-                                    className="rounded-full sm:w-full sm:h-full  object-cover"
+                        </div> :
+                        <>
+                            <div className="flex items-center justify-evenly">
+                                <div className="flex items-center gap-2">
+                                    <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                                        <Image
+                                            src={Data?.data.avatar_url}
+                                            width={64}
+                                            height={64}
+                                            alt="Preview"
+                                            className="rounded-full sm:w-full sm:h-full  object-cover"
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <p>{Data?.data.first_name} {Data?.data.last_name}</p>
+                                        <p>Points: 0</p>
+                                    </div>
+                                </div>
+
+                                <div className="flex items-center">
+                                    <p className="sm:text-3xl">VS</p>
+                                </div>
+
+                                <div className="flex items-center sm:gap-2">
+                                    <div className="flex flex-col">
+                                        <p>{pairedStudent}</p>
+                                        <p>Points: 0</p>
+                                    </div>
+                                    <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                                        <Image
+                                            src={opponentImage}
+                                            width={64}
+                                            height={64}
+                                            alt="Preview"
+                                            className="rounded-full sm:w-full sm:h-full  object-cover"
+                                        />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div className="flex flex-col items-center  mt-[100px] justify-center">
+                                {riddleQuestion && (
+                                    <p className="text-xl">{riddleQuestion}</p>
+                                )}
+                                <div
+                                    className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
+                                    onClick={handleCircleClick}
                                 />
-                            </div>
-                            <div className="flex flex-col">
-                                <p>Jared Amoako</p>
-                                <p>Points: 15</p>
-                            </div>
-                        </div>
+                                <div>
+                                    <h2 className="font-semibold">Transcribed Answer:</h2>
+                                    <div>
 
-                        <div className="flex items-center">
-                            <p className="sm:text-3xl">VS</p>
-                        </div>
-
-                        <div className="flex items-center sm:gap-2">
-                            <div className="flex flex-col">
-                                <p>Jared Amoako</p>
-                                <p>Points: 15</p>
+                                        {connecting && (<div>{connecting}</div>)}
+                                        <button onClick={disconnectFromQuiz}>Disconnect</button>
+                                    </div>
+                                    <p className="font-semibold text-[#475569]">{transcribedText}</p>
+                                </div>
+                                <button
+                                    onClick={handleCalculateSimilarity}
+                                    disabled={!isReadyToCalculate}
+                                    className="bg-green-400 dar px-6 py-1 rounded-lg"
+                                >
+                                    <p className="font-semibold text-white"> {checkingAnswer ? <CgSpinner size={25} className="animate-spin text-white" /> : "Submit Answer"} </p>
+                                </button>
                             </div>
-                            <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
-                                <Image
-                                    src={ProfilePic}
-                                    width={64}
-                                    height={64}
-                                    alt="Preview"
-                                    className="rounded-full sm:w-full sm:h-full  object-cover"
-                                />
-                            </div>
-
-                        </div>
-                    </div>
-                    <div className="flex flex-col items-center justify-center">
-                        <p className="text-xl">I am a metal halide</p>
-                    </div>
+                        </>}
                 </div>
+
             </div>
         </div>
     );
