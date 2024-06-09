@@ -96,7 +96,7 @@ from TTS.utils.audio.numpy_transforms import save_wav
 import os
 import torch
 import numpy as np
-import whisper
+# import whisper
 import os
 import torch
 import torch.nn.functional as F
