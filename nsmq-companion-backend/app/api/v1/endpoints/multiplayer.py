@@ -148,3 +148,4 @@ async def websocket_endpoint(websocket: WebSocket):
 
                 # Remove the player's WebSocket connection
                 del player_connections[player_uuid]
+        await websocket.close()

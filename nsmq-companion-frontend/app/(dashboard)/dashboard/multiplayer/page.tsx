@@ -246,7 +246,7 @@ export default function MultiplayerPage() {
             <div className="flex justify-center bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full">
                 {/* <p className="mt-[100px]">Compete against friends in fast paced quizzes</p> */}
                 <div className="bg-white relative rounded-xl w-11/12 shadow-xl mt-[80px] ">
-                    {quizStarted ?
+                    {!quizStarted ?
                         <div>
                             {waitingRoomStatus === 'searching' ? (
                                 <p>Searching for an opponent...</p>
@@ -315,7 +315,7 @@ export default function MultiplayerPage() {
                                     <p className="text-xl">{riddleQuestion}</p>
                                 )}
                                 <div>
-                                    <h2 className="font-semibold">Transcribed Answer</h2>
+                                    <h2 className="font-semibold">Transcribed Answer:</h2>
                                     <p className="font-semibold text-black">{transcribedText}</p>
                                 </div>
                             </div>
