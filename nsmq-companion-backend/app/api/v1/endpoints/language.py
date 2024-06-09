@@ -137,10 +137,10 @@ async def create_audio(text_model: TextModel):
     
 
 
-whisper.load_model("medium.en")
-torch.cuda.is_available()
+# whisper.load_model("medium.en")
+# torch.cuda.is_available()
 # DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-device = torch.device("mps")
+# device = torch.device("mps")
 
 model = whisper.load_model("medium.en", device = "cpu") 
 
