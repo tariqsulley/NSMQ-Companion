@@ -54,7 +54,7 @@ frozenlist==1.4.1
 fsspec==2024.5.0
 g2pkk==0.1.2
 grpcio==1.64.0
-gruut==2.3.4
+gruut==2.2.3
 gruut-ipa==0.13.0
 gruut_lang_de==2.0.0
 gruut_lang_en==2.0.0
