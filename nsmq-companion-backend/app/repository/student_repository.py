@@ -63,3 +63,11 @@ class StudentRepository(BaseRepository):
             .first()
         )
         return student
+    
+    def update_user_avatar(self, user_id: str, avatar_url: str):
+        with self.session_factory() as session:
+            user = session.query(self.model).filter(self.model.uuid == user_id).first()
+            user.avatar_url = avatar_url
+            session.commit()
+            session.refresh(user)
+            return user

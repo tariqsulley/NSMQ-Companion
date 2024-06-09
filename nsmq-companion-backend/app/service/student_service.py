@@ -26,3 +26,9 @@ class StudentService(BaseService):
     
     def get_facilitator(self,payload:str):
         return self.student_repository.get_students_by_facilitator_uuid(payload)
+    
+    def update_user_avatar(self, user_id: str, avatar_url: str):
+        try:
+            return self.student_repository.update_user_avatar(user_id, avatar_url)
+        except Exception as e:
+            raise e

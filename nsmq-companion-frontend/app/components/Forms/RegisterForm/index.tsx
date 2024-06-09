@@ -68,7 +68,7 @@ export default function RegisterForm() {
 
         try {
             setLoading(true)
-            const response = await axios.post(`${API_BASE}/facilitators/create`, {
+            const response = await axios.post(`${API_BASE}/users/facilitator`, {
                 first_name: firstName,
                 last_name: lastName,
                 school: schoolName,

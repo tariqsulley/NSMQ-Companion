@@ -15,6 +15,18 @@ import { useEffect } from 'react';
 import ThemeSwitch from '../Theme/ThemeSwitch';
 import { LiaTrophySolid } from "react-icons/lia";
 import { usePathname } from 'next/navigation';
+import Image from "next/image"
+
+
+const getInitials = (name: string) => {
+    const nameArray = name?.split(" ");
+    const initials = nameArray
+        ?.map((namePart: string) => namePart.charAt(0))
+        ?.slice(0, 2)
+        ?.join("")
+        ?.toUpperCase();
+    return initials;
+};
 
 export default function Sidebar() {
     const { logout, Data } = useAuth()
@@ -61,7 +73,19 @@ export default function Sidebar() {
                                 <div>
                                     <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                                         <span className="sr-only">Open user menu</span>
-                                        <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo" />
+                                        <div className="flex items-center justify-center rounded-full bg-primary border-2 border-blue-100 h-8 w-8">
+                                            {!Data?.data.avatar_url ?
+                                                <p className="text-white text-md">{getInitials(Data?.data?.first_name)}</p> :
+                                                <Image
+                                                    src={Data?.data.avatar_url}
+                                                    alt="profile"
+                                                    width={34}
+                                                    height={34}
+                                                    priority
+                                                    className="rounded-full w-full h-full  object-cover"
+                                                />
+                                            }
+                                        </div>
                                     </button>
                                 </div>
                                 <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">

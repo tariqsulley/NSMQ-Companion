@@ -15,7 +15,8 @@ from app.core.dependencies import get_current_user
 
 from app.schemas.student import (
    StudentCreate,
-   StudentBase
+   StudentBase,
+   UpdateUserAvatar
 )
 from app.schemas.facilitator import(
     Facilitator
@@ -37,12 +38,11 @@ router = APIRouter(
 msg_prefix = "user"
 
 
-@router.post("/", response_class=ORJSONResponse)
+@router.post("/facilitator", response_class=ORJSONResponse)
 @inject
 async def create_facilitator_handler(
     payload: Facilitator,
     service: UserService = Depends(Provide[Container.user_service]),
-    current_user: Student = Depends(get_current_user),
 ):
     try:
         found_user = service.get_user_by_email_address(payload.email_address)
@@ -134,3 +134,34 @@ async def get_students_for_facilitator(facilitator_uuid:str,
     except Exception as e:
         msg = f"Failed to retrieve facilitator: {facilitator_uuid}"
         return send_internal_server_error(user_msg=msg,error=e)
+    
+
+@router.put("/avatar/facilitator/{uuid}", response_class=ORJSONResponse)
+@inject
+async def update_user_avatar_handler(
+    uuid: str,
+    payload: UpdateUserAvatar,
+   service: UserService = Depends(Provide[Container.user_service])
+):
+    try:
+        user = service.update_user_avatar(user_id=uuid, avatar_url=payload.avatar_url)
+        return send_data(UpdateUserAvatar(avatar_url=user.avatar_url))
+    except Exception as e:
+        msg = messages.GET_FAILED + msg_prefix
+        return send_internal_server_error(user_msg=msg, error=e)
+    
+
+@router.put("/avatar/student/{uuid}", response_class=ORJSONResponse)
+@inject
+async def update_user_avatar_handler(
+    uuid: str,
+    payload: UpdateUserAvatar,
+    service:StudentService = Depends(Provide[Container.student_service])
+):
+    try:
+        user = service.update_user_avatar(user_id=uuid, avatar_url=payload.avatar_url)
+        return send_data(UpdateUserAvatar(avatar_url=user.avatar_url))
+    except Exception as e:
+        msg = messages.GET_FAILED + msg_prefix
+        return send_internal_server_error(user_msg=msg, error=e)
+    

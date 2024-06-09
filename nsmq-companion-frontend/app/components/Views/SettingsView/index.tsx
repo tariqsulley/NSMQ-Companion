@@ -5,6 +5,11 @@ import { useAuth } from '@/app/context/AuthContext';
 import AWS from "aws-sdk";
 import { useState } from 'react';
 import { CgSpinner } from 'react-icons/cg';
+import API_BASE from '@/app/utils/api';
+import axios from 'axios';
+import { Slide, ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import useSWR from 'swr';
 
 interface UploadProgressEvent {
     loaded: number;
@@ -12,7 +17,7 @@ interface UploadProgressEvent {
 }
 
 export default function SettingsView() {
-    const { Data } = useAuth()
+    const { Data, mutate } = useAuth()
     const [uploadProgress, setUploadProgress] = useState(0);
     const [file, setFile] = useState<File | null>(null);
     const [uploading, setUploading] = useState(false);
@@ -45,6 +50,7 @@ export default function SettingsView() {
             const uploadedImageUrl = result.Location;
             setUserImage(uploadedImageUrl);
             setUserImageName(selectedFile.name);
+            submitImageUrlToDatabase(uploadedImageUrl);
         } catch (error) {
             alert('Error uploading file.');
         } finally {
@@ -91,52 +97,92 @@ export default function SettingsView() {
         }
     };
 
+    const submitImageUrlToDatabase = async (imageUrl: any) => {
+        try {
+            setUploading(true);
+            const prefix = Data?.data.account_type == "student" ?
+                `users/avatar/student/${Data?.data.uuid}` : `users/avatar/facilitator/${Data?.data.uuid}`
+            const res = await axios.put(
+                `${API_BASE}/${prefix}`,
+                {
+                    avatar_url: imageUrl,
+                }
+            );
+            toast.success("Profile Picture Changed Successfully", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            });
+            console.log("Image URL submitted to database:", imageUrl);
+            mutate();
+        } catch (error) {
+            console.log(error);
+            toast.error("Error", {
+                position: "top-center",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+                transition: Slide,
+            });
+        } finally {
+            setUploading(false);
+        }
+    };
 
     return (
         <div className='flex flex-col sm:flex-row w-full items-center justify-center m-5
         bg-white rounded-xl  md:min-h-[82vh] 2xl:min-h-[90vh] min-h-48'>
             <div className='flex flex-col items-center justify-center'>
-                <Image src={ProfilePic} alt='profile img' />
-                <button>
-                    <p>Edit Profile Picture</p>
-                </button>
-                <div className="mt-4">
-                    <p className="text-[#354055]">Image of Vehicle</p>
-
-                    <div
-                        className="flex flex-col items-center justify-center border-dashed border-2 border-primaryBlue
-                rounded-lg p-4 mt-2"
-                    >
-                        <label htmlFor="imageInput" className="cursor-pointer flex flex-col items-center  justify-center">
-                            {/* <Image src={uploadImg} alt="image" /> */}
-                            {uploading && (
-                                <div className="flex gap-3 items-center">
-                                    <CgSpinner className="animate-spin text-primaryBlue" />
-                                    <div className="text-lg font-semibold text-primaryBlue">{`${uploadProgress}%`}</div>
-                                </div>
-                            )}
-                            <input
-                                type="file"
-                                id="imageInput"
-                                accept="image/*"
-                                className="hidden"
-                                onChange={handleFileChange}
+                <div className="mt-4 text-center">
+                    <div className="bg-white w-24 h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                        {!Data?.data.avatar_url ? (
+                            <Image
+                                src={ProfilePic}
+                                width={64}
+                                height={64}
+                                alt="Preview"
+                                className="rounded-full w-full h-full  object-cover"
                             />
-                            <p className="text-[#70707b] text-center">
-                                {" "}
-                                <span className="text-primaryBlue font-semibold">
-                                    Click to upload image of vehicle
-                                </span>{" "}
-                                or drag and drop
-                            </p>
-                            <p className=" text-[#70707b] text-center">
-                                PNG or JPG (max 800 x 400px)
-                            </p>
-                        </label>
-
-                        <p>{userName ? userName : ""}</p>
+                        ) : (
+                            <Image
+                                src={Data?.data.avatar_url}
+                                alt="profile"
+                                width={64}
+                                height={64}
+                                priority
+                                className="rounded-full w-full h-full  object-cover"
+                            />
+                        )}
                     </div>
-                </div>
+
+                    {uploading && (
+                        <div className="flex gap-3 items-center">
+                            <CgSpinner className="animate-spin text-primaryBlue" />
+                            <div className="text-lg font-semibold text-primaryBlue">{`${uploadProgress}%`}</div>
+                        </div>
+                    )}
+
+                    <label htmlFor="imageInput" className="cursor-pointer">
+                        <span className="text-center pt-2 text-[#00458D]">Edit</span>
+                        <input
+                            type="file"
+                            id="imageInput"
+                            accept="image/*"
+                            className="hidden"
+                            onChange={handleFileChange}
+                        />
+                    </label>                </div>
+
             </div>
             <div className='w-full mx-10 '>
                 <div className=' sm:w-1/2' >

@@ -24,6 +24,9 @@ class Login(BaseModel):
     class Config:
         orm_model = True
 
+class UpdateUserAvatar(BaseModel):
+    avatar_url: str
+
         
 
 

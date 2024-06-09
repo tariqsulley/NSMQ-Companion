@@ -122,7 +122,7 @@ export const AuthProvider = ({ children }) => {
     const uuid = Cookies.get("uuid");
     const decodedToken = token ? jwt.decode(token) : null;
 
-    const { data: Data, error, isLoading } = useSWR(
+    const { data: Data, error, isLoading, mutate } = useSWR(
         `${API_BASE}/users/${uuid}/find/`,
         fetcher,
         {
@@ -156,6 +156,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         verifyEmail,
         handleEmailVerification,
+        mutate
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
