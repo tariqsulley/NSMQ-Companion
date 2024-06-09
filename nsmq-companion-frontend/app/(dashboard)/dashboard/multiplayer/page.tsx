@@ -245,8 +245,8 @@ export default function MultiplayerPage() {
             <Sidebar />
             <div className="flex justify-center bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full">
                 {/* <p className="mt-[100px]">Compete against friends in fast paced quizzes</p> */}
-                <div className="bg-blue-100 rounded-xl w-11/12 shadow-xl mt-[80px] p-3">
-                    {!quizStarted ?
+                <div className="bg-white relative rounded-xl w-11/12 shadow-xl mt-[80px] ">
+                    {quizStarted ?
                         <div>
                             {waitingRoomStatus === 'searching' ? (
                                 <p>Searching for an opponent...</p>
@@ -266,67 +266,82 @@ export default function MultiplayerPage() {
                             )}
                         </div> :
                         <>
-                            <div className="flex items-center justify-evenly">
-                                <div className="flex items-center gap-2">
-                                    <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
-                                        <Image
-                                            src={Data?.data.avatar_url}
-                                            width={64}
-                                            height={64}
-                                            alt="Preview"
-                                            className="rounded-full sm:w-full sm:h-full  object-cover"
-                                        />
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <p>{Data?.data.first_name} {Data?.data.last_name}</p>
-                                        <p>Points: 0</p>
-                                    </div>
-                                </div>
-
-                                <div className="flex items-center">
-                                    <p className="sm:text-3xl">VS</p>
-                                </div>
-
-                                <div className="flex items-center sm:gap-2">
-                                    <div className="flex flex-col">
-                                        <p>{pairedStudent}</p>
-                                        <p>Points: 0</p>
-                                    </div>
-                                    <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
-                                        <Image
-                                            src={opponentImage}
-                                            width={64}
-                                            height={64}
-                                            alt="Preview"
-                                            className="rounded-full sm:w-full sm:h-full  object-cover"
-                                        />
+                            <div className="flex items-center justify-evenly bg-[#3b65d9] shadow p-3 rounded-b-3xl">
+                                <div className="flex items-center justify-evenly w-[90%] bg-gray-100 rounded-xl shadow">
+                                    <div className="flex items-center gap-2">
+                                        <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                                            <Image
+                                                src={Data?.data.avatar_url}
+                                                width={64}
+                                                height={64}
+                                                alt="Preview"
+                                                className="rounded-full sm:w-full sm:h-full  object-cover"
+                                            />
+                                        </div>
+                                        <div className="flex flex-col">
+                                            <p>{Data?.data.first_name} {Data?.data.last_name}</p>
+                                            <p>Points: 0</p>
+                                        </div>
                                     </div>
 
+                                    <div className="flex items-center">
+                                        <p className="sm:text-3xl">VS</p>
+                                    </div>
+
+                                    <div className="flex items-center sm:gap-2">
+                                        <div className="flex flex-col">
+                                            <p>{pairedStudent}</p>
+                                            <p>Points: 0</p>
+                                        </div>
+                                        <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                                            <Image
+                                                src={opponentImage}
+                                                width={64}
+                                                height={64}
+                                                alt="Preview"
+                                                className="rounded-full sm:w-full sm:h-full object-cover"
+                                            />
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
-                            <div className="flex flex-col items-center  mt-[100px] justify-center">
+                            <div className="flex flex-col items-center justify-center">
+                                <div className="flex items-center justify-between bg-[#3b65d9] w-1/2 rounded-lg py-2 p-2 mt-10 ">
+                                    <p className="text-white">Question</p>
+                                    <p className="text-white">3/5</p>
+                                </div>
                                 {riddleQuestion && (
                                     <p className="text-xl">{riddleQuestion}</p>
                                 )}
+                                <div>
+                                    <h2 className="font-semibold">Transcribed Answer:</h2>
+                                    <p className="font-semibold text-black">{transcribedText}</p>
+                                </div>
+                            </div>
+
+
+                            <div className="flex absolute bottom-0 w-full flex-col items-center h-[50%] shadow mt-[100px] bg-[#3b65d9] rounded-t-3xl justify-center">
+
                                 <div
                                     className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
                                     onClick={handleCircleClick}
                                 />
                                 <div>
-                                    <h2 className="font-semibold">Transcribed Answer:</h2>
+
+
                                     <div>
 
                                         {connecting && (<div>{connecting}</div>)}
                                         <button onClick={disconnectFromQuiz}>Disconnect</button>
                                     </div>
-                                    <p className="font-semibold text-[#475569]">{transcribedText}</p>
                                 </div>
                                 <button
                                     onClick={handleCalculateSimilarity}
                                     disabled={!isReadyToCalculate}
-                                    className="bg-green-400 dar px-6 py-1 rounded-lg"
+                                    className="bg-white  px-6 py-2 rounded-lg w-1/2 shadow"
                                 >
-                                    <p className="font-semibold text-white"> {checkingAnswer ? <CgSpinner size={25} className="animate-spin text-white" /> : "Submit Answer"} </p>
+                                    <p className="font-semibold text-black"> {checkingAnswer ? <CgSpinner size={25} className="animate-spin text-white" /> : "Submit Answer"} </p>
                                 </button>
                             </div>
                         </>}
