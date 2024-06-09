@@ -1,4 +1,15 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+    output: "standalone",
+    images: {
+        remotePatterns: [
+            {
+                protocol: "https",
+                hostname: "nsmqcompanion.s3.eu-north-1.amazonaws.com",
+                pathname: "**",
+            }
+        ],
+    },
+};
 
 export default nextConfig;

@@ -6,3 +6,7 @@ venv/
 
 *.onnx
 nsmq-companion-backend/app/utils/tts_files/quizmistress.onnx
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]

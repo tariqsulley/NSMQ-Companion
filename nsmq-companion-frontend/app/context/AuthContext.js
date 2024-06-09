@@ -36,8 +36,8 @@ export const AuthProvider = ({ children }) => {
             setLoading(true);
             const response = await axios.post(`${API_BASE}/login`, {
                 email_address: email,
-                password: password,
-                account_type: account_type
+                account_type: account_type,
+                password: password
             });
 
             const userInfo = response?.data;
@@ -46,16 +46,16 @@ export const AuthProvider = ({ children }) => {
             setIsLoggedIn(true);
             setUserData(userInfo);
 
-            const tokenData = jwt.decode(userInfo.access_token);
-            const expirationDate = new Date(tokenData.exp * 1000);
-            Cookies.set("access_token", userInfo.access_token, {
-                expires: expirationDate,
+            // const tokenData = jwt.decode(userInfo.access_token);
+            // const expirationDate = new Date(tokenData.exp * 1000);
+            Cookies.set("access_token", userInfo?.data?.access_token, {
+                // expires: expirationDate,
                 path: "/",
                 sameSite: "strict",
             });
 
-            Cookies.set("uuid", userInfo?.user?.uuid, {
-                expires: expirationDate,
+            Cookies.set("uuid", userInfo?.data?.user?.uuid, {
+                // expires: expirationDate,
                 path: "/",
                 sameSite: "strict",
             });
@@ -66,7 +66,7 @@ export const AuthProvider = ({ children }) => {
 
             const redirectUrl =
                 callbackUrl ||
-                (userInfo.user.account_type === "facilitator" || userInfo.user.account_type === "student"
+                (userInfo?.data?.user.account_type === "facilitator" || userInfo?.data?.user.account_type === "student"
                     ? "/dashboard"
                     : "/auth/login");
 
@@ -80,7 +80,8 @@ export const AuthProvider = ({ children }) => {
             // router.push(redirectPath);
         } catch (error) {
             const { response } = error;
-            toast.error("Registration failed", {
+            console.log("err", error)
+            toast.error("Invalid login credentials", {
                 position: "top-center",
                 autoClose: 5000,
                 hideProgressBar: true,
@@ -121,8 +122,8 @@ export const AuthProvider = ({ children }) => {
     const uuid = Cookies.get("uuid");
     const decodedToken = token ? jwt.decode(token) : null;
 
-    const { data: Data, error, isLoading } = useSWR(
-        `${API_BASE}/facilitators/${uuid}/find`,
+    const { data: Data, error, isLoading, mutate } = useSWR(
+        `${API_BASE}/users/${uuid}/find/`,
         fetcher,
         {
             revalidateIfStale: true,
@@ -155,6 +156,7 @@ export const AuthProvider = ({ children }) => {
         logout,
         verifyEmail,
         handleEmailVerification,
+        mutate
     };
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

@@ -12,7 +12,7 @@ export default function AddVehicle() {
                     <OnboardingNav />
                 </div>
                 <div>
-                    <div className="flex h-screen">
+                    <div className="flex h-screen dark:bg-darkBgLight">
                         <div className="flex m-2  lg:m-0 flex-col w-full lg:w-2/5 items-center ">
                             <div className=" w-5/5 p-2 sm:p-0 sm:w-4/5  flex flex-col  h-screen">
                                 <div className=" w-full">

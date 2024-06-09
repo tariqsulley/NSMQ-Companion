@@ -7,51 +7,29 @@ from app.database.helpers import get_all_items
 from app.utils.email import send_email
 from app.utils.hashing import VERIFY_TOKEN_EXPIRE_DAYS, hash_user_password
 from sqlalchemy.dialects.postgresql import UUID
-
-from . import models, schemas
+from app.models.facilitator import Facilitator
+from app.models.student import Student
+from app.models.email_verification import EmailVerification
+from app.schemas.email_verification import UserEmailVerification
+from app.schemas.student import StudentCreate
 import logging
 
 
 def get_all_users(db: Session):
-    return get_all_items(db, models.Facilitator)
-
-
-def update_user_by_uuid(db: Session, uuid: str, user: schemas.UpdateUser):
-    user_to_update = db.query(models.User).filter(models.Facilitator.uuid == uuid).first()
-    user_to_update.phone_number = user.phone_number
-    user_to_update.address = user.address
-    user_to_update.location = user.location
-
-    db.commit()
-    db.refresh(user_to_update)
-    return user
-
+    return get_all_items(db, Facilitator)
 
 def get_user_by_email_address(email: str, db: Session):
-    user = db.query(models.Facilitator).filter(models.Facilitator.email_address == email).first()
-    return user 
-    # try:
-    #     user = db.query(models.Facilitator).filter(models.Facilitator.email_address == email).first()
-    #     if user:
-    #         return user
-    # except Exception:
-    #     raise HTTPException(status_code=400, detail="User not found")
-
-
-def get_user_by_phone_number(db: Session, phone_number: str):
-    return (
-        db.query(models.User).filter(models.Facilitator.phone_number == phone_number).first()
-    )
-
-
-# def hash_user_password(password: str):
-#     pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-#     return pwd_context.hash(password)
-
-
-def create_user(db: Session, user: schemas.Facilitator):
     try:
-        db_user = models.Facilitator(
+        user = db.query(Facilitator).filter(Facilitator.email_address == email).first()
+        if user:
+            return user
+    except Exception:
+        raise HTTPException(status_code=400, detail="User not found")
+
+
+def create_user(db: Session, user: Facilitator):
+    try:
+        db_user = Facilitator(
             first_name=user.first_name,
             last_name=user.last_name,
             school = user.school,
@@ -65,8 +43,8 @@ def create_user(db: Session, user: schemas.Facilitator):
         db.refresh(db_user)
 
         created_user = (
-            db.query(models.Facilitator)
-            .filter(models.Facilitator.email_address == db_user.email_address)
+            db.query(Facilitator)
+            .filter(Facilitator.email_address == db_user.email_address)
             .first()
         )
 
@@ -79,6 +57,7 @@ def create_user(db: Session, user: schemas.Facilitator):
         }
 
         return returned_user
+    
     except Exception as e:
         logging.error(f"Failed to create user: {e}")
         raise HTTPException(status_code=400, detail=f"{e}")
@@ -86,14 +65,14 @@ def create_user(db: Session, user: schemas.Facilitator):
 
 def create_verification_token(
     db: Session,
-    user_verify: schemas.UserEmailVerification,
-    verification_token: schemas.EmailVerification,
+    user_verify: UserEmailVerification,
+    verification_token: EmailVerification,
 ) -> bool:
     try:
         current_date = datetime.now()
         # return user_verify
 
-        db_verify = models.EmailVerification(
+        db_verify = EmailVerification(
             facilitator_uuid=user_verify.uuid,
             verification_token=verification_token["verification_token"],
             expiry_date=current_date + timedelta(days=VERIFY_TOKEN_EXPIRE_DAYS),
@@ -103,7 +82,7 @@ def create_verification_token(
         db.commit()
 
         db_user = (
-            db.query(models.Facilitator).filter(models.Facilitator.uuid == user_verify.uuid).first()
+            db.query(Facilitator).filter(Facilitator.uuid == user_verify.uuid).first()
         )
 
         # return result
@@ -122,9 +101,9 @@ def create_verification_token(
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"{e}")
     
-def create_student(db: Session, student: schemas.StudentCreate):
+def create_student(db: Session, student: StudentCreate):
     hashed_password = hash_user_password("password")
-    db_student = models.Student(
+    db_student = Student(
         first_name=student.first_name,
         last_name=student.last_name,
         year=student.year,
@@ -138,18 +117,19 @@ def create_student(db: Session, student: schemas.StudentCreate):
     db.refresh(db_student)
     return db_student
 
+
 def get_students_by_facilitator_uuid(db: Session, uuid: UUID):
-    return db.query(models.Student).filter(models.Student.facilitator_uuid == uuid).all()
+    return db.query(Student).filter(Student.facilitator_uuid == uuid).all()
 
 
 def get_user_by_uuid(db: Session, user_uuid: UUID):
     # First try to fetch the user from the Facilitator table
-    user = db.query(models.Facilitator).filter(models.Facilitator.uuid == user_uuid).first()
+    user = db.query(Facilitator).filter(Facilitator.uuid == user_uuid).first()
     if user:
         return user
 
     # If not found, try to fetch from the Student table
-    user = db.query(models.Student).filter(models.Student.uuid == user_uuid).first()
+    user = db.query(Student).filter(Student.uuid == user_uuid).first()
     if user:
         return user
 
@@ -157,7 +137,7 @@ def get_user_by_uuid(db: Session, user_uuid: UUID):
     return None
 
 def delete_student_by_uuid(db: Session, facilitator_uuid: UUID, student_uuid: UUID):
-    student = db.query(models.Student).filter(models.Student.uuid == student_uuid, models.Student.facilitator_uuid == facilitator_uuid).first()
+    student = db.query(Student).filter(Student.uuid == student_uuid, Student.facilitator_uuid == facilitator_uuid).first()
     if not student:
         return None
     db.delete(student)

@@ -1,43 +1,49 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
 
-from app.database.core import init_db
-from app.routers import (
- 
-    authentication,
-    questions,
-    system,
-    users,
-)
-
-app = FastAPI(
-    title="NSMQ Companion",
-    description=None,
-    summary="",
-    version="0.0.1",
-)
-
-app.include_router(system.router)
-app.include_router(users.router)
-app.include_router(authentication.router)
-app.include_router(questions.router)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=[
-        "http://localhost:8000",
-        "https://localhost:8000",
-        "http://localhost:3000",
-        "http://localhost:3001",
-        "http://localhost",
-    ],
-    # allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+from app.api.v1.routes import routers as v1_routers
+from app.core.container import Container
+from app.core.logger import get_logger
+from app.core.settings import settings
+from app.utils.class_object import singleton
 
 
-@app.on_event("startup")
-def on_startup():
-    init_db()
+@singleton
+class AppCreator:
+    def __init__(self):
+        # set app default
+        self.app = FastAPI(
+            title=settings.PROJECT_NAME,
+            openapi_url=f"{settings.API}/openapi.json",
+            version=settings.API_VERSION,
+        )
+        # set db and container
+        self.container = Container()
+        self.db = self.container.db()
+        self.db.create_database()
+
+        if self.db.connected():
+            get_logger().info("Successfully connected to the PostgreSQL database")
+        else:
+            get_logger().error("Failed to connect to the PostgreSQL database")
+        # set cors
+        if settings.BACKEND_CORS_ORIGINS:
+            self.app.add_middleware(
+                CORSMiddleware,
+                allow_origins=[str(origin) for origin in settings.BACKEND_CORS_ORIGINS],
+                allow_credentials=True,
+                allow_methods=["*"],
+                allow_headers=["*"],
+            )
+        # set routes
+        @self.app.get("/")
+        def root():
+            return "service is working"
+
+        self.app.include_router(v1_routers, prefix=settings.API_V1_STR)
+
+
+app_creator = AppCreator()
+app = app_creator.app
+db = app_creator.db
+container = app_creator.container

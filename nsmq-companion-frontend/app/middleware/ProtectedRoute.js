@@ -14,7 +14,7 @@ const WithAuth = ({ children }) => {
 
     async function verifyToken(token) {
         try {
-            const response = await axios.post(`${API_BASE}/verify-token-frontend`, {
+            const response = await axios.post(`${API_BASE}/verify_token_frontend`, {
                 Token: token
             });
             return response.status === 200;
