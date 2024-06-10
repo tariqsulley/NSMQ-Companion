@@ -51,6 +51,8 @@ export default function MultiplayerPage() {
     const [isAudioPaused, setIsAudioPaused] = useState(false);
     const [quizStarted, setQuizStarted] = useState(false);
     const [opponentImage, setOpponentImage] = useState("");
+    const [currentAudio, setCurrentAudio] = useState<AudioBufferSourceNode | null>(null);
+    const audioCtx = new (window.AudioContext)();
 
     const [countdown, setCountdown] = useState(3); // Initialize countdown to 3 seconds
     const startCountdown = () => {
@@ -66,13 +68,6 @@ export default function MultiplayerPage() {
             });
         }, 1000);
     };
-    const audioCtx = new (window.AudioContext)();
-
-    async function loadAudio(url: any) {
-        const response = await fetch(url);
-        const arrayBuffer = await response.arrayBuffer();
-        return audioCtx.decodeAudioData(arrayBuffer);
-    }
 
     // const handleCircleClick = () => {
     //     if (!isBellPlaying && browserSupportsSpeechRecognition) {
@@ -96,7 +91,6 @@ export default function MultiplayerPage() {
     //         }, 10000);
     //     }
     // };
-
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
@@ -119,7 +113,6 @@ export default function MultiplayerPage() {
             }, 10000);
         }
     };
-
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -172,15 +165,12 @@ export default function MultiplayerPage() {
                 setOpponentImage(data.opponent_image);
                 startCountdown();
             } else if (data.action === "pause_audio") {
-                if (audioCtx) {
-                    audioCtx.suspend();
+                if (currentAudio) {
+                    currentAudio.pause();
                     setIsAudioPaused(true);
                 }
             } else if (data.action === "resume_audio") {
                 setIsAudioPaused(false);
-                audioCtx.resume().then(() => {
-                    playRiddle(1);
-                });
                 playRiddle(1);
             }
         };
@@ -210,6 +200,12 @@ export default function MultiplayerPage() {
         }
     };
 
+    async function loadAudio(url: any) {
+        const response = await fetch(url);
+        const arrayBuffer = await response.arrayBuffer();
+        return audioCtx.decodeAudioData(arrayBuffer);
+    }
+
     async function playAudio(riddleNumber: any, lineNumber: any) {
         const audioPath = `/Sounds/multiplayer_riddles/riddle_${riddleNumber}/line_${lineNumber}.wav`;
         const audioBuffer = await loadAudio(audioPath);
@@ -223,7 +219,6 @@ export default function MultiplayerPage() {
             source.onended = resolve;
         });
     }
-
     // const playAudio = (riddleNumber: any, lineNumber: any) => {
     //     const audioPath = `/Sounds/multiplayer_riddles/riddle_${riddleNumber}/line_${lineNumber}.wav`;
     //     const audio = new Audio(audioPath);
@@ -232,35 +227,11 @@ export default function MultiplayerPage() {
     //     return audio;
     // };
 
-    // const playAudio = (riddleNumber: any, lineNumber: any) => {
-    //     const audioPath = `/Sounds/multiplayer_riddles/riddle_${riddleNumber}/line_${lineNumber}.wav`;
-    //     const audio = new Audio(audioPath);
-    //     audio.play();
+    // const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(
+    //     null
+    // );
 
-    //     // Return a promise that resolves when the audio finishes playing
-    //     return new Promise((resolve) => {
-    //         audio.onended = resolve;
-    //     });
-    // };
-
-    const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(
-        null
-    );
     const [currentLine, setCurrentLine] = useState(1);
-
-    const playRiddle = async (riddleNumber: any) => {
-        const riddleLines = riddles[`riddle_${riddleNumber}`];
-        if (!riddleLines) return;
-
-        for (let lineNumber = currentLine; lineNumber <= Object.keys(riddleLines).length; lineNumber++) {
-            if (audioCtx.state === "suspended") {
-                setCurrentLine(lineNumber);
-                break;
-            }
-            setRiddleQuestion(riddleLines[`line_${lineNumber}`]);
-            await playAudio(riddleNumber, lineNumber);
-        }
-    };
 
     // const playRiddle = async (riddleNumber: any) => {
     //     const riddleLines = riddles[`riddle_${riddleNumber}`];
@@ -283,6 +254,25 @@ export default function MultiplayerPage() {
     //         });
     //     }
     // };
+    const playRiddle = async (riddleNumber: any) => {
+        const riddleLines = riddles[`riddle_${riddleNumber}`];
+        if (!riddleLines) {
+            console.error(`No riddle found for riddle_${riddleNumber}`);
+            return;
+        }
+
+        console.log('Playing riddle:', riddleNumber);
+
+        for (let lineNumber = currentLine; lineNumber <= Object.keys(riddleLines).length; lineNumber++) {
+            if (audioCtx.state === "suspended") {
+                setCurrentLine(lineNumber);
+                break;
+            }
+            setRiddleQuestion(riddleLines[`line_${lineNumber}`]);
+            await playAudio(riddleNumber, lineNumber);
+        }
+    };
+
 
     // const playRiddle = async (riddleNumber: any) => {
     //     const riddleLines = riddles[`riddle_${riddleNumber}`];
@@ -309,9 +299,11 @@ export default function MultiplayerPage() {
             setSimilarityScore(similarityScore);
             if (similarityScore > 0.6) {
                 console.log("right");
-                audioCtx.suspend().then(() => {
-                    socket?.send(JSON.stringify({ action: "suspend_audio" }));
-                });
+                if (currentAudio) {
+                    currentAudio.stop(0);
+                    setCurrentAudio(null);
+                }
+                socket?.send(JSON.stringify({ action: "stop_audio" }));
             } else {
                 console.log("wrong");
                 setIsAudioPaused(false);
@@ -320,7 +312,6 @@ export default function MultiplayerPage() {
                     playRiddle(1);
                 });
                 socket?.send(JSON.stringify({ action: "resume_audio" }));
-                // playRiddle(1);
             }
         } catch (error) {
             console.error("Error calculating similarity:", error);
