@@ -115,7 +115,7 @@ export default function MultiplayerPage() {
 
     const joinWaitingRoom = () => {
         const newSocket = new WebSocket(
-            "ws://127.0.0.1:8000/api/v1/multiplayer/ws"
+            "ws://51.20.43.5/api/v1/multiplayer/ws"
         );
         setSocket(newSocket);
 
