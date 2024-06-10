@@ -6,6 +6,7 @@ from sqlalchemy import select
 import uuid
 from sqlalchemy import select, func
 import random
+
 router = APIRouter(
     prefix="/multiplayer",
     tags=["multiplayer"],

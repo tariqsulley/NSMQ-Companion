@@ -66,17 +66,48 @@ export default function MultiplayerPage() {
             });
         }, 1000);
     };
+    const audioCtx = new (window.AudioContext)();
+
+    async function loadAudio(url: any) {
+        const response = await fetch(url);
+        const arrayBuffer = await response.arrayBuffer();
+        return audioCtx.decodeAudioData(arrayBuffer);
+    }
+
+    // const handleCircleClick = () => {
+    //     if (!isBellPlaying && browserSupportsSpeechRecognition) {
+    //         setIsBellPlaying(true);
+    //         setIsCircleGreen(true);
+    //         play();
+
+    //         if (currentAudio) {
+    //             currentAudio.pause();
+    //             setIsAudioPaused(true);
+    //             // Notify other client to pause audio
+    //             socket?.send(JSON.stringify({ action: "pause_audio" }));
+    //         }
+
+    //         SpeechRecognition.startListening({ continuous: true });
+
+    //         setTimeout(() => {
+    //             setIsCircleGreen(false);
+    //             setIsBellPlaying(false);
+    //             SpeechRecognition.stopListening();
+    //         }, 10000);
+    //     }
+    // };
+
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
             setIsCircleGreen(true);
             play();
 
-            if (currentAudio) {
-                currentAudio.pause();
-                setIsAudioPaused(true);
-                // Notify other client to pause audio
-                socket?.send(JSON.stringify({ action: "pause_audio" }));
+            if (audioCtx.state === "running") {
+                audioCtx.suspend().then(() => {
+                    // Notify other client to suspend audio
+                    socket?.send(JSON.stringify({ action: "suspend_audio" }));
+                });
             }
 
             SpeechRecognition.startListening({ continuous: true });
@@ -88,6 +119,7 @@ export default function MultiplayerPage() {
             }, 10000);
         }
     };
+
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
@@ -140,12 +172,15 @@ export default function MultiplayerPage() {
                 setOpponentImage(data.opponent_image);
                 startCountdown();
             } else if (data.action === "pause_audio") {
-                if (currentAudio) {
-                    currentAudio.pause();
+                if (audioCtx) {
+                    audioCtx.suspend();
                     setIsAudioPaused(true);
                 }
             } else if (data.action === "resume_audio") {
                 setIsAudioPaused(false);
+                audioCtx.resume().then(() => {
+                    playRiddle(1);
+                });
                 playRiddle(1);
             }
         };
@@ -175,13 +210,27 @@ export default function MultiplayerPage() {
         }
     };
 
-    const playAudio = (riddleNumber: any, lineNumber: any) => {
+    async function playAudio(riddleNumber: any, lineNumber: any) {
         const audioPath = `/Sounds/multiplayer_riddles/riddle_${riddleNumber}/line_${lineNumber}.wav`;
-        const audio = new Audio(audioPath);
-        audio.play();
+        const audioBuffer = await loadAudio(audioPath);
+        const source = audioCtx.createBufferSource();
+        source.buffer = audioBuffer;
+        source.connect(audioCtx.destination);
+        source.start();
+        setCurrentAudio(source);
 
-        return audio;
-    };
+        return new Promise((resolve) => {
+            source.onended = resolve;
+        });
+    }
+
+    // const playAudio = (riddleNumber: any, lineNumber: any) => {
+    //     const audioPath = `/Sounds/multiplayer_riddles/riddle_${riddleNumber}/line_${lineNumber}.wav`;
+    //     const audio = new Audio(audioPath);
+    //     audio.play();
+
+    //     return audio;
+    // };
 
     // const playAudio = (riddleNumber: any, lineNumber: any) => {
     //     const audioPath = `/Sounds/multiplayer_riddles/riddle_${riddleNumber}/line_${lineNumber}.wav`;
@@ -203,23 +252,37 @@ export default function MultiplayerPage() {
         const riddleLines = riddles[`riddle_${riddleNumber}`];
         if (!riddleLines) return;
 
-        for (
-            let lineNumber = currentLine;
-            lineNumber <= Object.keys(riddleLines).length;
-            lineNumber++
-        ) {
-            if (isAudioPaused) {
+        for (let lineNumber = currentLine; lineNumber <= Object.keys(riddleLines).length; lineNumber++) {
+            if (audioCtx.state === "suspended") {
                 setCurrentLine(lineNumber);
                 break;
             }
             setRiddleQuestion(riddleLines[`line_${lineNumber}`]);
-            const audio = playAudio(riddleNumber, lineNumber);
-            setCurrentAudio(audio);
-            await new Promise((resolve) => {
-                audio.onended = resolve;
-            });
+            await playAudio(riddleNumber, lineNumber);
         }
     };
+
+    // const playRiddle = async (riddleNumber: any) => {
+    //     const riddleLines = riddles[`riddle_${riddleNumber}`];
+    //     if (!riddleLines) return;
+
+    //     for (
+    //         let lineNumber = currentLine;
+    //         lineNumber <= Object.keys(riddleLines).length;
+    //         lineNumber++
+    //     ) {
+    //         if (isAudioPaused) {
+    //             setCurrentLine(lineNumber);
+    //             break;
+    //         }
+    //         setRiddleQuestion(riddleLines[`line_${lineNumber}`]);
+    //         const audio = playAudio(riddleNumber, lineNumber);
+    //         setCurrentAudio(audio);
+    //         await new Promise((resolve) => {
+    //             audio.onended = resolve;
+    //         });
+    //     }
+    // };
 
     // const playRiddle = async (riddleNumber: any) => {
     //     const riddleLines = riddles[`riddle_${riddleNumber}`];
@@ -246,12 +309,18 @@ export default function MultiplayerPage() {
             setSimilarityScore(similarityScore);
             if (similarityScore > 0.6) {
                 console.log("right");
+                audioCtx.suspend().then(() => {
+                    socket?.send(JSON.stringify({ action: "suspend_audio" }));
+                });
             } else {
                 console.log("wrong");
                 setIsAudioPaused(false);
                 // Notify other client to resume audio
+                audioCtx.resume().then(() => {
+                    playRiddle(1);
+                });
                 socket?.send(JSON.stringify({ action: "resume_audio" }));
-                playRiddle(1);
+                // playRiddle(1);
             }
         } catch (error) {
             console.error("Error calculating similarity:", error);
