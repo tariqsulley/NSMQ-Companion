@@ -86,7 +86,7 @@ const contest_1_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$a=4, b=7$\n$[2 a-5=3,2 a=8, a=4,8-b=1, b=7]$",
+        "Answer": "a is equal to 4 and b is equal to 7",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -99,7 +99,7 @@ const contest_1_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$a=1, b=-2$ $[6-2 a=4,2 a=2, a=1,2 b+10=6,2 b=-4, b=--2]$",
+        "Answer": "a is equal to 1 and b is equal to negative 2",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -107,12 +107,12 @@ const contest_1_1 = [
         "S/N": 9,
         "Has Preamble": "Yes",
         "Preamble Text": "Find the values of the constants $a$ and $b$ if the straight lines",
-        "Question": "$a x+2 y=-3$, and $2 x+$ by $=6$ meet at the point $(1,2)$",
+        "Question": "$a x+2 y=-3$, and $2 x+$ by $=6$ intersect at the point $(1,2)$",
         "Question has figure": "No",
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$a=-7, b=2$\n$[a+4=-3, a=-7,2+2 b=6,2 b=4, b=2]$",
+        "Answer": "a is equal to minus 7 and b is equal to 2",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -125,7 +125,7 @@ const contest_1_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$x=5 / 2,-1$\n$\\left[2 x^{2}-3 x-5=0,2 x^{2}-5 x+2 x-5=(x+1)(2 x-5)=0, x=5 / 2,-1\\right]$",
+        "Answer": "a is equal to 5 over 2 and negative 1",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -138,7 +138,7 @@ const contest_1_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$\\mathbf{x}=7 / 6,-1$\n$\\left[6 x^{2}-x-7=0,6 x^{2}-7 x+6 x-7=(x+1)(6 x-7)=0, x=7 / 6,-1\\right]$",
+        "Answer": "x is equal to 7 over 6 and negative 1",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -151,7 +151,7 @@ const contest_1_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$\\mathrm{x}=\\mathbf{1 / 3},\\mathbf{- 1 / 5}$\n$\\left[15 \\mathrm{x}^{2}-2 \\mathrm{x}-1=(3 \\mathrm{x}-1)(5 \\mathrm{x}+1)=0, \\mathrm{x}=1 / 3, \\mathrm{x}=-1 / 5\\right]$",
+        "Answer": "x is equal to 1/3 and -1/5",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -281,7 +281,7 @@ const contest_1_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$3 \\mathrm{NO}_{2}+\\mathrm{H}_{2} \\mathrm{O} \\rightarrow 2 \\mathrm{HNO}_{3}+\\mathrm{NO}$.\n$3 \\times 46.0$\n$138 \\mathrm{~g}$ of $\\mathrm{NO}_{2} \\quad \\equiv \\quad 126 \\mathrm{~g}$ of $\\mathrm{HNO}_{3}$\nTherefore, mass of $\\mathrm{HNO}_{3}$ to be produced from $69.0 \\mathrm{~g}$ of NO${ }_{2}=$ $(69.0 / 138)^{*} 126 \\mathrm{~g}=63.0 \\mathrm{~g}$",
+        "Answer": "Three N O 2 plus H 2 0 produces 2 HNO3 + NO",
         "calculations present": "Yes",
         "Subject": "Chemistry"
     },

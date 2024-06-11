@@ -1,6 +1,6 @@
 "use client"
 import PracticeNavBar from "@/app/components/PracticeNavBar";
-import questions from "../../../../utils/Questions/NSMQ_2021/contest40/round1"
+import questions from "../../../../utils/Questions/NSMQ_2021/contest1/round1"
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
@@ -14,7 +14,7 @@ import Image from "next/image";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import ContestData from "@/app/utils/NSMQContests";
-import contest_40_1 from "../../../../utils/Questions/NSMQ_2021/contest40/round1";
+import contest_40_1 from "../../../../utils/Questions/NSMQ_2021/contest1/round1";
 import { CgSpinner } from "react-icons/cg";
 
 // const nums = [2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35, 36]
@@ -177,8 +177,8 @@ export default function ContestPage({ params }: any) {
     let audioInstance: any;
 
     const playQuestionAudio = (questionIndex: any) => {
-        const questionAudioUrl = `/Sounds/2021/Contest40/q${questionIndex}.wav`;
-        const preambleAudioUrl = `/Sounds/2021/Contest40/preamble_q${questionIndex}.wav`;
+        const questionAudioUrl = `/Sounds/2021/Contest1/round1/q${questionIndex}.wav`;
+        const preambleAudioUrl = `/Sounds/2021/Contest1/round1/preamble_q${questionIndex}.wav`;
 
         const playAudio = (url: any, onEnded: any) => {
             if (!audioInstance) {
@@ -206,6 +206,9 @@ export default function ContestPage({ params }: any) {
                     if (newTimeLeft < 0) {
                         clearInterval(timerRef.current);
                         return 0;
+                    }
+                    else if (newTimeLeft == 0) {
+                        handleNextQuestion()
                     }
                     return newTimeLeft;
                 });
@@ -326,7 +329,6 @@ export default function ContestPage({ params }: any) {
 
             if (similarityScore > 0.6) {
                 synthesizeText("yes you are right");
-                handleNextQuestion()
                 setTimeout(() => {
                     handleNextQuestion();
                     setRoundScore(round_score + 3);
@@ -422,7 +424,7 @@ export default function ContestPage({ params }: any) {
                                 <h2 className="font-semibold">Transcribed Answer:</h2>
                                 <p className="font-semibold text-[#475569]">{transcribedText}</p>
                             </div>
-                            {/* {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
+                            {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
                                 || currentQuestion.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
                                     <MathJax key={currentQuestionIndex}>
@@ -430,7 +432,7 @@ export default function ContestPage({ params }: any) {
                                     </MathJax>
                                 </MathJaxContext>) :
                                 <h2>Answer: {currentQuestion["Answer"]}</h2>
-                            } */}
+                            }
                         </div>
 
                         <div
