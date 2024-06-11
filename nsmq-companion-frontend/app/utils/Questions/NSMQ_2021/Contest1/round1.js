@@ -10,7 +10,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "The respiratory organs in Amphibians are gills, skin, and lungs, whereas reptiles have only lungs",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Respiratory Systems", "Animal Classification"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "Amphibians are oviparous organisms, whereas reptiles can be oviparous or viviparous",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Reproduction", "Animal Classification"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "Amphibians exhibit external mode of fertilization, whereas reptiles exhibit internal mode of fertilization",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Fertilization", "Animal Reproduction"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "They are either cold or warm-blooded organisms",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Chordates", "Temperature Regulation"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "Have a closed vascular system",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Chordates", "Circulatory System"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "Triploblastic",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Chordates", "Developmental Biology"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "a is equal to 4 and b is equal to 7",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Linear Equations"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "a is equal to 1 and b is equal to negative 2",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Linear Equations"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "a is equal to minus 7 and b is equal to 2",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "System of Equations"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "a is equal to 5 over 2 and negative 1",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Matrices"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "x is equal to 7 over 6 and negative 1",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Matrices"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "x is equal to 1/3 and -1/5",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Matrices"]
     },
     {
         "S/N": 13,
@@ -166,7 +178,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "$42 \\mathrm{~cm}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Torque and Equilibrium"]
     },
     {
         "S/N": 14,
@@ -179,7 +192,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "$50 \\mathrm{~cm}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Torque and Equilibrium"]
     },
     {
         "S/N": 15,
@@ -192,7 +206,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "$48 \\mathrm{~cm}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Torque and Equilibrium"]
     },
     {
         "S/N": 16,
@@ -205,7 +220,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "0.25",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Optics", "Mirror Equation"]
     },
     {
         "S/N": 17,
@@ -218,7 +234,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "0.20",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Optics", "Mirror Equation"]
     },
     {
         "S/N": 18,
@@ -231,7 +248,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "2.0",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Optics", "Mirror Equation"]
     },
     {
         "S/N": 19,
@@ -244,7 +262,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "Sodium",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Periodic Table", "Ionisation Energy"]
     },
     {
         "S/N": 20,
@@ -257,7 +276,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "Argon",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Periodic Trends", "Atomic Radius"]
     },
     {
         "S/N": 21,
@@ -270,7 +290,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "Silicon",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Properties", "Electronegativity"]
     },
     {
         "S/N": 22,
@@ -283,7 +304,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "Three N O 2 plus H 2 0 produces 2 HNO3 + NO",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Reactions", "Stoichiometry"]
     },
     {
         "S/N": 23,
@@ -296,7 +318,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "$3 \\mathrm{NO}_{2}+\\mathrm{H}_{2} \\mathrm{O} \\rightarrow 2 \\mathrm{HNO}_{3}+\\mathrm{NO}$.\nMoles of $\\mathrm{HNO}_{3}$ in $189 \\mathrm{~g}$ of it. $\\quad=189 / 63.0=3.00$\nMoles of $\\mathrm{NO}_{2}$ needed $\\quad=(3.00 / 2.00) * 3=4.50$.\nHence volume of $\\mathrm{NO}_{2}$ at STP required $=4.50 * 22.4=100.8 \\mathrm{dm}^{3}=$\n$101 \\mathrm{dm}^{3}$",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Reactions", "Gas Laws"]
     },
     {
         "S/N": 24,
@@ -309,7 +332,8 @@ const contest_1_1 = [
         "Answer figure name": null,
         "Answer": "$3 \\mathrm{NO}_{2}+\\mathrm{H}_{2} \\mathrm{O} \\rightarrow 2 \\mathrm{HNO}_{3}+\\mathrm{NO}$.\nMoles of $\\mathrm{NO}_{2}$ in $44.8 \\mathrm{dm}^{3}$ of the gas at STP $=44.8 / 22.4=2.00$\nMoles of water required $=(1 / 3) * 2=2 / 3$\nMass of water $\\quad=(2 / 3) * 18.0=12.0 \\mathrm{~g}$",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Reactions", "Stoichiometry"]
     }
 ]
 

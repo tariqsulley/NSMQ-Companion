@@ -205,10 +205,8 @@ export default function ContestPage({ params }: any) {
                     const newTimeLeft = prevTimeLeft - 1;
                     if (newTimeLeft < 0) {
                         clearInterval(timerRef.current);
+
                         return 0;
-                    }
-                    else if (newTimeLeft == 0) {
-                        handleNextQuestion()
                     }
                     return newTimeLeft;
                 });
@@ -234,6 +232,7 @@ export default function ContestPage({ params }: any) {
                 const newTimeLeft = prevTimeLeft - 1;
                 if (newTimeLeft < 0) {
                     clearInterval(timerRef.current);
+
                     return 0;
                 }
                 return newTimeLeft;
