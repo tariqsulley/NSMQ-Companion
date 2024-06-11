@@ -105,7 +105,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                         <div className="font-semibold">Percentage Completed: 0%</div>
                                         <div className="flex gap-4">
                                             <button className="text-white rounded-lg shadow
-                                         bg-blue-800 px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}?set=1`)}>
+                                         bg-blue-800 px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}`)}>
                                                 <p>
                                                     Start Contest
                                                 </p>

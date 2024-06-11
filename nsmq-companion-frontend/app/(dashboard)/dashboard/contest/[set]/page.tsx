@@ -56,6 +56,42 @@ export default function ContestPage({ params }: any) {
     const student_analytics = []
     const [timeRemainingPercentage, setTimeRemainingPercentage] = useState(Array(questions.length).fill(null));
 
+
+
+    const [totalRoundScore, setTotalRoundScore] = useState([{
+        'Contest': 'Contest 1',
+        'Round1': 0
+    }])
+
+    const [roundBreakDown, setRoundBreakDown] = useState([{
+        'Year': '2021',
+        'contest': 'Contest 1',
+        'name': 'Round1',
+        'Mathematics': 0,
+        'Biology': 0,
+        'Chemistry': 0,
+        'Physics': 0
+    }])
+
+    const [studentStrength, setStudentStrength] = useState([0, 0, 0, 0])
+
+    type Subject = 'Mathematics' | 'Biology' | 'Chemistry' | 'Physics';
+
+    const updateRoundBreakDown = (subject: Subject, score: number) => {
+        setRoundBreakDown((prevBreakDown) => {
+            const newBreakDown = [...prevBreakDown];
+            const subjectIndex = {
+                'Mathematics': 0,
+                'Biology': 1,
+                'Chemistry': 2,
+                'Physics': 3,
+            };
+            const index = subjectIndex[subject];
+            newBreakDown[0][subject] += score;
+            return newBreakDown;
+        });
+    };
+
     const handleTranscriptUpdate = () => {
         setTranscribedText(transcript);
         if (!listening) {
@@ -328,12 +364,14 @@ export default function ContestPage({ params }: any) {
 
             if (similarityScore > 0.6) {
                 synthesizeText("yes you are right");
+                updateRoundBreakDown(currentQuestion["Subject"] as Subject, 3);
                 setTimeout(() => {
                     handleNextQuestion();
                     setRoundScore(round_score + 3);
                 }, 3000);
             } else {
                 synthesizeText("I'm not accepting that")
+                updateRoundBreakDown(currentQuestion["Subject"] as Subject, 0);
                 setTimeout(() => {
                     handleNextQuestion();
                 }, 3000);
@@ -376,19 +414,22 @@ export default function ContestPage({ params }: any) {
                     <button onClick={handleSkipIntro}>
                         Skip Intro
                     </button>}
+                <div>
+                    <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold">Round 1</p>
+                </div>
 
                 <div className="flex w-full">
 
                     <div className="flex items-center gap-1 p-2 w-full justify-start">
-                        <p className="font-semibold">Points: {round_score}</p>
+                        <p className="font-semibold text-2xl">Points: {round_score}</p>
                     </div>
 
                     {isAudioPlaying ? <div className="flex items-center gap-1 p-2 w-full justify-end">
                         <Image src={clock_icon} alt="clock icon" width={20} height={20} />
-                        <p className="font-semibold">Time left:</p>
+                        <p className="font-semibold text-2xl">Time left:</p>
                     </div> : <div className="flex items-center gap-1 p-2 w-full justify-end">
                         <Image src={clock_icon} alt="clock icon" width={20} height={20} />
-                        <p className="font-semibold">Time left: {timeLeft}s</p>
+                        <p className="font-semibold text-2xl">Time left: {timeLeft}s</p>
                     </div>
                     }
                 </div>

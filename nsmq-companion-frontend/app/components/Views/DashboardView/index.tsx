@@ -128,7 +128,6 @@ export default function DashboardView() {
                     <SearchSelect>
                         <SearchSelectItem value="1">2021</SearchSelectItem>
                         <SearchSelectItem value="2">2020</SearchSelectItem>
-                        <SearchSelectItem value="3">2019</SearchSelectItem>
                     </SearchSelect>
                 </div>
                 <div></div>
