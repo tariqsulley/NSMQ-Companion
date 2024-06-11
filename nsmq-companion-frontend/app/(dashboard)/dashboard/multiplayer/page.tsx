@@ -69,28 +69,7 @@ export default function MultiplayerPage() {
         }, 1000);
     };
 
-    // const handleCircleClick = () => {
-    //     if (!isBellPlaying && browserSupportsSpeechRecognition) {
-    //         setIsBellPlaying(true);
-    //         setIsCircleGreen(true);
-    //         play();
 
-    //         if (currentAudio) {
-    //             currentAudio.pause();
-    //             setIsAudioPaused(true);
-    //             // Notify other client to pause audio
-    //             socket?.send(JSON.stringify({ action: "pause_audio" }));
-    //         }
-
-    //         SpeechRecognition.startListening({ continuous: true });
-
-    //         setTimeout(() => {
-    //             setIsCircleGreen(false);
-    //             setIsBellPlaying(false);
-    //             SpeechRecognition.stopListening();
-    //         }, 10000);
-    //     }
-    // };
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
@@ -166,7 +145,6 @@ export default function MultiplayerPage() {
                 startCountdown();
             } else if (data.action === "pause_audio") {
                 if (currentAudio) {
-                    currentAudio.pause();
                     setIsAudioPaused(true);
                 }
             } else if (data.action === "resume_audio") {
@@ -195,9 +173,7 @@ export default function MultiplayerPage() {
             setQuizStarted(false);
             setOpponentImage("");
         }
-        if (currentAudio) {
-            currentAudio.pause();
-        }
+
     };
 
     async function loadAudio(url: any) {
@@ -219,41 +195,11 @@ export default function MultiplayerPage() {
             source.onended = resolve;
         });
     }
-    // const playAudio = (riddleNumber: any, lineNumber: any) => {
-    //     const audioPath = `/Sounds/multiplayer_riddles/riddle_${riddleNumber}/line_${lineNumber}.wav`;
-    //     const audio = new Audio(audioPath);
-    //     audio.play();
 
-    //     return audio;
-    // };
-
-    // const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(
-    //     null
-    // );
 
     const [currentLine, setCurrentLine] = useState(1);
 
-    // const playRiddle = async (riddleNumber: any) => {
-    //     const riddleLines = riddles[`riddle_${riddleNumber}`];
-    //     if (!riddleLines) return;
 
-    //     for (
-    //         let lineNumber = currentLine;
-    //         lineNumber <= Object.keys(riddleLines).length;
-    //         lineNumber++
-    //     ) {
-    //         if (isAudioPaused) {
-    //             setCurrentLine(lineNumber);
-    //             break;
-    //         }
-    //         setRiddleQuestion(riddleLines[`line_${lineNumber}`]);
-    //         const audio = playAudio(riddleNumber, lineNumber);
-    //         setCurrentAudio(audio);
-    //         await new Promise((resolve) => {
-    //             audio.onended = resolve;
-    //         });
-    //     }
-    // };
     const playRiddle = async (riddleNumber: any) => {
         const riddleLines = riddles[`riddle_${riddleNumber}`];
         if (!riddleLines) {
@@ -274,15 +220,6 @@ export default function MultiplayerPage() {
     };
 
 
-    // const playRiddle = async (riddleNumber: any) => {
-    //     const riddleLines = riddles[`riddle_${riddleNumber}`];
-    //     if (!riddleLines) return;
-
-    //     for (let lineNumber = 1; lineNumber <= Object.keys(riddleLines).length; lineNumber++) {
-    //         setRiddleQuestion(riddleLines[`line_${lineNumber}`]);
-    //         await playAudio(riddleNumber, lineNumber);
-    //     }
-    // };
 
     const handleCalculateSimilarity = async () => {
         try {
