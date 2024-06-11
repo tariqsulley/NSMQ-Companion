@@ -55,8 +55,7 @@ export default function ContestPage({ params }: any) {
     const [round_score, setRoundScore] = useState(0)
     const student_analytics = []
     const [timeRemainingPercentage, setTimeRemainingPercentage] = useState(Array(questions.length).fill(null));
-
-
+    const [quizEnded, setQuizEnded] = useState(false)
 
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
@@ -241,7 +240,7 @@ export default function ContestPage({ params }: any) {
                     const newTimeLeft = prevTimeLeft - 1;
                     if (newTimeLeft < 0) {
                         clearInterval(timerRef.current);
-
+                        setQuizEnded(true)
                         return 0;
                     }
                     return newTimeLeft;
@@ -293,6 +292,7 @@ export default function ContestPage({ params }: any) {
                 return newIndex;
             } else {
                 setQuizStarted(false);
+                setQuizEnded(true)
                 return prevIndex;
             }
         });
@@ -407,6 +407,7 @@ export default function ContestPage({ params }: any) {
                         are no calculations you have 10 seconds to do so. All questions are to be attempted once only.
                         Best wishes to you
                     </p> : ""}
+
                 {!introStarted ?
                     <button onClick={handleStartIntro}>
                         Start Intro
@@ -414,28 +415,30 @@ export default function ContestPage({ params }: any) {
                     <button onClick={handleSkipIntro}>
                         Skip Intro
                     </button>}
-                <div>
-                    <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold">Round 1</p>
-                </div>
 
-                <div className="flex w-full">
+                {introskipped && !quizEnded &&
+                    <div className="m-10  flex flex-col  w-full justify-center items-center">
 
-                    <div className="flex items-center gap-1 p-2 w-full justify-start">
-                        <p className="font-semibold text-2xl">Points: {round_score}</p>
-                    </div>
+                        <div>
+                            <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold">Round 1</p>
+                        </div>
 
-                    {isAudioPlaying ? <div className="flex items-center gap-1 p-2 w-full justify-end">
-                        <Image src={clock_icon} alt="clock icon" width={20} height={20} />
-                        <p className="font-semibold text-2xl">Time left:</p>
-                    </div> : <div className="flex items-center gap-1 p-2 w-full justify-end">
-                        <Image src={clock_icon} alt="clock icon" width={20} height={20} />
-                        <p className="font-semibold text-2xl">Time left: {timeLeft}s</p>
-                    </div>
-                    }
-                </div>
+                        <div className="flex w-full ">
 
-                {introskipped &&
-                    <div className="m-10  flex flex-col justify-center items-center">
+                            <div className="flex items-center gap-1 p-2 w-full justify-start">
+                                <p className="font-semibold text-2xl">Points: {round_score}</p>
+                            </div>
+
+                            {isAudioPlaying ? <div className="flex items-center gap-1 p-2 w-full justify-end">
+                                <Image src={clock_icon} alt="clock icon" width={20} height={20} />
+                                <p className="font-semibold text-2xl">Time left:</p>
+                            </div> : <div className="flex items-center gap-1 p-2 w-full justify-end">
+                                <Image src={clock_icon} alt="clock icon" width={20} height={20} />
+                                <p className="font-semibold text-2xl">Time left: {timeLeft}s</p>
+                            </div>
+                            }
+                        </div>
+
                         <div className="">
                             {/* <p> Question: {currentQuestion["S/N"]} </p> */}
                             <h2 className="font-bold">Subject: {currentQuestion["Subject"]}</h2>
@@ -474,12 +477,10 @@ export default function ContestPage({ params }: any) {
                                 <h2>Answer: {currentQuestion["Answer"]}</h2>
                             }
                         </div>
-
                         <div
                             className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
                             onClick={handleCircleClick}
                         />
-
                         <div className=" w-full justify-between flex gap-2 items-center mt-2">
 
                             <button
@@ -501,18 +502,20 @@ export default function ContestPage({ params }: any) {
                                         <p className="font-semibold text-white">Next Question</p></button>
                                 )}
                             </div>
-
-                            {/* <button onClick={handleRecordAudio}>
-                            {isRecording ? <div>
-                                <p>Recording</p>
-                                <FaMicrophoneAlt className="text-red-500" size={25} />
-                            </div> :
-                                <FaMicrophoneAlt size={25} />}
-                        </button> */}
-                            {/* <p> {checkingAnswer ? "Checking" : "Done checking"}</p> */}
                             <p>Similarity:{similarityScore}</p>
                         </div>
                     </div>}
+
+                {quizEnded && (
+                    <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 shadow w-full
+                     shadow rounded-b-xl dark:bg-darkBgLight">
+                        <h2 className="text-2xl font-bold">End of Round 1</h2>
+                        <p className="text-lg mt-2">Total Points: {round_score}</p>
+                        <div>
+                            <button>Go To Next Round</button>
+                        </div>
+                    </div>
+                )}
 
             </div>
             <div className="flex flex-wrap items-center justify-center mt-10 gap-4 m-2">
