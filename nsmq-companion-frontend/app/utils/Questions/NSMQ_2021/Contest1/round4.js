@@ -10,7 +10,8 @@ const contest_1_4 = [
         "Answer figure name": null,
         "Answer": "Isobaric process",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Thermodynamics", "Isobaric Process"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_1_4 = [
         "Answer figure name": null,
         "Answer": "Endosperm",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Botany", "Plant Reproduction"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_1_4 = [
         "Answer figure name": null,
         "Answer": "INFINITY",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Mathematics", "Conceptual Mathematics"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_1_4 = [
         "Answer figure name": null,
         "Answer": "Covalent bond.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemistry", "Chemical Bonding"]
     }
 ]
 

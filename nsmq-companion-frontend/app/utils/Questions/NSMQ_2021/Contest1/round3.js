@@ -10,7 +10,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "T. $\\quad$ (It is more pronounced in non-polar solvents.)",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Solvent Effects"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "F. (In the vapour phase there is extensive dimerization)",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Physical Chemistry", "Phase Behavior"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "T.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Acid Strength"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "$F$.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Kinetics", "Catalysis"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "F. It will increase it by a factor of 9 .",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Kinetics", "Reaction Rates"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "T. (Heterogenous catalysis is a surface action.)",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Catalytic Reduction"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Geometry", "Symmetry"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Geometry", "Isosceles Triangles"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Geometry", "Equilateral Triangles"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Trigonometry", "Function Properties"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Trigonometry", "Function Properties"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Trigonometry", "Function Properties"]
     },
     {
         "S/N": 13,
@@ -166,7 +178,9 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Botany", "Evolution of Plant Structures"]
+
     },
     {
         "S/N": 14,
@@ -179,7 +193,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Botany", "Root and Leaf Structure Correlation"]
     },
     {
         "S/N": 15,
@@ -192,7 +207,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Botany", "Root System Development"]
     },
     {
         "S/N": 16,
@@ -205,7 +221,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Human Biology", "Spermatogenesis"]
     },
     {
         "S/N": 17,
@@ -218,7 +235,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Human Biology", "Developmental Biology"]
     },
     {
         "S/N": 18,
@@ -231,7 +249,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Human Biology", "Reproductive Physiology"]
     },
     {
         "S/N": 19,
@@ -244,7 +263,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electricity", "Capacitors in Series"]
     },
     {
         "S/N": 20,
@@ -257,7 +277,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electricity", "Capacitors in Series"]
     },
     {
         "S/N": 21,
@@ -270,7 +291,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electricity", "Capacitors in Series"]
     },
     {
         "S/N": 22,
@@ -283,7 +305,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Nuclear Physics", "Radioactivity"]
     },
     {
         "S/N": 23,
@@ -296,7 +319,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Nuclear Physics", "Radioactivity"]
     },
     {
         "S/N": 24,
@@ -309,7 +333,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Nuclear Physics", "Radioactivity"]
     }
 ]
 

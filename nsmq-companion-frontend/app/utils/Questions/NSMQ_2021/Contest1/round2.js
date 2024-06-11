@@ -10,7 +10,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "$(\\mathbf{a}+\\mathbf{b})^{4}$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Polynomial Factorization"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "120\n$[5 !=5 \\times 4 \\times 3 \\times 2 \\times 1=20 \\times 6=120]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Combinatorics", "Permutations"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "$(2,16)$\n$\\left[d y / d x=3 x^{2}-12 x+16, d^{2} y / d x^{2}=6 x-12=0, x=2, y=8-24+32=16\\right.$, $(2,16)]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Calculus", "Curve Analysis"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "Two sets of sister chromatids (Don't accept four chromatids)",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Genetics", "Cell Division"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "Lithotrophs",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Ecology", "Energy Sources"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "A perfect flower is one in which both male and female reproductive structures are present. / Both androecium and gynoecium are located on the same flower",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Botany", "Flower Anatomy"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "Sited at Tema so as to receive imported alumina through the Tema harbour and also having electricity supply from Akosombo.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Industrial Chemistry", "Location Factors"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "$\\mathrm{H}^{+}$ions in the aqueous solution will be discharged at the cathode in preference to the $\\mathrm{Al}^{3+}$ ions $\\mathrm{OR}$ the reduction potential of $\\mathrm{H}^{+}$ions is higher than that of $\\mathrm{Al}^{3+}$.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Electrochemistry", "Aluminum Production"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "$\\mathrm{pK} \\mathrm{b}_{\\mathrm{b}}$ of the conjugate base $=14.0-4.80=9.20$\n$$\n\\begin{array}{rlrl}\n\\mathrm{pOH} & =1 / 2 \\mathrm{pK}_{\\mathrm{b}-} \\quad 1 / 2 \\log \\mathrm{C}_{\\mathrm{b}} & \\left(C_{b}=0.100 \\mathrm{moldm}^{-3}\\right) \\\\\n& =9.20 / 2+0.500=5.10 \\\\\n\\text { Hence } \\mathrm{pH} & =14.0-5.10=8.90 .\n\\end{array}\n$$",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Acid-Base Chemistry", "pH Calculation"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "$800 \\mathrm{~kJ}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Thermodynamics", "Work Done"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "$8 \\Omega$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electricity", "Resistance Calculation"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_1_2 = [
         "Answer figure name": null,
         "Answer": "They move in the same direction as the incoming object",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Conservation of Momentum"]
     }
 ]
 
