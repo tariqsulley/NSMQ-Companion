@@ -53,14 +53,28 @@ export default function ContestPage({ params }: any) {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
 
 
-    useEffect(() => {
-        const importQuestions = async () => {
-            const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/round1`);
-            setImportedQuestions(questionsData.default);
-        };
+    // useEffect(() => {
+    //     const importQuestions = async () => {
+    //         const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/round1`);
+    //         setImportedQuestions(questionsData.default);
+    //     };
 
-        importQuestions();
-    }, []);
+    //     importQuestions();
+    // }, []);
+    const importQuestions = async (round = 'round1') => {
+        try {
+            const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/${round}`);
+            setImportedQuestions(questionsData.default);
+        } catch (error) {
+            console.error('Failed to load questions:', error);
+            setImportedQuestions([]);  // Handle the error, maybe set to empty array or show error message
+        }
+    };
+
+    useEffect(() => {
+        importQuestions();  // You might pass a round variable here if it changes
+    }, [contestId]);  // Add round to dependency array if it's a state/prop
+
 
 
     const [introStarted, setIntroStarted] = useState(false)
@@ -408,6 +422,18 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+    const handleGoToNextRound = () => {
+        importQuestions('round2').then(() => {
+            setCurrentQuestionIndex(0);  // Reset the question index
+            setQuizEnded(false);  // Ensure quiz is not marked as ended if starting new round
+        });
+    };
+
+    if (!questions) {
+        return <div>Loading questions...</div>;
+    }
+
+
     return (
         <div className="bg-bgMain dark:bg-darkBgDeep h-screen">
             <PracticeNavBar />
@@ -527,7 +553,7 @@ export default function ContestPage({ params }: any) {
                         <h2 className="text-2xl font-bold">End of Round 1</h2>
                         <p className="text-lg mt-2">Total Points: {round_score}</p>
                         <div>
-                            <button>Go To Next Round</button>
+                            <button onClick={handleGoToNextRound}>Go To Next Round</button>
                         </div>
                     </div>
                 )}
