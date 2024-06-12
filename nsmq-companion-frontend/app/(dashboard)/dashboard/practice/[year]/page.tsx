@@ -79,13 +79,13 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     }
 
     return (
-        <div className="bg-bgMain h-screen">
+        <div className="bg-bgMain dark:bg-darkBgDeep h-screen">
             <PracticeNavBar />
             <div>
 
             </div>
-            <div className="bg-white shadow rounded-b-xl mt-20">
-                <Link href={"/dashboard/practice"} className="flex bg-white sm:w-[15%] items-center justify-center gap-1 
+            <div className="bg-white dark:bg-darkBgLight shadow rounded-b-xl mt-20">
+                <Link href={"/dashboard/practice"} className="flex bg-white dark:bg-blue-800 sm:w-[15%] items-center justify-center gap-1 
                 border-2 px-5 py-2 rounded-lg mx-10 mt-5 shadow">
                     <p className="font-semibold">Back to Dashboard </p>
                     <IoReturnUpBack size={20} />
@@ -102,7 +102,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                 <ContestCard
                                     key={contest}
                                     contest_name={contest}
-                                    bg_color="bg-gray-200"
+                                    bg_color="bg-gray-200 dark:bg-blue-800"
                                     is_active={selectedContest === contest}
                                     onClick={() => handleContestClick(contest)}
                                 />
