@@ -8,7 +8,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "T. $\\quad$ (It is more pronounced in non-polar solvents.)",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Organic Chemistry", "Solvent Effects"]
@@ -22,7 +22,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "F. (In the vapour phase there is extensive dimerization)",
+        "Answer": "False",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Physical Chemistry", "Phase Behavior"]
@@ -36,7 +36,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "T.",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Organic Chemistry", "Acid Strength"]
@@ -50,7 +50,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$F$.",
+        "Answer": "False.",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Chemical Kinetics", "Catalysis"]
@@ -64,7 +64,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "F. It will increase it by a factor of 9 .",
+        "Answer": "False",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Chemical Kinetics", "Reaction Rates"]
@@ -78,7 +78,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "T. (Heterogenous catalysis is a surface action.)",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Organic Chemistry", "Catalytic Reduction"]
@@ -92,7 +92,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "FALSE",
+        "Answer": "False",
         "calculations present": "No",
         "Subject": "Mathematics",
         "Topic Tag": ["Geometry", "Symmetry"]
@@ -106,7 +106,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "FALSE",
+        "Answer": "False",
         "calculations present": "No",
         "Subject": "Mathematics",
         "Topic Tag": ["Geometry", "Isosceles Triangles"]
@@ -120,7 +120,7 @@ const contest_1_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "FALSE",
+        "Answer": "False",
         "calculations present": "No",
         "Subject": "Mathematics",
         "Topic Tag": ["Geometry", "Equilateral Triangles"]

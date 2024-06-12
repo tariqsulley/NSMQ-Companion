@@ -57,4 +57,4 @@ const contest_1_4 = [
     }
 ]
 
-export default contest_1_5
+export default contest_1_4

@@ -487,39 +487,39 @@ export default function ContestPage({ params }: any) {
 
                         <div className="">
                             {/* <p> Question: {currentQuestion["S/N"]} </p> */}
-                            <h2 className="font-bold">Subject: {currentQuestion["Subject"]}</h2>
-                            {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
-                                || currentQuestion.Subject === "Chemistry" ? (
+                            <h2 className="font-bold">Subject: {currentQuestion?.["Subject"]}</h2>
+                            {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
+                                || currentQuestion?.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
                                     <MathJax key={currentQuestionIndex}>
-                                        Preamble:  {currentQuestion["Preamble Text"]}
+                                        Preamble:  {currentQuestion?.["Preamble Text"]}
                                     </MathJax>
                                 </MathJaxContext>) :
-                                <h2 className="font-semibold text-[#475569]">Preamble: {currentQuestion["Preamble Text"]}</h2>
+                                <h2 className="font-semibold text-[#475569]">Preamble: {currentQuestion?.["Preamble Text"]}</h2>
                             }
 
-                            {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
-                                || currentQuestion.Subject === "Chemistry" ? (
+                            {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
+                                || currentQuestion?.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
                                     <MathJax key={currentQuestionIndex}>
-                                        {currentQuestion["Question"]}
+                                        {currentQuestion?.["Question"]}
                                     </MathJax>
                                 </MathJaxContext>) :
-                                <h2 className="font-bold">Question: {currentQuestion["Question"]}</h2>
+                                <h2 className="font-bold">Question: {currentQuestion?.["Question"]}</h2>
                             }
 
                             <div>
                                 <h2 className="font-semibold">Transcribed Answer:</h2>
                                 <p className="font-semibold text-[#475569]">{transcribedText}</p>
                             </div>
-                            {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
-                                || currentQuestion.Subject === "Chemistry" ? (
+                            {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
+                                || currentQuestion?.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
                                     <MathJax key={currentQuestionIndex}>
-                                        Answer: {currentQuestion["Answer"]}
+                                        Answer: {currentQuestion?.["Answer"]}
                                     </MathJax>
                                 </MathJaxContext>) :
-                                <h2>Answer: {currentQuestion["Answer"]}</h2>
+                                <h2>Answer: {currentQuestion?.["Answer"]}</h2>
                             }
                         </div>
                         <div
