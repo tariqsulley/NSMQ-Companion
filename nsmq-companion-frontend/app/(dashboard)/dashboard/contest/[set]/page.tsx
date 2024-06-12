@@ -15,7 +15,6 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import ContestData from "@/app/utils/NSMQContests";
 import { CgSpinner } from "react-icons/cg";
 
-// const nums = [2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35, 36]
 
 
 export default function ContestPage({ params }: any) {
@@ -26,11 +25,8 @@ export default function ContestPage({ params }: any) {
     const currentQuestion = questions?.length > 0 ? questions[currentQuestionIndex] : null;
     const pathname = usePathname();
     const year = pathname.split('/')[3];
-
-
     const searchParams = useSearchParams();
     const contestId = searchParams.get('id');
-
     const type = parseInt(searchParams.get("nums") ?? "0");
     const [selectedContest, setSelectedContest] = useState("");
     const [contestValue, setContestValue] = useState("");
@@ -53,6 +49,37 @@ export default function ContestPage({ params }: any) {
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const [currentRound, setCurrentRound] = useState(1);
     const [playedPreambles, setPlayedPreambles] = useState(new Set());
+    const [introStarted, setIntroStarted] = useState(false)
+    const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
+    const [isReadyToCalculate, setIsReadyToCalculate] = useState(false);
+    const [round_score, setRoundScore] = useState(0)
+    const student_analytics = []
+    const [timeRemainingPercentage, setTimeRemainingPercentage] = useState(Array(questions?.length).fill(null));
+    const [quizEnded, setQuizEnded] = useState(false)
+    const [timeLeft, setTimeLeft] = useState(0);
+    const [currentClueIndex, setCurrentClueIndex] = useState(0);
+    const [currentClueText, setCurrentClueText] = useState('');
+    const timerRef = useRef<any>(null);
+    const [totalRoundScore, setTotalRoundScore] = useState([{
+        'Contest': 'Contest 1',
+        'Round1': 0
+    }])
+    const [roundBreakDown, setRoundBreakDown] = useState([{
+        'Year': '2021',
+        'contest': 'Contest 1',
+        'name': 'Round1',
+        'Mathematics': 0,
+        'Biology': 0,
+        'Chemistry': 0,
+        'Physics': 0
+    }])
+    const [studentStrength, setStudentStrength] = useState([0, 0, 0, 0])
+
+    const [clueTexts, setClueTexts] = useState<string[]>([]);
+
+    const addClueText = (newText: string) => {
+        setClueTexts(prevTexts => [...prevTexts, newText]);
+    };
 
     const importQuestions = async (round: any) => {
         try {
@@ -64,36 +91,11 @@ export default function ContestPage({ params }: any) {
         }
     };
 
-
     useEffect(() => {
         importQuestions(currentRound);
     }, [contestId, currentRound]);
 
-    const [introStarted, setIntroStarted] = useState(false)
-    const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
-    const [isReadyToCalculate, setIsReadyToCalculate] = useState(false);
-    const [round_score, setRoundScore] = useState(0)
-    const student_analytics = []
-    const [timeRemainingPercentage, setTimeRemainingPercentage] = useState(Array(questions?.length).fill(null));
-    const [quizEnded, setQuizEnded] = useState(false)
-    const [timeLeft, setTimeLeft] = useState(0);
 
-    const [totalRoundScore, setTotalRoundScore] = useState([{
-        'Contest': 'Contest 1',
-        'Round1': 0
-    }])
-
-    const [roundBreakDown, setRoundBreakDown] = useState([{
-        'Year': '2021',
-        'contest': 'Contest 1',
-        'name': 'Round1',
-        'Mathematics': 0,
-        'Biology': 0,
-        'Chemistry': 0,
-        'Physics': 0
-    }])
-
-    const [studentStrength, setStudentStrength] = useState([0, 0, 0, 0])
 
     type Subject = 'Mathematics' | 'Biology' | 'Chemistry' | 'Physics';
 
@@ -119,12 +121,9 @@ export default function ContestPage({ params }: any) {
         }
     };
 
-
-    const timerRef = useRef<any>(null);
-
-
     const handleStartQuiz = () => {
         setQuizStarted(true);
+        setCurrentClueIndex(0);
         playQuestionAudio(1);
     };
 
@@ -137,7 +136,6 @@ export default function ContestPage({ params }: any) {
         stopIntro();
         setIntroSkipper(true);
     };
-
 
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
@@ -252,18 +250,58 @@ export default function ContestPage({ params }: any) {
             }, 1000);
         };
 
+        const clearClues = () => {
+            setClueTexts([]); // Clear all clues
+        };
+
+
+        const playCluesByOne = () => {
+            setCurrentClueIndex(0); // Reset the clue index
+            clearClues();
+
+            const playNextClue = (clueIndex: any) => {
+                const clueAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
+                addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]); // Add the clue text before playing audio
+
+                playAudio(clueAudioUrl, () => {
+                    if (clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1) {
+                        playNextClue(clueIndex + 1); // Recursive call to play the next clue
+                    } else {
+                        onQuestionEnded(); // All clues have been played
+                    }
+                });
+            };
+
+            playNextClue(0); // Start playing from the first clue
+        };
+
+
+
         const question = questions[questionIndex - 1];
         const preambleText = question["Preamble Text"];
 
-        if (preambleText && !playedPreambles.has(preambleText)) {
-            setPlayedPreambles(new Set(playedPreambles).add(preambleText));
-            playAudio(preambleAudioUrl, () => {
+        if (currentRound === 4) {
+            // Round 4, handle preamble and clues
+            if (preambleText && !playedPreambles.has(preambleText)) {
+                setPlayedPreambles(new Set(playedPreambles).add(preambleText));
+                playAudio(preambleAudioUrl, () => {
+                    playCluesByOne();
+                });
+            } else {
+                playCluesByOne();
+            }
+        } else {
+            // Other rounds, handle preamble and full question
+            if (preambleText && !playedPreambles.has(preambleText)) {
+                setPlayedPreambles(new Set(playedPreambles).add(preambleText));
+                playAudio(preambleAudioUrl, () => {
+                    playAudio(questionAudioUrl, onQuestionEnded);
+                    startTimer();
+                });
+            } else {
                 playAudio(questionAudioUrl, onQuestionEnded);
                 startTimer();
-            });
-        } else {
-            playAudio(questionAudioUrl, onQuestionEnded);
-            startTimer();
+            }
         }
     };
 
@@ -292,35 +330,29 @@ export default function ContestPage({ params }: any) {
     }, [quizStarted]);
 
 
-    // const handleNextQuestion = () => {
-    //     resetTranscript();
-    //     setCurrentQuestionIndex((prevIndex) => {
-    //         const newIndex = prevIndex + 1;
-    //         if (newIndex < questions.length) {
-    //             playQuestionAudio(newIndex + 1);
-    //             return newIndex;
-    //         } else {
-    //             setQuizStarted(false);
-    //             setQuizEnded(true)
-    //             return prevIndex;
-    //         }
-    //     });
-    // };
 
     const handleNextQuestion = () => {
-        resetTranscript();
-        setCurrentQuestionIndex((prevIndex) => {
+        resetTranscript(); // Clear any existing transcripts
+
+        // Update the question index
+        setCurrentQuestionIndex(prevIndex => {
             const newIndex = prevIndex + 1;
             if (newIndex < questions.length) {
-                playQuestionAudio(newIndex + 1);
+                // Call to play the next question audio is moved to useEffect to ensure the index is updated
                 return newIndex;
             } else {
+                // End the quiz if there are no more questions
                 setQuizStarted(false);
                 setQuizEnded(true);
-                return prevIndex;
+                return prevIndex; // Return the current index if no more questions
             }
         });
     };
+    useEffect(() => {
+        if (quizStarted && currentQuestionIndex < questions?.length) {
+            playQuestionAudio(currentQuestionIndex + 1);
+        }
+    }, [currentQuestionIndex]);
 
 
     const sendAudioToBackend = async (audioBlob: any) => {
@@ -498,15 +530,27 @@ export default function ContestPage({ params }: any) {
                                 <h2 className="font-semibold text-[#475569]">Preamble: {currentQuestion?.["Preamble Text"]}</h2>
                             }
 
-                            {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
-                                || currentQuestion?.Subject === "Chemistry" ? (
-                                <MathJaxContext config={config}>
-                                    <MathJax key={currentQuestionIndex}>
-                                        {currentQuestion?.["Question"]}
-                                    </MathJax>
-                                </MathJaxContext>) :
-                                <h2 className="font-bold">Question: {currentQuestion?.["Question"]}</h2>
-                            }
+
+                            <div>
+                                {currentRound === 4 ? (
+                                    <div>
+                                        <h2 className="font-bold">Clues:</h2>
+                                        {clueTexts.map((text, index) => (
+                                            <p key={index}>{text}</p>  // Display each clue text
+                                        ))}
+                                    </div>
+                                )
+                                    : (
+                                        currentQuestion?.["calculations present"] ? (
+                                            <MathJaxContext config={config}>
+                                                <MathJax key={currentQuestionIndex}>
+                                                    {currentQuestion?.["Question"]}
+                                                </MathJax>
+                                            </MathJaxContext>) : <h2 className="font-bold">Question: {currentQuestion?.["Question"]} </h2>
+                                    )
+                                }
+                            </div>
+
 
                             <div>
                                 <h2 className="font-semibold">Transcribed Answer:</h2>

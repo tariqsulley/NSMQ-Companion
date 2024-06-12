@@ -5,7 +5,7 @@ const contest_1_4 = [
         "Preamble Text": null,
         "Question": "I am a thermodynamic process.\nFor an ideal gas, I can be accompanied by changes in internal energy.\nFor an ideal gas, I can also be accompanied by volume changes.\nMy name is derived from the Greek word for weight.\nI am the thermodynamic process in which pressure remains constant.\nWho am I?",
         "Question has figure": "No",
-        "clue1": " am a thermodynamic process",
+        "clue1": "I am a thermodynamic process",
         "clue2": "For an ideal gas, I can be accompanied by changes in internal energy.",
         "clue3": "For an ideal gas, I can also be accompanied by volume changes",
         "clue4": "My name is derived from the Greek word for weight.",
