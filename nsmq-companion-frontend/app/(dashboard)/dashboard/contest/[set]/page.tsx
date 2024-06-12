@@ -76,6 +76,7 @@ export default function ContestPage({ params }: any) {
     const student_analytics = []
     const [timeRemainingPercentage, setTimeRemainingPercentage] = useState(Array(questions?.length).fill(null));
     const [quizEnded, setQuizEnded] = useState(false)
+    const [timeLeft, setTimeLeft] = useState(0);
 
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
@@ -118,9 +119,6 @@ export default function ContestPage({ params }: any) {
         }
     };
 
-    const [timeLeft, setTimeLeft] = useState(
-        currentQuestion?.["Subject"] === "Mathematics" ? 30 : 10
-    );
 
     const timerRef = useRef<any>(null);
 
@@ -234,13 +232,12 @@ export default function ContestPage({ params }: any) {
             audioInstance.onended = () => {
                 onEnded();
                 setIsAudioPlaying(false);
-                startTimer(questions[questionIndex - 1]["Subject"]);
+                // startTimer();
             };
         };
 
         const onQuestionEnded = () => {
-            const subject = questions[questionIndex - 1]["Subject"];
-            const timeLimit = subject === "Mathematics" ? 30 : 10;
+            const timeLimit = questions[questionIndex - 1]["calculations present"] === "Yes" ? 30 : 10;
             clearInterval(timerRef.current);
             setTimeLeft(timeLimit);
             timerRef.current = setInterval(() => {
@@ -248,7 +245,6 @@ export default function ContestPage({ params }: any) {
                     const newTimeLeft = prevTimeLeft - 1;
                     if (newTimeLeft < 0) {
                         clearInterval(timerRef.current);
-                        setQuizEnded(true)
                         return 0;
                     }
                     return newTimeLeft;
@@ -259,23 +255,24 @@ export default function ContestPage({ params }: any) {
         if (questions[questionIndex - 1]?.["Preamble Text"] && questions[questionIndex - 1]?.["S/N"] === 1) {
             playAudio(preambleAudioUrl, () => {
                 playAudio(questionAudioUrl, onQuestionEnded);
+                startTimer();
             });
         } else {
             playAudio(questionAudioUrl, onQuestionEnded);
+            startTimer();
         }
     };
 
 
-    const startTimer = (subject: any) => {
+    const startTimer = () => {
         clearInterval(timerRef.current);
-        const timeLimit = subject === "Mathematics" ? 30 : 10;
+        const timeLimit = currentQuestion["calculations present"] === "Yes" ? 30 : 10;
         setTimeLeft(timeLimit);
         timerRef.current = setInterval(() => {
             setTimeLeft((prevTimeLeft) => {
                 const newTimeLeft = prevTimeLeft - 1;
                 if (newTimeLeft < 0) {
                     clearInterval(timerRef.current);
-
                     return 0;
                 }
                 return newTimeLeft;
@@ -291,6 +288,21 @@ export default function ContestPage({ params }: any) {
     }, [quizStarted]);
 
 
+    // const handleNextQuestion = () => {
+    //     resetTranscript();
+    //     setCurrentQuestionIndex((prevIndex) => {
+    //         const newIndex = prevIndex + 1;
+    //         if (newIndex < questions.length) {
+    //             playQuestionAudio(newIndex + 1);
+    //             return newIndex;
+    //         } else {
+    //             setQuizStarted(false);
+    //             setQuizEnded(true)
+    //             return prevIndex;
+    //         }
+    //     });
+    // };
+
     const handleNextQuestion = () => {
         resetTranscript();
         setCurrentQuestionIndex((prevIndex) => {
@@ -300,11 +312,12 @@ export default function ContestPage({ params }: any) {
                 return newIndex;
             } else {
                 setQuizStarted(false);
-                setQuizEnded(true)
+                setQuizEnded(true);
                 return prevIndex;
             }
         });
     };
+
 
     const sendAudioToBackend = async (audioBlob: any) => {
         try {
@@ -448,7 +461,7 @@ export default function ContestPage({ params }: any) {
                     <div className="m-10  flex flex-col  w-full justify-center items-center">
 
                         <div>
-                            <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold">Round 1</p>
+                            <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold">Round {currentRound}</p>
                         </div>
 
                         <div className="flex w-full ">
