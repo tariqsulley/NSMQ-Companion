@@ -425,6 +425,7 @@ export default function ContestPage({ params }: any) {
             const nextRound = currentRound + 1;
             setCurrentRound(nextRound);
             setRoundScore(0);
+            SetSimilarityScore(Array(questions?.length).fill(null));
             importQuestions(nextRound).then(() => {
                 setCurrentQuestionIndex(0);
                 setQuizEnded(false);
