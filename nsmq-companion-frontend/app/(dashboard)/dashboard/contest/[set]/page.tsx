@@ -1,6 +1,6 @@
 "use client"
 import PracticeNavBar from "@/app/components/PracticeNavBar";
-import questions from "../../../../utils/Questions/NSMQ_2021/contest1/round1"
+// import questions from "../../../../utils/Questions/NSMQ_2021/contest1/round1"
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
@@ -14,7 +14,6 @@ import Image from "next/image";
 import { MathJax, MathJaxContext } from "better-react-mathjax";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import ContestData from "@/app/utils/NSMQContests";
-import contest_40_1 from "../../../../utils/Questions/NSMQ_2021/contest1/round1";
 import { CgSpinner } from "react-icons/cg";
 
 // const nums = [2, 3, 5, 6, 8, 9, 11, 12, 14, 15, 17, 18, 20, 21, 23, 24, 26, 27, 29, 30, 32, 33, 35, 36]
@@ -23,15 +22,20 @@ import { CgSpinner } from "react-icons/cg";
 export default function ContestPage({ params }: any) {
 
     const { set } = params;
-    const { year } = params;
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+    const [questions, setImportedQuestions] = useState<any>(null);
+    // const currentQuestion = questions[currentQuestionIndex];
+    const currentQuestion = questions?.length > 0 ? questions[currentQuestionIndex] : null;
+
     const searchParams = useSearchParams();
+    const contestId = searchParams.get('id');
+    const year = searchParams.get('year');
+
     const type = parseInt(searchParams.get("nums") ?? "0");
     const [selectedContest, setSelectedContest] = useState("");
     const [contestValue, setContestValue] = useState("");
     const router = useRouter();
     const [loading, setloading] = useState<boolean>(false)
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const currentQuestion = questions[currentQuestionIndex];
     const [color, setColor] = useState('red');
     const [audio] = useState(new Audio(''));
     const [isCircleGreen, setIsCircleGreen] = useState(false);
@@ -45,8 +49,18 @@ export default function ContestPage({ params }: any) {
     const [quizStarted, setQuizStarted] = useState(false);
     const [introskipped, setIntroSkipper] = useState(false)
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
-    const [SimilarityScore, SetSimilarityScore] = useState(Array(contest_40_1.length).fill(null));
+    const [SimilarityScore, SetSimilarityScore] = useState(Array(questions?.length).fill(null));
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+
+
+    useEffect(() => {
+        const importQuestions = async () => {
+            const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/round1`);
+            setImportedQuestions(questionsData.default);
+        };
+
+        importQuestions();
+    }, []);
 
 
     const [introStarted, setIntroStarted] = useState(false)
@@ -54,7 +68,7 @@ export default function ContestPage({ params }: any) {
     const [isReadyToCalculate, setIsReadyToCalculate] = useState(false);
     const [round_score, setRoundScore] = useState(0)
     const student_analytics = []
-    const [timeRemainingPercentage, setTimeRemainingPercentage] = useState(Array(questions.length).fill(null));
+    const [timeRemainingPercentage, setTimeRemainingPercentage] = useState(Array(questions?.length).fill(null));
     const [quizEnded, setQuizEnded] = useState(false)
 
     const [totalRoundScore, setTotalRoundScore] = useState([{
@@ -99,7 +113,7 @@ export default function ContestPage({ params }: any) {
     };
 
     const [timeLeft, setTimeLeft] = useState(
-        currentQuestion["Subject"] === "Mathematics" ? 30 : 10
+        currentQuestion?.["Subject"] === "Mathematics" ? 30 : 10
     );
 
     const timerRef = useRef<any>(null);
@@ -399,7 +413,8 @@ export default function ContestPage({ params }: any) {
             <PracticeNavBar />
             <div className="mt-[100px] md:h-1/2 flex flex-col w-full items-center justify-center bg-white shadow rounded-b-xl 
              dark:bg-darkBgLight">
-
+                <p>{year}</p>
+                <p>{contestId}</p>
                 {!introskipped ?
                     <p className="font-semibold m-2">Welcome to round number 1. This round is the round for fundamental concepts.
                         The questions are simple and direct so I'm expecting simple and direct answers from you.
@@ -507,7 +522,7 @@ export default function ContestPage({ params }: any) {
                     </div>}
 
                 {quizEnded && (
-                    <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 shadow w-full
+                    <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 w-full
                      shadow rounded-b-xl dark:bg-darkBgLight">
                         <h2 className="text-2xl font-bold">End of Round 1</h2>
                         <p className="text-lg mt-2">Total Points: {round_score}</p>
@@ -519,7 +534,7 @@ export default function ContestPage({ params }: any) {
 
             </div>
             <div className="flex flex-wrap items-center justify-center mt-10 gap-4 m-2">
-                {contest_40_1.map((_, index) => (
+                {questions?.map((_: any, index: any) => (
                     <p
                         key={index}
                         className={`rounded-full text-white w-[30px] h-[30px] text-center flex items-center justify-center ${index === currentQuestionIndex

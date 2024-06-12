@@ -377,3 +377,4 @@ const bar_data = [{
     'Chemistry': 28,
     'Physics': 33,
 }]
+

@@ -59,7 +59,13 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         setSelectedContest(contest);
         setContestValue(contest);
     }
-
+    // const handleContestClick = (contest: any) => {
+    //     setSelectedContest(contest);
+    //     const contestId = contest.split(' ')[1]; // Assuming the contest name is "Contest 1", "Contest 2", etc.
+    //     router.push(`/dashboard/contest/${year}?id=${contestId}`);
+    //     setSelectedContest(contest);
+    //     setContestValue(contest);
+    // }
 
     if (!contests) {
         return (
@@ -105,7 +111,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                         <div className="font-semibold">Percentage Completed: 0%</div>
                                         <div className="flex gap-4">
                                             <button className="text-white rounded-lg shadow
-                                         bg-blue-800 px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${type}`)}>
+                                         bg-blue-800 px-6 py-1 m-1" onClick={() => router.push(`/dashboard/contest/${year}?id=${selectedContest}`)}>
                                                 <p>
                                                     Start Contest
                                                 </p>
