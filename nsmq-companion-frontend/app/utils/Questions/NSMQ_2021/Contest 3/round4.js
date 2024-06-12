@@ -5,6 +5,8 @@ const contest_3_4 = [
         "Preamble Text": null,
         "Question": "I am synthesized by an addition reaction.\nThe reaction may be initiated with a cation or anion or even a free radical.\nAlmost always the reaction is carried out under pressure.\nMy giant molecule appears to be made up of many repeated units.\nMy backbone is made up of a chain of $\\mathrm{sp}^{3}$-carbons with a methyl group on alternating carbons.\nWho am I?",
         "Question has figure": "No",
+        "clue1": "I am synthesized by an addition reaction",
+        "clue2": "",
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
@@ -52,3 +54,5 @@ const contest_3_4 = [
         "Subject": "Mathematics"
     }
 ]
+
+export default contest_3_4
