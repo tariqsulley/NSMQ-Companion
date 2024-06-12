@@ -1,9 +1,8 @@
 "use client"
 import PracticeNavBar from "@/app/components/PracticeNavBar";
-// import questions from "../../../../utils/Questions/NSMQ_2021/contest1/round1"
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 // @ts-ignore
 import useSound from 'use-sound';
 import API_BASE from "@/app/utils/api";
@@ -24,12 +23,13 @@ export default function ContestPage({ params }: any) {
     const { set } = params;
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setImportedQuestions] = useState<any>(null);
-    // const currentQuestion = questions[currentQuestionIndex];
     const currentQuestion = questions?.length > 0 ? questions[currentQuestionIndex] : null;
+    const pathname = usePathname();
+    const year = pathname.split('/')[3];
+
 
     const searchParams = useSearchParams();
     const contestId = searchParams.get('id');
-    const year = searchParams.get('year');
 
     const type = parseInt(searchParams.get("nums") ?? "0");
     const [selectedContest, setSelectedContest] = useState("");
@@ -51,31 +51,23 @@ export default function ContestPage({ params }: any) {
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
     const [SimilarityScore, SetSimilarityScore] = useState(Array(questions?.length).fill(null));
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+    const [currentRound, setCurrentRound] = useState(1);
 
 
-    // useEffect(() => {
-    //     const importQuestions = async () => {
-    //         const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/round1`);
-    //         setImportedQuestions(questionsData.default);
-    //     };
-
-    //     importQuestions();
-    // }, []);
-    const importQuestions = async (round = 'round1') => {
+    const importQuestions = async (round: any) => {
         try {
-            const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/${round}`);
+            const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/round${round}`);
             setImportedQuestions(questionsData.default);
         } catch (error) {
             console.error('Failed to load questions:', error);
-            setImportedQuestions([]);  // Handle the error, maybe set to empty array or show error message
+            setImportedQuestions([]);
         }
     };
 
+
     useEffect(() => {
-        importQuestions();  // You might pass a round variable here if it changes
-    }, [contestId]);  // Add round to dependency array if it's a state/prop
-
-
+        importQuestions(currentRound);
+    }, [contestId, currentRound]);
 
     const [introStarted, setIntroStarted] = useState(false)
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
@@ -165,7 +157,7 @@ export default function ContestPage({ params }: any) {
                 const currentQuestion = questions[currentQuestionIndex];
                 const timeLimit = currentQuestion["Subject"] === "Mathematics" ? 30 : 10;
                 const timeRemaining = timeLeft;
-                newPercentage[currentQuestionIndex] = (timeRemaining / timeLimit) * 100; // Store the percentage of time remaining
+                newPercentage[currentQuestionIndex] = (timeRemaining / timeLimit) * 100;
                 return newPercentage;
             });
 
@@ -190,7 +182,7 @@ export default function ContestPage({ params }: any) {
                     const currentQuestion = questions[currentQuestionIndex];
                     const timeLimit = currentQuestion["Subject"] === "Mathematics" ? 30 : 10;
                     const timeRemaining = timeLeft;
-                    newPercentage[currentQuestionIndex] = (timeRemaining / timeLimit) * 100; // Store the percentage of time remaining
+                    newPercentage[currentQuestionIndex] = (timeRemaining / timeLimit) * 100;
                     return newPercentage;
                 });
             }
@@ -203,19 +195,7 @@ export default function ContestPage({ params }: any) {
         };
     }, [handleCircleClick, isBellPlaying, currentQuestionIndex, timeLeft]);
 
-    // useEffect(() => {
-    //     const handleKeyDown = (event: KeyboardEvent) => {
-    //         if (event.key.toLowerCase() === 'b' && !isBellPlaying) {
-    //             handleCircleClick();
-    //         }
-    //     };
 
-    //     window.addEventListener('keydown', handleKeyDown);
-
-    //     return () => {
-    //         window.removeEventListener('keydown', handleKeyDown);
-    //     };
-    // }, [handleCircleClick, isBellPlaying]);
 
     const synthesizeText = async (text: string) => {
         try {
@@ -240,8 +220,8 @@ export default function ContestPage({ params }: any) {
     let audioInstance: any;
 
     const playQuestionAudio = (questionIndex: any) => {
-        const questionAudioUrl = `/Sounds/2021/Contest1/round1/q${questionIndex}.wav`;
-        const preambleAudioUrl = `/Sounds/2021/Contest1/round1/preamble_q${questionIndex}.wav`;
+        const questionAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${questionIndex}.wav`;
+        const preambleAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/preamble_q${questionIndex}.wav`;
 
         const playAudio = (url: any, onEnded: any) => {
             if (!audioInstance) {
@@ -422,22 +402,29 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+
     const handleGoToNextRound = () => {
-        importQuestions('round2').then(() => {
-            setCurrentQuestionIndex(0);  // Reset the question index
-            setQuizEnded(false);  // Ensure quiz is not marked as ended if starting new round
-        });
+        if (currentRound <= 3) {
+            const nextRound = currentRound + 1;
+            setCurrentRound(nextRound);
+            setRoundScore(0);
+            importQuestions(nextRound).then(() => {
+                setCurrentQuestionIndex(0);
+                setQuizEnded(false);
+            });
+        } else {
+            console.log("Quiz has ended");
+        }
     };
 
     if (!questions) {
         return <div>Loading questions...</div>;
     }
 
-
     return (
         <div className="bg-bgMain dark:bg-darkBgDeep h-screen">
             <PracticeNavBar />
-            <div className="mt-[100px] md:h-1/2 flex flex-col w-full items-center justify-center bg-white shadow rounded-b-xl 
+            <div className="mt-[100px]  flex flex-col w-full items-center justify-center bg-white shadow rounded-b-xl 
              dark:bg-darkBgLight">
                 <p>{year}</p>
                 <p>{contestId}</p>
@@ -492,7 +479,6 @@ export default function ContestPage({ params }: any) {
                                 </MathJaxContext>) :
                                 <h2 className="font-semibold text-[#475569]">Preamble: {currentQuestion["Preamble Text"]}</h2>
                             }
-
 
                             {currentQuestion.Subject === "Mathematics" || currentQuestion.Subject === "Physics"
                                 || currentQuestion.Subject === "Chemistry" ? (

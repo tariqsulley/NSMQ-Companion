@@ -8,7 +8,7 @@ const contest_1_2 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$(\\mathbf{a}+\\mathbf{b})^{4}$",
+        "Answer": "a plus b all to the power 4",
         "calculations present": "Yes",
         "Subject": "Mathematics",
         "Topic Tag": ["Algebra", "Polynomial Factorization"]
@@ -22,7 +22,7 @@ const contest_1_2 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "120\n$[5 !=5 \\times 4 \\times 3 \\times 2 \\times 1=20 \\times 6=120]$",
+        "Answer": "120",
         "calculations present": "Yes",
         "Subject": "Mathematics",
         "Topic Tag": ["Combinatorics", "Permutations"]
@@ -36,7 +36,7 @@ const contest_1_2 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$(2,16)$\n$\\left[d y / d x=3 x^{2}-12 x+16, d^{2} y / d x^{2}=6 x-12=0, x=2, y=8-24+32=16\\right.$, $(2,16)]$",
+        "Answer": "2 and 16",
         "calculations present": "Yes",
         "Subject": "Mathematics",
         "Topic Tag": ["Calculus", "Curve Analysis"]
@@ -50,7 +50,7 @@ const contest_1_2 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "Two sets of sister chromatids (Don't accept four chromatids)",
+        "Answer": "Two sets of sister chromatids",
         "calculations present": "No",
         "Subject": "Biology",
         "Topic Tag": ["Genetics", "Cell Division"]
@@ -121,6 +121,7 @@ const contest_1_2 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "$\\mathrm{pK} \\mathrm{b}_{\\mathrm{b}}$ of the conjugate base $=14.0-4.80=9.20$\n$$\n\\begin{array}{rlrl}\n\\mathrm{pOH} & =1 / 2 \\mathrm{pK}_{\\mathrm{b}-} \\quad 1 / 2 \\log \\mathrm{C}_{\\mathrm{b}} & \\left(C_{b}=0.100 \\mathrm{moldm}^{-3}\\right) \\\\\n& =9.20 / 2+0.500=5.10 \\\\\n\\text { Hence } \\mathrm{pH} & =14.0-5.10=8.90 .\n\\end{array}\n$$",
+        "direct_answer": "8.90",
         "calculations present": "Yes",
         "Subject": "Chemistry",
         "Topic Tag": ["Acid-Base Chemistry", "pH Calculation"]
