@@ -554,7 +554,7 @@ export default function ContestPage({ params }: any) {
                 {quizEnded && (
                     <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 w-full
                      shadow rounded-b-xl dark:bg-darkBgLight">
-                        <h2 className="text-2xl font-bold">End of Round 1</h2>
+                        <h2 className="text-2xl font-bold">End of Round {currentRound}</h2>
                         <p className="text-lg mt-2">Total Points: {round_score}</p>
                         <div>
                             <button onClick={handleGoToNextRound}>Go To Next Round</button>
