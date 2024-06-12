@@ -52,7 +52,7 @@ export default function ContestPage({ params }: any) {
     const [SimilarityScore, SetSimilarityScore] = useState(Array(questions?.length).fill(null));
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const [currentRound, setCurrentRound] = useState(1);
-
+    const [playedPreambles, setPlayedPreambles] = useState(new Set());
 
     const importQuestions = async (round: any) => {
         try {
@@ -252,7 +252,11 @@ export default function ContestPage({ params }: any) {
             }, 1000);
         };
 
-        if (questions[questionIndex - 1]?.["Preamble Text"] && questions[questionIndex - 1]?.["S/N"] === 1) {
+        const question = questions[questionIndex - 1];
+        const preambleText = question["Preamble Text"];
+
+        if (preambleText && !playedPreambles.has(preambleText)) {
+            setPlayedPreambles(new Set(playedPreambles).add(preambleText));
             playAudio(preambleAudioUrl, () => {
                 playAudio(questionAudioUrl, onQuestionEnded);
                 startTimer();
