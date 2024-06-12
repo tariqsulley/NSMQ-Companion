@@ -5,7 +5,7 @@ export default function SettingsPage() {
     return (
         <div className="flex h-screen">
             <Sidebar />
-            <div className="bg-bgMain sm:ml-[256px] w-full flex justify-center">
+            <div className="bg-bgMain dark:bg-darkBgDeep sm:ml-[256px] w-full flex justify-center">
                 <div className="mt-[100px]  w-11/12 ">
                     <SettingsView />
                 </div>

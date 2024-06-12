@@ -141,10 +141,11 @@ export default function SettingsView() {
 
     return (
         <div className='flex flex-col sm:flex-row w-full items-center justify-center m-5
-        bg-white rounded-xl  md:min-h-[82vh] 2xl:min-h-[90vh] min-h-48'>
+        bg-white dark:bg-darkBgLight rounded-xl  md:min-h-[82vh] 2xl:min-h-[90vh] min-h-48'>
             <div className='flex flex-col items-center justify-center'>
                 <div className="mt-4 text-center">
-                    <div className="bg-white w-24 h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                    <div className="bg-white dark:bg-darkBgLight w-24 h-24  
+                    rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
                         {!Data?.data.avatar_url ? (
                             <Image
                                 src={ProfilePic}
@@ -171,7 +172,7 @@ export default function SettingsView() {
                         </div>
                     )}
                     <label htmlFor="imageInput" className="cursor-pointer">
-                        <span className="text-center pt-2 text-[#00458D]">Edit</span>
+                        <span className="text-center pt-2 text-[#00458D] dark:text-white">Edit</span>
                         <input
                             type="file"
                             id="imageInput"
