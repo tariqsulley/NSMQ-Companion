@@ -47,7 +47,7 @@ export default function ContestPage({ params }: any) {
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
     const [SimilarityScore, SetSimilarityScore] = useState(Array(questions?.length).fill(null));
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-    const [currentRound, setCurrentRound] = useState(1);
+    const [currentRound, setCurrentRound] = useState(4);
     const [playedPreambles, setPlayedPreambles] = useState(new Set());
     const [introStarted, setIntroStarted] = useState(false)
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
@@ -60,6 +60,7 @@ export default function ContestPage({ params }: any) {
     const [currentClueIndex, setCurrentClueIndex] = useState(0);
     const [currentClueText, setCurrentClueText] = useState('');
     const timerRef = useRef<any>(null);
+    const [stopCluePlayback, setStopCluePlayback] = useState(false);
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
         'Round1': 0
@@ -76,7 +77,7 @@ export default function ContestPage({ params }: any) {
     const [studentStrength, setStudentStrength] = useState([0, 0, 0, 0])
 
     const [clueTexts, setClueTexts] = useState<string[]>([]);
-
+    const [isCluePlayingNow, setIsCluePlayingNow] = useState(false);
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
     };
@@ -138,6 +139,13 @@ export default function ContestPage({ params }: any) {
     };
 
     const handleCircleClick = () => {
+        if (isCluePlayingNow) {
+            // A clue is currently being played, so stop clue playback
+            setStopCluePlayback(true);
+            console.log("Clue playback stopped.");
+            return;
+        }
+
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
             setIsBellPlaying(true);
             setIsCircleGreen(true);
@@ -254,27 +262,38 @@ export default function ContestPage({ params }: any) {
             setClueTexts([]); // Clear all clues
         };
 
-
         const playCluesByOne = () => {
             setCurrentClueIndex(0); // Reset the clue index
             clearClues();
 
-            const playNextClue = (clueIndex: any) => {
-                const clueAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
-                addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]); // Add the clue text before playing audio
+            const playNextClue = async (clueIndex: any) => {
+                if (stopCluePlayback) {
+                    console.log('clues paused')
+                    // Clue playback has been stopped, reset the flag and return
+                    // setStopCluePlayback(false);
+                    return;
+                } else {
+                    const clueAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
+                    addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]);
 
-                playAudio(clueAudioUrl, () => {
-                    if (clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1) {
-                        playNextClue(clueIndex + 1); // Recursive call to play the next clue
-                    } else {
-                        onQuestionEnded(); // All clues have been played
-                    }
-                });
-            };
+                    setIsCluePlayingNow(true);
 
-            playNextClue(0); // Start playing from the first clue
+                    playAudio(clueAudioUrl, () => {
+                        setIsCluePlayingNow(false);
+
+                        if (clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1) {
+                            // Wait for 2 seconds before playing the next clue
+                            setTimeout(() => {
+                                playNextClue(clueIndex + 1);
+                            }, 2000);
+                        } else {
+                            onQuestionEnded();
+                        }
+                    });
+                };
+            }
+            playNextClue(0);
         };
-
 
 
         const question = questions[questionIndex - 1];
@@ -282,13 +301,11 @@ export default function ContestPage({ params }: any) {
 
         if (currentRound === 4) {
             // Round 4, handle preamble and clues
-            if (preambleText && !playedPreambles.has(preambleText)) {
-                setPlayedPreambles(new Set(playedPreambles).add(preambleText));
-                playAudio(preambleAudioUrl, () => {
-                    playCluesByOne();
-                });
-            } else {
+            if (!stopCluePlayback) {
                 playCluesByOne();
+            } else {
+                console.log("no clues")
+                // playCluesByOne();
             }
         } else {
             // Other rounds, handle preamble and full question
@@ -348,6 +365,7 @@ export default function ContestPage({ params }: any) {
             }
         });
     };
+
     useEffect(() => {
         if (quizStarted && currentQuestionIndex < questions?.length) {
             playQuestionAudio(currentQuestionIndex + 1);
