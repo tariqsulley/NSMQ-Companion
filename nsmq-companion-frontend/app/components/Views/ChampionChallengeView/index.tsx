@@ -49,13 +49,13 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
         }
     };
     const getImageWidth = () => {
-        return school === "Presec Legon" ? "w-[12%]" : "w-[15%]";
+        return school === "Presec Legon" ? "w-[15%]" : "w-[15%]";
     };
 
     return (
         <div>
-            <div className="bg-white dark:bg-darkBgDeep shadow">
-                <div className={`${getBackgroundGradient()} p-2 shadow relative overflow-hidden group`}>
+            <div className="bg-white rounded-lg dark:bg-darkBgDeep shadow">
+                <div className={`${getBackgroundGradient()} rounded-t-lg p-2 shadow relative overflow-hidden group`}>
                     <Image
                         src={imageSource}
                         alt="image"
@@ -112,7 +112,7 @@ export default function ChampionChallengeView() {
     ];
 
     return (
-        <div className="flex flex-col w-full bg-gray-200 dark:bg-gray-700">
+        <div className="flex flex-col w-full bg-gray-200 rounded-t-lg dark:bg-gray-700">
             {champions.map((champion, index) => (
                 <ChampionCard
                     key={index}
