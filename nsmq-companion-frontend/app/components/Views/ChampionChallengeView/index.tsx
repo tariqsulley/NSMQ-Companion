@@ -2,8 +2,8 @@
 import React from 'react';
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
-import winner_2021 from "../../../../public/images/prempeh.jpg";
-import winner_2020 from "../../../../public/images/presec.jpg";
+import winner_2021 from "../../../../public/images/prempeh.png";
+import winner_2020 from "../../../../public/images/presec.png";
 import trophyicon from "../../../../public/icons/trop.png";
 
 interface StarRatingProps {
@@ -36,11 +36,20 @@ interface ChampionCardProps {
 }
 
 const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, rating, color }) => {
+    const getBackgroundGradient = () => {
+        if (school === "Presec Legon") {
+            return "bg-gradient-to-r from-indigo-500 to-blue-500";
+        } else if (school === "Prempeh College") {
+            return "bg-gradient-to-r from-teal-200 to-teal-500";
+        } else {
+            return "bg-gradient-to-r from-violet-600 to-indigo-600";
+        }
+    };
     return (
         <div>
             <div className="bg-white dark:bg-darkBgDeep shadow">
-                <div className="bg p-2 shadow relative overflow-hidden group">
-                    <Image src={imageSource} alt="image" className="w-[15%] rounded-t-xl transition-transform duration-300 transform group-hover:scale-110" />
+                <div className={`${getBackgroundGradient()} p-2 shadow relative overflow-hidden group`}>
+                    <Image src={imageSource} alt="image" className="w-[15%] mb-[-10px] rounded-t-xl transition-transform duration-300 transform group-hover:scale-110" />
                 </div>
                 <div className="mx-2">
                     <p className="font-bold text-xl">{year}</p>

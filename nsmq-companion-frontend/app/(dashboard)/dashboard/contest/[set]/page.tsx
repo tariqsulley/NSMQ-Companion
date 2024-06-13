@@ -75,6 +75,7 @@ export default function ContestPage({ params }: any) {
         'Chemistry': 0,
         'Physics': 0
     }])
+
     const [studentStrength, setStudentStrength] = useState([0, 0, 0, 0])
 
     const [clueTexts, setClueTexts] = useState<string[]>([]);
