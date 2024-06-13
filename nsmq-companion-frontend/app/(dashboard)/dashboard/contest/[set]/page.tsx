@@ -47,7 +47,7 @@ export default function ContestPage({ params }: any) {
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
     const [SimilarityScore, SetSimilarityScore] = useState(Array(questions?.length).fill(null));
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-    const [currentRound, setCurrentRound] = useState(4);
+    const [currentRound, setCurrentRound] = useState(1);
     const [playedPreambles, setPlayedPreambles] = useState(new Set());
     const [introStarted, setIntroStarted] = useState(false)
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
@@ -531,7 +531,7 @@ export default function ContestPage({ params }: any) {
                     <div className="m-10  flex flex-col  w-full justify-center items-center">
 
                         <div>
-                            <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold">Round {currentRound}</p>
+                            <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold dark:bg-blue-800 ">Round {currentRound}</p>
                         </div>
 
                         <div className="flex w-full ">

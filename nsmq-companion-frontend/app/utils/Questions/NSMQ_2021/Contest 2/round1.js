@@ -8,7 +8,7 @@ const contest_2_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$90^{\\circ}, 60^{\\circ}$,\n$30^{\\circ}$\n$[3 x+4 x+5 x=12 x=360, x=30$, exterior angles are $90,120,150$, interior angles are $180-90=90,180-120=60,180-150=30]$",
+        "Answer": "90 degrees, 60 degrees and 30 degrees",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -21,7 +21,7 @@ const contest_2_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$\\mathbf{7 0}^{\\circ}, \\mathbf{6 0}^{\\circ}, \\mathbf{5 0}^{\\circ}$\n$[11 x+12 x+13 x=36 x=360, x=10$, exterior angles are $110,120,130$, interior angles are $180-110=70,180-120=60,180-130=50]$",
+        "Answer": "70 degrees, 60 degrees and 50 degrees",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -60,7 +60,7 @@ const contest_2_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$A=4, B=2, C=9$\n$\\left[4 x^{2}+16 x+25=4\\left(x^{2}+4 x\\right)+25=4(x+2)^{2}+25-16, A=4, B=2, C=\\right.$ 9]",
+        "Answer": "A is equal to 4, B is equal to 2 and C is equal to 9",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
@@ -73,7 +73,7 @@ const contest_2_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$A=5, B=-3, C=-51$\n$\\left[5\\left(x^{2}-6 x\\right)-6=5(x-3)^{2}-45-6=A(x+B)^{2}+C, A=5, B=-3, C=-51\\right]$",
+        "Answer": "A is equal to 5, B is equal to negative 3 and C is equal to negative 51",
         "calculations present": "Yes",
         "Subject": "Mathematics"
     },
