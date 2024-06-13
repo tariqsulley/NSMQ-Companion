@@ -45,6 +45,9 @@ export default function ContestPage({ params }: any) {
     const [quizStarted, setQuizStarted] = useState(false);
     const [introskipped, setIntroSkipper] = useState(false)
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
+    const [playRound2Intro, { stop: StopRound2Intro }] = useSound('/Sounds/remarks/round2_intro.wav')
+    const [playRound3Intro, { stop: StopRound3Intro }] = useSound('/Sounds/remarks/round3_intro.wav')
+    const [playRound4Intro, { stop: StopRound4Intro }] = useSound('/Sounds/remarks/round4_intro.wav')
     const [SimilarityScore, SetSimilarityScore] = useState(Array(questions?.length).fill(null));
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
     const [currentRound, setCurrentRound] = useState(1);
@@ -81,6 +84,43 @@ export default function ContestPage({ params }: any) {
     const [clueTexts, setClueTexts] = useState<string[]>([]);
     const [isCluePlayingNow, setIsCluePlayingNow] = useState(false);
 
+    const round1Intro = `Welcome to round number 1. This round is the round for fundamental concepts.
+    The questions are simple and direct so I'm expecting simple and direct answers from you.
+    For questions which require calculation, you have 30 seconds to present your answer and if there
+    are no calculations you have 10 seconds to do so. All questions are to be attempted once only.
+    Best wishes to you`;
+
+    const round3Intro = `In this round, I am going to be reading statements to you. When you receive a statement,
+     please consider the statement carefully and let me know whether it is true or false, if you are right, 
+     2 points, if you are incorrect you lose a precious point. Best wishes to you.`
+
+    const round2Intro = `This is the round of speed. For an opportunity to answer a question you must ring the bell. 
+    If you ring and answer correctly you get 3 points. But please be very careful because if you attempt to answer a 
+    question and you are unsuccessful. unsuccessful. meaning you are unable to provide a correct answer.
+     Or you are unable to provide an answer withing 3 seconds of ringing. You lose a precious point. Best wishes to you`
+
+    const round4Intro = `Welcome to the round of riddles. In this round I am going to be reading out clues. 
+    If you answer the riddle on the first clue, you get five points on the second clue you get 4 points,
+     on the third or any other clue you get three points. Best wishes to you`
+
+    const [playedRound1Intro, setPlayedRound1Intro] = useState(false);
+    const [playedRound2Intro, setPlayedRound2Intro] = useState(false);
+    const [playedRound3Intro, setPlayedRound3Intro] = useState(false);
+    const [playedRound4Intro, setPlayedRound4Intro] = useState(false);
+
+    const [round1ended, setRound1Ended] = useState(false)
+    const [round2ended, setRound2Ended] = useState(false)
+    const [round3ended, setRound3Ended] = useState(false)
+    const [round4ended, setRound4Ended] = useState(false)
+
+    const [round1started, setRound1Started] = useState(false)
+    const [round2started, setRound2Started] = useState(false)
+    const [round3started, setRound3Started] = useState(false)
+    const [round4started, setRound4Started] = useState(false)
+
+    const [goToNextRoundClicked, setGoToNextRoundClicked] = useState(false)
+
+    const [showNextRoundIntro, setShowNextRoundIntro] = useState(false);
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
     };
@@ -150,6 +190,9 @@ export default function ContestPage({ params }: any) {
     const handleSkipIntro = () => {
         stopIntro();
         setIntroSkipper(true);
+        // setQuizStarted(true)
+        handleStartQuiz()
+        setRound1Started(true)
     };
 
     const handleCircleClick = () => {
@@ -374,21 +417,38 @@ export default function ContestPage({ params }: any) {
     }, [quizStarted]);
 
 
-
     const handleNextQuestion = () => {
-        resetTranscript(); // Clear any existing transcripts
-        setClueStopped("play")
-        // Update the question index
-        setCurrentQuestionIndex(prevIndex => {
+        resetTranscript();
+        setClueStopped("play");
+
+        setCurrentQuestionIndex((prevIndex) => {
             const newIndex = prevIndex + 1;
             if (newIndex < questions.length) {
-                // Call to play the next question audio is moved to useEffect to ensure the index is updated
                 return newIndex;
             } else {
-                // End the quiz if there are no more questions
+                switch (currentRound) {
+                    case 1:
+                        setRound1Ended(true);
+                        setRound1Started(false);
+                        break;
+                    case 2:
+                        setRound2Ended(true);
+                        setRound2Started(false);
+                        break;
+                    case 3:
+                        setRound3Ended(true);
+                        setRound3Started(false);
+                        break;
+                    case 4:
+                        setRound4Ended(true);
+                        break;
+                    default:
+                        break;
+                }
+
                 setQuizStarted(false);
                 setQuizEnded(true);
-                return prevIndex; // Return the current index if no more questions
+                return prevIndex;
             }
         });
     };
@@ -512,6 +572,31 @@ export default function ContestPage({ params }: any) {
     };
 
 
+    const handleSkipRound2Intro = () => {
+        setPlayedRound2Intro(true);
+        StopRound2Intro();
+        setIntroSkipper(true);
+        setRound2Started(true);
+        setShowNextRoundIntro(false);
+    };
+
+    const handleSkipRound3Intro = () => {
+        setPlayedRound3Intro(true);
+        StopRound3Intro();
+        setIntroSkipper(true);
+        setRound3Started(true);
+        setShowNextRoundIntro(false);
+    };
+
+    const handleSkipRound4Intro = () => {
+        setPlayedRound4Intro(true);
+        StopRound4Intro();
+        setIntroSkipper(true);
+        setRound4Started(true)
+        setShowNextRoundIntro(false);
+    };
+
+
     const handleGoToNextRound = () => {
         if (currentRound <= 3) {
             const nextRound = currentRound + 1;
@@ -521,11 +606,13 @@ export default function ContestPage({ params }: any) {
             importQuestions(nextRound).then(() => {
                 setCurrentQuestionIndex(0);
                 setQuizEnded(false);
+                setShowNextRoundIntro(true);
             });
         } else {
             console.log("Quiz has ended");
         }
     };
+
 
     if (!questions) {
         return <div>Loading questions...</div>;
@@ -538,23 +625,48 @@ export default function ContestPage({ params }: any) {
              dark:bg-darkBgLight">
                 <p>{year}</p>
                 <p>{contestId}</p>
-                {!introskipped ?
-                    <p className="font-semibold m-2">Welcome to round number 1. This round is the round for fundamental concepts.
-                        The questions are simple and direct so I'm expecting simple and direct answers from you.
-                        For questions which require calculation, you have 30 seconds to present your answer and if there
-                        are no calculations you have 10 seconds to do so. All questions are to be attempted once only.
-                        Best wishes to you
-                    </p> : ""}
 
-                {!introStarted ?
-                    <button onClick={handleStartIntro}>
-                        Start Intro
-                    </button> :
-                    <button onClick={handleSkipIntro}>
-                        Skip Intro
-                    </button>}
+                {showNextRoundIntro && (
+                    <div>
 
-                {introskipped && !quizEnded &&
+                        {(currentRound) === 2 && (
+                            <div>
+                                <p>{round2Intro}</p>
+                                <button onClick={playRound2Intro}>Play Round 2 Intro</button>
+                                <button onClick={handleSkipRound2Intro}>Skip Intro</button>
+                            </div>
+                        )}
+                        {(currentRound) === 3 && (
+                            <div>
+                                <p>{round3Intro}</p>
+                                <button onClick={playRound3Intro}>Play Round 3 Intro</button>
+                                <button onClick={handleSkipRound3Intro}>Skip Intro</button>
+                            </div>
+                        )}
+                        {(currentRound) === 4 && (
+                            <div>
+                                <p>{round4Intro}</p>
+                                <button onClick={playRound4Intro}>Play Round 4 Intro</button>
+                                <button onClick={handleSkipRound4Intro}>Skip Intro</button>
+                            </div>
+                        )}
+                    </div>
+                )}
+                {currentRound === 1 && !quizStarted && !round1ended ?
+                    <div>
+                        <p className="font-semibold m-2">{round1Intro}
+                        </p>
+                        {!introStarted && !quizStarted ?
+                            <button onClick={handleStartIntro}>
+                                Start Intro
+                            </button> :
+                            <button onClick={handleSkipIntro}>
+                                Skip Intro
+                            </button>}
+                    </div>
+                    : ""}
+
+                {(introskipped && !quizEnded) && round1started || round2started || round3started || round4started ?
                     <div className="m-10  flex flex-col  w-full justify-center items-center">
 
                         <div>
@@ -654,13 +766,14 @@ export default function ContestPage({ params }: any) {
                             </div>
                             <p>Similarity:{similarityScore}</p>
                         </div>
-                    </div>}
+                    </div> : ""}
 
                 {quizEnded && (
                     <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 w-full
                      shadow rounded-b-xl dark:bg-darkBgLight">
                         <h2 className="text-2xl font-bold">End of Round {currentRound}</h2>
                         <p className="text-lg mt-2">Total Points: {round_score}</p>
+
                         <div>
                             <button onClick={handleGoToNextRound}>Go To Next Round</button>
                         </div>

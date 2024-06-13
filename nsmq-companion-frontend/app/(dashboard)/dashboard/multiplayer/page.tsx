@@ -264,7 +264,7 @@ export default function MultiplayerPage() {
             <Sidebar />
             <div className="flex justify-center bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full">
                 {/* <p className="mt-[100px]">Compete against friends in fast paced quizzes</p> */}
-                <div className="bg-white dark:bg-darkBgDeep relative mb-2 rounded-xl w-11/12 shadow-xl mt-[80px] ">
+                <div className="bg-white border-4 dark:bg-darkBgDeep relative mb-2 rounded-xl w-11/12 shadow-xl mt-[80px] ">
                     {!quizStarted ? (
                         <div>
                             {waitingRoomStatus === "searching" ? (
