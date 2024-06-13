@@ -47,7 +47,7 @@ export default function ContestPage({ params }: any) {
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
     const [SimilarityScore, SetSimilarityScore] = useState(Array(questions?.length).fill(null));
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-    const [currentRound, setCurrentRound] = useState(4);
+    const [currentRound, setCurrentRound] = useState(1);
     const [playedPreambles, setPlayedPreambles] = useState(new Set());
     const [introStarted, setIntroStarted] = useState(false)
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
@@ -98,6 +98,17 @@ export default function ContestPage({ params }: any) {
         importQuestions(currentRound);
     }, [contestId, currentRound]);
 
+
+    const getScoreForClueIndex = (clueIndex: any) => {
+        switch (clueIndex) {
+            case 0:
+                return 5;
+            case 1:
+                return 4;
+            default:
+                return 3;
+        }
+    };
 
 
     type Subject = 'Mathematics' | 'Biology' | 'Chemistry' | 'Physics';
@@ -453,19 +464,35 @@ export default function ContestPage({ params }: any) {
             setSimilarityScore(similarityScore);
 
             if (similarityScore > 0.6) {
-                synthesizeText("yes you are right");
-                updateRoundBreakDown(currentQuestion["Subject"] as Subject, 3);
+                const scoreToAdd = currentRound === 4 ? getScoreForClueIndex(currentClueIndex - 1) : 3;
+                updateRoundBreakDown(currentQuestion["Subject"] as Subject, scoreToAdd);
+                setRoundScore(round_score + scoreToAdd);
+
+                if (currentRound === 4) {
+                    switch (scoreToAdd) {
+                        case 5:
+                            synthesizeText("I was reading the first clue, 5 points");
+                            break;
+                        case 4:
+                            synthesizeText("I was reading the second clue, 4 points");
+                            break;
+                        default:
+                            synthesizeText("yes you are right");
+                            break;
+                    }
+                } else {
+                    synthesizeText("yes you are right");
+                }
+
                 setTimeout(() => {
                     handleNextQuestion();
-                    setRoundScore(round_score + 3);
-                }, 3000);
+                }, 5000);
             } else {
-                synthesizeText("I'm not accepting that")
+                synthesizeText("I'm not accepting that");
                 updateRoundBreakDown(currentQuestion["Subject"] as Subject, 0);
                 setTimeout(() => {
                     handleNextQuestion();
                 }, 3000);
-                // synthesizeText("The right answer I was looking for is")
             }
         } catch (error) {
             console.error('Error calculating similarity:', error);
@@ -474,7 +501,6 @@ export default function ContestPage({ params }: any) {
             setIsReadyToCalculate(false);
         }
     };
-
 
     const config = {
         loader: { load: ['input/tex', 'output/svg'] },
