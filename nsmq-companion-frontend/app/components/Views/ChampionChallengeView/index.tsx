@@ -4,6 +4,8 @@ import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
 import winner_2021 from "../../../../public/images/prempeh.png";
 import winner_2020 from "../../../../public/images/presec.png";
+import prempeh_logo from "../../../../public/images/prempeh.jpg";
+import presec_logo from "../../../../public/images/presec.jpg";
 import trophyicon from "../../../../public/icons/trop.png";
 
 interface StarRatingProps {
@@ -31,11 +33,12 @@ interface ChampionCardProps {
     year: number;
     school: string;
     imageSource: any;
+    schoolLogo: any;
     rating: number;
     color: string;
 }
 
-const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, rating, color }) => {
+const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, schoolLogo, rating, color }) => {
     const getBackgroundGradient = () => {
         if (school === "Presec Legon") {
             return "bg-gradient-to-r from-indigo-500 to-blue-500";
@@ -45,15 +48,26 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
             return "bg-gradient-to-r from-violet-600 to-indigo-600";
         }
     };
+    const getImageWidth = () => {
+        return school === "Presec Legon" ? "w-[12%]" : "w-[15%]";
+    };
+
     return (
         <div>
             <div className="bg-white dark:bg-darkBgDeep shadow">
                 <div className={`${getBackgroundGradient()} p-2 shadow relative overflow-hidden group`}>
-                    <Image src={imageSource} alt="image" className="w-[15%] mb-[-10px] rounded-t-xl transition-transform duration-300 transform group-hover:scale-110" />
+                    <Image
+                        src={imageSource}
+                        alt="image"
+                        className={`${getImageWidth()} mb-[-10px] rounded-t-xl transition-transform duration-300 transform group-hover:scale-110`}
+                    />
                 </div>
-                <div className="mx-2">
-                    <p className="font-bold text-xl">{year}</p>
-                    <p className="font-semibold">{school}</p>
+                <div className="flex items-center ">
+                    <Image src={schoolLogo} alt='image' className='w-[10%]' />
+                    <div className=' w-full mx-2'>
+                        <p className="font-bold text-xl">{year}</p>
+                        <p className="font-semibold">{school}</p>
+                    </div>
                 </div>
             </div>
             <div className="relative">
@@ -83,6 +97,7 @@ export default function ChampionChallengeView() {
             year: 2021,
             school: "Prempeh College",
             imageSource: winner_2021,
+            schoolLogo: prempeh_logo,
             rating: 0,
             color: "bg-green-500 border-green-800"
         },
@@ -90,6 +105,7 @@ export default function ChampionChallengeView() {
             year: 2020,
             school: "Presec Legon",
             imageSource: winner_2020,
+            schoolLogo: presec_logo,
             rating: 0,
             color: "bg-blue-500 border-blue-800"
         }
@@ -103,6 +119,7 @@ export default function ChampionChallengeView() {
                     year={champion.year}
                     school={champion.school}
                     imageSource={champion.imageSource}
+                    schoolLogo={champion.schoolLogo}
                     rating={champion.rating}
                     color={champion.color}
                 />
