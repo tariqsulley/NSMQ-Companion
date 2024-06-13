@@ -14,6 +14,7 @@ import Image from "next/image";
 import img1 from "../../../../public/images/2018-winner.png";
 import img2 from "../../../../public/images/2021-winner.png";
 import ProfilePic from "../../../../public/images/avatar.svg";
+import multiplayericon from "../../../../public/images/mult.jpg"
 
 const riddles: any = {
     riddle_1: {
@@ -263,7 +264,7 @@ export default function MultiplayerPage() {
             <Sidebar />
             <div className="flex justify-center bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full">
                 {/* <p className="mt-[100px]">Compete against friends in fast paced quizzes</p> */}
-                <div className="bg-white relative rounded-xl w-11/12 shadow-xl mt-[80px] ">
+                <div className="bg-white dark:bg-darkBgDeep relative mb-2 rounded-xl w-11/12 shadow-xl mt-[80px] ">
                     {!quizStarted ? (
                         <div>
                             {waitingRoomStatus === "searching" ? (
@@ -271,17 +272,22 @@ export default function MultiplayerPage() {
                             ) : waitingRoomStatus === "paired" ? (
                                 <p>Quiz starts in {countdown} seconds...</p>
                             ) : (
-                                <div className="flex gap-2 items-center justify-center  h-screen">
-                                    <button
-                                        onClick={joinWaitingRoom}
-                                        className="bg-blue-800 text-white rounded-lg px-5 py-2"
-                                    >
-                                        Join Waiting Room
-                                    </button>
+                                <div className="flex flex-col gap-2 items-center justify-center  h-screen">
                                     <div>
-                                        <button className="bg-blue-800 text-white rounded-lg px-5 py-2">
-                                            View LeaderBoard
+                                        <Image src={multiplayericon} width={200} height={200} alt="image" />
+                                    </div>
+                                    <div className="flex gap-2">
+                                        <button
+                                            onClick={joinWaitingRoom}
+                                            className="bg-blue-800 text-white rounded-lg px-5 py-2"
+                                        >
+                                            Join Waiting Room
                                         </button>
+                                        <div>
+                                            <button className="bg-blue-800 text-white rounded-lg px-5 py-2">
+                                                View LeaderBoard
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             )}
