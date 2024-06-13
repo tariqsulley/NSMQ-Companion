@@ -2,14 +2,8 @@
 import React from 'react';
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
-
-// Import all the winner images
 import winner_2021 from "../../../../public/images/prempeh.jpg";
 import winner_2020 from "../../../../public/images/presec.jpg";
-import winner_2019 from "../../../../public/images/2019-winner.jpg";
-import winner_2018 from "../../../../public/images/2018-winner.png";
-import winner_2017 from "../../../../public/images/2017-winner.png";
-import winner_2016 from "../../../../public/images/2016-winner.png";
 import trophyicon from "../../../../public/icons/trop.png";
 
 interface StarRatingProps {
@@ -104,6 +98,9 @@ export default function ChampionChallengeView() {
                     color={champion.color}
                 />
             ))}
+            <div className='bg-white dark:bg-darkBgDeep shadow flex items-center justify-center p-4'>
+                <Image src={trophyicon} alt='image' width={100} height={100} />
+            </div>
         </div>
     );
 }
