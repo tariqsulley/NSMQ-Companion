@@ -47,7 +47,7 @@ export default function ContestPage({ params }: any) {
     const [playIntro, { stop: stopIntro }] = useSound('/Sounds/remarks/round1_intro.wav');
     const [SimilarityScore, SetSimilarityScore] = useState(Array(questions?.length).fill(null));
     const [isAudioPlaying, setIsAudioPlaying] = useState(false);
-    const [currentRound, setCurrentRound] = useState(1);
+    const [currentRound, setCurrentRound] = useState(4);
     const [playedPreambles, setPlayedPreambles] = useState(new Set());
     const [introStarted, setIntroStarted] = useState(false)
     const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();

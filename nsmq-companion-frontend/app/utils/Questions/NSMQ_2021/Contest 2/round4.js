@@ -63,7 +63,7 @@ const contest_2_4 = [
         "Preamble Text": null,
         "Question": "I bring order into arithmetic.\nThis is to ensure sanity and avoid unnecessary confusion and controversy.\nWith me all calculators should give the same answer.\nI ensure some order in the operation of computation.\nI insist that brackets be evaluated first starting from the innermost bracket.\nMultiplication precedes addition according to me.\nWho am I?",
         "Question has figure": "No",
-        "clue1:": "I bring order into arithmetic",
+        "clue1": "I bring order into arithmetic",
         "clue2": "This is to ensure sanity and avoid unnecessary confusion and controversy",
         "clue3": "With me all calculators should give the same answer",
         "clue4": "I ensure some order in the operation of computation",
