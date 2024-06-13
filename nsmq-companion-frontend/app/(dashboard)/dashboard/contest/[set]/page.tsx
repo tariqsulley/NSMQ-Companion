@@ -254,40 +254,6 @@ export default function ContestPage({ params }: any) {
             }, 1000);
         };
 
-        const clearClues = () => {
-            setClueTexts([]); // Clear all clues
-        };
-
-        const playCluesByOne = () => {
-            setCurrentClueIndex(0);
-            clearClues();
-
-            const playNextClue = async (clueIndex: any) => {
-                if (cluestopped === "stop") {
-                    console.log('Clues stopped');
-                    return;
-                }
-
-                const clueAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
-                addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]);
-
-                setIsCluePlayingNow(true);
-
-                playAudio(clueAudioUrl, () => {
-                    setIsCluePlayingNow(false);
-
-                    if (clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1 && cluestopped !== "stop") {
-                        setTimeout(() => {
-                            playNextClue(clueIndex + 1);
-                        }, 2000);
-                    } else {
-                        onQuestionEnded();
-                    }
-                });
-            };
-
-            playNextClue(0);
-        };
         const question = questions[questionIndex - 1];
         const preambleText = question["Preamble Text"];
 
@@ -312,6 +278,61 @@ export default function ContestPage({ params }: any) {
                 startTimer();
             }
         }
+
+    };
+
+
+    const playAudio = (url: any, onEnded: any) => {
+        if (!audioInstance) {
+            audioInstance = new Audio(url);
+        } else {
+            audioInstance.src = url;
+        }
+        setIsAudioPlaying(true);
+        audioInstance.play();
+        audioInstance.onended = () => {
+            onEnded();
+            setIsAudioPlaying(false);
+            // startTimer();
+        };
+    };
+
+    const clearClues = () => {
+        setClueTexts([]);
+    };
+
+    const playNextClue = (clueIndex: any) => {
+        if (cluestopped === "stop") {
+            console.log('Clues stopped');
+            return;
+        }
+
+        const clueAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
+        addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]);
+
+        setIsCluePlayingNow(true);
+
+        playAudio(clueAudioUrl, () => {
+            setIsCluePlayingNow(false);
+            if ((clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1) && cluestopped !== "stop") {
+                setCurrentClueIndex(clueIndex + 1); // This will trigger the useEffect
+            } else {
+                // onQuestionEnded();
+            }
+        });
+    };
+
+    useEffect(() => {
+        if (currentClueIndex > 0) {
+            playNextClue(currentClueIndex);
+        }
+    }, [currentClueIndex, cluestopped]);
+
+
+    const playCluesByOne = () => {
+        setCurrentClueIndex(0);
+        clearClues();
+        playNextClue(0);
     };
 
 
@@ -342,7 +363,7 @@ export default function ContestPage({ params }: any) {
 
     const handleNextQuestion = () => {
         resetTranscript(); // Clear any existing transcripts
-
+        setClueStopped("play")
         // Update the question index
         setCurrentQuestionIndex(prevIndex => {
             const newIndex = prevIndex + 1;
