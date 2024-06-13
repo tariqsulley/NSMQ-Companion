@@ -61,6 +61,7 @@ export default function ContestPage({ params }: any) {
     const [currentClueText, setCurrentClueText] = useState('');
     const timerRef = useRef<any>(null);
     const [stopCluePlayback, setStopCluePlayback] = useState(false);
+    const [cluestopped, setClueStopped] = useState("play")
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
         'Round1': 0
@@ -78,6 +79,7 @@ export default function ContestPage({ params }: any) {
 
     const [clueTexts, setClueTexts] = useState<string[]>([]);
     const [isCluePlayingNow, setIsCluePlayingNow] = useState(false);
+
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
     };
@@ -139,14 +141,8 @@ export default function ContestPage({ params }: any) {
     };
 
     const handleCircleClick = () => {
-        if (isCluePlayingNow) {
-            // A clue is currently being played, so stop clue playback
-            setStopCluePlayback(true);
-            console.log("Clue playback stopped.");
-            return;
-        }
-
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
+            setClueStopped("stop")
             setIsBellPlaying(true);
             setIsCircleGreen(true);
             play();
@@ -263,45 +259,41 @@ export default function ContestPage({ params }: any) {
         };
 
         const playCluesByOne = () => {
-            setCurrentClueIndex(0); // Reset the clue index
+            setCurrentClueIndex(0);
             clearClues();
 
             const playNextClue = async (clueIndex: any) => {
-                if (stopCluePlayback) {
-                    console.log('clues paused')
-                    // Clue playback has been stopped, reset the flag and return
-                    // setStopCluePlayback(false);
+                if (cluestopped === "stop") {
+                    console.log('Clues stopped');
                     return;
-                } else {
-                    const clueAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
-                    addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]);
+                }
 
-                    setIsCluePlayingNow(true);
+                const clueAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
+                addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]);
 
-                    playAudio(clueAudioUrl, () => {
-                        setIsCluePlayingNow(false);
+                setIsCluePlayingNow(true);
 
-                        if (clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1) {
-                            // Wait for 2 seconds before playing the next clue
-                            setTimeout(() => {
-                                playNextClue(clueIndex + 1);
-                            }, 2000);
-                        } else {
-                            onQuestionEnded();
-                        }
-                    });
-                };
-            }
+                playAudio(clueAudioUrl, () => {
+                    setIsCluePlayingNow(false);
+
+                    if (clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1 && cluestopped !== "stop") {
+                        setTimeout(() => {
+                            playNextClue(clueIndex + 1);
+                        }, 2000);
+                    } else {
+                        onQuestionEnded();
+                    }
+                });
+            };
+
             playNextClue(0);
         };
-
-
         const question = questions[questionIndex - 1];
         const preambleText = question["Preamble Text"];
 
         if (currentRound === 4) {
             // Round 4, handle preamble and clues
-            if (!stopCluePlayback) {
+            if (cluestopped !== "stop") {
                 playCluesByOne();
             } else {
                 console.log("no clues")
@@ -367,7 +359,7 @@ export default function ContestPage({ params }: any) {
     };
 
     useEffect(() => {
-        if (quizStarted && currentQuestionIndex < questions?.length) {
+        if (quizStarted && currentQuestionIndex < questions?.length && cluestopped != "stop") {
             playQuestionAudio(currentQuestionIndex + 1);
         }
     }, [currentQuestionIndex]);
@@ -599,6 +591,7 @@ export default function ContestPage({ params }: any) {
                             </button>
 
                             <div>
+
                                 {!quizStarted ? (
                                     <button onClick={handleStartQuiz}
                                         className="bg-[#4a6cc3] px-6 py-1 rounded-lg">
