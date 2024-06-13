@@ -315,7 +315,9 @@ export default function ContestPage({ params }: any) {
         playAudio(clueAudioUrl, () => {
             setIsCluePlayingNow(false);
             if ((clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1) && cluestopped !== "stop") {
-                setCurrentClueIndex(clueIndex + 1); // This will trigger the useEffect
+                setTimeout(() => {
+                    setCurrentClueIndex(clueIndex + 1);
+                }, 2000);
             } else {
                 // onQuestionEnded();
             }
