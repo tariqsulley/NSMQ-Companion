@@ -14,11 +14,18 @@ import Link from "next/link";
 import useSWR from "swr";
 import { useAuth } from "@/app/context/AuthContext";
 import axios from "axios";
+
 interface PracticeYearProps {
     params: {
         year: string;
     };
 }
+
+type ContestRoundData = {
+    date: string;
+    [key: string]: string | number;
+};
+
 
 export default function PracticeYear({ params }: PracticeYearProps) {
     const { year } = params;
@@ -63,8 +70,10 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         }
     }, [completedData]);
 
+
+
     const isRoundCompleted = (contestId: any, roundNumber: any) => {
-        const contestData = completedRounds?.find(item => item.date === `Contest ${contestId}`);
+        const contestData = completedRounds?.find((item: ContestRoundData) => item.date === `Contest ${contestId}`);
         return contestData ? !!contestData[`Round ${roundNumber}`] : false;
     };
 
@@ -100,24 +109,9 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                 return i;
             }
         }
-        return 1; // All rounds completed, start from beginning
+        return 1;
     }
 
-
-    // const handleContestClick = (contest: any) => {
-    //     // setSelectedContest(contest);
-    //     // router.push(`/dashboard/practice/${year}?nums=${type}`);
-    //     // setSelectedContest(contest);
-    //     // setContestValue(contest);
-    //     setSelectedContest(contest);
-    //     const contestId = contest.split(' ')[1];
-    //     const completedRoundsForContest = completedRounds?.find((item: any) => item.date === `Contest ${contestId}`);
-    //     const startingRound = getStartingRound(completedRoundsForContest);
-    //     // router.push(`/dashboard/contest/${year}?id=${contestId}&startRound=${startingRound}`);
-    //     router.push(`/dashboard/contest/${year}?id=${contestId}&startRound=${startingRound}`);
-    //     setSelectedContest(contest);
-    //     setContestValue(contest);
-    // }
 
     const handleContestClick = (contest: any) => {
         setSelectedContest(contest);
@@ -131,14 +125,6 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         const startingRound = getStartingRound(completedRoundsForContest);
         router.push(`/dashboard/contest/${year}?id=${contestId}&startRound=${startingRound}`);
     }
-
-    // const handleContestClick = (contest: any) => {
-    //     setSelectedContest(contest);
-    //     const contestId = contest.split(' ')[1]; // Assuming the contest name is "Contest 1", "Contest 2", etc.
-    //     router.push(`/dashboard/contest/${year}?id=${contestId}`);
-    //     setSelectedContest(contest);
-    //     setContestValue(contest);
-    // }
 
     const calculatePercentageCompleted = (contest: string) => {
         const completedRoundsForContest = completedRounds?.find((item: any) => item.date === contest);
@@ -198,14 +184,18 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                             Percentage Completed: {calculatePercentageCompleted(contest).toFixed(0)}%
                                         </div>
                                         <div className="flex gap-4">
-                                            <button
-                                                className="text-white rounded-lg shadow bg-blue-800 px-6 py-1 m-1"
-                                                onClick={() => handleStartContest(contest)}
-                                            >
-                                                <p>
-                                                    {calculatePercentageCompleted(contest) === 100 ? "Restart Contest" : "Start Contest"}
-                                                </p>
-                                            </button>
+                                            {calculatePercentageCompleted(contest) < 100 && (
+                                                <button
+                                                    className="text-white rounded-lg shadow bg-blue-800 px-6 py-1 m-1"
+                                                    onClick={() => handleStartContest(contest)}
+                                                >
+                                                    <p>
+                                                        {calculatePercentageCompleted(contest) > 0
+                                                            ? "Continue Contest"
+                                                            : "Start Contest"}
+                                                    </p>
+                                                </button>
+                                            )}
                                             {calculatePercentageCompleted(contest) > 0 && (
                                                 <div className="relative">
                                                     <button
@@ -234,23 +224,6 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                         </div>
                                     </>
                                 )}
-                                {/* {selectedContest === contest && (
-                                    <>
-                                        <div className="font-semibold">
-                                            Percentage Completed: {calculatePercentageCompleted(contest).toFixed(0)}%
-                                        </div>
-                                        <div className="flex gap-4">
-                                            <button
-                                                className="text-white rounded-lg shadow bg-blue-800 px-6 py-1 m-1"
-                                                onClick={() => handleStartContest(contest)}
-                                            >
-                                                <p>
-                                                    {calculatePercentageCompleted(contest) === 100 ? "Restart Contest" : "Start Contest"}
-                                                </p>
-                                            </button>
-                                        </div>
-                                    </>
-                                )} */}
                             </div>
                         ))}
 
@@ -277,8 +250,6 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                             </button>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
