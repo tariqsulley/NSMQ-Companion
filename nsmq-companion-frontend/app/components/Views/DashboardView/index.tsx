@@ -14,6 +14,9 @@ import {
     Legend,
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
+import useSWR from "swr";
+import API_BASE from "@/app/utils/api";
+import axios from "axios"
 
 ChartJS.register(
     RadialLinearScale,
@@ -118,11 +121,39 @@ const chartdata = [
 
 ]
 export default function DashboardView() {
+    const { Data } = useAuth()
+
     const dataFormatter = (number: any) =>
         `$${Intl.NumberFormat('us').format(number).toString()}`;
 
+    const fetcher = async (url: any) => {
+        const response = await axios.get(url);
+        return response?.data;
+    };
 
-    const { Data } = useAuth()
+    const {
+        data: barData,
+        error,
+        isLoading
+    } = useSWR(
+        `${API_BASE}/questions/student-rounds?student_uuid=${Data?.data.uuid}&year=2021&contest_id=1`,
+        fetcher,
+        {
+            revalidateIfStale: true,
+            revalidateOnFocus: true,
+            revalidateOnReconnect: true,
+            refreshInterval: 1000
+        },
+    );
+
+    if (isLoading) {
+        return (
+            <div>
+                Loading
+            </div>
+        )
+    }
+
     return (
         <div className="flex flex-col gap-4">
             <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
@@ -178,7 +209,7 @@ export default function DashboardView() {
                 <p className="mx-10 text-xl font-semibold">Contest 1</p>
                 <BarChart
                     className="mt-6"
-                    data={bar_data}
+                    data={barData}
                     index="name"
                     categories={[
                         'Maths',
