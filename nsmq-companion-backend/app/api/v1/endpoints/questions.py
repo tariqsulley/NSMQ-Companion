@@ -63,13 +63,14 @@ async def get_student_rounds(
 
 @router.get("/contest-rounds", response_model=None)
 @inject
-async def get_contest_rounds_scores(student_uuid: str ,
-                                    student_service: StudentService = Depends(Provide[Container.student_service])):
+async def get_contest_rounds_scores(
+    student_uuid: str,
+    year: int,
+    student_service: StudentService = Depends(Provide[Container.student_service])):
     try:
-        contest_rounds_data =  await student_service.get_contest_rounds_scores(student_uuid)
+        contest_rounds_data = await student_service.get_contest_rounds_scores(student_uuid, year)
         return contest_rounds_data
     except Exception as e:
         print(f"Error: {str(e)}")  
         raise HTTPException(status_code=500, detail="Failed to retrieve contest round scores")
-    
 

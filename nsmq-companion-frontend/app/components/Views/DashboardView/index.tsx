@@ -17,6 +17,8 @@ import { Radar } from 'react-chartjs-2';
 import useSWR from "swr";
 import API_BASE from "@/app/utils/api";
 import axios from "axios"
+import { useState } from 'react';
+
 
 ChartJS.register(
     RadialLinearScale,
@@ -122,6 +124,8 @@ const chartdata = [
 ]
 export default function DashboardView() {
     const { Data } = useAuth()
+    const [year, setYear] = useState('2021');
+    const [contestId, setContestId] = useState('1');
 
     const dataFormatter = (number: any) =>
         `$${Intl.NumberFormat('us').format(number).toString()}`;
@@ -136,7 +140,7 @@ export default function DashboardView() {
         error: Error,
         isLoading: IsLoaing
     } = useSWR(
-        `${API_BASE}/questions/contest-rounds?student_uuid=${Data?.data.uuid}`,
+        `${API_BASE}/questions/contest-rounds?student_uuid=${Data?.data.uuid}&year=${year}`,
         fetcher,
         {
             revalidateIfStale: true,
@@ -151,7 +155,7 @@ export default function DashboardView() {
         error,
         isLoading
     } = useSWR(
-        `${API_BASE}/questions/student-rounds?student_uuid=${Data?.data.uuid}&year=2021&contest_id=1`,
+        `${API_BASE}/questions/student-rounds?student_uuid=${Data?.data.uuid}&year=${year}&contest_id=${contestId}`,
         fetcher,
         {
             revalidateIfStale: true,
@@ -163,8 +167,26 @@ export default function DashboardView() {
 
     if (isLoading) {
         return (
-            <div>
-                Loading
+            <div className="flex flex-col gap-4">
+                <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
+                <div className="flex items-center gap-3">
+                    <div>
+                        <SearchSelect value={year} onValueChange={(value) => setYear(value)}>
+                            <SearchSelectItem value="2021">2021</SearchSelectItem>
+                            <SearchSelectItem value="2020">2020</SearchSelectItem>
+                        </SearchSelect>
+
+                    </div>
+                    <div></div>
+                    <SearchSelect value={contestId} onValueChange={(value) => setContestId(value)}>
+                        <SearchSelectItem value="1">Contest 1</SearchSelectItem>
+                        <SearchSelectItem value="2">Contest 2</SearchSelectItem>
+                        <SearchSelectItem value="3">Contest 3</SearchSelectItem>
+                    </SearchSelect>
+                </div>
+                <div className=" flex items-center justify-center">
+                    <p>Loading </p>
+                </div>
             </div>
         )
     }
@@ -174,13 +196,14 @@ export default function DashboardView() {
             <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
             <div className="flex items-center gap-3">
                 <div>
-                    <SearchSelect>
-                        <SearchSelectItem value="1">2021</SearchSelectItem>
-                        <SearchSelectItem value="2">2020</SearchSelectItem>
+                    <SearchSelect value={year} onValueChange={(value) => setYear(value)}>
+                        <SearchSelectItem value="2021">2021</SearchSelectItem>
+                        <SearchSelectItem value="2020">2020</SearchSelectItem>
                     </SearchSelect>
+
                 </div>
                 <div></div>
-                <SearchSelect>
+                <SearchSelect value={contestId} onValueChange={(value) => setContestId(value)}>
                     <SearchSelectItem value="1">Contest 1</SearchSelectItem>
                     <SearchSelectItem value="2">Contest 2</SearchSelectItem>
                     <SearchSelectItem value="3">Contest 3</SearchSelectItem>

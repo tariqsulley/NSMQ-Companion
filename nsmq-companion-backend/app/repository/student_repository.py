@@ -111,36 +111,26 @@ class StudentRepository(BaseRepository):
             })
         return result
 
-    def get_contest_rounds_scores(self, student_uuid: UUID):
+    async def get_contest_rounds_scores(self, student_uuid: UUID, year: int):
         with self.session_factory() as session:
             try:
+                # Adding a filter for the year
                 round_data = session.query(StudentRoundData).filter(
-                    StudentRoundData.student_uuid == student_uuid
+                    StudentRoundData.student_uuid == student_uuid,
+                    StudentRoundData.year == year  # Assumes that the 'year' column directly corresponds to the year of the contest
                 ).order_by(StudentRoundData.contest_id, StudentRoundData.round_id).all()
-
-                if not round_data:
-                    print(f"No round data found for student UUID: {student_uuid}")
-                    return [] 
 
                 results = {}
                 for data in round_data:
                     contest_key = f'Contest {data.contest_id}'
-                    if contest_key not in results:
-                        results[contest_key] = {}
+                    results.setdefault(contest_key, {})
+                    results[contest_key][f'Round {data.round_id}'] = data.round_score
 
-                    round_key = f'Round {data.round_id}'
-                    results[contest_key][round_key] = data.round_score
-
-                formatted_results = []
-                for contest, rounds in results.items():
-                    round_entry = {'date': contest}
-                    round_entry.update(rounds)
-                    formatted_results.append(round_entry)
-
+                formatted_results = [{'date': contest, **rounds} for contest, rounds in results.items()]
                 return formatted_results
             except Exception as e:
-                print(f"Error processing round data: {e}")
-                raise 
+                print(f"Error processing round data for {student_uuid} in {year}: {e}")
+                raise
 
 
 
