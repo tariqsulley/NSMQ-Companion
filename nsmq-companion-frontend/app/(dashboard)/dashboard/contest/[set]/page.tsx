@@ -16,17 +16,20 @@ import ContestData from "@/app/utils/NSMQContests";
 import { CgSpinner } from "react-icons/cg";
 import bolt from "../../../../../public/images/bolt.svg"
 import arrow from "../../../../../public/images/arrow.svg"
-
+import useSWR from "swr";
+import { useAuth } from "@/app/context/AuthContext";
 export default function ContestPage({ params }: any) {
-
+    const { Data } = useAuth()
     const { set } = params;
+    const searchParams = useSearchParams();
+    const contestId = searchParams.get('id');
+    const startRound = parseInt(searchParams.get('startRound') || '2');
+
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setImportedQuestions] = useState<any>(null);
     const currentQuestion = questions?.length > 0 ? questions[currentQuestionIndex] : null;
     const pathname = usePathname();
     const year = pathname.split('/')[3];
-    const searchParams = useSearchParams();
-    const contestId = searchParams.get('id');
     const type = parseInt(searchParams.get("nums") ?? "0");
     const [selectedContest, setSelectedContest] = useState("");
     const [contestValue, setContestValue] = useState("");
@@ -121,10 +124,31 @@ export default function ContestPage({ params }: any) {
     const [goToNextRoundClicked, setGoToNextRoundClicked] = useState(false)
 
     const [showNextRoundIntro, setShowNextRoundIntro] = useState(false);
+
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
     };
 
+    // useEffect(() => {
+    //     setCurrentRound(startRound);
+    //     importQuestions(startRound);
+    // }, [contestId, startRound]);
+
+    useEffect(() => {
+        const fetchQuestions = async () => {
+            try {
+                console.log(`Fetching questions for year ${year}, contest ${contestId}, round ${startRound}`);
+                const questionsData = await import(`../../../../utils/Questions/NSMQ_${year}/Contest ${contestId}/round${startRound}`);
+                console.log("Fetched questions:", questionsData.default);
+                setImportedQuestions(questionsData.default);
+            } catch (error) {
+                console.error('Failed to load questions:', error);
+                setImportedQuestions([]);
+            }
+        };
+
+        fetchQuestions();
+    }, [year, contestId, startRound]);
 
 
     const importQuestions = async (round: any) => {
@@ -277,8 +301,8 @@ export default function ContestPage({ params }: any) {
     let audioInstance: any;
 
     const playQuestionAudio = (questionIndex: any) => {
-        const questionAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${questionIndex}.wav`;
-        const preambleAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/preamble_q${questionIndex}.wav`;
+        const questionAudioUrl = `/Sounds/${year}/Contest ${contestId}/round${startRound}/q${questionIndex}.wav`;
+        const preambleAudioUrl = `/Sounds/${year}/Contest ${contestId}/round${startRound}/preamble_q${questionIndex}.wav`;
 
         const playAudio = (url: any, onEnded: any) => {
             if (!audioInstance) {
@@ -311,10 +335,10 @@ export default function ContestPage({ params }: any) {
             }, 1000);
         };
 
-        const question = questions[questionIndex - 1];
-        const preambleText = question["Preamble Text"];
+        const question = questions?.[questionIndex - 1];
+        const preambleText = question?.["Preamble Text"];
 
-        if (currentRound === 4) {
+        if (startRound === 4) {
             // Round 4, handle preamble and clues
             if (cluestopped !== "stop") {
                 playCluesByOne();
@@ -364,7 +388,8 @@ export default function ContestPage({ params }: any) {
             return;
         }
 
-        const clueAudioUrl = `/Sounds/${year}/${contestId}/round${currentRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
+
+        const clueAudioUrl = `/Sounds/${year}/Contest ${contestId}/Round${startRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
         addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]);
 
         setIsCluePlayingNow(true);
@@ -397,7 +422,7 @@ export default function ContestPage({ params }: any) {
 
     const startTimer = () => {
         clearInterval(timerRef.current);
-        const timeLimit = currentQuestion["calculations present"] === "Yes" ? 30 : 10;
+        const timeLimit = currentQuestion?.["calculations present"] === "Yes" ? 30 : 10;
         setTimeLeft(timeLimit);
         timerRef.current = setInterval(() => {
             setTimeLeft((prevTimeLeft) => {
@@ -418,6 +443,11 @@ export default function ContestPage({ params }: any) {
         };
     }, [quizStarted]);
 
+    useEffect(() => {
+        if (quizEnded) {
+            sendRoundDataToBackend();
+        }
+    }, [quizEnded]);
 
     const handleNextQuestion = () => {
         resetTranscript();
@@ -428,6 +458,7 @@ export default function ContestPage({ params }: any) {
             if (newIndex < questions.length) {
                 return newIndex;
             } else {
+                // sendRoundDataToBackend();
                 switch (currentRound) {
                     case 1:
                         setRound1Ended(true);
@@ -550,6 +581,7 @@ export default function ContestPage({ params }: any) {
                 setTimeout(() => {
                     handleNextQuestion();
                 }, 5000);
+
             } else {
                 synthesizeText("I'm not accepting that");
                 updateRoundBreakDown(currentQuestion["Subject"] as Subject, 0);
@@ -616,6 +648,26 @@ export default function ContestPage({ params }: any) {
     };
 
 
+    const sendRoundDataToBackend = async () => {
+        try {
+            const response = await axios.post(`${API_BASE}/questions/round-score`, {
+                Student_uuid: Data?.data.uuid,
+                Year: parseInt(year),
+                Contest_id: contestId,
+                Round_id: startRound,
+                Round_score: round_score,
+                Maths: roundBreakDown[0]['Mathematics'] / 2,
+                Biology: roundBreakDown[0]['Biology'] / 2,
+                Chemistry: roundBreakDown[0]['Chemistry'] / 2,
+                Physics: roundBreakDown[0]['Physics'] / 2
+            });
+            console.log('Round data sent successfully:', response.data);
+        } catch (error) {
+            console.error('Error sending round data:', error);
+        }
+    };
+
+
     if (!questions) {
         return <div>Loading questions...</div>;
     }
@@ -627,8 +679,7 @@ export default function ContestPage({ params }: any) {
              dark:bg-darkBgLight">
                 <p>{year}</p>
                 <p>{contestId}</p>
-
-                {showNextRoundIntro && (
+                {/* {showNextRoundIntro && (
                     <div>
 
                         {(currentRound) === 2 && (
@@ -653,8 +704,34 @@ export default function ContestPage({ params }: any) {
                             </div>
                         )}
                     </div>
-                )}
-                {currentRound === 1 && !quizStarted && !round1ended ?
+                )} */}
+                {/* {showNextRoundIntro && ( */}
+                <div>
+                    {startRound == 2 && !quizEnded && !round2started && (
+                        <div>
+                            <p>{round2Intro}</p>
+                            <button onClick={playRound2Intro}>Play Round 2 Intro</button>
+                            <button onClick={handleSkipRound2Intro}>Skip Intro</button>
+                        </div>
+                    )}
+
+                    {startRound == 3 && !quizEnded && !round3started && (
+                        <div>
+                            <p>{round3Intro}</p>
+                            <button onClick={playRound3Intro}>Play Round 3 Intro</button>
+                            <button onClick={handleSkipRound3Intro}>Skip Intro</button>
+                        </div>
+                    )}
+                    {startRound == 4 && !quizEnded && !round4started && (
+                        <div>
+                            <p>{round4Intro}</p>
+                            <button onClick={playRound4Intro}>Play Round 4 Intro</button>
+                            <button onClick={handleSkipRound4Intro}>Skip Intro</button>
+                        </div>
+                    )}
+                </div>
+                {/* )} */}
+                {/* {currentRound === 1 && !quizStarted && !round1ended ?
                     <div className="flex flex-col items-center justify-center">
                         <p className="font-semibold m-2">{round1Intro}
                         </p>
@@ -666,13 +743,25 @@ export default function ContestPage({ params }: any) {
                                 Skip Intro
                             </button>}
                     </div>
-                    : ""}
+                    : ""} */}
 
-                {(introskipped && !quizEnded) && round1started || round2started || round3started || round4started ?
+                {currentRound === 1 && startRound === 1 && !quizStarted && !round1ended ? (
+                    <div className="flex flex-col items-center justify-center">
+                        <p className="font-semibold m-2">{round1Intro}</p>
+                        {!introStarted && !quizStarted ? (
+                            <button onClick={handleStartIntro}>Start Intro</button>
+                        ) : (
+                            <button onClick={handleSkipIntro}>Skip Intro</button>
+                        )}
+                    </div>
+                ) : null}
+
+
+                {(introskipped && !quizEnded) ?
                     <div className="m-10  flex flex-col  w-full justify-center items-center">
 
                         <div>
-                            <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold dark:bg-blue-800 ">Round {currentRound}</p>
+                            <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold dark:bg-blue-800 ">Round {startRound}</p>
                         </div>
 
                         <div className="flex w-full ">
@@ -706,11 +795,11 @@ export default function ContestPage({ params }: any) {
 
 
                             <div>
-                                {currentRound === 4 ? (
+                                {startRound === 4 ? (
                                     <div>
                                         <h2 className="font-bold">Clues:</h2>
                                         {clueTexts.map((text, index) => (
-                                            <p key={index}>{text}</p>  // Display each clue text
+                                            <p key={index}>{text}</p>
                                         ))}
                                     </div>
                                 )
@@ -773,7 +862,7 @@ export default function ContestPage({ params }: any) {
                 {quizEnded && (
                     <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 w-full
                      shadow rounded-b-xl dark:bg-darkBgLight">
-                        <h2 className="text-2xl font-bold">End of Round {currentRound}</h2>
+                        <h2 className="text-2xl font-bold">End of Round {startRound}</h2>
                         <div className="flex items-center gap-4 mt-2 mb-2">
                             <div className="bg-[#FFD700] p-2 rounded-lg">
                                 <p className="dark:text-darkBgLight">TOTAL POINTS</p>

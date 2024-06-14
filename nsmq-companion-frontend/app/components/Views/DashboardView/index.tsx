@@ -244,7 +244,7 @@ export default function DashboardView() {
                 />
             </div>
             <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
-                <p className="mx-10 text-xl font-semibold">Contest 1</p>
+                <p className="mx-10 text-xl font-semibold">Contest {contestId}</p>
                 <BarChart
                     className="mt-6"
                     data={barData}
