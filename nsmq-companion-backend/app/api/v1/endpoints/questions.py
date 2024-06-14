@@ -47,7 +47,7 @@ async def create_round_score(data: RoundData,
         msg = "Error posting data"
         return send_internal_server_error(user_msg=msg, error=str(e))
     
-    
+
 @router.get("/student-rounds", response_model=None) 
 @inject
 async def get_student_rounds(
@@ -61,4 +61,15 @@ async def get_student_rounds(
     except Exception as e:
         return send_internal_server_error("Failed to retrieve round scores", str(e))
 
+@router.get("/contest-rounds", response_model=None)
+@inject
+async def get_contest_rounds_scores(student_uuid: str ,
+                                    student_service: StudentService = Depends(Provide[Container.student_service])):
+    try:
+        contest_rounds_data =  await student_service.get_contest_rounds_scores(student_uuid)
+        return contest_rounds_data
+    except Exception as e:
+        print(f"Error: {str(e)}")  
+        raise HTTPException(status_code=500, detail="Failed to retrieve contest round scores")
+    
 

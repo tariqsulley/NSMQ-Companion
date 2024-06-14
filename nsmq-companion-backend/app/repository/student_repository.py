@@ -111,6 +111,38 @@ class StudentRepository(BaseRepository):
             })
         return result
 
+    def get_contest_rounds_scores(self, student_uuid: UUID):
+        with self.session_factory() as session:
+            try:
+                round_data = session.query(StudentRoundData).filter(
+                    StudentRoundData.student_uuid == student_uuid
+                ).order_by(StudentRoundData.contest_id, StudentRoundData.round_id).all()
+
+                if not round_data:
+                    print(f"No round data found for student UUID: {student_uuid}")
+                    return [] 
+
+                results = {}
+                for data in round_data:
+                    contest_key = f'Contest {data.contest_id}'
+                    if contest_key not in results:
+                        results[contest_key] = {}
+
+                    round_key = f'Round {data.round_id}'
+                    results[contest_key][round_key] = data.round_score
+
+                formatted_results = []
+                for contest, rounds in results.items():
+                    round_entry = {'date': contest}
+                    round_entry.update(rounds)
+                    formatted_results.append(round_entry)
+
+                return formatted_results
+            except Exception as e:
+                print(f"Error processing round data: {e}")
+                raise 
+
+
 
 
     

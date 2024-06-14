@@ -132,6 +132,21 @@ export default function DashboardView() {
     };
 
     const {
+        data: chartData,
+        error: Error,
+        isLoading: IsLoaing
+    } = useSWR(
+        `${API_BASE}/questions/contest-rounds?student_uuid=${Data?.data.uuid}`,
+        fetcher,
+        {
+            revalidateIfStale: true,
+            revalidateOnFocus: true,
+            revalidateOnReconnect: true,
+            refreshInterval: 1000
+        },
+    );
+
+    const {
         data: barData,
         error,
         isLoading
@@ -194,7 +209,7 @@ export default function DashboardView() {
                 </div>
                 <AreaChart
                     className="h-80"
-                    data={chartdata}
+                    data={chartData}
                     index="date"
                     curveType="monotone"
                     yAxisWidth={30}

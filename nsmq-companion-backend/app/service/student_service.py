@@ -45,3 +45,5 @@ class StudentService(BaseService):
     def get_student_rounds(self, student_uuid: UUID, year: int, contest_id: str):
         return self.student_repository.get_student_rounds(student_uuid, year, contest_id)
 
+    async def get_contest_rounds_scores(self, student_uuid: UUID):
+        return self.student_repository.get_contest_rounds_scores(student_uuid)
