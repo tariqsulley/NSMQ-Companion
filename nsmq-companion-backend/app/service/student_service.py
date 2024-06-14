@@ -27,8 +27,21 @@ class StudentService(BaseService):
     def get_facilitator(self,payload:str):
         return self.student_repository.get_students_by_facilitator_uuid(payload)
     
+    def get_student_by_uuid(self,student_uuid:str):
+        return self.student_repository.get_student_by_uuid(student_uuid)
+    
     def update_user_avatar(self, user_id: str, avatar_url: str):
         try:
             return self.student_repository.update_user_avatar(user_id, avatar_url)
         except Exception as e:
             raise e
+        
+    def update_student_round_data(self, student_uuid: str, year:int, round_score: int, round_id:int, contest_id: str, maths_score: int, 
+                                  biology_score: int, chemistry_score: int, physics_score: int):
+        return self.student_repository.update_student_round_data(student_uuid, year, round_score, round_id, contest_id, 
+                                                                 maths_score, biology_score, chemistry_score, 
+                                                                 physics_score)
+
+    def get_student_rounds(self, student_uuid: UUID, year: int, contest_id: str):
+        return self.student_repository.get_student_rounds(student_uuid, year, contest_id)
+

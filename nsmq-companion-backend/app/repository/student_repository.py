@@ -17,7 +17,7 @@ from app.models.email_verification import EmailVerification
 from app.schemas.email_verification import UserEmailVerification
 from app.schemas.student import StudentCreate
 import logging
-
+from app.models.contest import StudentRoundData
 
 
 class StudentRepository(BaseRepository):
@@ -71,3 +71,46 @@ class StudentRepository(BaseRepository):
             session.commit()
             session.refresh(user)
             return user
+        
+    def update_student_round_data(self, student_uuid: str, year: int, round_score: int, round_id: int,
+                              contest_id: str, maths_score: int, biology_score: int,
+                              chemistry_score: int, physics_score: int):
+        with self.session_factory() as session:
+            new_student_round = StudentRoundData(
+            student_uuid=student_uuid,
+            round_id=round_id,
+            contest_id=contest_id,
+            year=year,
+            round_score=round_score,
+            maths=maths_score,
+            biology=biology_score,
+            chemistry=chemistry_score,
+            physics=physics_score
+        )
+        session.add(new_student_round)
+        session.commit()
+        session.refresh(new_student_round)
+        return new_student_round
+    
+    def get_student_rounds(self, student_uuid: UUID, year: int, contest_id: str):
+        with self.session_factory() as session:
+            rounds = session.query(StudentRoundData).filter(
+            StudentRoundData.student_uuid == student_uuid,
+            StudentRoundData.year == year,
+            StudentRoundData.contest_id == contest_id
+        ).all()
+
+        result = []
+        for round in rounds:
+            result.append({
+                "name": f"Round {round.round_id}",
+                "Maths": round.maths,
+                "Biology": round.biology,
+                "Chemistry": round.chemistry,
+                "Physics": round.physics,
+            })
+        return result
+
+
+
+    

@@ -50,6 +50,9 @@ const options = {
     }
 };
 
+
+
+
 const bar_data = [
     {
         name: 'Round 1',
@@ -57,7 +60,6 @@ const bar_data = [
         'Biology': 338,
         'Chemistry': 538,
         'Physics': 396,
-
     },
     {
         name: 'Round 2',
@@ -81,6 +83,7 @@ const bar_data = [
         'Physics': 33,
     },
 ];
+
 
 
 const chartdata = [

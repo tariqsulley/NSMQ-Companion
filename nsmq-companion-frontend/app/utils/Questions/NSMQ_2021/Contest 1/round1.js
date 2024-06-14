@@ -340,14 +340,19 @@ const contest_1_1 = [
 export default contest_1_1
 
 
-// const round1 = {
-//     "2021": {
-//         "Contest1": {
-//             "Round_score": "27",
+const round1 = {
+    'student_uuid': 'uuid',
+    "year": "2021",
+    "Contest_1": {
+        "Round1_score": "27",
+        'Maths': 890,
+        'Biology': 338,
+        'Chemistry': 538,
+        'Physics': 396,
+    }
+}
 
-//         }
-//     }
-// }
+
 
 const bar_data = [{
     name: 'Round 1',

@@ -125,6 +125,8 @@ export default function ContestPage({ params }: any) {
         setClueTexts(prevTexts => [...prevTexts, newText]);
     };
 
+
+
     const importQuestions = async (round: any) => {
         try {
             const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/round${round}`);

@@ -18,7 +18,8 @@ class Container(containers.DeclarativeContainer):
         modules=[
             "app.api.v1.endpoints.authentication",
             "app.api.v1.endpoints.users",
-            "app.api.v1.endpoints.language"
+            "app.api.v1.endpoints.language",
+            "app.api.v1.endpoints.questions"
         ]
     )
 
