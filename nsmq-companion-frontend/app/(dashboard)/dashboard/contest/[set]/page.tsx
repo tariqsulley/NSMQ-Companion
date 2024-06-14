@@ -24,6 +24,8 @@ export default function ContestPage({ params }: any) {
     const searchParams = useSearchParams();
     const contestId = searchParams.get('id');
     const startRound = parseInt(searchParams.get('startRound') || '2');
+    const mode = searchParams.get('mode');
+    const isReviewMode = mode === 'review';
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [questions, setImportedQuestions] = useState<any>(null);
@@ -630,6 +632,18 @@ export default function ContestPage({ params }: any) {
         setShowNextRoundIntro(false);
     };
 
+    const handleNextReviewQuestion = () => {
+        if (currentQuestionIndex < questions.length - 1) {
+            setCurrentQuestionIndex(currentQuestionIndex + 1);
+        }
+    };
+
+    const handlePreviousReviewQuestion = () => {
+        if (currentQuestionIndex > 0) {
+            setCurrentQuestionIndex(currentQuestionIndex - 1);
+        }
+    };
+
 
     const handleGoToNextRound = () => {
         if (currentRound <= 3) {
@@ -705,83 +719,11 @@ export default function ContestPage({ params }: any) {
                         )}
                     </div>
                 )} */}
-                {/* {showNextRoundIntro && ( */}
-                <div>
-                    {startRound == 2 && !quizEnded && !round2started && (
-                        <div>
-                            <p>{round2Intro}</p>
-                            <button onClick={playRound2Intro}>Play Round 2 Intro</button>
-                            <button onClick={handleSkipRound2Intro}>Skip Intro</button>
-                        </div>
-                    )}
-
-                    {startRound == 3 && !quizEnded && !round3started && (
-                        <div>
-                            <p>{round3Intro}</p>
-                            <button onClick={playRound3Intro}>Play Round 3 Intro</button>
-                            <button onClick={handleSkipRound3Intro}>Skip Intro</button>
-                        </div>
-                    )}
-                    {startRound == 4 && !quizEnded && !round4started && (
-                        <div>
-                            <p>{round4Intro}</p>
-                            <button onClick={playRound4Intro}>Play Round 4 Intro</button>
-                            <button onClick={handleSkipRound4Intro}>Skip Intro</button>
-                        </div>
-                    )}
-                </div>
-                {/* )} */}
-                {/* {currentRound === 1 && !quizStarted && !round1ended ?
-                    <div className="flex flex-col items-center justify-center">
-                        <p className="font-semibold m-2">{round1Intro}
-                        </p>
-                        {!introStarted && !quizStarted ?
-                            <button onClick={handleStartIntro}>
-                                Start Intro
-                            </button> :
-                            <button onClick={handleSkipIntro}>
-                                Skip Intro
-                            </button>}
-                    </div>
-                    : ""} */}
-
-                {currentRound === 1 && startRound === 1 && !quizStarted && !round1ended ? (
-                    <div className="flex flex-col items-center justify-center">
-                        <p className="font-semibold m-2">{round1Intro}</p>
-                        {!introStarted && !quizStarted ? (
-                            <button onClick={handleStartIntro}>Start Intro</button>
-                        ) : (
-                            <button onClick={handleSkipIntro}>Skip Intro</button>
-                        )}
-                    </div>
-                ) : null}
-
-
-                {(introskipped && !quizEnded) ?
-                    <div className="m-10  flex flex-col  w-full justify-center items-center">
-
-                        <div>
-                            <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold dark:bg-blue-800 ">Round {startRound}</p>
-                        </div>
-
-                        <div className="flex w-full ">
-
-                            <div className="flex items-center gap-1 p-2 w-full justify-start">
-                                <p className="font-semibold text-2xl">Points: {round_score}</p>
-                            </div>
-
-                            {isAudioPlaying ? <div className="flex items-center gap-1 p-2 w-full justify-end">
-                                <Image src={clock_icon} alt="clock icon" width={20} height={20} />
-                                <p className="font-semibold text-2xl">Time left:</p>
-                            </div> : <div className="flex items-center gap-1 p-2 w-full justify-end">
-                                <Image src={clock_icon} alt="clock icon" width={20} height={20} />
-                                <p className="font-semibold text-2xl">Time left: {timeLeft}s</p>
-                            </div>
-                            }
-                        </div>
-
-                        <div className="">
-                            {/* <p> Question: {currentQuestion["S/N"]} </p> */}
+                {isReviewMode ?
+                    <div className="w-full">
+                        Review Mode
+                        <div className="flex flex-col  w-full items-center justify-center">
+                            <p className="font-bold">Question: {currentQuestion?.["S/N"]}</p>
                             <h2 className="font-bold">Subject: {currentQuestion?.["Subject"]}</h2>
                             {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
                                 || currentQuestion?.Subject === "Chemistry" ? (
@@ -814,107 +756,246 @@ export default function ContestPage({ params }: any) {
                                 }
                             </div>
 
-
-                            <div>
-                                <h2 className="font-semibold">Transcribed Answer:</h2>
-                                <p className="font-semibold text-[#475569]">{transcribedText}</p>
-                            </div>
                             {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
                                 || currentQuestion?.Subject === "Chemistry" ? (
                                 <MathJaxContext config={config}>
                                     <MathJax key={currentQuestionIndex}>
-                                        Answer: {currentQuestion?.["Answer"]}
+                                        <p className="font-bold">Answer: {currentQuestion?.["Answer"]} </p>
                                     </MathJax>
                                 </MathJaxContext>) :
-                                <h2>Answer: {currentQuestion?.["Answer"]}</h2>
+                                <h2 className="font-bold">Answer: {currentQuestion?.["Answer"]}</h2>
                             }
+
+                            <div className="mt-4 flex justify-between w-full">
+                                <button
+                                    onClick={handlePreviousReviewQuestion}
+                                    disabled={currentQuestionIndex === 0}
+                                    className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
+                                >
+                                    Previous
+                                </button>
+                                <button
+                                    onClick={handleNextReviewQuestion}
+                                    disabled={currentQuestionIndex === questions.length - 1}
+                                    className="bg-blue-500 text-white px-4 py-2 rounded disabled:bg-gray-300"
+                                >
+                                    Next
+                                </button>
+                            </div>
                         </div>
-                        <div
-                            className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
-                            onClick={handleCircleClick}
-                        />
-                        <div className=" w-full justify-between flex gap-2 items-center mt-2">
+                    </div> :
+                    <>
+                        <div>
+                            {startRound == 2 && !quizEnded && !round2started && (
+                                <div>
+                                    <p>{round2Intro}</p>
+                                    <button onClick={playRound2Intro}>Play Round 2 Intro</button>
+                                    <button onClick={handleSkipRound2Intro}>Skip Intro</button>
+                                </div>
+                            )}
 
-                            <button
-                                onClick={handleCalculateSimilarity}
-                                disabled={!isReadyToCalculate}
-                                className="bg-green-400 dar px-6 py-1 rounded-lg"
-                            >
-                                <p className="font-semibold text-white"> {checkingAnswer ? <CgSpinner size={25} className="animate-spin text-white" /> : "Submit Answer"} </p>
-                            </button>
+                            {startRound == 3 && !quizEnded && !round3started && (
+                                <div>
+                                    <p>{round3Intro}</p>
+                                    <button onClick={playRound3Intro}>Play Round 3 Intro</button>
+                                    <button onClick={handleSkipRound3Intro}>Skip Intro</button>
+                                </div>
+                            )}
+                            {startRound == 4 && !quizEnded && !round4started && (
+                                <div>
+                                    <p>{round4Intro}</p>
+                                    <button onClick={playRound4Intro}>Play Round 4 Intro</button>
+                                    <button onClick={handleSkipRound4Intro}>Skip Intro</button>
+                                </div>
+                            )}
+                        </div>
+                        {/* )} */}
+                        {/* {currentRound === 1 && !quizStarted && !round1ended ?
+                    <div className="flex flex-col items-center justify-center">
+                        <p className="font-semibold m-2">{round1Intro}
+                        </p>
+                        {!introStarted && !quizStarted ?
+                            <button onClick={handleStartIntro}>
+                                Start Intro
+                            </button> :
+                            <button onClick={handleSkipIntro}>
+                                Skip Intro
+                            </button>}
+                    </div>
+                    : ""} */}
 
-                            <div>
-
-                                {!quizStarted ? (
-                                    <button onClick={handleStartQuiz}
-                                        className="bg-[#4a6cc3] px-6 py-1 rounded-lg">
-                                        <p className="font-semibold text-white">Start Quiz</p></button>
+                        {currentRound === 1 && startRound === 1 && !quizStarted && !round1ended ? (
+                            <div className="flex flex-col items-center justify-center">
+                                <p className="font-semibold m-2">{round1Intro}</p>
+                                {!introStarted && !quizStarted ? (
+                                    <button onClick={handleStartIntro}>Start Intro</button>
                                 ) : (
-                                    <button onClick={handleNextQuestion}
-                                        className="bg-[#4a6cc3] px-6 py-1 rounded-lg">
-                                        <p className="font-semibold text-white">Next Question</p></button>
+                                    <button onClick={handleSkipIntro}>Skip Intro</button>
                                 )}
                             </div>
-                            <p>Similarity:{similarityScore}</p>
-                        </div>
-                    </div> : ""}
+                        ) : null}
 
-                {quizEnded && (
-                    <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 w-full
+
+                        {(introskipped && !quizEnded) ?
+                            <div className="m-10  flex flex-col  w-full justify-center items-center">
+
+                                <div>
+                                    <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold dark:bg-blue-800 ">Round {startRound}</p>
+                                </div>
+
+                                <div className="flex w-full ">
+
+                                    <div className="flex items-center gap-1 p-2 w-full justify-start">
+                                        <p className="font-semibold text-2xl">Points: {round_score}</p>
+                                    </div>
+
+                                    {isAudioPlaying ? <div className="flex items-center gap-1 p-2 w-full justify-end">
+                                        <Image src={clock_icon} alt="clock icon" width={20} height={20} />
+                                        <p className="font-semibold text-2xl">Time left:</p>
+                                    </div> : <div className="flex items-center gap-1 p-2 w-full justify-end">
+                                        <Image src={clock_icon} alt="clock icon" width={20} height={20} />
+                                        <p className="font-semibold text-2xl">Time left: {timeLeft}s</p>
+                                    </div>
+                                    }
+                                </div>
+
+                                <div className="">
+                                    {/* <p> Question: {currentQuestion["S/N"]} </p> */}
+                                    <h2 className="font-bold">Subject: {currentQuestion?.["Subject"]}</h2>
+                                    {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
+                                        || currentQuestion?.Subject === "Chemistry" ? (
+                                        <MathJaxContext config={config}>
+                                            <MathJax key={currentQuestionIndex}>
+                                                Preamble:  {currentQuestion?.["Preamble Text"]}
+                                            </MathJax>
+                                        </MathJaxContext>) :
+                                        <h2 className="font-semibold text-[#475569]">Preamble: {currentQuestion?.["Preamble Text"]}</h2>
+                                    }
+
+
+                                    <div>
+                                        {startRound === 4 ? (
+                                            <div>
+                                                <h2 className="font-bold">Clues:</h2>
+                                                {clueTexts.map((text, index) => (
+                                                    <p key={index}>{text}</p>
+                                                ))}
+                                            </div>
+                                        )
+                                            : (
+                                                currentQuestion?.["calculations present"] ? (
+                                                    <MathJaxContext config={config}>
+                                                        <MathJax key={currentQuestionIndex}>
+                                                            {currentQuestion?.["Question"]}
+                                                        </MathJax>
+                                                    </MathJaxContext>) : <h2 className="font-bold">Question: {currentQuestion?.["Question"]} </h2>
+                                            )
+                                        }
+                                    </div>
+
+
+                                    <div>
+                                        <h2 className="font-semibold">Transcribed Answer:</h2>
+                                        <p className="font-semibold text-[#475569]">{transcribedText}</p>
+                                    </div>
+                                    {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
+                                        || currentQuestion?.Subject === "Chemistry" ? (
+                                        <MathJaxContext config={config}>
+                                            <MathJax key={currentQuestionIndex}>
+                                                Answer: {currentQuestion?.["Answer"]}
+                                            </MathJax>
+                                        </MathJaxContext>) :
+                                        <h2>Answer: {currentQuestion?.["Answer"]}</h2>
+                                    }
+                                </div>
+                                <div
+                                    className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
+                                    onClick={handleCircleClick}
+                                />
+                                <div className=" w-full justify-between flex gap-2 items-center mt-2">
+
+                                    <button
+                                        onClick={handleCalculateSimilarity}
+                                        disabled={!isReadyToCalculate}
+                                        className="bg-green-400 dar px-6 py-1 rounded-lg"
+                                    >
+                                        <p className="font-semibold text-white"> {checkingAnswer ? <CgSpinner size={25} className="animate-spin text-white" /> : "Submit Answer"} </p>
+                                    </button>
+
+                                    <div>
+
+                                        {!quizStarted ? (
+                                            <button onClick={handleStartQuiz}
+                                                className="bg-[#4a6cc3] px-6 py-1 rounded-lg">
+                                                <p className="font-semibold text-white">Start Quiz</p></button>
+                                        ) : (
+                                            <button onClick={handleNextQuestion}
+                                                className="bg-[#4a6cc3] px-6 py-1 rounded-lg">
+                                                <p className="font-semibold text-white">Next Question</p></button>
+                                        )}
+                                    </div>
+                                    <p>Similarity:{similarityScore}</p>
+                                </div>
+                            </div> : ""}
+
+                        {quizEnded && (
+                            <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 w-full
                      shadow rounded-b-xl dark:bg-darkBgLight">
-                        <h2 className="text-2xl font-bold">End of Round {startRound}</h2>
-                        <div className="flex items-center gap-4 mt-2 mb-2">
-                            <div className="bg-[#FFD700] p-2 rounded-lg">
-                                <p className="dark:text-darkBgLight">TOTAL POINTS</p>
-                                <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
-                                    <Image src={bolt} width={30} height={30} alt="image" />
-                                    <p className="text-3xl text-[#FFD700] font-semibold ">
-                                        {round_score}
-                                    </p>
+                                <h2 className="text-2xl font-bold">End of Round {startRound}</h2>
+                                <div className="flex items-center gap-4 mt-2 mb-2">
+                                    <div className="bg-[#FFD700] p-2 rounded-lg">
+                                        <p className="dark:text-darkBgLight">TOTAL POINTS</p>
+                                        <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                            <Image src={bolt} width={30} height={30} alt="image" />
+                                            <p className="text-3xl text-[#FFD700] font-semibold ">
+                                                {round_score}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-[#3888ff] p-2 rounded-lg">
+                                        <p className="dark:text-darkBgLight text-center">BLAZING</p>
+                                        <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                            <Image src={clock_icon} width={30} height={30} alt="image" />
+                                            <p className="text-3xl text-blue-400 font-semibold ">
+                                                1:03
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div className="bg-green-400 p-2 rounded-lg">
+                                        <p className="dark:text-darkBgLight text-center">GOOD</p>
+                                        <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                            <Image src={arrow} width={30} height={30} alt="image" />
+                                            <p className="text-3xl text-green-400 font-semibold">
+                                                72%
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button onClick={handleGoToNextRound}>Go To Next Round</button>
                                 </div>
                             </div>
-                            <div className="bg-[#3888ff] p-2 rounded-lg">
-                                <p className="dark:text-darkBgLight text-center">BLAZING</p>
-                                <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
-                                    <Image src={clock_icon} width={30} height={30} alt="image" />
-                                    <p className="text-3xl text-blue-400 font-semibold ">
-                                        1:03
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="bg-green-400 p-2 rounded-lg">
-                                <p className="dark:text-darkBgLight text-center">GOOD</p>
-                                <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
-                                    <Image src={arrow} width={30} height={30} alt="image" />
-                                    <p className="text-3xl text-green-400 font-semibold">
-                                        72%
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <button onClick={handleGoToNextRound}>Go To Next Round</button>
-                        </div>
-                    </div>
-                )}
-
+                        )}
+                    </>}
             </div>
             <div className="flex flex-wrap items-center justify-center mt-10 gap-4 m-2">
-                {questions?.map((_: any, index: any) => (
-                    <p
-                        key={index}
-                        className={`rounded-full text-white w-[30px] h-[30px] text-center flex items-center justify-center ${index === currentQuestionIndex
-                            ? 'bg-blue-800'
-                            : index < currentQuestionIndex
-                                ? SimilarityScore && SimilarityScore[index] > 0.6
-                                    ? 'bg-green-500'
-                                    : 'bg-red-500'
-                                : 'bg-gray-400'
-                            }`}
-                    >
-                        {index + 1}
-                    </p>
-                ))}
+                {!isReviewMode ?
+                    questions?.map((_: any, index: any) => (
+                        <p
+                            key={index}
+                            className={`rounded-full text-white w-[30px] h-[30px] text-center flex items-center justify-center ${index === currentQuestionIndex
+                                ? 'bg-blue-800'
+                                : index < currentQuestionIndex
+                                    ? SimilarityScore && SimilarityScore[index] > 0.6
+                                        ? 'bg-green-500'
+                                        : 'bg-red-500'
+                                    : 'bg-gray-400'
+                                }`}
+                        >
+                            {index + 1}
+                        </p>
+                    )) : ""}
+
             </div>
         </div>
     )

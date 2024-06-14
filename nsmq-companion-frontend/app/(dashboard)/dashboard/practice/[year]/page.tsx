@@ -37,7 +37,6 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const indexOfLastCard = currentPage * cardsPerPage;
     const indexOfFirstCard = indexOfLastCard - cardsPerPage;
     const [completedRounds, setCompletedRounds] = useState<any>(null);
-
     const fetcher = async (url: any) => {
         const response = await axios.get(url);
         return response?.data;
@@ -64,6 +63,17 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         }
     }, [completedData]);
 
+    const isRoundCompleted = (contestId: any, roundNumber: any) => {
+        const contestData = completedRounds?.find(item => item.date === `Contest ${contestId}`);
+        return contestData ? !!contestData[`Round ${roundNumber}`] : false;
+    };
+
+    const [showReviewDropdown, setShowReviewDropdown] = useState(false);
+
+    const handleReviewRound = (contest: any, roundNumber: any) => {
+        const contestId = contest.split(' ')[1];
+        router.push(`/dashboard/contest/${year}?id=${contestId}&startRound=${roundNumber}&mode=review`);
+    };
 
     useEffect(() => {
         if (sidebarRef.current) {
@@ -196,9 +206,51 @@ export default function PracticeYear({ params }: PracticeYearProps) {
                                                     {calculatePercentageCompleted(contest) === 100 ? "Restart Contest" : "Start Contest"}
                                                 </p>
                                             </button>
+                                            {calculatePercentageCompleted(contest) > 0 && (
+                                                <div className="relative">
+                                                    <button
+                                                        className="text-white rounded-lg shadow bg-green-600 px-6 py-1 m-1"
+                                                        onClick={() => setShowReviewDropdown(prevState => !prevState)}
+                                                    >
+                                                        Review Contest
+                                                    </button>
+                                                    {showReviewDropdown && (
+                                                        <div className="absolute z-10 bg-white border rounded-lg shadow-lg mt-1">
+                                                            {[1, 2, 3, 4].map(roundNumber => (
+                                                                isRoundCompleted(contest.split(' ')[1], roundNumber) && (
+                                                                    <button
+                                                                        key={roundNumber}
+                                                                        className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                                                                        onClick={() => handleReviewRound(contest, roundNumber)}
+                                                                    >
+                                                                        Round {roundNumber}
+                                                                    </button>
+                                                                )
+                                                            ))}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )}
                                         </div>
                                     </>
                                 )}
+                                {/* {selectedContest === contest && (
+                                    <>
+                                        <div className="font-semibold">
+                                            Percentage Completed: {calculatePercentageCompleted(contest).toFixed(0)}%
+                                        </div>
+                                        <div className="flex gap-4">
+                                            <button
+                                                className="text-white rounded-lg shadow bg-blue-800 px-6 py-1 m-1"
+                                                onClick={() => handleStartContest(contest)}
+                                            >
+                                                <p>
+                                                    {calculatePercentageCompleted(contest) === 100 ? "Restart Contest" : "Start Contest"}
+                                                </p>
+                                            </button>
+                                        </div>
+                                    </>
+                                )} */}
                             </div>
                         ))}
 
