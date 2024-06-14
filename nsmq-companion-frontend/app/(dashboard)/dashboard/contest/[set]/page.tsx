@@ -18,6 +18,8 @@ import bolt from "../../../../../public/images/bolt.svg"
 import arrow from "../../../../../public/images/arrow.svg"
 import useSWR from "swr";
 import { useAuth } from "@/app/context/AuthContext";
+
+
 export default function ContestPage({ params }: any) {
     const { Data } = useAuth()
     const { set } = params;
@@ -126,6 +128,10 @@ export default function ContestPage({ params }: any) {
     const [goToNextRoundClicked, setGoToNextRoundClicked] = useState(false)
 
     const [showNextRoundIntro, setShowNextRoundIntro] = useState(false);
+
+    const [round2skipped, setRound2Skipped] = useState(false)
+    const [round3skipped, setRound3Skipped] = useState(false)
+    const [round4skipped, setRound4Skipped] = useState(false)
 
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
@@ -341,7 +347,6 @@ export default function ContestPage({ params }: any) {
         const preambleText = question?.["Preamble Text"];
 
         if (startRound === 4) {
-            // Round 4, handle preamble and clues
             if (cluestopped !== "stop") {
                 playCluesByOne();
             } else {
@@ -349,7 +354,6 @@ export default function ContestPage({ params }: any) {
                 // playCluesByOne();
             }
         } else {
-            // Other rounds, handle preamble and full question
             if (preambleText && !playedPreambles.has(preambleText)) {
                 setPlayedPreambles(new Set(playedPreambles).add(preambleText));
                 playAudio(preambleAudioUrl, () => {
@@ -461,21 +465,25 @@ export default function ContestPage({ params }: any) {
                 return newIndex;
             } else {
                 // sendRoundDataToBackend();
-                switch (currentRound) {
+                switch (startRound) {
                     case 1:
                         setRound1Ended(true);
                         setRound1Started(false);
+
                         break;
                     case 2:
                         setRound2Ended(true);
                         setRound2Started(false);
+                        setRound1Started(false)
                         break;
                     case 3:
                         setRound3Ended(true);
                         setRound3Started(false);
+                        setRound2Started(false)
                         break;
                     case 4:
                         setRound4Ended(true);
+                        setRound3Started(false)
                         break;
                     default:
                         break;
@@ -614,6 +622,7 @@ export default function ContestPage({ params }: any) {
         setIntroSkipper(true);
         setRound2Started(true);
         setShowNextRoundIntro(false);
+        setRound2Skipped(true)
     };
 
     const handleSkipRound3Intro = () => {
@@ -622,6 +631,7 @@ export default function ContestPage({ params }: any) {
         setIntroSkipper(true);
         setRound3Started(true);
         setShowNextRoundIntro(false);
+        setRound3Skipped(true)
     };
 
     const handleSkipRound4Intro = () => {
@@ -630,6 +640,7 @@ export default function ContestPage({ params }: any) {
         setIntroSkipper(true);
         setRound4Started(true)
         setShowNextRoundIntro(false);
+        setRound4Skipped(true)
     };
 
     const handleNextReviewQuestion = () => {
@@ -646,8 +657,8 @@ export default function ContestPage({ params }: any) {
 
 
     const handleGoToNextRound = () => {
-        if (currentRound <= 3) {
-            const nextRound = currentRound + 1;
+        if (startRound <= 3) {
+            const nextRound = startRound + 1;
             setCurrentRound(nextRound);
             setRoundScore(0);
             SetSimilarityScore(Array(questions?.length).fill(null));
@@ -655,12 +666,16 @@ export default function ContestPage({ params }: any) {
                 setCurrentQuestionIndex(0);
                 setQuizEnded(false);
                 setShowNextRoundIntro(true);
+
+                const newSearchParams = new URLSearchParams(searchParams);
+                newSearchParams.set('startRound', nextRound.toString());
+                const newUrl = `${window.location.pathname}?${newSearchParams.toString()}`;
+                window.history.replaceState(null, '', newUrl);
             });
         } else {
             console.log("Quiz has ended");
         }
     };
-
 
     const sendRoundDataToBackend = async () => {
         try {
@@ -693,32 +708,6 @@ export default function ContestPage({ params }: any) {
              dark:bg-darkBgLight">
                 <p>{year}</p>
                 <p>{contestId}</p>
-                {/* {showNextRoundIntro && (
-                    <div>
-
-                        {(currentRound) === 2 && (
-                            <div>
-                                <p>{round2Intro}</p>
-                                <button onClick={playRound2Intro}>Play Round 2 Intro</button>
-                                <button onClick={handleSkipRound2Intro}>Skip Intro</button>
-                            </div>
-                        )}
-                        {(currentRound) === 3 && (
-                            <div>
-                                <p>{round3Intro}</p>
-                                <button onClick={playRound3Intro}>Play Round 3 Intro</button>
-                                <button onClick={handleSkipRound3Intro}>Skip Intro</button>
-                            </div>
-                        )}
-                        {(currentRound) === 4 && (
-                            <div>
-                                <p>{round4Intro}</p>
-                                <button onClick={playRound4Intro}>Play Round 4 Intro</button>
-                                <button onClick={handleSkipRound4Intro}>Skip Intro</button>
-                            </div>
-                        )}
-                    </div>
-                )} */}
                 {isReviewMode ?
                     <div className="w-full">
                         Review Mode
@@ -734,7 +723,6 @@ export default function ContestPage({ params }: any) {
                                 </MathJaxContext>) :
                                 <h2 className="font-semibold text-[#475569]">Preamble: {currentQuestion?.["Preamble Text"]}</h2>
                             }
-
 
                             <div>
                                 {
@@ -800,20 +788,7 @@ export default function ContestPage({ params }: any) {
                                 </div>
                             )}
                         </div>
-                        {/* )} */}
-                        {/* {currentRound === 1 && !quizStarted && !round1ended ?
-                    <div className="flex flex-col items-center justify-center">
-                        <p className="font-semibold m-2">{round1Intro}
-                        </p>
-                        {!introStarted && !quizStarted ?
-                            <button onClick={handleStartIntro}>
-                                Start Intro
-                            </button> :
-                            <button onClick={handleSkipIntro}>
-                                Skip Intro
-                            </button>}
-                    </div>
-                    : ""} */}
+
 
                         {currentRound === 1 && startRound === 1 && !quizStarted && !round1ended ? (
                             <div className="flex flex-col items-center justify-center">
@@ -827,7 +802,7 @@ export default function ContestPage({ params }: any) {
                         ) : null}
 
 
-                        {(introskipped && !quizEnded) ?
+                        {(round1started) || (round2started) || (round3started) || (round4started) ?
                             <div className="m-10  flex flex-col  w-full justify-center items-center">
 
                                 <div>
@@ -986,7 +961,6 @@ export default function ContestPage({ params }: any) {
                             {index + 1}
                         </p>
                     )) : ""}
-
             </div>
         </div>
     )
