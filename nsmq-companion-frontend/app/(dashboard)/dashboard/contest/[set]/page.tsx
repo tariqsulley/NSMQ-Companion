@@ -14,8 +14,8 @@ import { MathJax, MathJaxContext } from "better-react-mathjax";
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import ContestData from "@/app/utils/NSMQContests";
 import { CgSpinner } from "react-icons/cg";
-
-
+import bolt from "../../../../../public/images/bolt.svg"
+import arrow from "../../../../../public/images/arrow.svg"
 
 export default function ContestPage({ params }: any) {
 
@@ -653,7 +653,7 @@ export default function ContestPage({ params }: any) {
                     </div>
                 )}
                 {currentRound === 1 && !quizStarted && !round1ended ?
-                    <div>
+                    <div className="flex flex-col items-center justify-center">
                         <p className="font-semibold m-2">{round1Intro}
                         </p>
                         {!introStarted && !quizStarted ?
@@ -772,8 +772,35 @@ export default function ContestPage({ params }: any) {
                     <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 w-full
                      shadow rounded-b-xl dark:bg-darkBgLight">
                         <h2 className="text-2xl font-bold">End of Round {currentRound}</h2>
-                        <p className="text-lg mt-2">Total Points: {round_score}</p>
-
+                        <div className="flex items-center gap-4 mt-2 mb-2">
+                            <div className="bg-[#FFD700] p-2 rounded-lg">
+                                <p className="dark:text-darkBgLight">TOTAL POINTS</p>
+                                <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                    <Image src={bolt} width={30} height={30} alt="image" />
+                                    <p className="text-3xl text-[#FFD700] font-semibold ">
+                                        {round_score}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="bg-[#3888ff] p-2 rounded-lg">
+                                <p className="dark:text-darkBgLight text-center">BLAZING</p>
+                                <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                    <Image src={clock_icon} width={30} height={30} alt="image" />
+                                    <p className="text-3xl text-blue-400 font-semibold ">
+                                        1:03
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="bg-green-400 p-2 rounded-lg">
+                                <p className="dark:text-darkBgLight text-center">GOOD</p>
+                                <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                    <Image src={arrow} width={30} height={30} alt="image" />
+                                    <p className="text-3xl text-green-400 font-semibold">
+                                        72%
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                         <div>
                             <button onClick={handleGoToNextRound}>Go To Next Round</button>
                         </div>
