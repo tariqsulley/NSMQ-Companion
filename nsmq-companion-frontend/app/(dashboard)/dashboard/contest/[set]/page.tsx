@@ -737,22 +737,13 @@ export default function ContestPage({ params }: any) {
 
 
                             <div>
-                                {startRound === 4 ? (
-                                    <div>
-                                        <h2 className="font-bold">Clues:</h2>
-                                        {clueTexts.map((text, index) => (
-                                            <p key={index}>{text}</p>
-                                        ))}
-                                    </div>
-                                )
-                                    : (
-                                        currentQuestion?.["calculations present"] ? (
-                                            <MathJaxContext config={config}>
-                                                <MathJax key={currentQuestionIndex}>
-                                                    {currentQuestion?.["Question"]}
-                                                </MathJax>
-                                            </MathJaxContext>) : <h2 className="font-bold">Question: {currentQuestion?.["Question"]} </h2>
-                                    )
+                                {
+                                    currentQuestion?.["calculations present"] ? (
+                                        <MathJaxContext config={config}>
+                                            <MathJax key={currentQuestionIndex}>
+                                                {currentQuestion?.["Question"]}
+                                            </MathJax>
+                                        </MathJaxContext>) : <h2 className="font-bold">Question: {currentQuestion?.["Question"]} </h2>
                                 }
                             </div>
 

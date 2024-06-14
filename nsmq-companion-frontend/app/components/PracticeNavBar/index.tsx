@@ -5,6 +5,8 @@ import { initFlowbite } from "flowbite";
 import { useEffect } from 'react';
 import ThemeSwitch from '../Theme/ThemeSwitch';
 import { useAuth } from '@/app/context/AuthContext';
+import Image from 'next/image';
+
 
 export default function PracticeNavBar() {
     const { logout, Data } = useAuth()
@@ -13,21 +15,22 @@ export default function PracticeNavBar() {
         initFlowbite();
     }, []);
 
+    const getInitials = (name: string) => {
+        const nameArray = name?.split(" ");
+        const initials = nameArray
+            ?.map((namePart: string) => namePart.charAt(0))
+            ?.slice(0, 2)
+            ?.join("")
+            ?.toUpperCase();
+        return initials;
+    };
+
     const handleLogout = async () => {
         logout();
     };
 
     return (
-        // <div className="bg-blue-800 dark:bg-darkBgDeep flex justify-evenly p-4 items-center w-full border-b-2">
-        //     <div>
-        //         <p className="text-white"> NSMQ Companion</p>
-        //     </div>
-        //     <div>
-        //         <Link href={"/dashboard/practice"}>
-        //             <p className="text-white font-semibold hover:underline">Dashboard</p>
-        //         </Link>
-        //     </div>
-        // </div>
+
         <nav className="fixed top-0 z-50 w-full bg-blue-800 border-b border-gray-200 dark:bg-darkBgDeep dark:border-gray-700">
             <div className="px-3 py-3 lg:px-5 lg:pl-3">
                 <div className="flex items-center justify-between">
@@ -50,17 +53,28 @@ export default function PracticeNavBar() {
                             </div>
                             <div>
                                 <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                                    <span className="sr-only">Open user menu</span>
-                                    <img className="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo" />
+                                    <div className="flex items-center justify-center rounded-full bg-primary border-2 border-blue-100 h-8 w-8">
+                                        {!Data?.data.avatar_url ?
+                                            <p className="text-white text-md">{getInitials(Data?.data?.first_name)}</p> :
+                                            <Image
+                                                src={Data?.data.avatar_url}
+                                                alt="profile"
+                                                width={34}
+                                                height={34}
+                                                priority
+                                                className="rounded-full w-full h-full  object-cover"
+                                            />
+                                        }
+                                    </div>
                                 </button>
                             </div>
                             <div className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded shadow dark:bg-gray-700 dark:divide-gray-600" id="dropdown-user">
                                 <div className="px-4 py-3" role="none">
                                     <p className="text-sm text-gray-900 dark:text-white" role="none">
-                                        {`${Data?.first_name} ${Data?.last_name}`}
+                                        {`${Data?.data.first_name} ${Data?.data.last_name}`}
                                     </p>
                                     <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-300" role="none">
-                                        {`${Data?.email_address}`}
+                                        {`${Data?.data.email_address}`}
                                     </p>
                                 </div>
                                 <div className="py-1" >

@@ -72,7 +72,6 @@ export default function Sidebar() {
                                 </div>
                                 <div>
                                     <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">
-                                        <span className="sr-only">Open user menu</span>
                                         <div className="flex items-center justify-center rounded-full bg-primary border-2 border-blue-100 h-8 w-8">
                                             {!Data?.data.avatar_url ?
                                                 <p className="text-white text-md">{getInitials(Data?.data?.first_name)}</p> :
