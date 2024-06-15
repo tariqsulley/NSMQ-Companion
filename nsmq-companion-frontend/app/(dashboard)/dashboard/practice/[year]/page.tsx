@@ -37,7 +37,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const router = useRouter();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const currentQuestion = questions[currentQuestionIndex];
-    const sidebarRef = useRef<HTMLDivElement>(null);
+    const sidebarRef = useRef<any>(null);
     const [sidebarWidth, setSidebarWidth] = useState(0);
     const cardsPerPage = 5;
     const [currentPage, setCurrentPage] = useState(1);
@@ -84,12 +84,7 @@ export default function PracticeYear({ params }: PracticeYearProps) {
         router.push(`/dashboard/contest/${year}?id=${contestId}&startRound=${roundNumber}&mode=review`);
     };
 
-    useEffect(() => {
-        if (sidebarRef.current) {
-            const width = sidebarRef.current.offsetWidth;
-            setSidebarWidth(width);
-        }
-    }, [])
+
 
 
     const contests = useMemo(() => {

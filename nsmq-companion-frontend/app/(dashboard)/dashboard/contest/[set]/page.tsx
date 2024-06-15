@@ -1,4 +1,5 @@
 "use client"
+import 'regenerator-runtime/runtime'
 import PracticeNavBar from "@/app/components/PracticeNavBar";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";

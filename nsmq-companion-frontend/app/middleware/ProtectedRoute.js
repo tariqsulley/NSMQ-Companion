@@ -1,14 +1,12 @@
 "use client"
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
 import API_BASE from "../utils/api";
 import axios from "axios";
 
 
 const WithAuth = ({ children }) => {
     const router = useRouter();
-    const { data: nextAuthSession, status } = useSession();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 
@@ -30,13 +28,7 @@ const WithAuth = ({ children }) => {
         // Sign up with google or the custom backend solution in FastAPI
         // Hence, I check if the user is authenticated via any of the two methods
 
-        if (status === "loading") return;
 
-        // Checking for NextAuth session first
-        if (status !== "unauthenticated") {
-            setIsAuthenticated(true);
-            return;
-        }
 
         // Checking for custom backend session
         const cookieRow = document.cookie.split('; ').find(row => row.startsWith('access_token'));
@@ -61,7 +53,7 @@ const WithAuth = ({ children }) => {
                 }
             });
         }
-    }, [status]);
+    });
 
     if (!isAuthenticated) return null;
 
