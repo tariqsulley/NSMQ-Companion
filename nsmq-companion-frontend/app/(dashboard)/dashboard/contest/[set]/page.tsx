@@ -74,6 +74,7 @@ export default function ContestPage({ params }: any) {
     const [stopCluePlayback, setStopCluePlayback] = useState(false);
     const [cluestopped, setClueStopped] = useState("play")
     const [quizCompleted, setQuizCompleted] = useState(false);
+    const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
         'Round1': 0
@@ -134,6 +135,8 @@ export default function ContestPage({ params }: any) {
     const [round2skipped, setRound2Skipped] = useState(false)
     const [round3skipped, setRound3Skipped] = useState(false)
     const [round4skipped, setRound4Skipped] = useState(false)
+    const [startTime, setStartTime] = useState<Date | null>(null);
+    const [endTime, setEndTime] = useState<Date | null>(null);
 
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
@@ -216,6 +219,7 @@ export default function ContestPage({ params }: any) {
         setQuizStarted(true);
         setCurrentClueIndex(0);
         playQuestionAudio(1);
+        setStartTime(new Date())
     };
 
     const handleStartIntro = () => {
@@ -471,23 +475,26 @@ export default function ContestPage({ params }: any) {
                     case 1:
                         setRound1Ended(true);
                         setRound1Started(false);
-
+                        setEndTime(new Date());
                         break;
                     case 2:
                         setRound2Ended(true);
                         setRound2Started(false);
                         setRound1Started(false)
+                        setEndTime(new Date());
                         break;
                     case 3:
                         setRound3Ended(true);
                         setRound3Started(false);
                         setRound2Started(false)
+                        setEndTime(new Date());
                         break;
                     case 4:
                         setRound4Ended(true);
                         setRound3Started(false)
                         setRound4Started(false)
                         setQuizCompleted(true);
+                        setEndTime(new Date());
                         break;
                     default:
                         break;
@@ -575,6 +582,7 @@ export default function ContestPage({ params }: any) {
                 const scoreToAdd = startRound === 4 ? getScoreForClueIndex(currentClueIndex - 1) : 3;
                 updateRoundBreakDown(currentQuestion["Subject"] as Subject, scoreToAdd);
                 setRoundScore(round_score + scoreToAdd);
+                setNumCorrectAnswers(numCorrectAnswers + 1);
 
                 if (startRound === 4) {
                     switch (scoreToAdd) {
@@ -659,6 +667,13 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+
+    const formatTimeDifference = (startTime: Date, endTime: Date) => {
+        const timeDiff = endTime.getTime() - startTime.getTime();
+        const minutes = Math.floor(timeDiff / (1000 * 60));
+        const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    };
 
     const handleGoToNextRound = () => {
         if (startRound <= 3) {
@@ -928,17 +943,25 @@ export default function ContestPage({ params }: any) {
                                             <p className="dark:text-darkBgLight text-center">BLAZING</p>
                                             <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
                                                 <Image src={clock_icon} width={30} height={30} alt="image" />
-                                                <p className="text-3xl text-blue-400 font-semibold ">
-                                                    1:03
+                                                <p className="text-3xl text-blue-400 font-semibold">
+                                                    {endTime && startTime ? formatTimeDifference(startTime, endTime) : '0:00'}
                                                 </p>
                                             </div>
                                         </div>
                                         <div className="bg-green-400 p-2 rounded-lg">
-                                            <p className="dark:text-darkBgLight text-center">GOOD</p>
+                                            <p className="dark:text-darkBgLight text-center">
+                                                {Math.round((numCorrectAnswers / questions.length) * 100) >= 90
+                                                    ? 'EXCELLENT'
+                                                    : Math.round((numCorrectAnswers / questions.length) * 100) >= 80
+                                                        ? 'VERY GOOD'
+                                                        : Math.round((numCorrectAnswers / questions.length) * 100) >= 70
+                                                            ? 'GOOD'
+                                                            : 'POOR'}
+                                            </p>
                                             <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
                                                 <Image src={arrow} width={30} height={30} alt="image" />
                                                 <p className="text-3xl text-green-400 font-semibold">
-                                                    72%
+                                                    {Math.round((numCorrectAnswers / questions.length) * 100)}%
                                                 </p>
                                             </div>
                                         </div>
@@ -948,7 +971,8 @@ export default function ContestPage({ params }: any) {
 
                                     {quizCompleted ? (
 
-                                        <Link href="/dashboard/practice" className='bg-white border-2 px-6 py-2 rounded-lg text-center' >
+                                        <Link href="/dashboard/practice" className='bg-white border-2 px-6
+                                         py-2 rounded-lg text-center dark:bg-blue-800 ' >
                                             Go to Practice Page
                                         </Link>
                                     ) : (
