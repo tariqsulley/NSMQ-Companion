@@ -8,6 +8,7 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
+        "Prempeh_Answer": 2,
         "Answer": "F $\\mathrm{Mg} 738 \\mathrm{kJmol}^{-1} ; \\mathrm{Al} \\quad 578 \\mathrm{~kJ}$",
         "calculations present": "No",
         "Subject": "Chemistry"
@@ -21,25 +22,12 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "T",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry"
     },
     {
         "S/N": 3,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Just like the Main Group elements, the first ionisation energies of the transition elements decrease down each Group.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "F",
-        "calculations present": "No",
-        "Subject": "Chemistry"
-    },
-    {
-        "S/N": 4,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "In the conversion of an alkane to an alkanol only one hydrogen atom is lost from the molecule.",
@@ -48,11 +36,12 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "F",
+        "Prempeh_Answer": 2,
         "calculations present": "No",
         "Subject": "Chemistry"
     },
     {
-        "S/N": 5,
+        "S/N": 4,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "In the conversion of an alkane into an alkanone only two hydrogen atoms are lost from the molecule",
@@ -65,20 +54,7 @@ const contest_40_3 = [
         "Subject": "Chemistry"
     },
     {
-        "S/N": 6,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "In the conversion of an alkane into a terminal alkanoic acid only three hydrogen atoms are lost from the molecule.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "F",
-        "calculations present": "No",
-        "Subject": "Chemistry"
-    },
-    {
-        "S/N": 7,
+        "S/N": 5,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "The electrostatic field is a conservative field.",
@@ -87,11 +63,12 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "T",
+        "Prempeh_Answer": 2,
         "calculations present": "No",
         "Subject": "Physics"
     },
     {
-        "S/N": 8,
+        "S/N": 6,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "The electric field is a conservative field.",
@@ -104,20 +81,7 @@ const contest_40_3 = [
         "Subject": "Physics"
     },
     {
-        "S/N": 9,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "The Newtonian gravitational field is a conservative field.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "T",
-        "calculations present": "No",
-        "Subject": "Physics"
-    },
-    {
-        "S/N": 10,
+        "S/N": 7,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "A hydrogen atom in the 6h state can have an orbital angular momentum quantum number of 7 .",
@@ -126,11 +90,12 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "F",
+        "Prempeh_Answer": 2,
         "calculations present": "No",
         "Subject": "Chemistry"
     },
     {
-        "S/N": 11,
+        "S/N": 8,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "A hydrogen atom in the $6 \\mathrm{~h}$ state can have an orbital angular momentum quantum number of 6.",
@@ -143,20 +108,7 @@ const contest_40_3 = [
         "Subject": "Chemistry"
     },
     {
-        "S/N": 12,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "A hydrogen atom in the $6 \\mathrm{~h}$ state can have a magnetic quantum number of -5 .",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "T",
-        "calculations present": "No",
-        "Subject": "Chemistry"
-    },
-    {
-        "S/N": 13,
+        "S/N": 9,
         "Has Preamble": "Yes",
         "Preamble Text": "Indicate whether the following are true or false with respect to the reasons why it is difficult to design a vaccine for viruses with high mutation rate such as the cold and flu viruses.",
         "Question": "Many protein fragments are represented that the immune system overreacts.",
@@ -164,12 +116,13 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
+        "Prempeh_Answer": 2,
         "Answer": "F",
         "calculations present": "No",
         "Subject": "Biology"
     },
     {
-        "S/N": 14,
+        "S/N": 10,
         "Has Preamble": "Yes",
         "Preamble Text": "Indicate whether the following are true or false with respect to the reasons why it is difficult to design a vaccine for viruses with high mutation rate such as the cold and flu viruses.",
         "Question": "The vaccines tend to be unstable and deteriorate over time",
@@ -182,20 +135,7 @@ const contest_40_3 = [
         "Subject": "Biology"
     },
     {
-        "S/N": 15,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Indicate whether the following are true or false with respect to the reasons why it is difficult to design a vaccine for viruses with high mutation rate such as the cold and flu viruses.",
-        "Question": "They mutate quickly, meaning that any cures or vaccines made for a specific virus may quickly become obsolete.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "T",
-        "calculations present": "No",
-        "Subject": "Biology"
-    },
-    {
-        "S/N": 16,
+        "S/N": 11,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "Analogous structures are structures found in different species that have similar functions resulting from natural selection",
@@ -204,11 +144,12 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "T",
+        "Prempeh_Answer": 2,
         "calculations present": "No",
         "Subject": "Biology"
     },
     {
-        "S/N": 17,
+        "S/N": 12,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "Homologous structures are structures found in different species that have similar anatomical forms, resulting from a common ancestor",
@@ -221,20 +162,7 @@ const contest_40_3 = [
         "Subject": "Biology"
     },
     {
-        "S/N": 18,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "An example of homologous structures are the \"arms\" of three different mammals, a human, a bat, and a whale.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "T",
-        "calculations present": "No",
-        "Subject": "Biology"
-    },
-    {
-        "S/N": 19,
+        "S/N": 13,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "The rational number $5 / 8$ is less than the rational number $7 / 11$.",
@@ -243,11 +171,12 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "T",
+        "Prempeh_Answer": 2,
         "calculations present": "No",
         "Subject": "Mathematics"
     },
     {
-        "S/N": 20,
+        "S/N": 14,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "The rational number $7 / 15$ is less than the rational number $8 / 17$.",
@@ -260,20 +189,7 @@ const contest_40_3 = [
         "Subject": "Mathematics"
     },
     {
-        "S/N": 21,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "The rational number $4 / 7$ is less than the rational number $7 / 13$.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "F",
-        "calculations present": "No",
-        "Subject": "Mathematics"
-    },
-    {
-        "S/N": 22,
+        "S/N": 15,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "For a natural number $\\mathrm{n}$ to be divisible by 18 ,\nit is necessary that $\\mathrm{n}$ is divisible by 6",
@@ -282,11 +198,12 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "TRUE",
+        "Prempeh_Answer": 2,
         "calculations present": "No",
         "Subject": "Mathematics"
     },
     {
-        "S/N": 23,
+        "S/N": 16,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "it is sufficient that $\\mathrm{n}$ is even and divisible by 9 .",
@@ -295,19 +212,6 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "T",
-        "calculations present": "No",
-        "Subject": "Mathematics"
-    },
-    {
-        "S/N": 24,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "it is necessary that $\\mathrm{n}$ is divisible by 12 .",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "F",
         "calculations present": "No",
         "Subject": "Mathematics"
     }

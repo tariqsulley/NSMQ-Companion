@@ -7,6 +7,7 @@ import winner_2020 from "../../../../public/images/presec.png";
 import prempeh_logo from "../../../../public/images/prempeh.jpg";
 import presec_logo from "../../../../public/images/presec.jpg";
 import trophyicon from "../../../../public/icons/trop.png";
+import { useRouter } from 'next/navigation';
 
 interface StarRatingProps {
     rating: number;
@@ -39,6 +40,9 @@ interface ChampionCardProps {
 }
 
 const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, schoolLogo, rating, color }) => {
+    const edition = 2021
+    const router = useRouter()
+
     const getBackgroundGradient = () => {
         if (school === "Presec Legon") {
             return "bg-gradient-to-r from-indigo-500 to-blue-500";
@@ -79,6 +83,7 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
                     {[...Array(4)].map((_, i) => (
                         <div key={i}>
                             <button
+                                onClick={() => router.push(`/dashboard/champion-challenge/${edition}&startRound=1`)}
                                 className={`${color} ${i === 0 ? 'bg-opacity-100' : 'bg-opacity-50'} ${i === 0 ? 'border-opacity-100' : 'border-opacity-50'} p-6 sm:p-10 ${i === 1 ? 'mr-[-70px]' : ''} ${i === 2 ? 'mr-[-10px]' : ''} ${i === 3 ? 'ml-[-50px]' : ''} border-b-4 rounded-full`}
                             >
                                 <FaStar size={25} className="text-white font-semibold" />
