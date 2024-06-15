@@ -340,46 +340,5 @@ const contest_1_1 = [
 export default contest_1_1
 
 
-const round1 = {
-    'student_uuid': 'uuid',
-    "year": "2021",
-    "Contest_1": {
-        "Round1_score": "27",
-        'Maths': 890,
-        'Biology': 338,
-        'Chemistry': 538,
-        'Physics': 396,
-    }
-}
 
-
-
-const bar_data = [{
-    name: 'Round 1',
-    'Maths': 890,
-    'Biology': 338,
-    'Chemistry': 538,
-    'Physics': 396,
-},
-{
-    name: 'Round 2',
-    'Maths': 289,
-    'Biology': 233,
-    'Chemistry': 253,
-    'Physics': 333,
-},
-{
-    name: 'Round 3',
-    'Maths': 380,
-    'Biology': 535,
-    'Chemistry': 352,
-    'Physics': 718,
-},
-{
-    name: 'Round 4',
-    'Maths': 90,
-    'Biology': 98,
-    'Chemistry': 28,
-    'Physics': 33,
-}]
 

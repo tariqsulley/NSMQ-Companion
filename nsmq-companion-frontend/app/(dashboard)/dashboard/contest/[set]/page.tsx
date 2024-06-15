@@ -172,8 +172,8 @@ export default function ContestPage({ params }: any) {
     };
 
     useEffect(() => {
-        importQuestions(currentRound);
-    }, [contestId, currentRound]);
+        importQuestions(startRound);
+    }, [contestId, startRound]);
 
 
     const getScoreForClueIndex = (clueIndex: any) => {
@@ -572,11 +572,11 @@ export default function ContestPage({ params }: any) {
             setSimilarityScore(similarityScore);
 
             if (similarityScore > 0.6) {
-                const scoreToAdd = currentRound === 4 ? getScoreForClueIndex(currentClueIndex - 1) : 3;
+                const scoreToAdd = startRound === 4 ? getScoreForClueIndex(currentClueIndex - 1) : 3;
                 updateRoundBreakDown(currentQuestion["Subject"] as Subject, scoreToAdd);
                 setRoundScore(round_score + scoreToAdd);
 
-                if (currentRound === 4) {
+                if (startRound === 4) {
                     switch (scoreToAdd) {
                         case 5:
                             synthesizeText("I was reading the first clue, 5 points");
