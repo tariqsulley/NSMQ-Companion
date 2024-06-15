@@ -216,3 +216,5 @@ const contest_40_3 = [
         "Subject": "Mathematics"
     }
 ]
+
+export default contest_40_3

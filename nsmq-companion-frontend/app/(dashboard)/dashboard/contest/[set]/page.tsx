@@ -164,6 +164,7 @@ export default function ContestPage({ params }: any) {
     }, [year, contestId, startRound]);
 
 
+
     const importQuestions = async (round: any) => {
         try {
             const questionsData = await import(`../../../../utils/Questions/NSMQ_2021/${contestId}/round${round}`);
@@ -334,7 +335,7 @@ export default function ContestPage({ params }: any) {
         };
 
         const onQuestionEnded = () => {
-            const timeLimit = questions[questionIndex - 1]["calculations present"] === "Yes" ? 30 : 10;
+            const timeLimit = questions?.[questionIndex - 1]?.["calculations present"] === "Yes" ? 30 : 10;
             clearInterval(timerRef.current);
             setTimeLeft(timeLimit);
             timerRef.current = setInterval(() => {

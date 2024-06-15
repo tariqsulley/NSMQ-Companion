@@ -80,3 +80,5 @@ const contest_40_4 = [
         "Subject": "Biology"
     }
 ]
+
+export default contest_40_4

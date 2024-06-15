@@ -5,7 +5,6 @@ import PracticeNavBar from "@/app/components/PracticeNavBar";
 import { useSearchParams } from "next/navigation";
 import ContestCard from "@/app/components/Cards/ContestCard";
 import ContestData from "@/app/utils/NSMQContests";
-import questions from "../../../../utils/Questions/NSMQ_2021/contest40/round1"
 import API_BASE from "@/app/utils/api";
 // @ts-ignore
 import useSound from 'use-sound';
@@ -36,7 +35,6 @@ export default function PracticeYear({ params }: PracticeYearProps) {
     const [contestValue, setContestValue] = useState("");
     const router = useRouter();
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-    const currentQuestion = questions[currentQuestionIndex];
     const sidebarRef = useRef<any>(null);
     const [sidebarWidth, setSidebarWidth] = useState(0);
     const cardsPerPage = 5;
