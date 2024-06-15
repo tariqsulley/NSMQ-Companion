@@ -38,11 +38,11 @@ export default function PracticeCard({ year, contest_nums, sub_text }: PracticeC
                         <p className="text-[#475569] dark:text-white text-[15px]">{sub_text}</p>
                     </div>
                     <div>
-                        <p className="font-semibold">  40 contests </p>
+                        <p className="font-semibold">  3 contests </p>
                     </div>
                     <div className=" ">
-                        <p className="text-green-500 bg-green-600 font-semibold
-                    bg-opacity-10 rounded-full px-2 mt-2 "> ● 2 complete </p>
+                        <p className="text-gray-500 bg-gray-600 font-semibold
+                    bg-opacity-10 rounded-full px-2 mt-2 "> ● 0 complete </p>
                     </div>
 
                     <button className="flex shadow justify-center items-center px-6 py-2 gap-1 
