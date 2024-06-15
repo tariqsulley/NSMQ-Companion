@@ -19,7 +19,7 @@ import bolt from "../../../../../public/images/bolt.svg"
 import arrow from "../../../../../public/images/arrow.svg"
 import useSWR from "swr";
 import { useAuth } from "@/app/context/AuthContext";
-
+import Link from 'next/link';
 
 export default function ContestPage({ params }: any) {
     const { Data } = useAuth()
@@ -73,6 +73,7 @@ export default function ContestPage({ params }: any) {
     const timerRef = useRef<any>(null);
     const [stopCluePlayback, setStopCluePlayback] = useState(false);
     const [cluestopped, setClueStopped] = useState("play")
+    const [quizCompleted, setQuizCompleted] = useState(false);
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
         'Round1': 0
@@ -390,7 +391,7 @@ export default function ContestPage({ params }: any) {
     };
 
     const playNextClue = (clueIndex: any) => {
-        if (cluestopped === "stop") {
+        if (cluestopped === "stop" || !round4started) {
             console.log('Clues stopped');
             return;
         }
@@ -485,6 +486,8 @@ export default function ContestPage({ params }: any) {
                     case 4:
                         setRound4Ended(true);
                         setRound3Started(false)
+                        setRound4Started(false)
+                        setQuizCompleted(true);
                         break;
                     default:
                         break;
@@ -677,6 +680,7 @@ export default function ContestPage({ params }: any) {
             console.log("Quiz has ended");
         }
     };
+
 
     const sendRoundDataToBackend = async () => {
         try {
@@ -906,40 +910,50 @@ export default function ContestPage({ params }: any) {
                             </div> : ""}
 
                         {quizEnded && (
-                            <div className="mt-[100px] md:h-1/2  flex flex-col items-center justify-center bg-gray-100 w-full
+                            <div className="mt-[100px] p-5  flex flex-col gap-5 items-center justify-center bg-gray-100 w-full
                      shadow rounded-b-xl dark:bg-darkBgLight">
-                                <h2 className="text-2xl font-bold">End of Round {startRound}</h2>
-                                <div className="flex items-center gap-4 mt-2 mb-2">
-                                    <div className="bg-[#FFD700] p-2 rounded-lg">
-                                        <p className="dark:text-darkBgLight">TOTAL POINTS</p>
-                                        <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
-                                            <Image src={bolt} width={30} height={30} alt="image" />
-                                            <p className="text-3xl text-[#FFD700] font-semibold ">
-                                                {round_score}
-                                            </p>
+                                <div className='flex flex-col items-center justify-center'>
+                                    <h2 className="text-2xl font-bold">End of Round {startRound}</h2>
+                                    <div className="flex items-center gap-4 mt-2 mb-2">
+                                        <div className="bg-[#FFD700] p-2 rounded-lg">
+                                            <p className="dark:text-darkBgLight">TOTAL POINTS</p>
+                                            <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                                <Image src={bolt} width={30} height={30} alt="image" />
+                                                <p className="text-3xl text-[#FFD700] font-semibold ">
+                                                    {round_score}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="bg-[#3888ff] p-2 rounded-lg">
-                                        <p className="dark:text-darkBgLight text-center">BLAZING</p>
-                                        <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
-                                            <Image src={clock_icon} width={30} height={30} alt="image" />
-                                            <p className="text-3xl text-blue-400 font-semibold ">
-                                                1:03
-                                            </p>
+                                        <div className="bg-[#3888ff] p-2 rounded-lg">
+                                            <p className="dark:text-darkBgLight text-center">BLAZING</p>
+                                            <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                                <Image src={clock_icon} width={30} height={30} alt="image" />
+                                                <p className="text-3xl text-blue-400 font-semibold ">
+                                                    1:03
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="bg-green-400 p-2 rounded-lg">
-                                        <p className="dark:text-darkBgLight text-center">GOOD</p>
-                                        <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
-                                            <Image src={arrow} width={30} height={30} alt="image" />
-                                            <p className="text-3xl text-green-400 font-semibold">
-                                                72%
-                                            </p>
+                                        <div className="bg-green-400 p-2 rounded-lg">
+                                            <p className="dark:text-darkBgLight text-center">GOOD</p>
+                                            <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
+                                                <Image src={arrow} width={30} height={30} alt="image" />
+                                                <p className="text-3xl text-green-400 font-semibold">
+                                                    72%
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div>
-                                    <button onClick={handleGoToNextRound}>Go To Next Round</button>
+
+                                    {quizCompleted ? (
+
+                                        <Link href="/dashboard/practice" className='bg-white border-2 px-6 py-2 rounded-lg text-center' >
+                                            Go to Practice Page
+                                        </Link>
+                                    ) : (
+                                        <button onClick={handleGoToNextRound}>Go To Next Round</button>
+                                    )}
                                 </div>
                             </div>
                         )}
