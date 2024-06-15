@@ -8,7 +8,7 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Prempeh_Answer": 2,
+        "Opponent_Answer": 2,
         "Answer": "F $\\mathrm{Mg} 738 \\mathrm{kJmol}^{-1} ; \\mathrm{Al} \\quad 578 \\mathrm{~kJ}$",
         "calculations present": "No",
         "Subject": "Chemistry"
@@ -36,7 +36,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "F",
-        "Prempeh_Answer": 2,
+        "Opponent_Answer": 2,
         "calculations present": "No",
         "Subject": "Chemistry"
     },
@@ -63,7 +63,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "T",
-        "Prempeh_Answer": 2,
+        "Opponent_Answer": 2,
         "calculations present": "No",
         "Subject": "Physics"
     },
@@ -90,7 +90,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "F",
-        "Prempeh_Answer": 2,
+        "Opponent_Answer": 2,
         "calculations present": "No",
         "Subject": "Chemistry"
     },
@@ -116,7 +116,7 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Prempeh_Answer": 2,
+        "Opponent_Answer": 2,
         "Answer": "F",
         "calculations present": "No",
         "Subject": "Biology"
@@ -144,7 +144,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "T",
-        "Prempeh_Answer": 2,
+        "Opponent_Answer": 2,
         "calculations present": "No",
         "Subject": "Biology"
     },
@@ -171,7 +171,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "T",
-        "Prempeh_Answer": 2,
+        "Opponent_Answer": 2,
         "calculations present": "No",
         "Subject": "Mathematics"
     },
@@ -198,7 +198,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "TRUE",
-        "Prempeh_Answer": 2,
+        "Opponent_Answer": 2,
         "calculations present": "No",
         "Subject": "Mathematics"
     },

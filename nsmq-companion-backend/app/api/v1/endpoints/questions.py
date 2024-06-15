@@ -73,4 +73,8 @@ async def get_contest_rounds_scores(
     except Exception as e:
         print(f"Error: {str(e)}")  
         raise HTTPException(status_code=500, detail="Failed to retrieve contest round scores")
-
+    
+@router.get("/champion-score",response_model=None)
+@inject
+async def create_champion_score():
+    pass

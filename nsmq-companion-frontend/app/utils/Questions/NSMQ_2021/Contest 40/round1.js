@@ -5,7 +5,7 @@ const contest_40_1 = [
         "Question": "The genetic code is non-overlapping",
         "Subject": "Biology",
         "Answer": "The same letter is not used for two different codons",
-        "Prempeh_Answer": 4,
+        "Opponent_Answer": 4,
         "calculations present": "No",
         "Topic Tag": ["Genetics", "DNA Translation"]
     },
@@ -24,7 +24,7 @@ const contest_40_1 = [
         "Preamble Text": null,
         "Question": "Anti-malarial drugs kill plasmodium parasites in the blood but may not kill all the parasites. Why?",
         "Subject": "Biology",
-        "Prempeh_Answer": 0,
+        "Opponent_Answer": 0,
         "calculations present": "No",
         "Answer": "Anti-malarial drugs do not kill the parasites in the liver.",
         "Topic Tag": ["Pharmacology", "Disease Mechanisms"]
@@ -43,7 +43,7 @@ const contest_40_1 = [
         "Preamble Text": null,
         "Question": "How can the extinction of one species lead to the extinction of another species?",
         "Subject": "Biology",
-        "Prempeh_Answer": 3,
+        "Opponent_Answer": 3,
         "calculations present": "No",
         "Answer": "In a native habitat, one species is connected to the other in an intricate network. The extinction of one species causes the extinction of other species, which is associated with it in an obligatory way. For example, the extinction of the host will cause the extinction of its parasites",
         "Topic Tag": ["Ecology", "Species Interdependence"]
@@ -63,7 +63,7 @@ const contest_40_1 = [
         "Preamble Text": "Find the values of the constants a and b such that the quadratic inequality has the given solution set.",
         "Question": "$\\mathrm{ax}^{2}+\\mathrm{bx}+6<0$ has solution set $\\{\\mathrm{x}: \\mathrm{x}<-3$, or $\\mathrm{x}>2\\}$",
         "Subject": "Mathematics",
-        "Prempeh_Answer": 3,
+        "Opponent_Answer": 3,
         "calculations present": "Yes",
         "Answer": "$\\mathrm{a}=-1, \\mathrm{~b}=-1$\n$\\left[(x+3)(x-2)=x^{2}+x-6>0,-x^{2}-x+6<0, a=-1, b=-1\\right]$",
         "Topic Tag": ["Quadratic Inequalities", "Solution Methods"]
@@ -83,7 +83,7 @@ const contest_40_1 = [
         "Preamble Text": "Find the common ratio $r$ of an exponential sequence whose first three terms are given by",
         "Question": "$(x-2),(x+1),(x+3) \\quad$",
         "Subject": "Mathematics",
-        "Prempeh_Answer": 3,
+        "Opponent_Answer": 3,
         "calculations present": "Yes",
         "Answer": "$r=2 / 3$\n$\\left[(\\mathrm{x}+1)^{2}=(\\mathrm{x}-2)(\\mathrm{x}+3), \\mathrm{x}^{2}+2 \\mathrm{x}+1=\\mathrm{x}^{2}+\\mathrm{x}-6, \\mathrm{x}=-7\\right.$,\n$r=(x+1) /(x-2)=(-7+1) /(-7-2)=-6 /-9=2 / 3]$",
         "Topic Tag": ["Sequences and Series", "Equation Solving"]
@@ -103,7 +103,7 @@ const contest_40_1 = [
         "Preamble Text": "Find the amount invested at each rate of interest if a man invests",
         "Question": "GHs 100,000 partly at10\\% and the remainder at $15 \\%$ and receives a total interest of GHs11,500 at the end of the year",
         "Subject": "Mathematics",
-        "Prempeh_Answer": 0,
+        "Opponent_Answer": 0,
         "calculations present": "Yes",
         "Answer": "GHs 70,000 at $10 \\%$, GHs 30,000 at $15 \\%$\n$[0.1 \\mathrm{x}+(100,000-\\mathrm{x}) 0.15=11500,15000-0.05 \\mathrm{x}=11500,5 \\mathrm{x}=350,000$, $x=70,000,100,000-70,000=30,000]$",
         "Topic Tag": ["Interest Calculations", "Financial Mathematics"]
@@ -124,7 +124,7 @@ const contest_40_1 = [
         "Question": "Name the particle emitted in the decay of a nuclide by internal conversion.",
         "Subject": "Chemistry, Physics",
         "Answer": "Atomic electron",
-        "Prempeh_Answer": 0,
+        "Opponent_Answer": 0,
         "calculations present": "No",
         "Topic Tag": ["Nuclear Decay", "Atomic Physics"]
     },
@@ -143,7 +143,7 @@ const contest_40_1 = [
         "Preamble Text": "An excited hydrogen atom is slightly heavier than a hydrogen atom in its ground state. Find the mass difference between a hydrogen atom in the states with the given principal quantum numbers.",
         "Question": "$\\quad n=2$ and $n=5$",
         "Subject": "Physics",
-        "Prempeh_Answer": 3,
+        "Opponent_Answer": 3,
         "calculations present": "Yes",
         "Answer": "$5.1 \\times 10^{-36} \\mathrm{~kg}$\nAccept $5.08 \\times 10^{-36} \\mathrm{~kg}$ or $5.09 \\times 10^{-36} \\mathrm{~kg}$.",
         "Topic Tag": ["Quantum Mechanics", "Energy Levels"]
@@ -163,7 +163,7 @@ const contest_40_1 = [
         "Preamble Text": "Total charge $Q$ is uniformly distributed throughout the volume of a sphere of radius $R$.",
         "Question": "What is the electric potential at the center of the sphere in SI units?",
         "Subject": "Physics",
-        "Prempeh_Answer": 0,
+        "Opponent_Answer": 0,
         "calculations present": "Yes",
         "Answer": "$3 Q / 8 \\pi \\epsilon_{0} R$",
         "Topic Tag": ["Electrostatics", "Potential Calculations"]
@@ -183,7 +183,7 @@ const contest_40_1 = [
         "Preamble Text": null,
         "Question": "What type of intermolecular forces will the molecules of chloroethene possess and why?",
         "Subject": "Chemistry",
-        "Prempeh_Answer": 1,
+        "Opponent_Answer": 1,
         "calculations present": "Yes",
         "Answer": "Dipole-dipole forces. The pi cloud of the $\\mathrm{ClCH}=\\mathrm{CH}_{2}$ molecules will be polarised by the presence of the chlorine atom and so the molecules will possess net dipole (moments).",
         "Topic Tag": ["Chemical Bonding", "Polarity"]
@@ -203,7 +203,7 @@ const contest_40_1 = [
         "Preamble Text": null,
         "Question": "Palm oil is made up of esters of palmitic (hexadecanoic) acid and stearic (octadecanoic) acid both of them colourless compounds. Why is palm oil red?",
         "Subject": "Chemistry",
-        "Prempeh_Answer": 0,
+        "Opponent_Answer": 0,
         "calculations present": "No",
         "Answer": "It contains carotenes which are originally present in the fruits, and which get extracted along with the oil.",
         "Topic Tag": ["Organic Chemistry", "Natural Pigments"]
@@ -222,7 +222,7 @@ const contest_40_1 = [
         "Preamble Text": "Each school will be given a chemical equation, which may be a redox or a disproportionation, to balance.",
         "Question": "$\\mathrm{MnSO}_{4}+\\mathrm{PbO}_{2}+\\mathrm{H}_{2} \\mathrm{SO}_{4} \\rightarrow \\mathrm{HMnO}_{4}+\\mathrm{PbSO}_{4}+\\mathrm{H}_{2} \\mathrm{O}$.",
         "Subject": "Chemistry",
-        "Prempeh_Answer": 0,
+        "Opponent_Answer": 0,
         "calculations present": "Yes",
         "Answer": "$2 \\mathrm{MnSO}_{4}+5 \\mathrm{PbO}_{2}+3 \\mathrm{H}_{2} \\mathrm{SO}_{4} \\rightarrow 2 \\mathrm{HMnO}_{4}+5 \\mathrm{PbSO}_{4}+2 \\mathrm{H}_{2} \\mathrm{O}$.",
         "Topic Tag": ["Oxidation-Reduction", "Reaction Stoichiometry"]

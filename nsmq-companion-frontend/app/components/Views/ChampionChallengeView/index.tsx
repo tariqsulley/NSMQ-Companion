@@ -83,7 +83,7 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
                     {[...Array(4)].map((_, i) => (
                         <div key={i}>
                             <button
-                                onClick={() => router.push(`/dashboard/contest/${year}?id=40&startRound=${i + 1}`)}
+                                onClick={() => router.push(`/dashboard/contest/${year}?id=40&startRound=${i + 1}&mode=Champion`)}
                                 className={`${color} ${i === 0 ? 'bg-opacity-100' : 'bg-opacity-50'} ${i === 0 ? 'border-opacity-100' : 'border-opacity-50'} p-6 sm:p-10 ${i === 1 ? 'mr-[-70px]' : ''} ${i === 2 ? 'mr-[-10px]' : ''} ${i === 3 ? 'ml-[-50px]' : ''} border-b-4 rounded-full`}
                             >
                                 <FaStar size={25} className="text-white font-semibold" />

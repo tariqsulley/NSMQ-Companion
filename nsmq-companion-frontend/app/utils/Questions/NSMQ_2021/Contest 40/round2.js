@@ -10,8 +10,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "$(4 x+1) /(2-x)$\n$[(2(x+1)+(2 x-1)) /((x+1)-(2 x-1))=(4 x+1) /(2-x)]$",
         "calculations present": "Yes",
-        "Prempeh_Answer": 3,
-        "Prempeh_Time": 24,
+        "Opponent_Answer": 3,
+        "Opponent_Time": 24,
         "Subject": "Mathematics",
     },
     {
@@ -25,8 +25,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "$x^{2} / y^{3}=10$, or $x^{2}=10 y^{3}$, or $y^{3}=x^{2} / 10$\n$\\left[\\log \\left(x^{2} / y^{3}\\right)=\\log 10, x^{2} / y^{3}=10\\right.$, or $x^{2}=10 y^{3}$ or $\\left.y^{3}=x^{2} / 10\\right]$",
         "calculations present": "Yes",
-        "Prempeh_Answer": 3,
-        "Prempeh_Time": 30,
+        "Opponent_Answer": 3,
+        "Opponent_Time": 30,
         "Subject": "Mathematics"
     },
     {
@@ -40,8 +40,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "$\\{x: x \\leq 3\\}$\n[function defined for $(3-x) \\geq 0,3 \\geq x$, or $x \\leq 3$ ]",
         "calculations present": "Yes",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Subject": "Mathematics"
     },
     {
@@ -55,8 +55,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Enzymes and microorganisms that cause spoilage work best in wet conditions. Dried food is thus better preserved. / The sugar in jam reduces hydration by thickening. The thicker the jam, the longer it takes to spoil, the juicier the jam, the sooner it will spoil. / low water activity",
         "calculations present": "No",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Subject": "Biology"
     },
     {
@@ -70,8 +70,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Population growth could be infinite when there are unlimited resources, such as space food and shelter, and where there are no deaths due to natural disasters.",
         "calculations present": "No",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Subject": "Biology"
     },
     {
@@ -85,8 +85,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "If this residual volume did not exist and the lungs emptied completely, the lung tissues would stick together and the energy necessary to re-inflate the lung could be too great to overcome. Therefore, there is always some air remaining in the lungs.",
         "calculations present": "No",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Subject": "Biology"
     },
     {
@@ -99,8 +99,8 @@ const contest_40_2 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "$273.15 \\mathrm{~K}$",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "calculations present": "No",
         "Subject": "Physics"
     },
@@ -115,8 +115,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Condensation of the steam injects additional energy into the burn",
         "calculations present": "No",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Subject": "Physics"
     },
     {
@@ -130,8 +130,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Insufficient potential difference across the feet of the bird to cause significant current flow through the bird",
         "calculations present": "No",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 30,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 30,
         "Subject": "Physics"
     },
     {
@@ -145,8 +145,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "i) Cosmic rays;\nii) Natural radioactivity of certain radioisotopes in the soil. e.g. $\\mathrm{K}-40$, Radium, Radon.",
         "calculations present": "No",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Subject": "Chemistry"
     },
     {
@@ -160,8 +160,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Aspirin: Ester and Carboxylic acid $\\quad\\left[o-\\mathrm{HOOC}-\\mathrm{C}_{6} \\mathrm{H}_{4}^{-}\\right.$\n$\\left.\\mathrm{OCOCH}_{3}\\right]$\nParacetamol:\n$\\left.\\mathrm{HO}-\\mathrm{C}_{6} \\mathrm{H}_{4}-\\mathrm{NHCOCH}_{3}\\right]$",
         "calculations present": "No",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Subject": "Chemistry"
     },
     {
@@ -175,8 +175,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Since the gases do not react the Dalton's Law of Partial Pressures apply.\nMoles of gas giving the pressure of $240 \\mathrm{kPa}=0.600 ; \\quad$ Additional kPa needed $=60$\nMoles of oxygen required to add $60.0 \\mathrm{kPa}=(60.0 / 240) * 0.600$\n$$\n=0.150 \\mathrm{~mol} \\text {. }\n$$",
         "calculations present": "Yes",
-        "Prempeh_Answer": 0,
-        "Prempeh_Time": 0,
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Subject": "Chemistry"
     }
 ]

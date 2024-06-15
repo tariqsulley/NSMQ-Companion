@@ -20,6 +20,7 @@ import arrow from "../../../../../public/images/arrow.svg"
 import useSWR from "swr";
 import { useAuth } from "@/app/context/AuthContext";
 import Link from 'next/link';
+import prempeh_logo from "../../../../../public/images/prempeh.jpg"
 
 export default function ContestPage({ params }: any) {
     const { Data } = useAuth()
@@ -27,6 +28,7 @@ export default function ContestPage({ params }: any) {
     const searchParams = useSearchParams();
     const contestId = searchParams.get('id');
     const startRound = parseInt(searchParams.get('startRound') || '2');
+    const quizMode = (searchParams.get('mode') || 'none');
     const mode = searchParams.get('mode');
     const isReviewMode = mode === 'review';
 
@@ -44,6 +46,8 @@ export default function ContestPage({ params }: any) {
     const [audio] = useState(new Audio(''));
     const [isCircleGreen, setIsCircleGreen] = useState(false);
     const [play] = useSound('/Sounds/bell.wav');
+    const [playOpponent] = useSound('/Sounds/opponent_bell.mp3')
+
     const [transcribedText, setTranscribedText] = useState('');
     const [isRecording, setIsRecording] = useState(false);
     const [isBellPlaying, setIsBellPlaying] = useState(false);
@@ -137,6 +141,9 @@ export default function ContestPage({ params }: any) {
     const [round4skipped, setRound4Skipped] = useState(false)
     const [startTime, setStartTime] = useState<Date | null>(null);
     const [endTime, setEndTime] = useState<Date | null>(null);
+
+    const [opponentScore, setOpponentScore] = useState(0)
+    const [disableButton, setDisabledButton] = useState(true)
 
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
@@ -330,6 +337,7 @@ export default function ContestPage({ params }: any) {
             audioInstance.onended = () => {
                 onEnded();
                 setIsAudioPlaying(false);
+                setDisabledButton(false)
                 // startTimer();
             };
         };
@@ -465,6 +473,11 @@ export default function ContestPage({ params }: any) {
     const handleNextQuestion = () => {
         resetTranscript();
         setClueStopped("play");
+        setDisabledButton(true)
+        {
+            currentQuestion["Opponent_Answer"] !== undefined ?
+                setOpponentScore((prevScore) => prevScore + currentQuestion["Opponent_Answer"]) : null
+        }
 
         setCurrentQuestionIndex((prevIndex) => {
             const newIndex = prevIndex + 1;
@@ -831,7 +844,11 @@ export default function ContestPage({ params }: any) {
                                 </div>
 
                                 <div className="flex w-full ">
-
+                                    <div className='flex flex-col items-center justify-center 
+                                    gap-2 bg-gray-100 shadow rounded-lg m-2'>
+                                        <Image src={prempeh_logo} alt='logo' className='w-[50%]' />
+                                        <p className='text-xl text-center'>Prempeh Score: {opponentScore}</p>
+                                    </div>
                                     <div className="flex items-center gap-1 p-2 w-full justify-start">
                                         <p className="font-semibold text-2xl">Points: {round_score}</p>
                                     </div>
@@ -895,10 +912,15 @@ export default function ContestPage({ params }: any) {
                                         <h2>Answer: {currentQuestion?.["Answer"]}</h2>
                                     }
                                 </div>
-                                <div
-                                    className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
-                                    onClick={handleCircleClick}
-                                />
+                                {mode == "Champion" && currentQuestion["S/N"] % 2 == 0 ?
+                                    <div
+                                        className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
+                                        onClick={handleCircleClick}
+                                    /> : mode == "Champion" && currentQuestion["S/N"] % 2 !== 0 ? "" :
+                                        <div
+                                            className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
+                                            onClick={handleCircleClick}
+                                        />}
                                 <div className=" w-full justify-between flex gap-2 items-center mt-2">
 
                                     <button
@@ -917,7 +939,8 @@ export default function ContestPage({ params }: any) {
                                                 <p className="font-semibold text-white">Start Quiz</p></button>
                                         ) : (
                                             <button onClick={handleNextQuestion}
-                                                className="bg-[#4a6cc3] px-6 py-1 rounded-lg">
+
+                                                className={`${disableButton ? "bg-gray-300" : "bg-[#4a6cc3] "} px-6 py-1 rounded-lg`}>
                                                 <p className="font-semibold text-white">Next Question</p></button>
                                         )}
                                     </div>
