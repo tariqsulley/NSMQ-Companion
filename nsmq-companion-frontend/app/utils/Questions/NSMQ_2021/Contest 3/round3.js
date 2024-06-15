@@ -8,7 +8,7 @@ const contest_3_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "T.",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry"
     },
@@ -21,7 +21,7 @@ const contest_3_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "F. The precipitate is reddish-brown, but it does not dissolve in excess.",
+        "Answer": "False",
         "calculations present": "No",
         "Subject": "Chemistry"
     },
@@ -34,7 +34,7 @@ const contest_3_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "T.",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry"
     },
@@ -81,7 +81,7 @@ const contest_3_3 = [
         "S/N": 7,
         "Has Preamble": "No",
         "Preamble Text": null,
-        "Question": "The terrestrial magnetic field is horizontal everywhere on the ) surface of the earth.",
+        "Question": "The terrestrial magnetic field is horizontal everywhere on the surface of the earth.",
         "Question has figure": "No",
         "Question figure name": null,
         "Answer has figure": "No",
