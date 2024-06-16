@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from 'react';
 import Image from "next/image";
 import { FaStar } from "react-icons/fa6";
@@ -8,6 +8,10 @@ import prempeh_logo from "../../../../public/images/prempeh.jpg";
 import presec_logo from "../../../../public/images/presec.jpg";
 import trophyicon from "../../../../public/icons/trop.png";
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/context/AuthContext';
+import axios from 'axios';
+import useSWR from 'swr';
+import API_BASE from '@/app/utils/api';
 
 interface StarRatingProps {
     rating: number;
@@ -30,6 +34,16 @@ const StarRating: React.FC<StarRatingProps> = ({ rating }) => {
     );
 };
 
+interface Progress {
+    student_id: string;
+    year: number;
+    school: string;
+    round_number: number;
+    completed: boolean;
+    score: number;
+    id: number;
+}
+
 interface ChampionCardProps {
     year: number;
     school: string;
@@ -37,11 +51,21 @@ interface ChampionCardProps {
     schoolLogo: any;
     rating: number;
     color: string;
+    progressData: Progress[];
+    unlockFirstRound: any;
 }
 
-const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, schoolLogo, rating, color }) => {
-    const edition = 2021
-    const router = useRouter()
+
+const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, schoolLogo, rating, color, progressData, unlockFirstRound  // Ensure this is included in the component parameters
+}) => {
+    const router = useRouter();
+
+    const schoolProgress = progressData
+        .filter((progress: any) => progress.school === school && progress.year === year)
+        .reduce((acc, current) => current.round_number > acc.round_number ? current : acc, { round_number: -1 });
+
+    console.log('data', progressData);
+    console.log("progress,", schoolProgress);
 
     const getBackgroundGradient = () => {
         if (school === "Presec Legon") {
@@ -55,6 +79,19 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
     const getImageWidth = () => {
         return school === "Presec Legon" ? "w-[15%]" : "w-[15%]";
     };
+
+
+    const getButtonOpacity = (index: number) => {
+        if (school === "Presec Legon" && index === 0 && unlockFirstRound) {
+            return 'bg-opacity-100 border-opacity-100';
+        }
+        return index <= schoolProgress.round_number ? 'bg-opacity-100 border-opacity-100' : 'bg-opacity-50 border-opacity-50';
+    };
+
+
+    const isButtonDisabled = (index: number) => (
+        school === "Presec Legon" && index === 0 ? !unlockFirstRound : index > schoolProgress.round_number
+    );
 
     return (
         <div>
@@ -83,8 +120,13 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
                     {[...Array(4)].map((_, i) => (
                         <div key={i}>
                             <button
-                                onClick={() => router.push(`/dashboard/contest/${year}?id=40&startRound=${i + 1}&mode=Champion`)}
-                                className={`${color} ${i === 0 ? 'bg-opacity-100' : 'bg-opacity-50'} ${i === 0 ? 'border-opacity-100' : 'border-opacity-50'} p-6 sm:p-10 ${i === 1 ? 'mr-[-70px]' : ''} ${i === 2 ? 'mr-[-10px]' : ''} ${i === 3 ? 'ml-[-50px]' : ''} border-b-4 rounded-full`}
+                                onClick={() => {
+                                    if (!isButtonDisabled(i)) {
+                                        router.push(`/dashboard/contest/${year}?id=40&startRound=${i + 1}&mode=Champion`);
+                                    }
+                                }}
+                                className={`${color} ${getButtonOpacity(i)} p-6 sm:p-10 ${i === 1 ? 'mr-[-70px]' : ''} ${i === 2 ? 'mr-[-10px]' : ''} ${i === 3 ? 'ml-[-50px]' : ''} border-b-4 rounded-full`}
+                                disabled={isButtonDisabled(i)}
                             >
                                 <FaStar size={25} className="text-white font-semibold" />
                             </button>
@@ -97,6 +139,25 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
 };
 
 export default function ChampionChallengeView() {
+    const { Data } = useAuth();
+    const studentId = Data?.data.uuid;
+    const fetcher = async (url: string) => {
+        const response = await axios.get(url);
+        return response.data;
+    };
+
+    const { data: progressData, error } = useSWR(`${API_BASE}/progress/${studentId}`, fetcher, {
+        revalidateIfStale: true,
+        revalidateOnFocus: true,
+        revalidateOnReconnect: true,
+        refreshInterval: 1000
+    });
+
+    if (error) return <div>Failed to load</div>;
+    if (!progressData) return <div>Loading...</div>;
+
+    const isPrempehComplete = progressData.filter((p: Progress) => p.school === "Prempeh College" && p.completed).length === 4;
+
     const champions = [
         {
             year: 2021,
@@ -112,7 +173,8 @@ export default function ChampionChallengeView() {
             imageSource: winner_2020,
             schoolLogo: presec_logo,
             rating: 0,
-            color: "bg-blue-500 border-blue-800"
+            color: "bg-blue-500 border-blue-800",
+            unlockFirstRound: isPrempehComplete
         }
     ];
 
@@ -127,6 +189,8 @@ export default function ChampionChallengeView() {
                     schoolLogo={champion.schoolLogo}
                     rating={champion.rating}
                     color={champion.color}
+                    progressData={progressData}
+                    unlockFirstRound={champion.unlockFirstRound}
                 />
             ))}
             <div className='bg-white dark:bg-darkBgDeep shadow flex items-center justify-center p-4'>
