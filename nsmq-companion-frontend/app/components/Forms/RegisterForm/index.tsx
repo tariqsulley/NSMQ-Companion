@@ -98,7 +98,7 @@ export default function RegisterForm() {
 
 
     return (
-        <div className="flex bg-white w-full h-screen rounded-lg shadow-xl  ">
+        <div className="flex bg-white dark:bg-darkBgLight w-full h-screen rounded-lg shadow-xl  ">
             <ToastContainer />
             <form onSubmit={handleSignUp} className="w-full 
              overflow-y-scroll md:w-1/2  z-0 flex flex-col  items-center justify-center">
@@ -106,7 +106,7 @@ export default function RegisterForm() {
                     <p className="text-3xl font-bold">Sign Up As A Facilitator</p>
 
                     <div className="flex flex-col">
-                        <p>First Name</p>
+                        <p className="dark:text-white">First Name</p>
                         <TextInput
                             value={firstName}
                             onValueChange={(value: string) => setFirstName(value)}
@@ -116,7 +116,7 @@ export default function RegisterForm() {
                     </div>
 
                     <div className="flex flex-col ">
-                        <p>Last Name</p>
+                        <p className="dark:text-white">Last Name</p>
                         <TextInput
                             value={lastName}
                             onValueChange={(value: string) => setLastName(value)}
@@ -124,21 +124,21 @@ export default function RegisterForm() {
                     </div>
 
                     <div>
-                        <p>Email Address</p>
+                        <p className="dark:text-white">Email Address</p>
                         <TextInput
                             value={emailAddress}
                             onValueChange={(value: string) => setEmailAddress(value)}
                             placeholder="Enter email address" required />
                     </div>
                     <div>
-                        <p>School Name</p>
+                        <p className="dark:text-white">School Name</p>
                         <TextInput
                             value={schoolName}
                             onValueChange={(value: string) => setSchoolName(value)}
                             placeholder="Enter name of affiliated school" required />
                     </div>
                     <div>
-                        <p>Password</p>
+                        <p className="dark:text-white">Password</p>
                         <TextInput
                             value={password}
                             type="password"
@@ -146,7 +146,7 @@ export default function RegisterForm() {
                             placeholder="Enter password" required />
                     </div>
                     <div>
-                        <p>Confirm Password</p>
+                        <p className="dark:text-white">Confirm Password</p>
                         <TextInput
                             value={confirmPassword}
                             type="password"

@@ -55,22 +55,22 @@ export default function LoginForm() {
     }
 
     return (
-        <div className="flex bg-white w-full h-screen rounded-lg shadow-xl  ">
+        <div className="flex bg-white dark:bg-darkBgLight w-full h-screen  shadow-xl  ">
             <ToastContainer />
             <form onSubmit={handleSignIn} className="w-full 
                 overflow-y-scroll md:w-1/2  z-0 flex flex-col  items-center justify-center">
                 <div className="w-3/4 flex flex-col gap-3">
-                    <p className="text-3xl font-bold">Login</p>
-                    <p className="text-[#475569]">Log in to access your account</p>
+                    <p className="text-3xl font-bold dark:text-white">Login</p>
+                    <p className="text-[#475569] dark:text-white">Log in to access your account</p>
                     <div>
-                        <p>Email Address</p>
+                        <p className="dark:text-white">Email Address</p>
                         <TextInput
                             value={emailAddress}
                             onValueChange={(value: string) => setEmailAddress(value)}
                             placeholder="Enter email address" required />
                     </div>
                     <div>
-                        <p>Account Type</p>
+                        <p className="dark:text-white">Account Type</p>
                         <Select
                             value={accountType}
                             onValueChange={setAccountType}
@@ -82,7 +82,7 @@ export default function LoginForm() {
                         </Select>
                     </div>
                     <div>
-                        <p>Password</p>
+                        <p className="dark:text-white">Password</p>
                         <TextInput
                             value={password}
                             type="password"
