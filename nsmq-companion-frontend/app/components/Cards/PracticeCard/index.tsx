@@ -23,7 +23,7 @@ export default function PracticeCard({ year, contest_nums, sub_text }: PracticeC
          shadow-md dark:shadow-[0px] dark:border-darkBgLight shadow-slate-200 p-[17px] w-11/12  bg-white dark:bg-darkBgDeep " onClick={handleClick}>
             <div className="relative overflow-hidden group">
                 <Image src={nsmq_logo} alt="image"
-                    className="rounded-t-xl bg-red-400 transition-transform duration-300 transform group-hover:scale-110" />
+                    className="rounded-t-xl transition-transform duration-300 transform group-hover:scale-110" />
             </div>
             <div className="bg-gray-100 dark:bg-darkBgLight">
                 <div className=" p-2 " >
