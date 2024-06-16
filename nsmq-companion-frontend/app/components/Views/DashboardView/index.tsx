@@ -220,21 +220,22 @@ export default function DashboardView() {
         return (
             <div className="flex flex-col gap-4">
                 <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
-                <div className="flex items-center gap-3">
-                    <div>
-                        <SearchSelect value={year} onValueChange={(value) => setYear(value)}>
-                            <SearchSelectItem value="2021">2021</SearchSelectItem>
-                            <SearchSelectItem value="2020">2020</SearchSelectItem>
-                        </SearchSelect>
+                {Data?.data.account_type !== "facilitator" ?
+                    <div className="flex items-center gap-3">
+                        <div>
+                            <SearchSelect value={year} onValueChange={(value) => setYear(value)}>
+                                <SearchSelectItem value="2021">2021</SearchSelectItem>
+                                <SearchSelectItem value="2020">2020</SearchSelectItem>
+                            </SearchSelect>
 
-                    </div>
-                    <div></div>
-                    <SearchSelect value={contestId} onValueChange={(value) => setContestId(value)}>
-                        <SearchSelectItem value="1">Contest 1</SearchSelectItem>
-                        <SearchSelectItem value="2">Contest 2</SearchSelectItem>
-                        <SearchSelectItem value="3">Contest 3</SearchSelectItem>
-                    </SearchSelect>
-                </div>
+                        </div>
+                        <div></div>
+                        <SearchSelect value={contestId} onValueChange={(value) => setContestId(value)}>
+                            <SearchSelectItem value="1">Contest 1</SearchSelectItem>
+                            <SearchSelectItem value="2">Contest 2</SearchSelectItem>
+                            <SearchSelectItem value="3">Contest 3</SearchSelectItem>
+                        </SearchSelect>
+                    </div> : ""}
                 <div className=" flex items-center justify-center">
                     <p>Loading </p>
                 </div>
@@ -259,21 +260,8 @@ export default function DashboardView() {
                         </SearchSelectItem>
                     ))}
                 </SearchSelect> : ""}
-            <div className="flex items-center gap-3">
-                <div>
-                    <SearchSelect value={year} onValueChange={(value) => setYear(value)}>
-                        <SearchSelectItem value="2021">2021</SearchSelectItem>
-                        <SearchSelectItem value="2020">2020</SearchSelectItem>
-                    </SearchSelect>
 
-                </div>
-                <div></div>
-                <SearchSelect value={contestId} onValueChange={(value) => setContestId(value)}>
-                    <SearchSelectItem value="1">Contest 1</SearchSelectItem>
-                    <SearchSelectItem value="2">Contest 2</SearchSelectItem>
-                    <SearchSelectItem value="3">Contest 3</SearchSelectItem>
-                </SearchSelect>
-            </div>
+
             {Data?.data.account_type === "facilitator" && (
                 <>
                     <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
@@ -292,7 +280,7 @@ export default function DashboardView() {
                         />
                     </div>
                     {recommendationData?.data?.similar_students.length > 0 && (
-                        <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
+                        <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow overflow-y-scroll">
                             <p className="text-xl font-semibold mb-4">Similar Students</p>
                             <ul>
                                 {recommendationData.data.similar_students.map((student: { student_id: string; student_name: string }) => (
@@ -305,59 +293,79 @@ export default function DashboardView() {
                     )}
                 </>
             )}
-            <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
-                <p className="mx-10 text-xl font-semibold">2021</p>
-                <div className="flex flex-col sm:flex-row items-center gap-10 mx-10 mt-2">
-                    <div className="flex flex-col gap-2">
-                        <p className="text-[#889096] font-semibold">Total Questions</p>
-                        <p className="font-bold text-xl">9440</p>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <p className="text-[#40C4AA] font-semibold">Correct Answers</p>
-                        <p className="font-bold text-xl">5223</p>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <p className="text-[#E44283] font-semibold">Wrong Answers</p>
-                        <p className="font-bold text-xl">2667</p>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                        <p className="text-[#889096] font-semibold">Unanswered Questions</p>
-                        <p className="font-bold text-xl">1550</p>
-                    </div>
-                </div>
-                <AreaChart
-                    className="h-80"
-                    data={chartData}
-                    index="date"
-                    curveType="monotone"
-                    yAxisWidth={30}
-                    categories={['Round 1', 'Round 2', 'Round 3', 'Round 4']}
-                    colors={['indigo', 'rose', 'green', 'orange']}
-                    onValueChange={(v) => console.log(v)}
-                    showAnimation={true}
+            {Data?.data.account_type !== "facilitator" ?
+                <>
+                    <div className="flex items-center gap-3">
+                        <div>
+                            <SearchSelect value={year} onValueChange={(value) => setYear(value)}>
+                                <SearchSelectItem value="2021">2021</SearchSelectItem>
+                                <SearchSelectItem value="2020">2020</SearchSelectItem>
+                            </SearchSelect>
 
-                />
-            </div>
-            <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
-                <p className="mx-10 text-xl font-semibold">Contest {contestId}</p>
-                <BarChart
-                    className="mt-6"
-                    data={barData}
-                    index="name"
-                    categories={[
-                        'Maths',
-                        'Biology',
-                        'Chemistry',
-                        'Physics',
-                    ]}
-                    colors={['blue', 'teal', 'amber', 'rose', 'indigo', 'emerald']}
-                    yAxisWidth={48}
-                    showAnimation={true}
-                />
-            </div>
-            <div className="bg-white dark:bg-darkBgDeep rounded-xl shadow flex items-center justify-center" style={{ height: '400px' }}>
-                <Radar data={data} options={options} />
-            </div>
+                        </div>
+                        <div></div>
+                        <SearchSelect value={contestId} onValueChange={(value) => setContestId(value)}>
+                            <SearchSelectItem value="1">Contest 1</SearchSelectItem>
+                            <SearchSelectItem value="2">Contest 2</SearchSelectItem>
+                            <SearchSelectItem value="3">Contest 3</SearchSelectItem>
+                        </SearchSelect>
+                    </div>
+
+                    <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
+                        <p className="mx-10 text-xl font-semibold">2021</p>
+                        <div className="flex flex-col sm:flex-row items-center gap-10 mx-10 mt-2">
+                            <div className="flex flex-col gap-2">
+                                <p className="text-[#889096] font-semibold">Total Questions</p>
+                                <p className="font-bold text-xl">9440</p>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <p className="text-[#40C4AA] font-semibold">Correct Answers</p>
+                                <p className="font-bold text-xl">5223</p>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <p className="text-[#E44283] font-semibold">Wrong Answers</p>
+                                <p className="font-bold text-xl">2667</p>
+                            </div>
+                            <div className="flex flex-col gap-2">
+                                <p className="text-[#889096] font-semibold">Unanswered Questions</p>
+                                <p className="font-bold text-xl">1550</p>
+                            </div>
+                        </div>
+                        <AreaChart
+                            className="h-80"
+                            data={chartData}
+                            index="date"
+                            curveType="monotone"
+                            yAxisWidth={30}
+                            categories={['Round 1', 'Round 2', 'Round 3', 'Round 4']}
+                            colors={['indigo', 'rose', 'green', 'orange']}
+                            onValueChange={(v) => console.log(v)}
+                            showAnimation={true}
+
+                        />
+                    </div>
+                    <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
+                        <p className="mx-10 text-xl font-semibold">Contest {contestId}</p>
+                        <BarChart
+                            className="mt-6"
+                            data={barData}
+                            index="name"
+                            categories={[
+                                'Maths',
+                                'Biology',
+                                'Chemistry',
+                                'Physics',
+                            ]}
+                            colors={['blue', 'teal', 'amber', 'rose', 'indigo', 'emerald']}
+                            yAxisWidth={48}
+                            showAnimation={true}
+                        />
+                    </div>
+                    <div className="bg-white dark:bg-darkBgDeep rounded-xl shadow flex items-center justify-center" style={{ height: '400px' }}>
+                        <Radar data={data} options={options} />
+                    </div>
+                </> :
+                ""}
         </div>
     )
 }
