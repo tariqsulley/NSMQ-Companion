@@ -56,3 +56,5 @@ const contest_40_2 = [
         "Topic Tag": ["Units of Measurement", "Physics"]
     }
 ]
+
+export default contest_40_2
