@@ -19,9 +19,20 @@ class Student(BaseModel):
     facilitator_uuid = Column(UUID(as_uuid=True), ForeignKey('Facilitators.uuid'))
     facilitator = relationship("Facilitator", back_populates="students")
     performances = relationship("Performance", back_populates="student", cascade="all, delete-orphan")
-    # waiting_room_entry = relationship("WaitingRoom", back_populates="student", uselist=False, cascade="all, delete-orphan")
     waiting_room_data = relationship("WaitingRoomData", back_populates="student", cascade="all, delete-orphan")
+    progress = relationship("StudentProgress", back_populates="student")
 
+
+class StudentProgress(BaseModel):
+    __tablename__ = 'student_progress'
+    id = Column(Integer, primary_key=True, index=True)
+    student_id = Column(UUID(as_uuid=True), ForeignKey('students.uuid'))
+    year = Column(Integer)
+    school = Column(String)
+    round_number = Column(Integer)
+    completed = Column(Boolean, default=False)
+    score = Column(Integer)
+    student = relationship("Student", back_populates="progress")
 
 class WaitingRoomData(BaseModel):
     __tablename__ = "waiting_room_data"

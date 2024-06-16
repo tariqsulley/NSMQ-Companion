@@ -27,6 +27,30 @@ class Login(BaseModel):
 class UpdateUserAvatar(BaseModel):
     avatar_url: str
 
+
+class StudentProgressBase(BaseModel):
+    student_id: str
+    year: int
+    school: str
+    round_number: int
+    completed: bool
+    score: int
+
+class StudentProgressCreate(StudentProgressBase):
+    student_id: str
+    year: int
+    school: str
+    round_number: int
+    completed: bool
+    score: int
+
+class StudentProgressRead(StudentProgressBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+
         
 
 

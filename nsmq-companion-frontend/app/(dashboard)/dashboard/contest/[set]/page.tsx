@@ -794,6 +794,9 @@ export default function ContestPage({ params }: any) {
             const nextRound = startRound + 1;
             setCurrentRound(nextRound);
             setRoundScore(0);
+            setTimeTakenArray([])
+            setTopicArray([])
+            setScoreArray([])
             SetSimilarityScore(Array(questions?.length).fill(null));
             importQuestions(nextRound).then(() => {
                 setCurrentQuestionIndex(0);
