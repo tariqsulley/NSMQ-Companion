@@ -17,7 +17,8 @@ const contest_40_4 = [
         "Answer figure name": null,
         "Answer": "Mass Spectrometry or Mass Spectrometer",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Mass Spectrometry", "Analytical Chemistry"]
     },
     {
         "S/N": 2,
@@ -36,7 +37,9 @@ const contest_40_4 = [
         "Answer figure name": null,
         "Answer": "Neutron",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Particle Physics", "Neutron"]
+
     },
     {
         "S/N": 3,
@@ -57,7 +60,8 @@ const contest_40_4 = [
         "Answer figure name": null,
         "Answer": "POPULATION CENSUS (accept CENSUS)",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Population Census", "Statistics"]
     },
     {
         "S/N": 4,
@@ -77,7 +81,8 @@ const contest_40_4 = [
         "Answer figure name": null,
         "Answer": "Genetically modified organisms/ Genetically engineered organisms",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Genetically Modified Organisms", "Biotechnology"]
     }
 ]
 

@@ -93,7 +93,6 @@ export default function ContestPage({ params }: any) {
         'Physics': 0
     }])
 
-    const [studentStrength, setStudentStrength] = useState([0, 0, 0, 0])
 
     const [clueTexts, setClueTexts] = useState<string[]>([]);
     const [isCluePlayingNow, setIsCluePlayingNow] = useState(false);
@@ -144,15 +143,16 @@ export default function ContestPage({ params }: any) {
 
     const [opponentScore, setOpponentScore] = useState(0)
     const [disableButton, setDisabledButton] = useState(true)
+    const [studentStrength, setStudentStrength] = useState([0, 0, 0, 0])
 
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
     };
 
-    // useEffect(() => {
-    //     setCurrentRound(startRound);
-    //     importQuestions(startRound);
-    // }, [contestId, startRound]);
+
+
+
+
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -216,6 +216,23 @@ export default function ContestPage({ params }: any) {
         });
     };
 
+    useEffect(() => {
+        const totalQuestions = {
+            'Mathematics': roundBreakDown[0]['Mathematics'],
+            'Biology': roundBreakDown[0]['Biology'],
+            'Chemistry': roundBreakDown[0]['Chemistry'],
+            'Physics': roundBreakDown[0]['Physics']
+        };
+
+        const strengthPercentages = Object.entries(totalQuestions).map(([subject, score]) => {
+            const maxScore = questions?.filter(q => q.Subject === subject).length * 3;
+            return Math.round((score / maxScore) * 100);
+        });
+
+        setStudentStrength(strengthPercentages);
+    }, [roundBreakDown, questions]);
+
+
     const handleTranscriptUpdate = () => {
         setTranscribedText(transcript);
         if (!listening) {
@@ -272,6 +289,7 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+
     useEffect(() => {
         handleTranscriptUpdate();
     }, [transcript, listening]);
@@ -322,6 +340,42 @@ export default function ContestPage({ params }: any) {
 
     let audioInstance: any;
 
+    useEffect(() => {
+        // This function is called when the component mounts
+        return () => {
+            // This function is called when the component unmounts
+            if (audioInstance) {
+                audioInstance.pause();
+                audioInstance.currentTime = 0;  // Optionally reset the time
+            }
+        };
+    }, [audioInstance]);
+
+
+    const audioRef = useRef(new Audio());
+
+    useEffect(() => {
+        // This function runs when the component mounts
+        return () => {
+            // This function runs when the component unmounts
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current.currentTime = 0; // Optionally reset the current time
+            }
+        };
+    }, []);
+
+    const playAudio2 = (url: any, onEnded: any) => {
+        audioRef.current.src = url;
+        audioRef.current.play();
+        setIsAudioPlaying(true);
+        audioRef.current.onended = () => {
+            onEnded();
+            setIsAudioPlaying(false);
+            setDisabledButton(false);
+        };
+    };
+
     const playQuestionAudio = (questionIndex: any) => {
         const questionAudioUrl = `/Sounds/${year}/Contest ${contestId}/round${startRound}/q${questionIndex}.wav`;
         const preambleAudioUrl = `/Sounds/${year}/Contest ${contestId}/round${startRound}/preamble_q${questionIndex}.wav`;
@@ -371,12 +425,12 @@ export default function ContestPage({ params }: any) {
         } else {
             if (preambleText && !playedPreambles.has(preambleText)) {
                 setPlayedPreambles(new Set(playedPreambles).add(preambleText));
-                playAudio(preambleAudioUrl, () => {
-                    playAudio(questionAudioUrl, onQuestionEnded);
+                playAudio2(preambleAudioUrl, () => {
+                    playAudio2(questionAudioUrl, onQuestionEnded);
                     startTimer();
                 });
             } else {
-                playAudio(questionAudioUrl, onQuestionEnded);
+                playAudio2(questionAudioUrl, onQuestionEnded);
                 startTimer();
             }
         }
@@ -415,7 +469,7 @@ export default function ContestPage({ params }: any) {
 
         setIsCluePlayingNow(true);
 
-        playAudio(clueAudioUrl, () => {
+        playAudio2(clueAudioUrl, () => {
             setIsCluePlayingNow(false);
             if ((clueIndex < questions[currentQuestionIndex]["clue_nums"] - 1) && cluestopped !== "stop") {
                 setTimeout(() => {

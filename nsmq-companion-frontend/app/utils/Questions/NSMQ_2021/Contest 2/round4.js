@@ -16,7 +16,8 @@ const contest_2_4 = [
         "Answer figure name": null,
         "Answer": "Aluminium chloride.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Inorganic Chemistry", "Metal Halides"]
     },
     {
         "S/N": 2,
@@ -35,7 +36,8 @@ const contest_2_4 = [
         "Answer figure name": null,
         "Answer": "Force",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Newton's Laws"]
     },
     {
         "S/N": 3,
@@ -55,7 +57,8 @@ const contest_2_4 = [
         "Answer figure name": null,
         "Answer": "Microvilli",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cell Biology", "Microscopic Structures"]
     },
     {
         "S/N": 4,
@@ -75,7 +78,8 @@ const contest_2_4 = [
         "Answer figure name": null,
         "Answer": "ORDER OF OPERATIONS",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Arithmetic Rules", "Mathematical Order"]
     }
 ]
 

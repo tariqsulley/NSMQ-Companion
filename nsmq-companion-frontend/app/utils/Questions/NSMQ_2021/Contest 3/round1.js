@@ -10,7 +10,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$x=6$\n$\\left[\\log _{6} x+2 \\log _{6} x=3 \\log _{6} x=3, \\log _{6} x=1, x=6\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithmic Equations", "Algebra"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$x=9 / 8$\n$\\left[\\log _{3}(x /(x-1))=2, x /(x-1)=9, x=9(x-1), 8 x=9, x=9 / 8\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithmic Equations", "Algebra"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$x=3$\n$\\left[\\log _{2}(x /(x+3))=\\log _{2}(1 / 2), x /(x+3)=1 / 2,2 x=x+3, x=3\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithmic Equations", "Algebra"]
     },
     {
         "S/N": 4,
@@ -62,7 +65,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "Animal cells may have many small vacuoles, a lot smaller than the plant cells/ Plant cells have a large central vacuole that can occupy large portion of the cell's volume.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cell Biology", "Cell Structure"]
     },
     {
         "S/N": 6,
@@ -75,7 +79,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "Animal cells have larger and fewer Golgi bodies, whereas plant cells have smaller but more Golgi bodies",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cell Biology", "Cell Structure"]
     },
     {
         "S/N": 7,
@@ -88,7 +93,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "Oviparous animals lay eggs that later hatch to form young ones.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Reproduction", "Animal Biology"]
     },
     {
         "S/N": 8,
@@ -101,7 +107,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "Oviparous animals might undergo internal or external fertilization.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Reproduction", "Animal Biology"]
     },
     {
         "S/N": 9,
@@ -114,7 +121,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "The chance of survival of the young ones is less as the eggs are laid in the environment where they are prone to various dangers",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Reproduction", "Animal Biology"]
     },
     {
         "S/N": 10,
@@ -127,7 +135,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "A base is an electron pair donor.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Acid-Base Chemistry", "Lewis Theory"]
     },
     {
         "S/N": 11,
@@ -140,7 +149,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "An acid is a proton donor.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Acid-Base Chemistry", "Bronsted-Lowry Theory"]
     },
     {
         "S/N": 12,
@@ -153,7 +163,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "A buffer solution will usually contain a weak acid and its conjugate base or a weak base and its conjugate acid.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Solutions", "Buffer Solutions"]
     },
     {
         "S/N": 13,
@@ -166,7 +177,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$\\mathrm{t}_{1 / 2}=0.693 / \\mathrm{k}$\n$$\n\\mathrm{k}=0.693 / 2.00 * 60.0=5.78 * 10^{-3} \\mathrm{~s}^{-1}\n$$",
         "calculations present": "Yes",
-        "Subject": "Chemistry, Physics"
+        "Subject": "Chemistry, Physics",
+        "Topic Tag": ["Chemical Kinetics", "Rate Constants"]
     },
     {
         "S/N": 14,
@@ -179,7 +191,9 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$\\mathrm{t}_{1 / 2}=0.693 / \\mathrm{k}$\n$$\n=0.693 / 6.60 * 10^{-3}=105 \\mathrm{~s} \\text { or } 1 \\min 45 \\mathrm{~s}\n$$",
         "calculations present": "Yes",
-        "Subject": "Chemistry, Physics"
+        "Subject": "Chemistry, Physics",
+        "Topic Tag": ["Radioactivity", "Decay Constants"]
+
     },
     {
         "S/N": 15,
@@ -192,7 +206,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "There are 5 half - lives in 10.0 hours.\nSo, the percentage left is $3.13 \\%$ of the initial activity.",
         "calculations present": "Yes",
-        "Subject": "Chemistry, Physics"
+        "Subject": "Chemistry, Physics",
+        "Topic Tag": ["Radioactivity", "Half-life Calculations"]
     },
     {
         "S/N": 16,
@@ -205,7 +220,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$130 N$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Normal Force"]
     },
     {
         "S/N": 17,
@@ -218,7 +234,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$80 \\mathrm{~N}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Friction Force"]
     },
     {
         "S/N": 18,
@@ -231,7 +248,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$120 \\mathrm{~N}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Normal Force"]
     },
     {
         "S/N": 19,
@@ -244,7 +262,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$0.60 \\mathrm{~N}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electromagnetism", "Magnetic Force"]
     },
     {
         "S/N": 20,
@@ -257,7 +276,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$0.48 \\mathrm{~N}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electromagnetism", "Magnetic Force"]
     },
     {
         "S/N": 21,
@@ -270,7 +290,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$3.0 \\mathrm{~N}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electromagnetism", "Magnetic Force"]
     },
     {
         "S/N": 22,
@@ -283,7 +304,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "y = $x [(x + 4)^{2} + (y \u2013 2)^{2} = (x - 2)^{2} + (y + 4)^{2} , 8x \u2013 4y = -4x + 8y, y = x ]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Coordinate Geometry", "Locus"]
     },
     {
         "S/N": 23,
@@ -296,7 +318,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "y = $-x [(x \u2013 3)^{2} + (y + 2)^{2} = (x \u2013 2)^{2} + (y + 3)^{2} , -6x + 4y = -4x + 6y, -2x = 2y, y = - x]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Coordinate Geometry", "Locus"]
     },
     {
         "S/N": 24,
@@ -309,7 +332,8 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "y = $-x/2 [(x \u2013 2)^{2} + (y \u2013 4)^{2} = (x + 2)^{2} + (y + 4)^{2} , -4x \u2013 8y = 4x + 8y, 16y = -8x, y = -x/2]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Coordinate Geometry", "Locus"]
     }
 ]
 

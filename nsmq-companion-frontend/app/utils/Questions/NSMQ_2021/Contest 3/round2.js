@@ -10,7 +10,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "Secondary Voltaic Cells - (they can be recharged after they have been discharged)",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Electrochemistry", "Voltaic Cells"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "$400^{\\circ} \\mathrm{C} . \\quad$ (Le Chatelier's Principle)",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Equilibrium", "Le Chatelier's Principle"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "Green",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Flame Test", "Copper Compounds"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "$30 \\mathrm{~V}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["AC Circuits", "Impedance"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "$10 \\mathrm{~ms}^{-1}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Collisions"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "$2 J$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Mechanics", "Pendulum"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "Nastic movements differ from tropic movements in that the direction of tropic responses depends on the direction of the stimulus, whereas the direction of nastic movements is independent of the stimulus's position.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Plant Biology", "Movement"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "The left ventricle",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Human Biology", "Cardiovascular System"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "Three (3)",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Genetics", "Blood Grouping"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "$y=-x-1$, or $x+y+1=0$\n[ $2 \\mathrm{ydy} / \\mathrm{dx}=4, \\mathrm{dy} / \\mathrm{dx}=2 / y, m=2 /-2=-1, y+2=-1(x-1), y=-x-1$ ]",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Calculus", "Tangents"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "$x=2 / 5$\n$\\left[5^{2(x+2)}=5^{3(x-2)},-2 x-4=3 x-6,5 x=2, x=2 / 5\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Exponential Equations"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_3_2 = [
         "Answer figure name": null,
         "Answer": "2\n$[2 x+3=A(x+2)+B(x-3)$, for $x=3,9=5 A, A=9 / 5$, for $x=-2,-1=-$\n$5 B, B=1 / 5$\n$A+B=9 / 5+1 / 5=2]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Partial Fractions"]
     }
 ]
 export default contest_3_2

@@ -11,7 +11,8 @@ const contest_40_3 = [
         "Opponent_Answer": 2,
         "Answer": "F $\\mathrm{Mg} 738 \\mathrm{kJmol}^{-1} ; \\mathrm{Al} \\quad 578 \\mathrm{~kJ}$",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Ionization Energy", "Periodic Trends"]
     },
     {
         "S/N": 2,
@@ -24,7 +25,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Ionization Energy", "Periodic Trends"]
     },
     {
         "S/N": 3,
@@ -38,7 +40,8 @@ const contest_40_3 = [
         "Answer": "F",
         "Opponent_Answer": 2,
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Hydrocarbons"]
     },
     {
         "S/N": 4,
@@ -51,7 +54,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "T",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Hydrocarbons"]
     },
     {
         "S/N": 5,
@@ -65,7 +69,8 @@ const contest_40_3 = [
         "Answer": "T",
         "Opponent_Answer": 2,
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electrostatics", "Physics"]
     },
     {
         "S/N": 6,
@@ -78,7 +83,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "F",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electrostatics", "Physics"]
     },
     {
         "S/N": 7,
@@ -92,7 +98,8 @@ const contest_40_3 = [
         "Answer": "F",
         "Opponent_Answer": 2,
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Electrostatics", "Physics"]
     },
     {
         "S/N": 8,
@@ -105,7 +112,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "F",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Quantum Mechanics", "Atomic Structure"]
     },
     {
         "S/N": 9,
@@ -119,7 +127,8 @@ const contest_40_3 = [
         "Opponent_Answer": 2,
         "Answer": "F",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Virology", "Immunology"]
     },
     {
         "S/N": 10,
@@ -132,7 +141,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "F",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Virology", "Immunology"]
     },
     {
         "S/N": 11,
@@ -146,7 +156,8 @@ const contest_40_3 = [
         "Answer": "T",
         "Opponent_Answer": 2,
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Evolution", "Comparative Anatomy"]
     },
     {
         "S/N": 12,
@@ -159,7 +170,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "T",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Evolution", "Comparative Anatomy"]
     },
     {
         "S/N": 13,
@@ -173,7 +185,8 @@ const contest_40_3 = [
         "Answer": "T",
         "Opponent_Answer": 2,
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Rational Numbers", "Mathematics"]
     },
     {
         "S/N": 14,
@@ -186,7 +199,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "T",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Rational Numbers", "Mathematics"]
     },
     {
         "S/N": 15,
@@ -200,7 +214,8 @@ const contest_40_3 = [
         "Answer": "TRUE",
         "Opponent_Answer": 2,
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Divisibility", "Number Theory"]
     },
     {
         "S/N": 16,
@@ -213,7 +228,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "T",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Divisibility", "Number Theory"]
     }
 ]
 

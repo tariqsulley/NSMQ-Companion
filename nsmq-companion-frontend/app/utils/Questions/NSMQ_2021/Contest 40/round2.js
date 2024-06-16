@@ -13,6 +13,7 @@ const contest_40_2 = [
         "Opponent_Answer": 3,
         "Opponent_Time": 24,
         "Subject": "Mathematics",
+        "Topic Tag": ["Algebraic Manipulation", "Rational Expressions"]
     },
     {
         "S/N": 2,
@@ -27,7 +28,8 @@ const contest_40_2 = [
         "calculations present": "Yes",
         "Opponent_Answer": 3,
         "Opponent_Time": 30,
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithmic Equations", "Algebra"]
     },
     {
         "S/N": 3,
@@ -42,7 +44,8 @@ const contest_40_2 = [
         "calculations present": "Yes",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Function Domains", "Square Roots"]
     },
     {
         "S/N": 4,
@@ -57,7 +60,8 @@ const contest_40_2 = [
         "calculations present": "No",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Food Preservation", "Enzymes and Microorganisms"]
     },
     {
         "S/N": 5,
@@ -72,7 +76,8 @@ const contest_40_2 = [
         "calculations present": "No",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Population Growth", "Ecology"]
     },
     {
         "S/N": 6,
@@ -87,7 +92,8 @@ const contest_40_2 = [
         "calculations present": "No",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Respiratory System", "Lung Function"]
     },
     {
         "S/N": 7,
@@ -102,7 +108,8 @@ const contest_40_2 = [
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Thermodynamic Scale", "Temperature"]
     },
     {
         "S/N": 8,
@@ -117,7 +124,8 @@ const contest_40_2 = [
         "calculations present": "No",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Heat Transfer", "Thermal Injuries"]
     },
     {
         "S/N": 9,
@@ -132,7 +140,8 @@ const contest_40_2 = [
         "calculations present": "No",
         "Opponent_Answer": 0,
         "Opponent_Time": 30,
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electricity", "Electrocution"]
     },
     {
         "S/N": 10,
@@ -147,7 +156,8 @@ const contest_40_2 = [
         "calculations present": "No",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Radiation", "Background Radiation"]
     },
     {
         "S/N": 11,
@@ -162,7 +172,8 @@ const contest_40_2 = [
         "calculations present": "No",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Functional Groups"]
     },
     {
         "S/N": 12,
@@ -177,7 +188,8 @@ const contest_40_2 = [
         "calculations present": "Yes",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Gas Laws", "Partial Pressures"]
     }
 ]
 

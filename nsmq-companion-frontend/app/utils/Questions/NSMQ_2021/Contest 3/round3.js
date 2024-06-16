@@ -10,7 +10,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Inorganic Chemistry", "Iron Compounds"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Inorganic Chemistry", "Precipitation Reactions"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Inorganic Chemistry", "Precipitation Reactions"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "F. Ethanamide is formed.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Amides"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "T.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Oxidation Reactions"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "F. Methanoic acid.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Organic Chemistry", "Acids"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Terrestrial Magnetism", "Physics Concepts"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Terrestrial Magnetism", "Physics Concepts"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Terrestrial Magnetism", "Physics Concepts"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Projectile Motion", "Kinematics"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Projectile Motion", "Kinematics"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Projectile Motion", "Kinematics"]
     },
     {
         "S/N": 13,
@@ -166,7 +178,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Plant Adaptations", "Cutinization"]
     },
     {
         "S/N": 14,
@@ -179,7 +192,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Plant Adaptations", "Drought Sensitivity"]
     },
     {
         "S/N": 15,
@@ -192,7 +206,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Plant Adaptations", "Root Systems"]
     },
     {
         "S/N": 16,
@@ -205,7 +220,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Phospholipids", "Cell Membranes"]
     },
     {
         "S/N": 17,
@@ -218,7 +234,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Peripheral Proteins", "Cell Membranes"]
     },
     {
         "S/N": 18,
@@ -231,7 +248,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Signal Transduction", "Cell Membranes"]
     },
     {
         "S/N": 19,
@@ -244,7 +262,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Binomial Expansion"]
     },
     {
         "S/N": 20,
@@ -257,7 +276,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "TRUE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Binomial Expansion"]
     },
     {
         "S/N": 21,
@@ -270,7 +290,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "TRUE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Algebra", "Binomial Expansion"]
     },
     {
         "S/N": 22,
@@ -283,7 +304,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Symmetry", "Geometric Shapes"]
     },
     {
         "S/N": 23,
@@ -296,7 +318,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "TRUE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Symmetry", "Geometric Shapes"]
     },
     {
         "S/N": 24,
@@ -309,7 +332,8 @@ const contest_3_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Symmetry", "Geometric Shapes"]
     }
 ]
 

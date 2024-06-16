@@ -16,7 +16,8 @@ const contest_3_4 = [
         "Answer figure name": null,
         "Answer": "Polypropene or Polypropylene",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Addition Reactions", "Polymers"]
     },
     {
         "S/N": 2,
@@ -35,7 +36,8 @@ const contest_3_4 = [
         "Answer figure name": null,
         "Answer": "Linear momentum",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Linear Momentum", "Physics Quantities"]
     },
     {
         "S/N": 3,
@@ -54,7 +56,8 @@ const contest_3_4 = [
         "Answer figure name": null,
         "Answer": "Plasmodesmata",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cell Communication", "Plant Cells"]
     },
     {
         "S/N": 4,
@@ -73,7 +76,8 @@ const contest_3_4 = [
         "Answer figure name": null,
         "Answer": "SUBTRACTION",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Binary Operations", "Subtraction"]
     }
 ]
 
