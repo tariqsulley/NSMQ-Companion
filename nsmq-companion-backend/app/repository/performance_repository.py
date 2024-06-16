@@ -1,11 +1,14 @@
+# app/repository/performance_repository.py
 from contextlib import AbstractContextManager
 from sqlalchemy.orm import Session
-from typing import Callable, List
+from typing import Callable
 from fastapi import HTTPException
 import logging
+
 from app.models.perfomance_model import Performance
 from app.schemas.performance import PerformanceCreate
 from app.repository.base_repository import BaseRepository
+
 
 class PerformanceRepository(BaseRepository):
     def __init__(self, session_factory: Callable[..., AbstractContextManager[Session]]):
@@ -32,7 +35,7 @@ class PerformanceRepository(BaseRepository):
                 logging.error(f"Failed to create performance: {e}")
                 raise HTTPException(status_code=400, detail=str(e))
 
-    def get_performance_by_student(self, student_id: int):
+    def get_performance_by_student(self, student_id: str):
         with self.session_factory() as session:
             try:
                 return session.query(Performance).filter(Performance.student_id == student_id).all()
@@ -47,3 +50,11 @@ class PerformanceRepository(BaseRepository):
             except Exception as e:
                 logging.error(f"Failed to find performance for contest {contest_id}: {e}")
                 raise HTTPException(status_code=404, detail=str(e))
+
+    def get_all_performance(self):
+        with self.session_factory() as session:
+            try:
+                return session.query(Performance).all()
+            except Exception as e:
+                logging.error(f"Failed to retrieve all performance data: {e}")
+                raise HTTPException(status_code=500, detail=str(e))

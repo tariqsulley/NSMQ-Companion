@@ -216,21 +216,21 @@ export default function ContestPage({ params }: any) {
         });
     };
 
-    useEffect(() => {
-        const totalQuestions = {
-            'Mathematics': roundBreakDown[0]['Mathematics'],
-            'Biology': roundBreakDown[0]['Biology'],
-            'Chemistry': roundBreakDown[0]['Chemistry'],
-            'Physics': roundBreakDown[0]['Physics']
-        };
+    // useEffect(() => {
+    //     const totalQuestions = {
+    //         'Mathematics': roundBreakDown[0]['Mathematics'],
+    //         'Biology': roundBreakDown[0]['Biology'],
+    //         'Chemistry': roundBreakDown[0]['Chemistry'],
+    //         'Physics': roundBreakDown[0]['Physics']
+    //     };
 
-        const strengthPercentages = Object.entries(totalQuestions).map(([subject, score]) => {
-            const maxScore = questions?.filter(q => q.Subject === subject).length * 3;
-            return Math.round((score / maxScore) * 100);
-        });
+    //     const strengthPercentages = Object.entries(totalQuestions).map(([subject, score]) => {
+    //         const maxScore = questions?.filter(q => q.Subject === subject).length * 3;
+    //         return Math.round((score / maxScore) * 100);
+    //     });
 
-        setStudentStrength(strengthPercentages);
-    }, [roundBreakDown, questions]);
+    //     setStudentStrength(strengthPercentages);
+    // }, [roundBreakDown, questions]);
 
 
     const handleTranscriptUpdate = () => {
