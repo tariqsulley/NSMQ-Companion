@@ -22,6 +22,8 @@ import { useAuth } from "@/app/context/AuthContext";
 import Link from 'next/link';
 import prempeh_logo from "../../../../../public/images/prempeh.jpg"
 
+
+
 export default function ContestPage({ params }: any) {
     const { Data } = useAuth()
     const { set } = params;
@@ -335,12 +337,10 @@ export default function ContestPage({ params }: any) {
     let audioInstance: any;
 
     useEffect(() => {
-        // This function is called when the component mounts
         return () => {
-            // This function is called when the component unmounts
             if (audioInstance) {
                 audioInstance.pause();
-                audioInstance.currentTime = 0;  // Optionally reset the time
+                audioInstance.currentTime = 0;
             }
         };
     }, [audioInstance]);
@@ -349,12 +349,10 @@ export default function ContestPage({ params }: any) {
     const audioRef = useRef(new Audio());
 
     useEffect(() => {
-        // This function runs when the component mounts
         return () => {
-            // This function runs when the component unmounts
             if (audioRef.current) {
                 audioRef.current.pause();
-                audioRef.current.currentTime = 0; // Optionally reset the current time
+                audioRef.current.currentTime = 0;
             }
         };
     }, []);
