@@ -65,46 +65,6 @@ async def verify_token(
         return send_internal_server_error(user_msg="Could not verify token", error=e)
 
 
-@router.post("/verify-email")
-async def verify_user_email(
-    user: UserEmailVerification, db: Session = Depends(get_db)
-):
-    # check if user already verified
-    expiry_time = datetime.now() + timedelta(minutes=3)
-    db_user = db.query(Facilitator).filter(Facilitator.uuid == user.facilitator_uuid).first()
-    if db_user:
-        if db_user.verifiedAt is None:
-            # check if token already generated
-            verified_user = (
-                db.query(EmailVerification)
-                .filter(EmailVerification.facilitator_uuid == user.facilitator_uuid)
-                .first()
-            )
-
-            if verified_user is None:
-                # Generate token
-                verify_token = generate_verification_token()
-
-                token_detail = {
-                    "facilitator_uuid": user.facilitator_uuid,
-                    "verification_token": verify_token,
-                    "expiry_date": expiry_time.isoformat() # Save the expiry time to the database
-                }
-
-                # save generated token into db
-                return create_verification_token(db, user, token_detail)
-            else:
-                raise HTTPException(
-                    status_code=409,
-                    detail="Verification code already generated, please check email to verify",
-                )
-        else:
-            raise HTTPException(status_code=409, detail="User already verified")
-    else:
-        raise HTTPException(status_code=404, detail="User not found")
-    
-
-
 @router.post("/login", response_model=None)
 @inject
 async def login_handler(

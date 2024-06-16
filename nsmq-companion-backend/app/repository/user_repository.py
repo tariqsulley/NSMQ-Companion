@@ -130,14 +130,6 @@ class UserRepository(BaseRepository):
         )
         return student
     
-    # def get_user_by_uuid(self, user_uuid: str):
-    #     with self.session_factory() as session:
-    #         user = session.query(self.model).filter(self.model.uuid == user_uuid).first()
-    #         if not user:
-    #             user = session.query(self.model).filter(self.model.uuid == user_uuid).first()
-    #         if not user:
-    #             logging.warning(f"No user found with UUID: {user_uuid}")
-    #         return user
 
   
 
