@@ -110,7 +110,7 @@ export default function LoginForm() {
                         <GoogleBtn />
                     </div>
                     <div className="w-full text-center ">
-                        <p className="text-[#6A6E73] font-semibold">Don't have an account?
+                        <p className="text-[#6A6E73] font-semibold">Don&apos;t have an account?
                             <Link href={"/auth/register"} className="text-blue-500 font-semibold hover:underline mx-1">Sign Up</Link></p>
                     </div>
                 </div>

@@ -42,7 +42,7 @@ export default function PracticeNavBar() {
                             </svg>
                         </button>
                         <a href="https://flowbite.com" className="flex ms-2 md:me-24">
-                            <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 me-3" alt="FlowBite Logo" />
+                            {/* <img src="https://flowbite.com/docs/images/logo.svg" className="h-8 me-3" alt="FlowBite Logo" /> */}
                             <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white text-white">NSMQ Companion</span>
                         </a>
                     </div>
@@ -50,6 +50,7 @@ export default function PracticeNavBar() {
                         <div className="flex items-center ms-3">
                             <div className='mx-10'>
                                 <ThemeSwitch />
+                                
                             </div>
                             <div>
                                 <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" aria-expanded="false" data-dropdown-toggle="dropdown-user">

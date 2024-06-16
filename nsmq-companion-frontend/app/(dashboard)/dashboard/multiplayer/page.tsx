@@ -1,4 +1,6 @@
 "use client";
+import 'regenerator-runtime/runtime'
+
 import Sidebar from "@/app/components/Sidebar";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/app/context/AuthContext";
