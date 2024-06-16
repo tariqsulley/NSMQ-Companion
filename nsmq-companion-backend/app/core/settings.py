@@ -52,6 +52,7 @@ class Settings(BaseSettings):
 
     # CORS
     BACKEND_CORS_ORIGINS: List[str] = [ 
+        "https://nsmq-companion.vercel.app",
         "http://localhost:8000",
         "https://localhost:8000",
         "http://localhost:3000",
