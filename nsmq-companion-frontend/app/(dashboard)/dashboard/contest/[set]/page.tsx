@@ -575,6 +575,43 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+    function levenshteinDistance(str1: any, str2: any) {
+        const m = str1.length;
+        const n = str2.length;
+
+        if (m === 0) return n;
+        if (n === 0) return m;
+
+        const dp = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+
+        for (let i = 0; i <= m; i++) {
+            dp[i][0] = i;
+        }
+
+        for (let j = 0; j <= n; j++) {
+            dp[0][j] = j;
+        }
+
+        for (let i = 1; i <= m; i++) {
+            for (let j = 1; j <= n; j++) {
+                if (str1[i - 1] === str2[j - 1]) {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else {
+                    dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+                }
+            }
+        }
+
+        return dp[m][n];
+    }
+
+    function calculateSimilarity(str1: any, str2: any) {
+        const distance = levenshteinDistance(str1, str2);
+        const maxLength = Math.max(str1.length, str2.length);
+        const similarity = 1 - distance / maxLength;
+        return similarity;
+    }
+
     const handleCalculateSimilarity = async () => {
         try {
             setCheckingAnswer(true);
@@ -731,6 +768,7 @@ export default function ContestPage({ params }: any) {
     };
 
 
+
     if (!questions) {
         return <div>Loading questions...</div>;
     }
@@ -844,11 +882,13 @@ export default function ContestPage({ params }: any) {
                                 </div>
 
                                 <div className="flex w-full ">
-                                    <div className='flex flex-col items-center justify-center 
+                                    {mode == "Champion" ?
+                                        <div className='flex flex-col items-center justify-center 
                                     gap-2 bg-gray-100 shadow rounded-lg m-2'>
-                                        <Image src={prempeh_logo} alt='logo' className='w-[50%]' />
-                                        <p className='text-xl text-center'>Prempeh Score: {opponentScore}</p>
-                                    </div>
+                                            <Image src={prempeh_logo} alt='logo' className='w-[50%]' />
+                                            <p className='text-xl text-center font-bold'>Prempeh Score: {opponentScore}</p>
+                                        </div> : ""}
+
                                     <div className="flex items-center gap-1 p-2 w-full justify-start">
                                         <p className="font-semibold text-2xl">Points: {round_score}</p>
                                     </div>
@@ -912,11 +952,11 @@ export default function ContestPage({ params }: any) {
                                         <h2>Answer: {currentQuestion?.["Answer"]}</h2>
                                     }
                                 </div>
-                                {mode == "Champion" && currentQuestion["S/N"] % 2 == 0 ?
+                                {(mode == "Champion" && currentQuestion?.["S/N"] % 2 == 0) || currentQuestion?.["Opponent_Answer"] == 0 ?
                                     <div
                                         className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
                                         onClick={handleCircleClick}
-                                    /> : mode == "Champion" && currentQuestion["S/N"] % 2 !== 0 ? "" :
+                                    /> : mode == "Champion" && currentQuestion?.["S/N"] % 2 !== 0 ? "" :
                                         <div
                                             className={`w-10 h-10 rounded-full ${isCircleGreen ? 'bg-green-500' : 'bg-gray-500'}`}
                                             onClick={handleCircleClick}
@@ -953,6 +993,8 @@ export default function ContestPage({ params }: any) {
                      shadow rounded-b-xl dark:bg-darkBgLight">
                                 <div className='flex flex-col items-center justify-center'>
                                     <h2 className="text-2xl font-bold">End of Round {startRound}</h2>
+                                    {mode == "Champion" ?
+                                        <p className='text-2xl'>{opponentScore > round_score ? "You lose" : "Congratulations 🎉"}</p> : ""}
                                     <div className="flex items-center gap-4 mt-2 mb-2">
                                         <div className="bg-[#FFD700] p-2 rounded-lg">
                                             <p className="dark:text-darkBgLight">TOTAL POINTS</p>
@@ -1000,8 +1042,12 @@ export default function ContestPage({ params }: any) {
                                             Go to Practice Page
                                         </Link>
                                     ) : (
+
                                         <button onClick={handleGoToNextRound}>Go To Next Round</button>
                                     )}
+
+                                    {quizCompleted && (round_score > opponentScore) && mode == "Champion" ?
+                                        <button onClick={handleGoToNextRound}>Go To Next Round</button> : ""}
                                 </div>
                             </div>
                         )}
