@@ -58,74 +58,24 @@ const options = {
 
 
 
-const bar_data = [
-    {
-        name: 'Round 1',
-        'Maths': 890,
-        'Biology': 338,
-        'Chemistry': 538,
-        'Physics': 396,
-    },
-    {
-        name: 'Round 2',
-        'Maths': 289,
-        'Biology': 233,
-        'Chemistry': 253,
-        'Physics': 333,
-    },
-    {
-        name: 'Round 3',
-        'Maths': 380,
-        'Biology': 535,
-        'Chemistry': 352,
-        'Physics': 718,
-    },
-    {
-        name: 'Round 4',
-        'Maths': 90,
-        'Biology': 98,
-        'Chemistry': 28,
-        'Physics': 33,
-    },
-];
-
-
-
-const chartdata = [
-    {
-        date: 'Contest 1',
-        'Round 1': 108,
-        'Round 2': 36,
-        'Round 3': 72,
-        'Round 4': 20
-    },
-    {
-        date: 'Contest 2',
-        'Round 1': 67,
-        'Round 2': 22,
-        'Round 3': 43,
-        'Round 4': 10
-    },
-    {
-        date: 'Contest 3',
-        'Round 1': 77,
-        'Round 2': 34,
-        'Round 3': 56,
-        'Round 4': 13
-    },
-    {
-        date: 'Contest 4',
-        'Round 1': 99,
-        'Round 2': 30,
-        'Round 3': 58,
-        'Round 4': 17
-    },
-
-]
 const fetcher3 = async (url: any) => {
     const response = await axios.get(url);
     return response?.data;
 };
+
+interface Student {
+    uuid: string;
+    first_name: string;
+    last_name: string;
+    [key: string]: any;
+}
+
+interface RecommendationData {
+    data: {
+        similar_students: { student_id: string; student_name: string }[];
+        topic_scores: { topic: string; average_score: number }[];
+    }
+}
 
 
 export default function DashboardView() {
@@ -206,8 +156,8 @@ export default function DashboardView() {
 
     useEffect(() => {
         if (studentsData) {
-            const map = {};
-            studentsData.data.forEach(student => {
+            const map: Record<string, string> = {};
+            studentsData.data.forEach((student: Student) => {
                 map[student.uuid] = `${student.first_name} ${student.last_name}`;
             });
             setStudentMap(map);
@@ -251,7 +201,7 @@ export default function DashboardView() {
                     value={selectedStudent}
                     onValueChange={(value) => setSelectedStudent(value)}
                 >
-                    {studentsData?.data.map(student => (
+                    {studentsData?.data.map((student: Student) => (
                         <SearchSelectItem
                             key={student.uuid}
                             value={student.uuid}
