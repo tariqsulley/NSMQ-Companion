@@ -17,7 +17,7 @@ import { Radar } from 'react-chartjs-2';
 import useSWR from "swr";
 import API_BASE from "@/app/utils/api";
 import axios from "axios"
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 ChartJS.register(
@@ -122,10 +122,22 @@ const chartdata = [
     },
 
 ]
+const fetcher3 = async (url: any) => {
+    const response = await axios.get(url);
+    return response?.data;
+};
+
+
 export default function DashboardView() {
     const { Data } = useAuth()
     const [year, setYear] = useState('2021');
     const [contestId, setContestId] = useState('1');
+    const [selectedStudent, setSelectedStudent] = useState<any>(null);
+    const [studentMap, setStudentMap] = useState({});
+
+
+
+
 
     const dataFormatter = (number: any) =>
         `$${Intl.NumberFormat('us').format(number).toString()}`;
@@ -165,7 +177,46 @@ export default function DashboardView() {
         },
     );
 
-    if (isLoading) {
+    const {
+        data: studentsData,
+        error: studentsError,
+        isLoading: isStudentsLoading,
+    } = useSWR(`${API_BASE}/users/students/${Data?.data.uuid}`, fetcher);
+
+
+    const {
+        data: recommendationData,
+        error: recommendationError,
+        isLoading: isRecommendationLoading,
+    } = useSWR(
+        selectedStudent
+            ? `${API_BASE}/performance/recommendations/${selectedStudent}`
+            : null,
+        fetcher,
+        {
+            revalidateIfStale: true,
+            revalidateOnFocus: true,
+            revalidateOnReconnect: true,
+            refreshInterval: 1000,
+        }
+    );
+
+
+
+
+    useEffect(() => {
+        if (studentsData) {
+            const map = {};
+            studentsData.data.forEach(student => {
+                map[student.uuid] = `${student.first_name} ${student.last_name}`;
+            });
+            setStudentMap(map);
+        }
+    }, [studentsData]);
+
+
+
+    if (isLoading || isRecommendationLoading) {
         return (
             <div className="flex flex-col gap-4">
                 <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
@@ -194,6 +245,20 @@ export default function DashboardView() {
     return (
         <div className="flex flex-col gap-4">
             <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
+            {Data?.data.account_type == "facilitator" ?
+                <SearchSelect
+                    value={selectedStudent}
+                    onValueChange={(value) => setSelectedStudent(value)}
+                >
+                    {studentsData?.data.map(student => (
+                        <SearchSelectItem
+                            key={student.uuid}
+                            value={student.uuid}
+                        >
+                            {`${student.first_name} ${student.last_name}`}
+                        </SearchSelectItem>
+                    ))}
+                </SearchSelect> : ""}
             <div className="flex items-center gap-3">
                 <div>
                     <SearchSelect value={year} onValueChange={(value) => setYear(value)}>
@@ -209,7 +274,37 @@ export default function DashboardView() {
                     <SearchSelectItem value="3">Contest 3</SearchSelectItem>
                 </SearchSelect>
             </div>
-            {/* <EmptyDashboardCard /> */}
+            {Data?.data.account_type === "facilitator" && (
+                <>
+                    <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
+                        <p className="mx-10 text-xl font-semibold">Recommended Topics Average Scores</p>
+                        <BarChart
+                            className="mt-6"
+                            data={recommendationData?.data?.topic_scores.map((score: any) => ({
+                                topic: score.topic,
+                                'Average Score': score.average_score,
+                            }))}
+                            index="topic"
+                            categories={['Average Score']}
+                            colors={['blue']}
+                            yAxisWidth={48}
+                            showAnimation={true}
+                        />
+                    </div>
+                    {recommendationData?.data?.similar_students.length > 0 && (
+                        <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
+                            <p className="text-xl font-semibold mb-4">Similar Students</p>
+                            <ul>
+                                {recommendationData.data.similar_students.map((student: { student_id: string; student_name: string }) => (
+                                    <li key={student.student_id} className="py-2">
+                                        {student.student_name}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+                </>
+            )}
             <div className="bg-white p-4 dark:bg-darkBgDeep rounded-xl shadow">
                 <p className="mx-10 text-xl font-semibold">2021</p>
                 <div className="flex flex-col sm:flex-row items-center gap-10 mx-10 mt-2">

@@ -1,4 +1,3 @@
-# app/repository/performance_repository.py
 from contextlib import AbstractContextManager
 from sqlalchemy.orm import Session
 from typing import Callable
@@ -8,6 +7,8 @@ import logging
 from app.models.perfomance_model import Performance
 from app.schemas.performance import PerformanceCreate
 from app.repository.base_repository import BaseRepository
+from app.models.student import Student 
+from typing import List
 
 
 class PerformanceRepository(BaseRepository):
@@ -57,4 +58,13 @@ class PerformanceRepository(BaseRepository):
                 return session.query(Performance).all()
             except Exception as e:
                 logging.error(f"Failed to retrieve all performance data: {e}")
+                raise HTTPException(status_code=500, detail=str(e))
+            
+    def get_student_names(self, student_ids: List[str]):
+        with self.session_factory() as session:
+            try:
+                students = session.query(Student).filter(Student.uuid.in_(student_ids)).all()
+                return {str(student.uuid): f"{student.first_name} {student.last_name}" for student in students}
+            except Exception as e:
+                logging.error(f"Failed to retrieve student names: {e}")
                 raise HTTPException(status_code=500, detail=str(e))

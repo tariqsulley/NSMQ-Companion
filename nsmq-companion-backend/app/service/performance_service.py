@@ -24,3 +24,7 @@ class PerformanceService(BaseService):
 
     def get_all_performance(self):
         return self.performance_repository.get_all_performance()
+    
+    def get_student_names(self, student_ids: List[str]):
+        return self.performance_repository.get_student_names(student_ids)
+    

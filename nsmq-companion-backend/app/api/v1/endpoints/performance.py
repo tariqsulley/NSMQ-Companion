@@ -87,14 +87,17 @@ async def get_recommendations(student_id: str,
         distances, indices = model.kneighbors(student_vector)
         similar_students = combined_matrix.iloc[indices[0]].index.tolist()
 
+        # Get student names
+        student_names = performance_service.get_student_names(similar_students)
+
         # Calculate average scores for each topic among similar students
         similar_students_data = student_score_matrix.loc[similar_students]
         average_scores = similar_students_data.mean().reset_index()
         average_scores.columns = ['topic', 'average_score']
 
         response_data = {
-            "similar_students": similar_students,
-            "topic_scores": average_scores.to_dict(orient="records") 
+            "similar_students": [{"student_id": student_id, "student_name": student_names[student_id]} for student_id in similar_students],
+            "topic_scores": average_scores.to_dict(orient="records")
         }
 
         return send_data(response_data)
