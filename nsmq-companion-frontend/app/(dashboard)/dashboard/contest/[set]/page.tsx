@@ -79,6 +79,8 @@ export default function ContestPage({ params }: any) {
     const [cluestopped, setClueStopped] = useState("play")
     const [quizCompleted, setQuizCompleted] = useState(false);
     const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
+    const [captureTime, setCapturedTime] = useState(0)
+
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
         'Round1': 0
@@ -144,6 +146,10 @@ export default function ContestPage({ params }: any) {
     const [opponentScore, setOpponentScore] = useState(0)
     const [disableButton, setDisabledButton] = useState(true)
     const [studentStrength, setStudentStrength] = useState([0, 0, 0, 0])
+
+    const [topicArray, setTopicArray] = useState<any>([]);
+    const [scoreArray, setScoreArray] = useState<any>([]);
+    const [timeTakenArray, setTimeTakenArray] = useState<any>([]);
 
     const addClueText = (newText: string) => {
         setClueTexts(prevTexts => [...prevTexts, newText]);
@@ -216,21 +222,7 @@ export default function ContestPage({ params }: any) {
         });
     };
 
-    // useEffect(() => {
-    //     const totalQuestions = {
-    //         'Mathematics': roundBreakDown[0]['Mathematics'],
-    //         'Biology': roundBreakDown[0]['Biology'],
-    //         'Chemistry': roundBreakDown[0]['Chemistry'],
-    //         'Physics': roundBreakDown[0]['Physics']
-    //     };
 
-    //     const strengthPercentages = Object.entries(totalQuestions).map(([subject, score]) => {
-    //         const maxScore = questions?.filter(q => q.Subject === subject).length * 3;
-    //         return Math.round((score / maxScore) * 100);
-    //     });
-
-    //     setStudentStrength(strengthPercentages);
-    // }, [roundBreakDown, questions]);
 
 
     const handleTranscriptUpdate = () => {
@@ -266,6 +258,7 @@ export default function ContestPage({ params }: any) {
             setIsBellPlaying(true);
             setIsCircleGreen(true);
             play();
+            setCapturedTime(timeLeft)
             if (audioInstance && audioInstance.currentTime > 0) {
                 audioInstance.pause();
                 audioInstance.currentTime = 0;
@@ -521,6 +514,7 @@ export default function ContestPage({ params }: any) {
     useEffect(() => {
         if (quizEnded) {
             sendRoundDataToBackend();
+            sendPerformanceDataToBackend()
         }
     }, [quizEnded]);
 
@@ -689,6 +683,14 @@ export default function ContestPage({ params }: any) {
                 setRoundScore(round_score + scoreToAdd);
                 setNumCorrectAnswers(numCorrectAnswers + 1);
 
+                setTopicArray((prevArray: string[]) => [...prevArray, currentQuestion["Topic Tag"][0]]);
+                setScoreArray((prevArray: number[]) => [...prevArray, 1]);
+                const timeLimit = currentQuestion["calculations present"] === "Yes" ? 30 : 10;
+                const timeRemaining = timeLeft;
+                const timeTaken = timeLimit - captureTime;
+                setTimeTakenArray((prevArray: number[]) => [...prevArray, timeTaken]);
+                setCapturedTime(0)
+
                 if (startRound === 4) {
                     switch (scoreToAdd) {
                         case 5:
@@ -712,6 +714,13 @@ export default function ContestPage({ params }: any) {
             } else {
                 synthesizeText("I'm not accepting that");
                 updateRoundBreakDown(currentQuestion["Subject"] as Subject, 0);
+                setTopicArray((prevArray: string[]) => [...prevArray, currentQuestion["Topic Tag"][0]]);
+                setScoreArray((prevArray: number[]) => [...prevArray, 0]);
+                const timeLimit = currentQuestion["calculations present"] === "Yes" ? 30 : 10;
+                const timeRemaining = timeLeft;
+                const timeTaken = timeLimit - captureTime;
+                setTimeTakenArray((prevArray: number[]) => [...prevArray, timeTaken]);
+                setCapturedTime(0)
                 setTimeout(() => {
                     handleNextQuestion();
                 }, 3000);
@@ -821,7 +830,21 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+    const sendPerformanceDataToBackend = async () => {
+        try {
+            const performanceData = {
+                student_id: Data?.data.uuid,
+                topic: topicArray,
+                score: scoreArray,
+                time_taken: timeTakenArray,
+            };
 
+            const response = await axios.post(`http://127.0.0.1:8000/api/v1/performance/`, performanceData);
+            console.log('Performance data sent successfully:', response.data);
+        } catch (error) {
+            console.error('Error sending performance data:', error);
+        }
+    };
 
     if (!questions) {
         return <div>Loading questions...</div>;
