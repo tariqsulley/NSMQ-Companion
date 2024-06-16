@@ -56,7 +56,7 @@ interface ChampionCardProps {
 }
 
 
-const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, schoolLogo, rating, color, progressData, unlockFirstRound  // Ensure this is included in the component parameters
+const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, schoolLogo, rating, color, progressData, unlockFirstRound
 }) => {
     const router = useRouter();
 
@@ -80,18 +80,22 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
         return school === "Presec Legon" ? "w-[15%]" : "w-[15%]";
     };
 
-
     const getButtonOpacity = (index: number) => {
-        if (school === "Presec Legon" && index === 0 && unlockFirstRound) {
+        if ((school === "Prempeh College" && index === 0 && progressData.length === 0) ||
+            (school === "Presec Legon" && index === 0 && unlockFirstRound) ||
+            index <= schoolProgress.round_number) {
             return 'bg-opacity-100 border-opacity-100';
         }
-        return index <= schoolProgress.round_number ? 'bg-opacity-100 border-opacity-100' : 'bg-opacity-50 border-opacity-50';
+        return 'bg-opacity-50 border-opacity-50';
     };
 
-
-    const isButtonDisabled = (index: number) => (
-        school === "Presec Legon" && index === 0 ? !unlockFirstRound : index > schoolProgress.round_number
-    );
+    const isButtonDisabled = (index: number) => {
+        if ((school === "Prempeh College" && progressData.length === 0 && index === 0) ||
+            (school === "Presec Legon" && index === 0 && unlockFirstRound)) {
+            return false;
+        }
+        return index > schoolProgress.round_number;
+    };
 
     return (
         <div>
