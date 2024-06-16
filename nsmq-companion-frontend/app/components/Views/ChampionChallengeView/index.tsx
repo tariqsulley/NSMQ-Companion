@@ -126,7 +126,7 @@ const ChampionCard: React.FC<ChampionCardProps> = ({ year, school, imageSource, 
                             <button
                                 onClick={() => {
                                     if (!isButtonDisabled(i)) {
-                                        router.push(`/dashboard/contest/${year}?id=40&startRound=${i + 1}&mode=Champion`);
+                                        router.push(`/dashboard/contest/${year}?id=40&startRound=${i + 1}&mode=Champion&school=${school}`);
                                     }
                                 }}
                                 className={`${color} ${getButtonOpacity(i)} p-6 sm:p-10 ${i === 1 ? 'mr-[-70px]' : ''} ${i === 2 ? 'mr-[-10px]' : ''} ${i === 3 ? 'ml-[-50px]' : ''} border-b-4 rounded-full`}

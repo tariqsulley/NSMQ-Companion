@@ -30,6 +30,7 @@ export default function ContestPage({ params }: any) {
     const startRound = parseInt(searchParams.get('startRound') || '2');
     const quizMode = (searchParams.get('mode') || 'none');
     const mode = searchParams.get('mode');
+    const school = searchParams.get('school')
     const isReviewMode = mode === 'review';
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -532,7 +533,7 @@ export default function ContestPage({ params }: any) {
             if (newIndex < questions.length) {
                 return newIndex;
             } else {
-                // sendRoundDataToBackend();
+                { round_score > opponentScore ? sendChampionScoreToBackend : "" }
                 switch (startRound) {
                     case 1:
                         setRound1Ended(true);
@@ -833,6 +834,24 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+    const sendChampionScoreToBackend = async () => {
+        try {
+            const ChampionData = {
+                student_id: Data?.data.uuid,
+                year: year,
+                school: "Presec Legon",
+                round_number: startRound,
+                "completed": true,
+                "score": round_score
+            }
+            const response = await axios.post(`${API_BASE}/progress`, ChampionData)
+            console.log('Champion data sent successfully:', response.data);
+
+        } catch (error) {
+            console.log("error", error)
+        }
+    }
+
     const sendPerformanceDataToBackend = async () => {
         try {
             const performanceData = {
@@ -842,7 +861,7 @@ export default function ContestPage({ params }: any) {
                 time_taken: timeTakenArray,
             };
 
-            const response = await axios.post(`http://127.0.0.1:8000/api/v1/performance/`, performanceData);
+            const response = await axios.post(`${API_BASE}/performance/`, performanceData);
             console.log('Performance data sent successfully:', response.data);
         } catch (error) {
             console.error('Error sending performance data:', error);
