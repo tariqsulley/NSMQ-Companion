@@ -237,7 +237,7 @@ const contest_1_1 = [
         "S/N": 19,
         "Has Preamble": "No",
         "Preamble Text": null,
-        "Question": "Permanent tissues in plants may be classified on the basis of origin or function. Mention one permeant tissue on the basis of function.",
+        "Question": "Permanent tissues in plants may be classified on the basis of origin or function. Mention one permenant tissue on the basis of function.",
         "Question has figure": "No",
         "Question figure name": null,
         "Answer has figure": "No",
