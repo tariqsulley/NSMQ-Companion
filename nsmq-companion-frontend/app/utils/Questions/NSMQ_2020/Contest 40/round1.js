@@ -10,7 +10,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Wilted lettuce leaves when placed in cold water for a while absorb water through endosmosis, the cells of leaves became turgid and thus become crispy/firm.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Osmosis", "Plant Physiology"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "The rate of transpiration is high on bright sunny gays. As a result, the plants roll up their leaves so as to reduce the exposed surface area to the sun and thus the rate of transpiration./ as well as the stomata get covered and water loss through stomata can be reduced.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Transpiration", "Plant Physiology"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "During the night photosynthesis stops and respiration continues. This means that little or no oxygen is produced by the plants at night. The concentration of $\\mathrm{CO}_{2}$ increases at the plant's surrounding atmosphere, which can cause breathing problems or even suffocation",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Respiration", "Plant Physiology"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Saliva has a high concentration of bicarbonate ions that allows it to act as physiological buffer",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Saliva", "Biochemistry"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Saliva contains high concentration of calcium and phosphate, which helps in mineralization of teeth.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Saliva", "Biochemistry"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Saliva moistens dry food and cools hot food and make easy for swallowing and digestion",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Saliva", "Biochemistry"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Habitat loss will decrease biodiversity. When this occurs only the animals that are able to adapt and live within the new habitat will survive. This could potentially cause a genetic bottleneck for those that were once thriving in the initial habitat.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Biodiversity", "Ecology"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Overharvesting can limit biodiversity. If too much of a species (whether plants or animals) is harvested for human use, then there is the potential that certain genes from the pool are completely wiped out. This means that they will be very hard to re-introduce into the population, and the biodiversity lessens.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Biodiversity", "Ecology"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Exotic species are a threat to biodiversity. This is because it will add a new element to the food chain. Perhaps the exotic species is a predator and will kill off some other organisms therefore shrinking biodiversity in an area. The exotic species could also be an invasive plant that takes root space away from other species, therefore threatening biodiversity.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Biodiversity", "Ecology"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Symbol $\\mathrm{Pb} ; \\quad$ Word Plumbum; $\\quad$ Language Latin.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Symbols", "Chemistry"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Symbol Hg; Word Hydrargyrum; Language Latin.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Symbols", "Chemistry"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Symbol Na; Word Natrium; Language Latin.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Symbols", "Chemistry"]
     },
     {
         "S/N": 13,
@@ -166,7 +178,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Reducing sugars Expected Positive result: $\\quad$ Silver mirror/metal.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Reagents", "Chemistry"]
     },
     {
         "S/N": 14,
@@ -179,7 +192,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Proteins (and 2-amino acids)\nExpected Positive results: Purple colouration",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Reagents", "Chemistry"]
     },
     {
         "S/N": 15,
@@ -192,7 +206,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "Phenolic compounds\nExpected Positive results: Purple colouration.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Reagents", "Chemistry"]
     },
     {
         "S/N": 16,
@@ -205,7 +220,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$\\quad \\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}$\nInitial: $0.100 \\quad 0 \\quad 0$\nFinal: $0.0800 \\quad 0.0200$\n$\\mathrm{Q}=\\frac{(0.0200)^{2}}{(0.0800)}=\\frac{4.00 * 10^{-4}}{8.00 * 10^{-2}}=5.00^{*} 10^{-3}$ or 0.00500\nThis is less than the $\\mathrm{K}_{\\mathrm{C}}\\left(3.60^{*} 10^{-2}\\right)$ and so the reaction is not at equilibrium.\nIt must shift from left to right to reach equilibrium.",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Equilibrium", "Chemistry"]
     },
     {
         "S/N": 17,
@@ -218,7 +234,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$\\quad \\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}$\n$$\n\\begin{aligned}\n& \\begin{array}{llll}\n\\text { Final: } & 0.0500 & 0.0500 & 0.0500\n\\end{array} \\\\\n& \\mathrm{Q}=\\frac{(0.0500)^{2}}{(0.0500)}=0.0500=5.00^{*} 10^{-2} \\text { or } 0.0500\n\\end{aligned}\n$$\nThis is greater than the $\\mathrm{K}_{\\mathrm{C}}$ of $3.60^{*} 10^{-2}$, hence the reaction would not be at equilibrium.\nThe reaction would have to move from right to left to establish equilibrium.",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Equilibrium", "Chemistry"]
     },
     {
         "S/N": 18,
@@ -231,7 +248,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$\\quad \\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}$\nScenario I: 0.0600 0.0500 0.0500\nScenario II: 0.0700 0.0500 0.0500\nQ I = $(0.0500)^{2}/(0.0600) = ( 25.0 6 )*10^{-2} = 4.17*10^{-2} \\\\or \\\\ 0.0417$\nQ II = $(0.0500)^{2}/(0.0700) = ( 25.0 7 )*10^{-2} = 3.57*10^{-2} \\\\ or \\\\ 0.0357$\n$\\mathrm{Q}_{\\mathrm{II}} \\approx \\mathrm{K}_{\\mathrm{C}}\\left(3.60^{*} 10^{-2)}\\right.$, hence Scenario II or addition of 0.0200 moldm $^{-3} \\mathrm{PCl}_{5}$ is preferable.",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Equilibrium", "Chemistry"]
     },
     {
         "S/N": 19,
@@ -244,7 +262,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$\\mathbf{n}=8 \\quad\\left[\\mathrm{q}-\\mathrm{p}=\\log _{2}(4 \\mathrm{n})-(2 / 3) \\log _{2} \\mathrm{n}=3\\right.$,\n$2+\\log _{2} \\mathrm{n}-(2 / 3) \\log _{2} \\mathrm{n}=3,(1 / 3) \\log _{2} \\mathrm{n}=1, \\log _{2} \\mathrm{n}=3, \\mathrm{n}=2^{3}=8$ ]",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Mathematics"]
     },
     {
         "S/N": 20,
@@ -257,7 +276,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$\\mathbf{n}=9 \\quad\\left[\\mathrm{p}+\\mathrm{q}=2 \\log _{9} \\mathrm{n}+\\log _{3} 9+\\log _{3} \\mathrm{n}=6\\right.$,\n$\\log _{3} n+2+\\log _{3} n=6,2 \\log _{3} n=4, \\log _{3} n=2, n=3^{2}=9$ ]",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Mathematics"]
     },
     {
         "S/N": 21,
@@ -270,7 +290,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$n=125$\n$\\left[p-q=3 \\log _{5} n-2-2 \\log _{5} n=1, \\log _{5} n=3, n=5^{3}=125\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Mathematics"]
     },
     {
         "S/N": 22,
@@ -283,7 +304,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$y=x / \\sqrt{ }\\left(1-x^{2}\\right) \\quad\\left[\\right.$ Let $\\tan ^{-1} y=a$, tana $=y, \\sin ^{-1} x=a$,\nhence $\\sin a=x$, tana $\\left.=x / \\sqrt{ }\\left(1-x^{2}\\right), y=x / \\sqrt{ }\\left(1-x^{2}\\right)\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Inverse Trigonometric Functions", "Mathematics"]
     },
     {
         "S/N": 23,
@@ -296,7 +318,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$y=x / \\sqrt{ }\\left(x^{2}+1\\right)$\n$\\left[\\right.$ Let $\\sin ^{-1} y=a, \\sin a=y, \\tan ^{-1} x=a$, tana $=x, \\sin a=x / \\sqrt{ }\\left(1+x^{2}\\right)=y$ ]",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Inverse Trigonometric Functions", "Mathematics"]
     },
     {
         "S/N": 24,
@@ -309,7 +332,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$y=\\sqrt{ }\\left(1-x^{2}\\right)$\n[Let $\\cos ^{-1} y=a, \\cos a=y, \\sin ^{-1} x=a, \\sin a=x, \\cos a=\\sqrt{ }\\left(1-\\sin ^{2} a\\right)=\\sqrt{ }\\left(1-x^{2}\\right)$ Hence $\\left.y=\\sqrt{ }\\left(1-x^{2}\\right)\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Inverse Trigonometric Functions", "Mathematics"]
     },
     {
         "S/N": 25,
@@ -322,7 +346,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "6\n$\\left[\\operatorname{Lim}_{x \\rightarrow 9} \\frac{(x-9)}{(\\sqrt{x}-3)}=\\operatorname{Lim}_{x \\rightarrow 9} \\frac{(x-9)(\\sqrt{x}+3)}{(x-9)}=\\operatorname{Lim}_{x \\rightarrow 9}(\\sqrt{x}+3)=3+3=6\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Limits", "Mathematics"]
     },
     {
         "S/N": 26,
@@ -335,7 +360,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$\\left.\\operatorname{Lim}_{x \\rightarrow 25} \\frac{(5-\\sqrt{x})}{(x-25)}=\\operatorname{Lim}_{x \\rightarrow 25} \\frac{(5-\\sqrt{x})}{(\\sqrt{x}-5)(\\sqrt{x}+5)}=\\operatorname{Lim}_{x \\rightarrow 25} \\frac{-1}{(\\sqrt{x}+5)}=\\frac{-1}{(5+5)}=\\frac{-1}{10}\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Limits", "Mathematics"]
     },
     {
         "S/N": 27,
@@ -348,7 +374,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "12\n$\\left[\\operatorname{Lim}_{x \\rightarrow-2} \\frac{\\left(x^{3}+8\\right)}{(x+2)}=\\operatorname{Lim}_{x \\rightarrow-2} \\frac{\\left(x^{2}-2 x+4\\right)}{1}=(4+4+4)=12\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Limits", "Mathematics"]
     },
     {
         "S/N": 28,
@@ -361,7 +388,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$1.6 \\times 10^{15} \\mathrm{~Hz}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Atomic Physics", "Physics"]
     },
     {
         "S/N": 29,
@@ -374,7 +402,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$3.8 \\times 10^{15} \\mathrm{~Hz}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Atomic Physics", "Physics"]
     },
     {
         "S/N": 30,
@@ -387,7 +416,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$2.6 \\times 10^{14} \\mathrm{~Hz}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Atomic Physics", "Physics"]
     },
     {
         "S/N": 31,
@@ -400,7 +430,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$1.3 \\times 10^{8} \\mathrm{~ms}^{-1}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
     {
         "S/N": 32,
@@ -413,7 +444,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$1.9 \\times 10^{8} \\mathrm{~ms}^{-1}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
     {
         "S/N": 33,
@@ -426,7 +458,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$2.6 \\times 10^{8} \\mathrm{~ms}^{-1}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
     {
         "S/N": 34,
@@ -439,7 +472,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$2.2 \\times 10^{-19} \\mathrm{~J}$\n$$\nE_{111}=\\frac{h^{2}}{8 m L^{2}}\\left(n_{x}^{2}+n_{y}^{2}+n_{z}^{2}\\right)=\\frac{3}{8} \\times \\frac{\\left(6.63 \\times 10^{-34} \\mathrm{Js}\\right)^{2}}{3.3 \\times 10^{-27} \\mathrm{~kg} \\times\\left(15 \\times 10^{-12} \\mathrm{~m}\\right)^{2}}=2.2 \\times 10^{-19} \\mathrm{~J}\n$$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
     {
         "S/N": 35,
@@ -452,7 +486,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$2.2 \\times 10^{-19} \\mathrm{~J}$\n$$\nE_{112}-E_{111}=\\frac{h^{2}}{8 m L^{2}} \\Delta\\left(n_{x}^{2}+n_{y}^{2}+n_{z}^{2}\\right)=\\frac{6-3}{8} \\times \\frac{\\left(6.63 \\times 10^{-34} \\mathrm{Js}\\right)^{2}}{3.3 \\times 10^{-27} \\mathrm{~kg} \\times\\left(15 \\times 10^{-12} \\mathrm{~m}\\right)^{2}}=2.2 \\times 10^{-19} \\mathrm{~J}\n$$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
     {
         "S/N": 36,
@@ -465,7 +500,8 @@ const contest_40_1 = [
         "Answer figure name": null,
         "Answer": "$1.5 \\times 10^{-19} \\mathrm{~J}$\n$$\nE_{113}-E_{122}=\\frac{h^{2}}{8 m L^{2}} \\Delta\\left(n_{x}^{2}+n_{y}^{2}+n_{z}^{2}\\right)=\\frac{11-9}{8} \\times \\frac{\\left(6.63 \\times 10^{-34} \\mathrm{Js}\\right)^{2}}{3.3 \\times 10^{-27} \\mathrm{~kg} \\times\\left(15 \\times 10^{-12} \\mathrm{~m}\\right)^{2}}=1.5 \\times 10^{-19} \\mathrm{~J}\n$$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Quantum Mechanics", "Physics"]
     }
 ]
 

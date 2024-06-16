@@ -10,7 +10,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Chlorine gas (Do not accept Chlorine or Chlorine solution)",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Chemical Elements", "Disinfection"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "COMPOSITE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Polynomials", "Materials Science"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Corona",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Astronomy", "Biology"]
     },
     {
         "S/N": 4,
@@ -49,6 +52,7 @@ const contest_40_2 = [
         "Answer figure name": null,
         "Answer": "Kilogram",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Units of Measurement", "Physics"]
     }
 ]

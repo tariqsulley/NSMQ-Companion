@@ -10,7 +10,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "$10 N$\n$$\nF=B I l \\sin \\theta=20 T \\times 2 A \\times 0.5 m \\times \\sin 30^{\\circ}=10 N\n$$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Magnetic Force", "Physics"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "$150 \\mathrm{~ms}^{-1}$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["RMS Speed", "Ideal Gas Law"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "$48 \\mathrm{~kg} \\mathrm{~m} \\mathrm{~s}^{-1}$ perpendicular to and away from the wall\n$$\n\\Delta p=2 m u \\hat{n}=2 \\times 3.0 \\mathrm{~kg} \\times 8.0 \\mathrm{~ms}^{-1} \\hat{n}=48 \\mathrm{~kg} \\mathrm{~ms}^{-1} \\hat{n}\n$$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Impulse", "Momentum"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "$\\mathrm{pH}=\\mathrm{pKa}+\\log _{10} \\frac{[\\text { Base }]}{[\\text { Acid }]} \\quad$ Or\n$$\n\\mathrm{pH} \\quad=\\quad \\mathrm{pKa}-\\log _{10} \\frac{[\\text { Acid }]}{[\\text { Base }]}\n$$",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Buffer Solution", "pH Calculation"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "Acidic",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Acid-Base Chemistry", "Aqueous Solutions"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "Plasticiser(s).",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Polymers", "Plasticisers"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "Interneuron",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Neurons", "Central Nervous System"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "Inside the chloroplast, it traps solar energy",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Chloroplast", "Thylakoids"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "Diastolic phase",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cardiac Cycle", "Diastole"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "$x= \\pm 2,-1$\n[denominator $=(x-2)(x+2)(x+1)$, hence not defined for $x=2,-2,-1]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Functions", "Undefined Points"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "36 sq. units\n$\\left[x^{2}+1=10, x^{2}=9, x= \\pm 3, A=\\int_{-3}^{3}\\left(9-x^{2}\\right) d x=\\left.\\left(9 x-x^{3} / 3\\right)\\right|_{-3} ^{3}=(27-9)-(-27+9)=36\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Area under Curve", "Integration"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_2_2 = [
         "Answer figure name": null,
         "Answer": "Both $P$ and $Q$ must be true.",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logic", "Compound Statements"]
     }
 ]
 export default contest_2_2

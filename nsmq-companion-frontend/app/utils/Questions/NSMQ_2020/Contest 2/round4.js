@@ -10,7 +10,8 @@ const contest_2_4 = [
         "Answer figure name": null,
         "Answer": "Rubidium bromide ( $\\mathrm{RbBr})$",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Inorganic Chemistry", "Salt Identification"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_2_4 = [
         "Answer figure name": null,
         "Answer": "COVER-UP RULE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Partial Fractions", "Algebra"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_2_4 = [
         "Answer figure name": null,
         "Answer": "Two-input NAND gate",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Logic Gates", "Digital Electronics"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_2_4 = [
         "Answer figure name": null,
         "Answer": "Prokaryote",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Microorganisms", "Prokaryotes"]
     }
 ]
 

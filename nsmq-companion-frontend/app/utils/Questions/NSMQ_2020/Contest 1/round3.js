@@ -10,7 +10,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["First Order Reactions", "Kinetics"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["First Order Reactions", "Kinetics"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Exothermic Reactions", "Thermodynamics"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False. $\\left[\\right.$ For $\\left.\\mathrm{CaC}_{2}, \\quad \\mathrm{C} \\quad=\\quad-1\\right]$",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Oxidation State", "Inorganic Chemistry"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False. $\\left[\\mathrm{H}_{2} \\mathrm{CO}, \\mathrm{C}=0 ; \\mathrm{HCOOH}, \\mathrm{C}=+2\\right]$",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Oxidation State", "Organic Chemistry"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True. $\\left[\\mathrm{CH}_{3} \\mathrm{OH} \\equiv \\mathrm{CH}_{4} \\mathrm{O} \\quad\\right.$ hence $\\left.\\mathrm{C}=-2 ; \\quad \\mathrm{H}_{2} \\mathrm{CO} \\quad \\mathrm{C}=0\\right]$",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Oxidation State", "Organic Chemistry"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cell Biology", "Genetics"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cell Biology", "Genetics"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,9 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cell Biology", "Genetics"]
+
     },
     {
         "S/N": 10,
@@ -127,7 +137,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Plant Biology", "Meristem"]
     },
     {
         "S/N": 11,
@@ -140,7 +151,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Plant Biology", "Meristem"]
     },
     {
         "S/N": 12,
@@ -153,7 +165,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Plant Biology", "Meristem"]
     },
     {
         "S/N": 13,
@@ -166,7 +179,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Algebra"]
     },
     {
         "S/N": 14,
@@ -179,7 +193,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Algebra"]
     },
     {
         "S/N": 15,
@@ -192,7 +207,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Algebra"]
     },
     {
         "S/N": 16,
@@ -205,7 +221,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Coordinate Geometry", "Equations of Lines"]
     },
     {
         "S/N": 17,
@@ -218,7 +235,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Coordinate Geometry", "Equations of Lines"]
     },
     {
         "S/N": 18,
@@ -231,7 +249,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Coordinate Geometry", "Equations of Lines"]
     },
     {
         "S/N": 19,
@@ -244,7 +263,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Measurement", "Accuracy"]
     },
     {
         "S/N": 20,
@@ -257,7 +277,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Measurement", "Accuracy"]
     },
     {
         "S/N": 21,
@@ -270,7 +291,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Measurement", "Accuracy"]
     },
     {
         "S/N": 22,
@@ -283,7 +305,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Sound Intensity", "Acoustics"]
     },
     {
         "S/N": 23,
@@ -296,7 +319,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Sound Intensity", "Acoustics"]
     },
     {
         "S/N": 24,
@@ -309,7 +333,8 @@ const contest_1_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Sound Intensity", "Acoustics"]
     }
 ]
 

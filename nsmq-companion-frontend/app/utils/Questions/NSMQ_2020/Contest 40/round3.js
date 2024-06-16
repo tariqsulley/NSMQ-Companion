@@ -10,7 +10,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "$\\mathrm{T}$",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Saponification", "Organic Chemistry"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "F.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Saponification", "Organic Chemistry"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "F.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Saponification", "Organic Chemistry"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "T.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Isomerism", "Organic Chemistry"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "T.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Solubility", "Inorganic Chemistry"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "F.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Ionization Energy", "Periodic Trends"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "TRUE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Mathematics"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Mathematics"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "TRUE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Mathematics"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Functions", "Mathematics"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Functions", "Mathematics"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "FALSE",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Functions", "Mathematics"]
     },
     {
         "S/N": 13,
@@ -166,7 +178,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electrostatics", "Physics"]
     },
     {
         "S/N": 14,
@@ -179,7 +192,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electrostatics", "Physics"]
     },
     {
         "S/N": 15,
@@ -192,7 +206,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Electrostatics", "Physics"]
     },
     {
         "S/N": 16,
@@ -205,7 +220,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Particle Physics", "Physics"]
     },
     {
         "S/N": 17,
@@ -218,7 +234,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Particle Physics", "Physics"]
     },
     {
         "S/N": 18,
@@ -231,7 +248,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Particle Physics", "Physics"]
     },
     {
         "S/N": 19,
@@ -244,7 +262,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Enzyme Inhibition", "Biochemistry"]
     },
     {
         "S/N": 20,
@@ -257,7 +276,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Enzyme Inhibition", "Biochemistry"]
     },
     {
         "S/N": 21,
@@ -270,7 +290,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "True.",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Enzyme Inhibition", "Biochemistry"]
     },
     {
         "S/N": 22,
@@ -283,7 +304,8 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "False",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Genetics", "Biology"]
     },
     {
         "S/N": 23,
@@ -296,7 +318,9 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Genetics", "Biology"]
+
     },
     {
         "S/N": 24,
@@ -309,7 +333,9 @@ const contest_40_3 = [
         "Answer figure name": null,
         "Answer": "True",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Genetics", "Biology"]
+
     }
 ]
 

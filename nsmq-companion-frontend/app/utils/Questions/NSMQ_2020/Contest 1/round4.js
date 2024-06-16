@@ -16,7 +16,8 @@ const contest_1_4 = [
         "Answer figure name": null,
         "Answer": "Buffer",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Buffer Solutions", "Acid-Base Chemistry"]
     },
     {
         "S/N": 2,
@@ -35,7 +36,8 @@ const contest_1_4 = [
         "Answer figure name": null,
         "Answer": "Isentropic process",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Thermodynamic Processes", "Isentropic Processes"]
     },
     {
         "S/N": 3,
@@ -54,7 +56,8 @@ const contest_1_4 = [
         "Answer figure name": null,
         "Answer": "LOGARITHM",
         "calculations present": "No",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Logarithms", "Algebra"]
     },
     {
         "S/N": 4,
@@ -73,7 +76,9 @@ const contest_1_4 = [
         "Answer figure name": null,
         "Answer": "Chloroplast",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Cell Biology", "Organelles", "Chloroplast"]
+
     }
 ]
 

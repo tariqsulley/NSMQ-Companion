@@ -11,7 +11,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "$9.0 \\times 10^{-4} \\mathrm{H}$\n$$\nL=\\mu_{0} n^{2} V=4 \\pi \\times 10^{-7} H m^{-1} \\times\\left(1200 \\mathrm{~m}^{-1}\\right)^{2} \\times 5.0 \\times 10^{-4} \\mathrm{~m}^{3}=9.0 \\times 10^{-4} \\mathrm{H}\n$$",
             "calculations present": "Yes",
-            "Subject": "Physics"
+            "Subject": "Physics",
+            "Topic Tag": ["Self-Inductance", "Electromagnetism"]
         },
         {
             "S/N": 2,
@@ -24,7 +25,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "$-200 k J$\n$$\nW=P \\Delta V=200 k P a \\times\\left(1 m^{3}-2 m^{3}\\right)=-200 k J\n$$",
             "calculations present": "Yes",
-            "Subject": "Physics"
+            "Subject": "Physics",
+            "Topic Tag": ["Work Done by Gas", "Thermodynamics"]
         },
         {
             "S/N": 3,
@@ -37,7 +39,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "$0.8 \\mathrm{~J}$\n$$\nU=F^{2} / 4 k=(4 N)^{2} /\\left(4 \\times 5 N m^{-1}\\right)=0.8 \\mathrm{~J}\n$$",
             "calculations present": "Yes",
-            "Subject": "Physics"
+            "Subject": "Physics",
+            "Topic Tag": ["Energy Stored in Springs", "Mechanics"]
         },
         {
             "S/N": 4,
@@ -50,7 +53,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "It slows down neutrons in order that the chain reaction in a nuclear reactor is sustained.",
             "calculations present": "No",
-            "Subject": "Physics"
+            "Subject": "Physics",
+            "Topic Tag": ["Moderator Function", "Nuclear Physics"]
         },
         {
             "S/N": 5,
@@ -63,7 +67,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "They are units obtained by combining SI base units.",
             "calculations present": "No",
-            "Subject": "Physics"
+            "Subject": "Physics",
+            "Topic Tag": ["Derived Units", "Measurement"]
         },
         {
             "S/N": 6,
@@ -76,7 +81,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "In an amine, the nitrogen is bonded to one or two or three alkyl or aryl groups but in an amide, the nitrogen is bonded to at least one carbonyl carbon.",
             "calculations present": "No",
-            "Subject": "Chemistry"
+            "Subject": "Chemistry",
+            "Topic Tag": ["Amine vs Amide", "Organic Chemistry"]
         },
         {
             "S/N": 7,
@@ -89,7 +95,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "$x=216$\n$\\left[x^{-2 / 3}=1 / 36, x^{2 / 3}=36, x^{1 / 3}=6, x=6^{3}=216\\right]$",
             "calculations present": "Yes",
-            "Subject": "Mathematics"
+            "Subject": "Mathematics",
+            "Topic Tag": ["Solving Equations", "Algebra"]
         },
         {
             "S/N": 8,
@@ -102,7 +109,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "$1 / 5$\n$[P(A \\cup B)=P(A)+P(B), P(B)=8 / 15-1 / 3=(8-5) / 15=3 / 15=1 / 5]$",
             "calculations present": "Yes",
-            "Subject": "Mathematics"
+            "Subject": "Mathematics",
+            "Topic Tag": ["Probability", "Statistics"]
         },
         {
             "S/N": 9,
@@ -115,7 +123,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "$(4 \\mathbf{i}+3 \\mathbf{j}) / 5$, (accept also $-(4 \\mathbf{i}+3 \\mathbf{j}) / 5)$\n$[b=\\mathbf{8 i}+\\mathbf{6} \\mathbf{j}$ is perpendicular to $a$, unit vector is $(\\mathbf{8} \\mathbf{i}+\\mathbf{6 j}) / 10=(\\mathbf{4} \\mathbf{i}+\\mathbf{3 j}) / 5]$",
             "calculations present": "Yes",
-            "Subject": "Mathematics"
+            "Subject": "Mathematics",
+            "Topic Tag": ["Unit Vector", "Vector Algebra"]
         },
         {
             "S/N": 10,
@@ -128,7 +137,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "d) Endoplasmic reticulum",
             "calculations present": "No",
-            "Subject": "Biology"
+            "Subject": "Biology",
+            "Topic Tag": ["Cellular Components", "Cell Biology"]
         },
         {
             "S/N": 11,
@@ -141,7 +151,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "Liver",
             "calculations present": "No",
-            "Subject": "Biology"
+            "Subject": "Biology",
+            "Topic Tag": ["Urea Production", "Mammalian Physiology"]
         },
         {
             "S/N": 12,
@@ -154,7 +165,8 @@ const contest_1_2 =
             "Answer figure name": null,
             "Answer": "Autophagy",
             "calculations present": "No",
-            "Subject": "Biology"
+            "Subject": "Biology",
+            "Topic Tag": ["Cell Digestion", "Cell Biology"]
         }
     ]
 

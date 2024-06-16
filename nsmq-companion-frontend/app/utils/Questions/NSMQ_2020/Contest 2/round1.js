@@ -10,7 +10,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "A metalloid: It will not form a cation easily neither will it form an anion easily. It will tend to have the properties of both metals and non-metals.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Electron Configuration", "Metalloids"]
     },
     {
         "S/N": 2,
@@ -23,7 +24,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "A metal: It will form a cation easily hence will behave as a metal.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Electron Configuration", "Metals"]
     },
     {
         "S/N": 3,
@@ -36,7 +38,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "A non-metal: It will form an anion easily, hence it will behave as a non-metal.",
         "calculations present": "No",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Electron Configuration", "Non-Metals"]
     },
     {
         "S/N": 4,
@@ -49,7 +52,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "Moisture in the soil $=15.0-14.3=0.700 \\mathrm{~g}$\n$$\n\\text { \\%Moisture }=\\frac{0.700}{15.0} \\times 100=4.67\n$$",
         "calculations present": "Yes",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Soil Analysis", "Moisture Content"]
     },
     {
         "S/N": 5,
@@ -62,7 +66,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "Amount of water absorbed $=207.2-205=2.20$\n$$\n\\text { \\%Water }=\\frac{2.20}{207.2} \\times 100=1.06\n$$",
         "calculations present": "Yes",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Water Absorption", "Wood Analysis"]
     },
     {
         "S/N": 6,
@@ -75,7 +80,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "Mass of oxygen that reacted $=5.60-4.00=1.60$ $\\%$ Oxygen in the oxide $=\\frac{1.60}{5.60} \\times 100=28.6$",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Oxide Formation", "Percentage Composition"]
     },
     {
         "S/N": 7,
@@ -88,7 +94,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "Chordata",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Phylum Chordata", "Notochord"]
     },
     {
         "S/N": 8,
@@ -101,7 +108,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "Amphibia",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Amniotic Egg", "Vertebrates"]
     },
     {
         "S/N": 9,
@@ -114,7 +122,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "Echinodermata",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Water Vascular System", "Phylum Echinodermata"]
     },
     {
         "S/N": 10,
@@ -127,7 +136,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "Intra-specific competition occurs among the individuals of a population",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Population Biology", "Competition"]
     },
     {
         "S/N": 11,
@@ -140,7 +150,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "The individuals in a population are morphologically and behaviorally similar",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Population Biology", "Morphology"]
     },
     {
         "S/N": 12,
@@ -153,7 +164,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "A population consists of a single species",
         "calculations present": "No",
-        "Subject": "Biology"
+        "Subject": "Biology",
+        "Topic Tag": ["Population Biology", "Species"]
     },
     {
         "S/N": 13,
@@ -166,7 +178,9 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "PT $=6 \\sqrt{5} \\mathrm{~cm}$\n$$\n\\left[\\mathrm{PA}=9, \\mathrm{~PB}=9+11=20, \\mathrm{PT}^{2}=\\mathrm{PA} \\times \\mathrm{PB}=9 \\times 20=180, \\mathrm{PT}=\\sqrt{180}=6\\sqrt{5}\\right]\n$$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Circle Geometry", "Tangents"]
+
     },
     {
         "S/N": 14,
@@ -179,7 +193,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "PA $=45 \\mathrm{~cm}$\n$$\n\\left[\\mathrm{PT}^{2}=\\mathrm{PA} \\times \\mathrm{PB}, \\mathrm{PA}=\\mathrm{PT}^{2} / \\mathrm{PB}=30^{2} / 20=900 / 20=45\\right]\n$$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Circle Geometry", "Tangents"]
     },
     {
         "S/N": 15,
@@ -192,7 +207,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "PB = $32 \\mathrm{~cm}$\n$\\left[\\mathrm{PT}^{2}=\\mathrm{PA} \\times \\mathrm{PB}, \\mathrm{PB}=\\mathrm{PT}^{2} / \\mathrm{PA}=24 \\times 24 / 18=8 \\times 8 / 2=32\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Circle Geometry", "Tangents"]
     },
     {
         "S/N": 16,
@@ -205,7 +221,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$A=2, B=1$\n$[2 x-3=A(x-2)+B$, compare coefficients $A=2,-3=-4+B, B=1]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Partial Fractions", "Algebra"]
     },
     {
         "S/N": 17,
@@ -218,7 +235,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$A=3, B=-4$\n$\\left[3 x+5=A(x+3)+B\\right.$, for $x$ coefficients $3=A$, for $x^{0} \\quad 5=3 A+B$,\n$B=5-9=-4]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Partial Fractions", "Algebra"]
     },
     {
         "S/N": 18,
@@ -231,7 +249,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$A=5, B=11$\n$\\left[5 x+6=A(x-1)+B\\right.$, for $x$ coefficients $A=5$, for $\\left.x^{0} 6=B-A, B=5+6=11\\right]$",
         "calculations present": "Yes",
-        "Subject": "Mathematics"
+        "Subject": "Mathematics",
+        "Topic Tag": ["Partial Fractions", "Algebra"]
     },
     {
         "S/N": 19,
@@ -244,7 +263,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$1.3 \\mathrm{~J}$\n$$\nK=M L^{2} \\omega^{2} / 24=32 \\mathrm{~kg} \\times(2.0 \\mathrm{~m})^{2} \\times\\left(0.50 \\mathrm{rad} \\mathrm{s}^{-1}\\right)^{2} / 24=1.3 \\mathrm{~J}\n$$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Rotational Kinetics", "Physics"]
     },
     {
         "S/N": 20,
@@ -257,7 +277,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$2.3 \\mathrm{~J}$\n$$\nK=M \\omega^{2}\\left(L^{2} / 12+d^{2}\\right) / 2=32 \\mathrm{~kg} \\times\\left(0.50 \\mathrm{rad} \\mathrm{s}^{-1}\\right)^{2} \\times\\left[\\left(2.0 \\mathrm{~m}^{2} / 12+(0.5 \\mathrm{~m})^{2}\\right] / 2=2.3 \\mathrm{~J}\\right.\n$$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Rotational Kinetics", "Physics"]
     },
     {
         "S/N": 21,
@@ -270,7 +291,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$0.080 \\mathrm{~J}$\n$$\nK=M R^{2} \\omega^{2} / 4=32 \\mathrm{~kg} \\times(0.20 \\mathrm{~m})^{2} \\times\\left(0.50 \\mathrm{rads}^{-1}\\right)^{2} / 4=0.080 \\mathrm{~J}\n$$",
         "calculations present": "Yes",
-        "Subject": "Physics"
+        "Subject": "Physics",
+        "Topic Tag": ["Rotational Kinetics", "Physics"]
     },
     {
         "S/N": 22,
@@ -283,7 +305,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$0.20 \\mathrm{~Pa}$\n$$\nP=n R / m=0.20 \\mathrm{~mol} \\times 8.31 \\mathrm{Jmol}^{-1} \\mathrm{~K}^{-1} /\\left(8.3 \\mathrm{~m}^{3} \\mathrm{~K}^{-1}\\right)=0.20 \\mathrm{~Pa}\n$$",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Ideal Gas Law", "Thermodynamics"]
     },
     {
         "S/N": 23,
@@ -296,7 +319,8 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$1500 \\mathrm{~Pa}$\n$$\nP=n R / m=7.4 \\mathrm{~mol} \\times 8.31 \\mathrm{Jmol}^{-1} \\mathrm{~K}^{-1} /\\left(0.041 \\mathrm{~m}^{3} \\mathrm{~K}^{-1}\\right)=1500 \\mathrm{~Pa}\n$$",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Ideal Gas Law", "Thermodynamics"]
     },
     {
         "S/N": 24,
@@ -309,7 +333,9 @@ const contest_2_1 = [
         "Answer figure name": null,
         "Answer": "$1.8 \\mathrm{~mol}$\n$$\nn=P m / R=250 \\mathrm{~Pa} \\times 0.060 \\mathrm{~m}^{3} \\mathrm{~K}^{-1} /\\left(8.31 \\mathrm{Jmol}^{-1} \\mathrm{~K}^{-1}\\right)=1.8 \\mathrm{~mol}\n$$",
         "calculations present": "Yes",
-        "Subject": "Chemistry"
+        "Subject": "Chemistry",
+        "Topic Tag": ["Ideal Gas Law", "Thermodynamics"]
+
     }
 ]
 
