@@ -184,7 +184,7 @@ const contest_40_2 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "Since the gases do not react the Dalton's Law of Partial Pressures apply.\nMoles of gas giving the pressure of $240 \\mathrm{kPa}=0.600 ; \\quad$ Additional kPa needed $=60$\nMoles of oxygen required to add $60.0 \\mathrm{kPa}=(60.0 / 240) * 0.600$\n$$\n=0.150 \\mathrm{~mol} \\text {. }\n$$",
+        "Answer": "0.150 mol",
         "calculations present": "Yes",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,

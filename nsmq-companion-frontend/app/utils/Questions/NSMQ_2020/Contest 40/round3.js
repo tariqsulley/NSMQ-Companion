@@ -8,7 +8,7 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$\\mathrm{T}$",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Saponification", "Organic Chemistry"]
@@ -22,27 +22,14 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "F.",
+        "Answer": "False",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Saponification", "Organic Chemistry"]
     },
+
     {
         "S/N": 3,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Saponification takes place in the process of digestion of vegetable oils in the gut of humans.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "F.",
-        "calculations present": "No",
-        "Subject": "Chemistry",
-        "Topic Tag": ["Saponification", "Organic Chemistry"]
-    },
-    {
-        "S/N": 4,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "Cyclopentane and 3-methyl-1-butene are isomers.",
@@ -50,13 +37,13 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "T.",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Isomerism", "Organic Chemistry"]
     },
     {
-        "S/N": 5,
+        "S/N": 4,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "$\\mathrm{Ca}^{2+}$ ions in solution do not form an insoluble sulphide when $\\mathrm{H}_{2} \\mathrm{~S}$ is bubbled through the solution.",
@@ -64,27 +51,14 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "T.",
+        "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Solubility", "Inorganic Chemistry"]
     },
+
     {
-        "S/N": 6,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "The first ionization energy of phosphorus is larger than that of nitrogen.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "F.",
-        "calculations present": "No",
-        "Subject": "Chemistry",
-        "Topic Tag": ["Ionization Energy", "Periodic Trends"]
-    },
-    {
-        "S/N": 7,
+        "S/N": 5,
         "Has Preamble": "Yes",
         "Preamble Text": "For the logarithm of a positive number,",
         "Question": "the mantissa is positive,",
@@ -98,7 +72,7 @@ const contest_40_3 = [
         "Topic Tag": ["Logarithms", "Mathematics"]
     },
     {
-        "S/N": 8,
+        "S/N": 6,
         "Has Preamble": "Yes",
         "Preamble Text": "For the logarithm of a positive number,",
         "Question": "the characteristic is positive",
@@ -111,22 +85,9 @@ const contest_40_3 = [
         "Subject": "Mathematics",
         "Topic Tag": ["Logarithms", "Mathematics"]
     },
+
     {
-        "S/N": 9,
-        "Has Preamble": "Yes",
-        "Preamble Text": "For the logarithm of a positive number,",
-        "Question": "the mantissa is itself a logarithm.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "TRUE",
-        "calculations present": "No",
-        "Subject": "Mathematics",
-        "Topic Tag": ["Logarithms", "Mathematics"]
-    },
-    {
-        "S/N": 10,
+        "S/N": 7,
         "Has Preamble": "Yes",
         "Preamble Text": "Let functions $\\mathrm{f}$ and $\\mathrm{g}$ have domains $\\mathrm{A}$ and $\\mathrm{B}$ respectively.",
         "Question": "The function $(\\mathrm{f}+\\mathrm{g})(\\mathrm{x})=\\mathrm{f}(\\mathrm{x})+\\mathrm{g}(\\mathrm{x})$ has domain $\\mathrm{A} \\cup \\mathrm{B}$",
@@ -140,7 +101,7 @@ const contest_40_3 = [
         "Topic Tag": ["Functions", "Mathematics"]
     },
     {
-        "S/N": 11,
+        "S/N": 8,
         "Has Preamble": "Yes",
         "Preamble Text": "Let functions $\\mathrm{f}$ and $\\mathrm{g}$ have domains $\\mathrm{A}$ and $\\mathrm{B}$ respectively.",
         "Question": "The composite function $\\mathrm{f}(\\mathrm{g}(\\mathrm{x}))$ has domain $A \\cup B$.",
@@ -153,22 +114,9 @@ const contest_40_3 = [
         "Subject": "Mathematics",
         "Topic Tag": ["Functions", "Mathematics"]
     },
+
     {
-        "S/N": 12,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Let functions $\\mathrm{f}$ and $\\mathrm{g}$ have domains $\\mathrm{A}$ and $\\mathrm{B}$ respectively.",
-        "Question": "The quotient function $\\mathrm{f}(\\mathrm{x}) / \\mathrm{g}(\\mathrm{x})$ has domain $\\mathrm{A} \\cap \\mathrm{B}$.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "FALSE",
-        "calculations present": "No",
-        "Subject": "Mathematics",
-        "Topic Tag": ["Functions", "Mathematics"]
-    },
-    {
-        "S/N": 13,
+        "S/N": 9,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "A charge $q$ outside a grounded conducting sphere at a distance $a$ from the center of the sphere which has a radius $R$ induces a total charge of $-q R / a$ on the sphere.",
@@ -182,7 +130,7 @@ const contest_40_3 = [
         "Topic Tag": ["Electrostatics", "Physics"]
     },
     {
-        "S/N": 14,
+        "S/N": 10,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "A charge $q$ inside a hollow grounded conducting sphere at a distance $a$ from the center of the sphere which has an inside radius $R$ induces a total charge of $-q R / a$ on the inside surface of the sphere.",
@@ -195,22 +143,9 @@ const contest_40_3 = [
         "Subject": "Physics",
         "Topic Tag": ["Electrostatics", "Physics"]
     },
+
     {
-        "S/N": 15,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "A charge $q$ inside a hollow grounded conducting sphere cannot induce any charge on the inside surface of the sphere because all charge on a conductor reside on the outside surface of the conductor.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "False",
-        "calculations present": "No",
-        "Subject": "Physics",
-        "Topic Tag": ["Electrostatics", "Physics"]
-    },
-    {
-        "S/N": 16,
+        "S/N": 11,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "The neutron is composed of one up and two down quarks and undergoes beta decay in which a proton is produced.",
@@ -224,7 +159,7 @@ const contest_40_3 = [
         "Topic Tag": ["Particle Physics", "Physics"]
     },
     {
-        "S/N": 17,
+        "S/N": 12,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "In the beta decay of a neutron, a down quark becomes an up quark with the release of an electron and an electron antineutrino, with the result that a proton is produced.",
@@ -237,106 +172,9 @@ const contest_40_3 = [
         "Subject": "Physics",
         "Topic Tag": ["Particle Physics", "Physics"]
     },
-    {
-        "S/N": 18,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "The proton, which is composed of one down and two up quarks, is unconditionally stable because an up quark cannot transform into a down quark.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "False",
-        "calculations present": "No",
-        "Subject": "Physics",
-        "Topic Tag": ["Particle Physics", "Physics"]
-    },
-    {
-        "S/N": 19,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Competitive inhibition is seen when a substrate competes with an enzyme for binding to an inhibitor protein",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "False",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Enzyme Inhibition", "Biochemistry"]
-    },
-    {
-        "S/N": 20,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Non-competitive inhibition of an enzyme can be overcome by adding large amount of substrate",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "False",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Enzyme Inhibition", "Biochemistry"]
-    },
-    {
-        "S/N": 21,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Competitive inhibition is seen when the substrate and the inhibitor compete for the active site on the enzyme",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "True.",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Enzyme Inhibition", "Biochemistry"]
-    },
-    {
-        "S/N": 22,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Pedigree analysis confirms that DNA is the carrier of genetic information",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "False",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Genetics", "Biology"]
-    },
-    {
-        "S/N": 23,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Pedigree analysis helps to understand whether the trait in question is dominant or recessive",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "True",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Genetics", "Biology"]
 
-    },
-    {
-        "S/N": 24,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Pedigree analysis helps to trace the inheritance of a specific trait",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "True",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Genetics", "Biology"]
 
-    }
+
 ]
 
 export default contest_40_3

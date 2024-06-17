@@ -11,6 +11,7 @@ const contest_40_1 = [
         "Answer": "Wilted lettuce leaves when placed in cold water for a while absorb water through endosmosis, the cells of leaves became turgid and thus become crispy/firm.",
         "calculations present": "No",
         "Subject": "Biology",
+        "Opponent_Answer": 2,
         "Topic Tag": ["Osmosis", "Plant Physiology"]
     },
     {
@@ -30,20 +31,6 @@ const contest_40_1 = [
     {
         "S/N": 3,
         "Has Preamble": "Yes",
-        "Preamble Text": "Provide suitable explanations for the following:",
-        "Question": "With regard to respiration, why is it not advisable for people to sleep under trees at night?",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "During the night photosynthesis stops and respiration continues. This means that little or no oxygen is produced by the plants at night. The concentration of $\\mathrm{CO}_{2}$ increases at the plant's surrounding atmosphere, which can cause breathing problems or even suffocation",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Respiration", "Plant Physiology"]
-    },
-    {
-        "S/N": 4,
-        "Has Preamble": "Yes",
         "Preamble Text": "Give the features of saliva that allows it to perform the following functions.",
         "Question": "It serves as a buffer.",
         "Question has figure": "No",
@@ -53,10 +40,11 @@ const contest_40_1 = [
         "Answer": "Saliva has a high concentration of bicarbonate ions that allows it to act as physiological buffer",
         "calculations present": "No",
         "Subject": "Biology",
+        "Opponent_Answer": 2,
         "Topic Tag": ["Saliva", "Biochemistry"]
     },
     {
-        "S/N": 5,
+        "S/N": 4,
         "Has Preamble": "Yes",
         "Preamble Text": "Give the features of saliva that allows it to perform the following functions.",
         "Question": "It helps in mineralization of the teeth",
@@ -70,21 +58,7 @@ const contest_40_1 = [
         "Topic Tag": ["Saliva", "Biochemistry"]
     },
     {
-        "S/N": 6,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Give the features of saliva that allows it to perform the following functions.",
-        "Question": "It aids swallowing",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "Saliva moistens dry food and cools hot food and make easy for swallowing and digestion",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Saliva", "Biochemistry"]
-    },
-    {
-        "S/N": 7,
+        "S/N": 5,
         "Has Preamble": "Yes",
         "Preamble Text": "State the effect(s) of each of the following on biodiversity the variability among living organisms from all source.",
         "Question": "Habitat loss",
@@ -95,10 +69,11 @@ const contest_40_1 = [
         "Answer": "Habitat loss will decrease biodiversity. When this occurs only the animals that are able to adapt and live within the new habitat will survive. This could potentially cause a genetic bottleneck for those that were once thriving in the initial habitat.",
         "calculations present": "No",
         "Subject": "Biology",
+        "Opponent_Answer": 2,
         "Topic Tag": ["Biodiversity", "Ecology"]
     },
     {
-        "S/N": 8,
+        "S/N": 6,
         "Has Preamble": "Yes",
         "Preamble Text": "State the effect(s) of each of the following on biodiversity the variability among living organisms from all source.",
         "Question": "Overharvesting",
@@ -112,21 +87,7 @@ const contest_40_1 = [
         "Topic Tag": ["Biodiversity", "Ecology"]
     },
     {
-        "S/N": 9,
-        "Has Preamble": "Yes",
-        "Preamble Text": "State the effect(s) of each of the following on biodiversity the variability among living organisms from all source.",
-        "Question": "Exotic species",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "Exotic species are a threat to biodiversity. This is because it will add a new element to the food chain. Perhaps the exotic species is a predator and will kill off some other organisms therefore shrinking biodiversity in an area. The exotic species could also be an invasive plant that takes root space away from other species, therefore threatening biodiversity.",
-        "calculations present": "No",
-        "Subject": "Biology",
-        "Topic Tag": ["Biodiversity", "Ecology"]
-    },
-    {
-        "S/N": 10,
+        "S/N": 7,
         "Has Preamble": "Yes",
         "Preamble Text": "Each school will be presented with an element. You are to state i) the symbol, ii) the word and the language from which the symbol is derived.",
         "Question": "Lead.",
@@ -137,10 +98,11 @@ const contest_40_1 = [
         "Answer": "Symbol $\\mathrm{Pb} ; \\quad$ Word Plumbum; $\\quad$ Language Latin.",
         "calculations present": "No",
         "Subject": "Chemistry",
+        "Opponent_Answer": 3,
         "Topic Tag": ["Chemical Symbols", "Chemistry"]
     },
     {
-        "S/N": 11,
+        "S/N": 8,
         "Has Preamble": "Yes",
         "Preamble Text": "Each school will be presented with an element. You are to state i) the symbol, ii) the word and the language from which the symbol is derived.",
         "Question": "Mercury.",
@@ -154,21 +116,7 @@ const contest_40_1 = [
         "Topic Tag": ["Chemical Symbols", "Chemistry"]
     },
     {
-        "S/N": 12,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Each school will be presented with an element. You are to state i) the symbol, ii) the word and the language from which the symbol is derived.",
-        "Question": "Sodium.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "Symbol Na; Word Natrium; Language Latin.",
-        "calculations present": "No",
-        "Subject": "Chemistry",
-        "Topic Tag": ["Chemical Symbols", "Chemistry"]
-    },
-    {
-        "S/N": 13,
+        "S/N": 9,
         "Has Preamble": "Yes",
         "Preamble Text": "Each school will be presented with a reagent. Name the group of natural products for which the reagent is used for testing and state the expected observation for positive result.",
         "Question": "Tollens' Reagent.",
@@ -179,10 +127,11 @@ const contest_40_1 = [
         "Answer": "Reducing sugars Expected Positive result: $\\quad$ Silver mirror/metal.",
         "calculations present": "No",
         "Subject": "Chemistry",
+        "Opponent_Answer": 1,
         "Topic Tag": ["Chemical Reagents", "Chemistry"]
     },
     {
-        "S/N": 14,
+        "S/N": 10,
         "Has Preamble": "Yes",
         "Preamble Text": "Each school will be presented with a reagent. Name the group of natural products for which the reagent is used for testing and state the expected observation for positive result.",
         "Question": "Ninhydrin.",
@@ -195,64 +144,37 @@ const contest_40_1 = [
         "Subject": "Chemistry",
         "Topic Tag": ["Chemical Reagents", "Chemistry"]
     },
+    // {
+    //     "S/N": 11,
+    //     "Has Preamble": "Yes",
+    //     "Preamble Text": "Phosphorus (V) chloride decomposes to phosphorus (III) chloride and chlorine gas when heated. The balanced equation is as follows:\n$$\n\\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}\n$$\nThe equilibrium constant $\\mathrm{K}_{\\mathrm{C}}$ for the reaction is 0.0360 at $300{ }^{\\circ} \\mathrm{C}$.",
+    //     "Question": "In an experiment when only $20.0 \\%$ of the initial amount of $0.100 \\mathrm{moldm}^{-3}$ of the $\\mathrm{PCl}_{5}$ had decomposed, it was not certain if equilibrium had been attained. If the initial concentration of each of $\\mathrm{PCl}_{3}$ and $\\mathrm{Cl}_{2}$ was zero moldm ${ }^{-3}$, determine by calculating the Reaction Quotient if there was equilibrium. If not state, the direction the reaction should move to establish equilibrium.",
+    //     "Question has figure": "No",
+    //     "Question figure name": null,
+    //     "Answer has figure": "No",
+    //     "Answer figure name": null,
+    //     "Answer": "$\\quad \\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}$\nInitial: $0.100 \\quad 0 \\quad 0$\nFinal: $0.0800 \\quad 0.0200$\n$\\mathrm{Q}=\\frac{(0.0200)^{2}}{(0.0800)}=\\frac{4.00 * 10^{-4}}{8.00 * 10^{-2}}=5.00^{*} 10^{-3}$ or 0.00500\nThis is less than the $\\mathrm{K}_{\\mathrm{C}}\\left(3.60^{*} 10^{-2}\\right)$ and so the reaction is not at equilibrium.\nIt must shift from left to right to reach equilibrium.",
+    //     "calculations present": "Yes",
+    //     "Subject": "Chemistry",
+    //     "Opponent_Answer": 1,
+    //     "Topic Tag": ["Chemical Equilibrium", "Chemistry"]
+    // },
+    // {
+    //     "S/N": 12,
+    //     "Has Preamble": "Yes",
+    //     "Preamble Text": "Phosphorus (V) chloride decomposes to phosphorus (III) chloride and chlorine gas when heated. The balanced equation is as follows:\n$$\n\\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}\n$$\nThe equilibrium constant $\\mathrm{K}_{\\mathrm{C}}$ for the reaction is 0.0360 at $300{ }^{\\circ} \\mathrm{C}$.",
+    //     "Question": "In another experiment $50.0 \\%$ of the initial $0.100 \\mathrm{moldm}^{-3} \\mathrm{PCl}_{5}$ had decomposed. Again, the initial concentration of $\\mathrm{PCl}_{3}$ and $\\mathrm{Cl}_{2}$ was zero moldm equilibrium. If not state, the direction in which the reaction should move to establish equilibrium.",
+    //     "Question has figure": "No",
+    //     "Question figure name": null,
+    //     "Answer has figure": "No",
+    //     "Answer figure name": null,
+    //     "Answer": "$\\quad \\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}$\n$$\n\\begin{aligned}\n& \\begin{array}{llll}\n\\text { Final: } & 0.0500 & 0.0500 & 0.0500\n\\end{array} \\\\\n& \\mathrm{Q}=\\frac{(0.0500)^{2}}{(0.0500)}=0.0500=5.00^{*} 10^{-2} \\text { or } 0.0500\n\\end{aligned}\n$$\nThis is greater than the $\\mathrm{K}_{\\mathrm{C}}$ of $3.60^{*} 10^{-2}$, hence the reaction would not be at equilibrium.\nThe reaction would have to move from right to left to establish equilibrium.",
+    //     "calculations present": "Yes",
+    //     "Subject": "Chemistry",
+    //     "Topic Tag": ["Chemical Equilibrium", "Chemistry"]
+    // },
     {
-        "S/N": 15,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Each school will be presented with a reagent. Name the group of natural products for which the reagent is used for testing and state the expected observation for positive result.",
-        "Question": "$1 \\%$ Dilute $\\mathrm{FeCl}_{3}$ solution.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "Phenolic compounds\nExpected Positive results: Purple colouration.",
-        "calculations present": "No",
-        "Subject": "Chemistry",
-        "Topic Tag": ["Chemical Reagents", "Chemistry"]
-    },
-    {
-        "S/N": 16,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Phosphorus (V) chloride decomposes to phosphorus (III) chloride and chlorine gas when heated. The balanced equation is as follows:\n$$\n\\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}\n$$\nThe equilibrium constant $\\mathrm{K}_{\\mathrm{C}}$ for the reaction is 0.0360 at $300{ }^{\\circ} \\mathrm{C}$.",
-        "Question": "In an experiment when only $20.0 \\%$ of the initial amount of $0.100 \\mathrm{moldm}^{-3}$ of the $\\mathrm{PCl}_{5}$ had decomposed, it was not certain if equilibrium had been attained. If the initial concentration of each of $\\mathrm{PCl}_{3}$ and $\\mathrm{Cl}_{2}$ was zero moldm ${ }^{-3}$, determine by calculating the Reaction Quotient if there was equilibrium. If not state, the direction the reaction should move to establish equilibrium.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "$\\quad \\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}$\nInitial: $0.100 \\quad 0 \\quad 0$\nFinal: $0.0800 \\quad 0.0200$\n$\\mathrm{Q}=\\frac{(0.0200)^{2}}{(0.0800)}=\\frac{4.00 * 10^{-4}}{8.00 * 10^{-2}}=5.00^{*} 10^{-3}$ or 0.00500\nThis is less than the $\\mathrm{K}_{\\mathrm{C}}\\left(3.60^{*} 10^{-2}\\right)$ and so the reaction is not at equilibrium.\nIt must shift from left to right to reach equilibrium.",
-        "calculations present": "Yes",
-        "Subject": "Chemistry",
-        "Topic Tag": ["Chemical Equilibrium", "Chemistry"]
-    },
-    {
-        "S/N": 17,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Phosphorus (V) chloride decomposes to phosphorus (III) chloride and chlorine gas when heated. The balanced equation is as follows:\n$$\n\\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}\n$$\nThe equilibrium constant $\\mathrm{K}_{\\mathrm{C}}$ for the reaction is 0.0360 at $300{ }^{\\circ} \\mathrm{C}$.",
-        "Question": "In another experiment $50.0 \\%$ of the initial $0.100 \\mathrm{moldm}^{-3} \\mathrm{PCl}_{5}$ had decomposed. Again, the initial concentration of $\\mathrm{PCl}_{3}$ and $\\mathrm{Cl}_{2}$ was zero moldm equilibrium. If not state, the direction in which the reaction should move to establish equilibrium.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "$\\quad \\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}$\n$$\n\\begin{aligned}\n& \\begin{array}{llll}\n\\text { Final: } & 0.0500 & 0.0500 & 0.0500\n\\end{array} \\\\\n& \\mathrm{Q}=\\frac{(0.0500)^{2}}{(0.0500)}=0.0500=5.00^{*} 10^{-2} \\text { or } 0.0500\n\\end{aligned}\n$$\nThis is greater than the $\\mathrm{K}_{\\mathrm{C}}$ of $3.60^{*} 10^{-2}$, hence the reaction would not be at equilibrium.\nThe reaction would have to move from right to left to establish equilibrium.",
-        "calculations present": "Yes",
-        "Subject": "Chemistry",
-        "Topic Tag": ["Chemical Equilibrium", "Chemistry"]
-    },
-    {
-        "S/N": 18,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Phosphorus (V) chloride decomposes to phosphorus (III) chloride and chlorine gas when heated. The balanced equation is as follows:\n$$\n\\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}\n$$\nThe equilibrium constant $\\mathrm{K}_{\\mathrm{C}}$ for the reaction is 0.0360 at $300{ }^{\\circ} \\mathrm{C}$.",
-        "Question": "It is possible by adding either 0.0100 moldm $^{-3}$ (Scenario I) or 0.0200 moldm $^{-3}$ (Scenario II) of $\\mathrm{PCl}_{5}$ to the mixture containing 0.0500 moldm reaction Quotients for the two Scenarios and indicate which Scenario is preferable?",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "$\\quad \\mathrm{PCl}_{5(\\mathrm{~g})} \\rightleftharpoons \\mathrm{PCl}_{3(\\mathrm{~g})}+\\mathrm{Cl}_{2(\\mathrm{~g})}$\nScenario I: 0.0600 0.0500 0.0500\nScenario II: 0.0700 0.0500 0.0500\nQ I = $(0.0500)^{2}/(0.0600) = ( 25.0 6 )*10^{-2} = 4.17*10^{-2} \\\\or \\\\ 0.0417$\nQ II = $(0.0500)^{2}/(0.0700) = ( 25.0 7 )*10^{-2} = 3.57*10^{-2} \\\\ or \\\\ 0.0357$\n$\\mathrm{Q}_{\\mathrm{II}} \\approx \\mathrm{K}_{\\mathrm{C}}\\left(3.60^{*} 10^{-2)}\\right.$, hence Scenario II or addition of 0.0200 moldm $^{-3} \\mathrm{PCl}_{5}$ is preferable.",
-        "calculations present": "Yes",
-        "Subject": "Chemistry",
-        "Topic Tag": ["Chemical Equilibrium", "Chemistry"]
-    },
-    {
-        "S/N": 19,
+        "S/N": 11,
         "Has Preamble": "Yes",
         "Preamble Text": "Find the value of $n$ if",
         "Question": "$\\log _{8} n=1 / 2 p, \\log _{2}(4 n)=q$ and $q-p=3$",
@@ -263,10 +185,11 @@ const contest_40_1 = [
         "Answer": "$\\mathbf{n}=8 \\quad\\left[\\mathrm{q}-\\mathrm{p}=\\log _{2}(4 \\mathrm{n})-(2 / 3) \\log _{2} \\mathrm{n}=3\\right.$,\n$2+\\log _{2} \\mathrm{n}-(2 / 3) \\log _{2} \\mathrm{n}=3,(1 / 3) \\log _{2} \\mathrm{n}=1, \\log _{2} \\mathrm{n}=3, \\mathrm{n}=2^{3}=8$ ]",
         "calculations present": "Yes",
         "Subject": "Mathematics",
+        "Opponent_Answer": 0,
         "Topic Tag": ["Logarithms", "Mathematics"]
     },
     {
-        "S/N": 20,
+        "S/N": 12,
         "Has Preamble": "Yes",
         "Preamble Text": "Find the value of $n$ if",
         "Question": "$2\\log _{9} n=p, \\log _{3}(9 n)=q$ and $p+q=6$",
@@ -279,22 +202,9 @@ const contest_40_1 = [
         "Subject": "Mathematics",
         "Topic Tag": ["Logarithms", "Mathematics"]
     },
+
     {
-        "S/N": 21,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Find the value of $n$ if",
-        "Question": "$\\log _{5} n=(1 / 3) p, \\log _{5}\\left(25 n^{2}\\right)=q$ and $p-q=1$",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "$n=125$\n$\\left[p-q=3 \\log _{5} n-2-2 \\log _{5} n=1, \\log _{5} n=3, n=5^{3}=125\\right]$",
-        "calculations present": "Yes",
-        "Subject": "Mathematics",
-        "Topic Tag": ["Logarithms", "Mathematics"]
-    },
-    {
-        "S/N": 22,
+        "S/N": 13,
         "Has Preamble": "Yes",
         "Preamble Text": "Assume $\\mathrm{x}$ and $\\mathrm{y}$ are positive real numbers. Express $\\mathrm{y}$ in terms of $\\mathrm{x}$ given",
         "Question": "$\\sin ^{-1} x=\\tan ^{-1} y$",
@@ -305,10 +215,11 @@ const contest_40_1 = [
         "Answer": "$y=x / \\sqrt{ }\\left(1-x^{2}\\right) \\quad\\left[\\right.$ Let $\\tan ^{-1} y=a$, tana $=y, \\sin ^{-1} x=a$,\nhence $\\sin a=x$, tana $\\left.=x / \\sqrt{ }\\left(1-x^{2}\\right), y=x / \\sqrt{ }\\left(1-x^{2}\\right)\\right]$",
         "calculations present": "Yes",
         "Subject": "Mathematics",
+        "Opponent_Answer": 1,
         "Topic Tag": ["Inverse Trigonometric Functions", "Mathematics"]
     },
     {
-        "S/N": 23,
+        "S/N": 14,
         "Has Preamble": "Yes",
         "Preamble Text": "Assume $\\mathrm{x}$ and $\\mathrm{y}$ are positive real numbers. Express $\\mathrm{y}$ in terms of $\\mathrm{x}$ given",
         "Question": "$\\tan ^{-1} x=\\sin ^{-1} y$",
@@ -321,22 +232,9 @@ const contest_40_1 = [
         "Subject": "Mathematics",
         "Topic Tag": ["Inverse Trigonometric Functions", "Mathematics"]
     },
+
     {
-        "S/N": 24,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Assume $\\mathrm{x}$ and $\\mathrm{y}$ are positive real numbers. Express $\\mathrm{y}$ in terms of $\\mathrm{x}$ given",
-        "Question": "$\\sin ^{-1} \\mathrm{x}=\\cos ^{-1} \\mathrm{y}$",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "$y=\\sqrt{ }\\left(1-x^{2}\\right)$\n[Let $\\cos ^{-1} y=a, \\cos a=y, \\sin ^{-1} x=a, \\sin a=x, \\cos a=\\sqrt{ }\\left(1-\\sin ^{2} a\\right)=\\sqrt{ }\\left(1-x^{2}\\right)$ Hence $\\left.y=\\sqrt{ }\\left(1-x^{2}\\right)\\right]$",
-        "calculations present": "Yes",
-        "Subject": "Mathematics",
-        "Topic Tag": ["Inverse Trigonometric Functions", "Mathematics"]
-    },
-    {
-        "S/N": 25,
+        "S/N": 15,
         "Has Preamble": "Yes",
         "Preamble Text": "Evaluate the limit",
         "Question": "$\\operatorname{Lim}_{x \\rightarrow 9} \\frac{(x-9)}{(\\sqrt{x}-3)} \\quad$",
@@ -347,10 +245,11 @@ const contest_40_1 = [
         "Answer": "6\n$\\left[\\operatorname{Lim}_{x \\rightarrow 9} \\frac{(x-9)}{(\\sqrt{x}-3)}=\\operatorname{Lim}_{x \\rightarrow 9} \\frac{(x-9)(\\sqrt{x}+3)}{(x-9)}=\\operatorname{Lim}_{x \\rightarrow 9}(\\sqrt{x}+3)=3+3=6\\right]$",
         "calculations present": "Yes",
         "Subject": "Mathematics",
+        "Opponent_Answer": 1,
         "Topic Tag": ["Limits", "Mathematics"]
     },
     {
-        "S/N": 26,
+        "S/N": 16,
         "Has Preamble": "Yes",
         "Preamble Text": "Evaluate the limit",
         "Question": "$\\operatorname{Lim}_{x \\rightarrow 25} \\frac{(5-\\sqrt{x})}{(x-25)}$",
@@ -363,22 +262,9 @@ const contest_40_1 = [
         "Subject": "Mathematics",
         "Topic Tag": ["Limits", "Mathematics"]
     },
+
     {
-        "S/N": 27,
-        "Has Preamble": "Yes",
-        "Preamble Text": "Evaluate the limit",
-        "Question": "${\\operatorname{Lim}_{x \\rightarrow-2} \\frac{\\left(x^{3}+8\\right)}{(x+2)}}$",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "12\n$\\left[\\operatorname{Lim}_{x \\rightarrow-2} \\frac{\\left(x^{3}+8\\right)}{(x+2)}=\\operatorname{Lim}_{x \\rightarrow-2} \\frac{\\left(x^{2}-2 x+4\\right)}{1}=(4+4+4)=12\\right]$",
-        "calculations present": "Yes",
-        "Subject": "Mathematics",
-        "Topic Tag": ["Limits", "Mathematics"]
-    },
-    {
-        "S/N": 28,
+        "S/N": 17,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "A hydrogen atom moving away from a detector at $1.2 \\times 10^{8} \\mathrm{~m} \\mathrm{~s}^{-1}$ makes a transition from the first excited state to the ground state. Find the frequency of the radiation recorded by the detector.",
@@ -389,10 +275,11 @@ const contest_40_1 = [
         "Answer": "$1.6 \\times 10^{15} \\mathrm{~Hz}$",
         "calculations present": "Yes",
         "Subject": "Physics",
+        "Opponent_Answer": 0,
         "Topic Tag": ["Atomic Physics", "Physics"]
     },
     {
-        "S/N": 29,
+        "S/N": 18,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "Find the frequency recorded by the detector if the hydrogen atom were moving towards the detector at $1.2 \\times 10^{8} \\mathrm{~m} \\mathrm{~s}^{-1}$ when it makes the transition from the first excited state to the ground state.",
@@ -405,22 +292,9 @@ const contest_40_1 = [
         "Subject": "Physics",
         "Topic Tag": ["Atomic Physics", "Physics"]
     },
+
     {
-        "S/N": 30,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Another hydrogen atom moving at $1.5 \\times 10^{8} \\mathrm{~m} \\mathrm{~s}^{-1}$ away from a detector makes a transition from the second excited state to the first excited state. Find the frequency recorded by the detector.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "$2.6 \\times 10^{14} \\mathrm{~Hz}$",
-        "calculations present": "Yes",
-        "Subject": "Physics",
-        "Topic Tag": ["Atomic Physics", "Physics"]
-    },
-    {
-        "S/N": 31,
+        "S/N": 19,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "Find the speed of an electron at which its de Broglie wavelength is $5.0 \\mathrm{pm}$.",
@@ -431,10 +305,11 @@ const contest_40_1 = [
         "Answer": "$1.3 \\times 10^{8} \\mathrm{~ms}^{-1}$",
         "calculations present": "Yes",
         "Subject": "Physics",
+        "Opponent_Answer": 0,
         "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
     {
-        "S/N": 32,
+        "S/N": 20,
         "Has Preamble": "No",
         "Preamble Text": null,
         "Question": "Find the speed of an electron at which its de Broglie wavelength is $3.0 \\mathrm{pm}$.",
@@ -447,22 +322,9 @@ const contest_40_1 = [
         "Subject": "Physics",
         "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
+
     {
-        "S/N": 33,
-        "Has Preamble": "No",
-        "Preamble Text": null,
-        "Question": "Find the speed of an electron at which its de Broglie wavelength is $1.5 \\mathrm{pm}$.",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "$2.6 \\times 10^{8} \\mathrm{~ms}^{-1}$",
-        "calculations present": "Yes",
-        "Subject": "Physics",
-        "Topic Tag": ["Quantum Mechanics", "Physics"]
-    },
-    {
-        "S/N": 34,
+        "S/N": 21,
         "Has Preamble": "Yes",
         "Preamble Text": "A particle of mass $3.3 \\times 10^{-27} \\mathrm{~kg}$ is trapped inside a cube of side $15 \\mathrm{pm}$ by infinitely high potential walls. The potential energy of the particle is everywhere zero inside the cube.",
         "Question": "What is the ground state energy of the particle?",
@@ -470,13 +332,14 @@ const contest_40_1 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$2.2 \\times 10^{-19} \\mathrm{~J}$\n$$\nE_{111}=\\frac{h^{2}}{8 m L^{2}}\\left(n_{x}^{2}+n_{y}^{2}+n_{z}^{2}\\right)=\\frac{3}{8} \\times \\frac{\\left(6.63 \\times 10^{-34} \\mathrm{Js}\\right)^{2}}{3.3 \\times 10^{-27} \\mathrm{~kg} \\times\\left(15 \\times 10^{-12} \\mathrm{~m}\\right)^{2}}=2.2 \\times 10^{-19} \\mathrm{~J}\n$$",
+        "Answer": "$2.2 \\times 10^{-19} \\mathrm{~J}$",
         "calculations present": "Yes",
         "Subject": "Physics",
+        "Opponent_Answer": 0,
         "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
     {
-        "S/N": 35,
+        "S/N": 22,
         "Has Preamble": "Yes",
         "Preamble Text": "A particle of mass $3.3 \\times 10^{-27} \\mathrm{~kg}$ is trapped inside a cube of side $15 \\mathrm{pm}$ by infinitely high potential walls. The potential energy of the particle is everywhere zero inside the cube.",
         "Question": "What is the energy difference between the first excited state and the ground state of the particle?",
@@ -489,20 +352,7 @@ const contest_40_1 = [
         "Subject": "Physics",
         "Topic Tag": ["Quantum Mechanics", "Physics"]
     },
-    {
-        "S/N": 36,
-        "Has Preamble": "Yes",
-        "Preamble Text": "A particle of mass $3.3 \\times 10^{-27} \\mathrm{~kg}$ is trapped inside a cube of side $15 \\mathrm{pm}$ by infinitely high potential walls. The potential energy of the particle is everywhere zero inside the cube.",
-        "Question": "What is the energy difference between the third and second excited states of the particle?",
-        "Question has figure": "No",
-        "Question figure name": null,
-        "Answer has figure": "No",
-        "Answer figure name": null,
-        "Answer": "$1.5 \\times 10^{-19} \\mathrm{~J}$\n$$\nE_{113}-E_{122}=\\frac{h^{2}}{8 m L^{2}} \\Delta\\left(n_{x}^{2}+n_{y}^{2}+n_{z}^{2}\\right)=\\frac{11-9}{8} \\times \\frac{\\left(6.63 \\times 10^{-34} \\mathrm{Js}\\right)^{2}}{3.3 \\times 10^{-27} \\mathrm{~kg} \\times\\left(15 \\times 10^{-12} \\mathrm{~m}\\right)^{2}}=1.5 \\times 10^{-19} \\mathrm{~J}\n$$",
-        "calculations present": "Yes",
-        "Subject": "Physics",
-        "Topic Tag": ["Quantum Mechanics", "Physics"]
-    }
+
 ]
 
 export default contest_40_1

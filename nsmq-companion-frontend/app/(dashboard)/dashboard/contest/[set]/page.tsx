@@ -897,6 +897,19 @@ export default function ContestPage({ params }: any) {
     };
 
 
+    // useEffect(() => {
+    //     if (questions && currentQuestionIndex < questions?.length) {
+    //         const currentQuestion = questions[currentQuestionIndex];
+    //         if (timeLeft === currentQuestion.Opponent_Time) {
+    //             // Update the opponent's score
+    //             setOpponentScore((prevScore) => prevScore + currentQuestion.Opponent_Answer);
+
+    //             // Move to the next question if possible
+    //             handleNextQuestion();
+    //         }
+    //     }
+    // }, [timeLeft, currentQuestionIndex, questions]);
+
     const sendRoundDataToBackend = async () => {
         try {
             setRoundDataSent(true);
