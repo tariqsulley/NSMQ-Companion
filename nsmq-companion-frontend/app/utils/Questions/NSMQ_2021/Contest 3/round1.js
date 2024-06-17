@@ -177,7 +177,7 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$\\mathrm{t}_{1 / 2}=0.693 / \\mathrm{k}$\n$$\n\\mathrm{k}=0.693 / 2.00 * 60.0=5.78 * 10^{-3} \\mathrm{~s}^{-1}\n$$",
         "calculations present": "Yes",
-        "Subject": "Chemistry, Physics",
+        "Subject": "Chemistry",
         "Topic Tag": ["Chemical Kinetics", "Rate Constants"]
     },
     {
@@ -191,7 +191,7 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "$\\mathrm{t}_{1 / 2}=0.693 / \\mathrm{k}$\n$$\n=0.693 / 6.60 * 10^{-3}=105 \\mathrm{~s} \\text { or } 1 \\min 45 \\mathrm{~s}\n$$",
         "calculations present": "Yes",
-        "Subject": "Chemistry, Physics",
+        "Subject": "Chemistry",
         "Topic Tag": ["Radioactivity", "Decay Constants"]
 
     },
@@ -206,7 +206,7 @@ const contest_3_1 = [
         "Answer figure name": null,
         "Answer": "There are 5 half - lives in 10.0 hours.\nSo, the percentage left is $3.13 \\%$ of the initial activity.",
         "calculations present": "Yes",
-        "Subject": "Chemistry, Physics",
+        "Subject": "Chemistry",
         "Topic Tag": ["Radioactivity", "Half-life Calculations"]
     },
     {

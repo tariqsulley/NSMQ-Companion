@@ -195,6 +195,38 @@ export default function ContestPage({ params }: any) {
         importQuestions(startRound);
     }, [contestId, startRound]);
 
+    const [totalQuestions, setTotalQuestions] = useState({ Mathematics: 0, Biology: 0, Chemistry: 0, Physics: 0 });
+
+    const countQuestionsBySubject = (questions: any) => {
+        const subjectCounts = { Mathematics: 0, Biology: 0, Chemistry: 0, Physics: 0 };
+        questions.forEach(question => {
+            if (question.Subject in subjectCounts) {
+                subjectCounts[question.Subject]++;
+            }
+        });
+        setTotalQuestions(subjectCounts);
+        console.log('subs', subjectCounts)
+        setStudentStrength([0, 0, 0, 0]); // Reset scores if needed
+    };
+
+    useEffect(() => {
+        if (questions) {
+            countQuestionsBySubject(questions);
+        }
+    }, [questions]);
+
+
+    const updateScores = (subject: any, correct: any) => {
+        const index = ['Mathematics', 'Biology', 'Physics', 'Chemistry'].indexOf(subject);
+        if (index !== -1) {
+            const updatedScores = [...studentStrength];
+            if (correct) {
+                updatedScores[index] += 1 / totalQuestions[subject]; // Increment the score proportionally
+            }
+            setStudentStrength(updatedScores);
+        }
+    };
+
 
     const getScoreForClueIndex = (clueIndex: any) => {
         switch (clueIndex) {
@@ -521,6 +553,8 @@ export default function ContestPage({ params }: any) {
         resetTranscript();
         setClueStopped("play");
         setDisabledButton(true)
+
+
         {
             currentQuestion["Opponent_Answer"] !== undefined ?
                 setOpponentScore((prevScore) => prevScore + currentQuestion["Opponent_Answer"]) : null
@@ -681,6 +715,7 @@ export default function ContestPage({ params }: any) {
                 updateRoundBreakDown(currentQuestion["Subject"] as Subject, scoreToAdd);
                 setRoundScore(round_score + scoreToAdd);
                 setNumCorrectAnswers(numCorrectAnswers + 1);
+                updateScores(currentQuestion["Subject"], true);
 
                 setTopicArray((prevArray: string[]) => [...prevArray, currentQuestion["Topic Tag"][0]]);
                 setScoreArray((prevArray: number[]) => [...prevArray, 1]);
@@ -712,6 +747,7 @@ export default function ContestPage({ params }: any) {
 
             } else {
                 synthesizeText("I'm not accepting that");
+                updateScores(currentQuestion["Subject"], false);
                 updateRoundBreakDown(currentQuestion["Subject"] as Subject, 0);
                 setTopicArray((prevArray: string[]) => [...prevArray, currentQuestion["Topic Tag"][0]]);
                 setScoreArray((prevArray: number[]) => [...prevArray, 0]);
