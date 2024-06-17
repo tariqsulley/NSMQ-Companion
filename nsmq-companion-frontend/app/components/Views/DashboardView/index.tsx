@@ -24,7 +24,7 @@ import Image from "next/image"
 import kauffman from "../../../../public/images/kauffman.jpg"
 import champion from "../../../../public/images/champion.jpg"
 import prac1 from "../../../../public/images/practice.png"
-import prac2 from "../../../../public/images/mult.png"
+import prac2 from "../../../../public/images/prac.jpg"
 
 
 const StepOneContent = () => (
