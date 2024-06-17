@@ -216,16 +216,16 @@ export default function ContestPage({ params }: any) {
     }, [questions]);
 
 
-    const updateScores = (subject: any, correct: any) => {
-        const index = ['Mathematics', 'Biology', 'Physics', 'Chemistry'].indexOf(subject);
-        if (index !== -1) {
-            const updatedScores = [...studentStrength];
-            if (correct) {
-                updatedScores[index] += 1 / totalQuestions[subject]; // Increment the score proportionally
-            }
-            setStudentStrength(updatedScores);
-        }
-    };
+    // const updateScores = (subject: any, correct: any) => {
+    //     const index = ['Mathematics', 'Biology', 'Physics', 'Chemistry'].indexOf(subject);
+    //     if (index !== -1) {
+    //         const updatedScores = [...studentStrength];
+    //         if (correct) {
+    //             updatedScores[index] += 1 / totalQuestions[subject];
+    //         }
+    //         setStudentStrength(updatedScores);
+    //     }
+    // };
 
 
     const getScoreForClueIndex = (clueIndex: any) => {
@@ -815,6 +815,36 @@ export default function ContestPage({ params }: any) {
             setCurrentQuestionIndex(currentQuestionIndex - 1);
         }
     };
+
+
+    // Function to update scores based on whether the answer was correct
+    const updateScores = (subject: Subject, correct: boolean) => {
+        const index = ['Mathematics', 'Biology', 'Physics', 'Chemistry'].indexOf(subject);
+        if (index !== -1) {
+            const updatedScores = [...studentStrength];
+            updatedScores[index] += correct ? 1 : 0;  // Increment only if correct
+            setStudentStrength(updatedScores);
+        }
+    };
+
+    // Function to calculate accuracy for each subject at the end of the quiz or round
+    const calculateAccuracy = () => {
+        const accuracies = studentStrength.map((score, index) => {
+            const subject = ['Mathematics', 'Biology', 'Physics', 'Chemistry'][index];
+            const totalQuestionsForSubject = totalQuestions[subject];
+            return totalQuestionsForSubject > 0 ? (score / totalQuestionsForSubject) * 100 : 0;
+        });
+        console.log('Accuracies:', accuracies);
+        return accuracies;
+    };
+
+    // Example of when to call calculateAccuracy
+    useEffect(() => {
+        if (quizEnded) {
+            const accuracies = calculateAccuracy();
+            // Here you can do something with the accuracies, like display them or save them
+        }
+    }, [quizEnded, studentStrength, totalQuestions]);
 
 
     const formatTimeDifference = (startTime: Date, endTime: Date) => {

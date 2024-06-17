@@ -5,7 +5,8 @@ from app.repository import (
     user_repository,
     student_repository,
     performance_repository,
-    student_progress_repository
+    student_progress_repository,
+    student_accuracy_repository
 )
 from app.service import (
     user_service,
@@ -13,7 +14,8 @@ from app.service import (
     student_service,
     language_service,
     performance_service,
-    student_progress_service
+    student_progress_service,
+    student_accuracy_service
 )
 
 
@@ -25,7 +27,8 @@ class Container(containers.DeclarativeContainer):
             "app.api.v1.endpoints.language",
             "app.api.v1.endpoints.questions",
             "app.api.v1.endpoints.performance",
-            "app.api.v1.endpoints.student_progress"
+            "app.api.v1.endpoints.student_progress",
+            "app.api.v1.endpoints.student_accuracy"
         ]
     )
 
@@ -46,6 +49,10 @@ class Container(containers.DeclarativeContainer):
 
     student_progress_repository = providers.Factory(
         student_progress_repository.StudentProgressRepository, session_factory = db.provided.session
+    )
+
+    student_accuracy_repository = providers.Factory(
+        student_accuracy_repository.StudentAccuracyRepository, session_factory = db.provided.session
     )
 
     auth_service = providers.Factory(
@@ -75,6 +82,11 @@ class Container(containers.DeclarativeContainer):
     student_progress_service = providers.Factory(
         student_progress_service.StudentProgressService,
         student_progress_repository = student_progress_repository
+    )
+
+    student_accuracy_service = providers.Factory(
+        student_accuracy_service.StudentAccuracyService,
+        student_accuracy_repository = student_accuracy_repository
     )
 
     

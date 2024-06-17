@@ -21,6 +21,7 @@ class Student(BaseModel):
     performances = relationship("Performance", back_populates="student", cascade="all, delete-orphan")
     waiting_room_data = relationship("WaitingRoomData", back_populates="student", cascade="all, delete-orphan")
     progress = relationship("StudentProgress", back_populates="student")
+    accuracies = relationship("StudentAccuracy", back_populates="student") 
 
 
 class StudentProgress(BaseModel):

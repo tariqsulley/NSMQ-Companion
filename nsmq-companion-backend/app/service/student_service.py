@@ -47,3 +47,7 @@ class StudentService(BaseService):
 
     async def get_contest_rounds_scores(self, student_uuid: UUID, year: int):
         return await self.student_repository.get_contest_rounds_scores(student_uuid, year)
+    
+    # def update_radar_chart_data(self, data: RoundData):
+    #     return self.student_repository.update_radar_chart_data(data)
+    
