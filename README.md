@@ -40,4 +40,5 @@ means the server I am hosting locally is down, hence you would have to use the b
 
 NB: There was not enough time in the hackathon so I could not finish implementing the multiplayer feature so please if you click join waiting room and nothing happens, it is not
 a bug :)
-
+Extra Notes: A bug I noticed late but I would advice you use an earpiece or headset when competing in a round to avoid the quiz mistress voice inteferring with the speech to text
+Also if questions did not load for a round(kindly refresh the page and they would load)
