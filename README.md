@@ -11,6 +11,7 @@ The NSMQ Companion App
 [![Typed with: pydantic](https://img.shields.io/badge/typed%20with-pydantic-BA600F.svg?style=for-the-badge)](https://docs.pydantic.dev/)
 
 Before setting up the backend, please make sure you have python and pip installed 
+I also ommited the onnx file from github because of the large size so when you pull the code in /utils/tts_files of the backend, manually place the quizmistress.onnx there
 To setup the backend locally, please make sure your python version is Python 3.11.9 in order to avoid any dependecy conflicts and have a hassle free setup.
 After that, move into the backend folder (cd nsmq-companion-backend)
 Before starting the server, you would have to install the requirements via
