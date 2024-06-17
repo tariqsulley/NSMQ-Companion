@@ -42,3 +42,6 @@ NB: There was not enough time in the hackathon so I could not finish implementin
 a bug :)
 Extra Notes: A bug I noticed late but I would advice you use an earpiece or headset when competing in a round to avoid the quiz mistress voice inteferring with the speech to text
 Also if questions did not load for a round(kindly refresh the page and they would load)
+
+Press the letter b on your keyboard to ring the bell or the grey icon
+For the champion challenge, if you see there is no grey icon, it means the school got that question right so please don't prease b, just press next question
