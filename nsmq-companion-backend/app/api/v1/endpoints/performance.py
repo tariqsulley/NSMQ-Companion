@@ -52,7 +52,7 @@ async def get_recommendations(student_id: str,
     try:
         # Query all performance data
         all_performance_data = performance_service.get_all_performance()
-        
+       
         # Transform the data into a DataFrame
         data = []
         for performance in all_performance_data:
