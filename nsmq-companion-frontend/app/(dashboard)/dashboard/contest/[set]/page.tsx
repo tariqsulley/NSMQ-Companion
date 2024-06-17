@@ -1190,7 +1190,7 @@ export default function ContestPage({ params }: any) {
                                         <h2 className="font-semibold">Transcribed Answer:</h2>
                                         <p className="font-semibold text-[#475569]">{transcribedText}</p>
                                     </div>
-                                    {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
+                                    {/* {currentQuestion?.Subject === "Mathematics" || currentQuestion?.Subject === "Physics"
                                         || currentQuestion?.Subject === "Chemistry" ? (
                                         <MathJaxContext config={config}>
                                             <MathJax key={currentQuestionIndex}>
@@ -1198,7 +1198,7 @@ export default function ContestPage({ params }: any) {
                                             </MathJax>
                                         </MathJaxContext>) :
                                         <h2>Answer: {currentQuestion?.["Answer"]}</h2>
-                                    }
+                                    } */}
                                 </div>
                                 {(mode == "Champion" && currentQuestion?.["S/N"] % 2 == 0) || currentQuestion?.["Opponent_Answer"] == 0 ?
                                     <div
