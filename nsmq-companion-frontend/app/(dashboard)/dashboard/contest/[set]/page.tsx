@@ -493,7 +493,7 @@ export default function ContestPage({ params }: any) {
         }
 
 
-        const clueAudioUrl = `/Sounds/${year}/Contest ${contestId}/Round${startRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
+        const clueAudioUrl = `/Sounds/${year}/Contest ${contestId}/round${startRound}/q${currentQuestionIndex + 1}_clue${clueIndex + 1}.wav`;
         addClueText(questions[currentQuestionIndex][`clue${clueIndex + 1}`]);
 
         setIsCluePlayingNow(true);
