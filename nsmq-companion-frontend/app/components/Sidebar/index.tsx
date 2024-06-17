@@ -113,7 +113,7 @@ export default function Sidebar() {
                     <ul className="space-y-2 font-medium">
                         <li>
                             <Link href="/dashboard">
-                                <div className={`flex items-center p-2 rounded-lg group ${isActive("/dashboard")}`}>
+                                <div className={`sidebar-dashboard flex items-center p-2 rounded-lg group ${isActive("/dashboard")}`}>
                                     <MdOutlineDashboard size={25} />
                                     <span className="ms-3">Dashboard</span>
                                 </div>
@@ -122,7 +122,7 @@ export default function Sidebar() {
                         {Data?.data?.account_type == "facilitator" ?
                             <li>
                                 <Link href="/dashboard/students">
-                                    <div className={`flex items-center p-2 rounded-lg group ${isActive("/dashboard/students")}`}>
+                                    <div className={`sidebar-students flex items-center p-2 rounded-lg group ${isActive("/dashboard/students")}`}>
                                         <PiStudentDuotone size={25} />
                                         <span className="flex-1 ms-3 whitespace-nowrap">Students</span>
                                     </div>
@@ -130,7 +130,7 @@ export default function Sidebar() {
                             </li> :
                             <li>
                                 <Link href="/dashboard/practice">
-                                    <div className={`flex items-center p-2 rounded-lg group ${isActive("/dashboard/practice")}`}>
+                                    <div className={`sidebar-practice flex items-center p-2 rounded-lg group ${isActive("/dashboard/practice")}`}>
                                         <SlBookOpen size={25} />
                                         <span className="flex-1 ms-3 whitespace-nowrap">Practice</span>
                                     </div>
@@ -139,7 +139,7 @@ export default function Sidebar() {
                         {Data?.data?.account_type == "student" ?
                             <li>
                                 <Link href="/dashboard/champion-challenge">
-                                    <div className={`flex items-center p-2 rounded-lg group ${isActive("/dashboard/champion-challenge")}`}>
+                                    <div className={`sidebar-championchallenge flex items-center p-2 rounded-lg group ${isActive("/dashboard/champion-challenge")}`}>
                                         <LiaTrophySolid size={25} />
                                         <span className="flex-1 ms-3 whitespace-nowrap">Champion Challenge</span>
                                     </div>
@@ -149,14 +149,14 @@ export default function Sidebar() {
                         {Data?.data?.account_type == "facilitator" ?
                             <li>
                                 <Link href="/dashboard/analytics">
-                                    <div className={`flex items-center p-2 rounded-lg group ${isActive("/dashboard/analytics")}`}>
+                                    <div className={`sidebar-analytics flex items-center p-2 rounded-lg group ${isActive("/dashboard/analytics")}`}>
                                         <IoAnalyticsOutline size={25} />
                                         <span className="flex-1 ms-3 whitespace-nowrap">Analytics</span>
                                     </div>
                                 </Link>
                             </li> : <li>
                                 <Link href="/dashboard/multiplayer">
-                                    <div className={`flex items-center p-2 rounded-lg group ${isActive("/dashboard/multiplayer")}`}>
+                                    <div className={`sidebar-multiplayer flex items-center p-2 rounded-lg group ${isActive("/dashboard/multiplayer")}`}>
                                         <IoPeopleOutline size={25} />
                                         <span className="flex-1 ms-3 whitespace-nowrap">Multiplayer</span>
                                     </div>
@@ -165,7 +165,7 @@ export default function Sidebar() {
                         <ul className="pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700">
                             <li>
                                 <Link href="/dashboard/settings">
-                                    <div className={`flex items-center p-2 rounded-lg group ${isActive("/dashboard/settings")}`}>
+                                    <div className={`sidebar-settings flex items-center p-2 rounded-lg group ${isActive("/dashboard/settings")}`}>
                                         <IoSettingsOutline size={25} />
                                         <span className="flex-1 ms-3 whitespace-nowrap">Settings</span>
                                     </div>

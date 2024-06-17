@@ -18,6 +18,69 @@ import useSWR from "swr";
 import API_BASE from "@/app/utils/api";
 import axios from "axios"
 import { useState, useEffect } from 'react';
+import ReactJoyride, { ACTIONS, EVENTS, STATUS } from "react-joyride";
+import Joyride from 'react-joyride';
+import Image from "next/image"
+import kauffman from "../../../../public/images/kauffman.jpg"
+import champion from "../../../../public/images/champion.jpg"
+import prac1 from "../../../../public/images/practice.png"
+import prac2 from "../../../../public/images/mult.png"
+
+
+const StepOneContent = () => (
+    <div className="flex flex-col justify-center items-center">
+        <div>
+            <Image src={kauffman} alt="image" className=" rounded-lg shadow" />
+            <p>Welcome to your NSMQ Companion dashboard! Here you can track your progress,
+                and analyze your performance in different subjects.</p>
+        </div>
+    </div>
+);
+
+const StepTwoContent = () => (
+    <div className="flex flex-col items-center justify-center">
+        <p>Manage your profile and access personalized study materials.
+            Tailor your learning experience to suit your specific needs and preferences.</p>
+    </div>
+);
+
+const StepFourContent = () => (
+    <div className="flex flex-col items-center justify-center">
+        <div>
+            <p>Use the Analytics section to gain insights into your learning patterns.
+                Discover your strengths and areas for improvement with detailed subject analysis.</p>
+        </div>
+    </div>
+);
+
+const StepFiveContent = () => (
+    <div className="flex flex-col items-center justify-center">
+        <div>
+            <Image src={prac1} alt="image" className=" rounded-lg shadow" />
+            <p>Sharpen your skills with timed practice tests that mimic the NSMQ format</p>
+        </div>
+    </div>
+);
+
+const StepSixContent = () => (
+    <div className="flex flex-col justify-center items-center">
+        <div>
+            <Image src={champion} alt="image" className=" rounded-lg shadow" />
+            <p>Do you have what it takes to take on the conquerors of the NSMQ?
+                This challenge is for you!
+            </p>
+        </div>
+    </div>
+);
+
+const StepSevenContent = () => (
+    <div className="flex flex-col justify-center items-center">
+        <div>
+            <Image src={prac2} alt="image" className=" rounded-lg shadow" />
+            <p>Join Multiplayer sessions to compete with fellow students across the Nation</p>
+        </div>
+    </div>
+);
 
 
 ChartJS.register(
@@ -42,7 +105,6 @@ export const data = {
     ],
 };
 
-
 const options = {
     scales: {
         r: {
@@ -54,8 +116,6 @@ const options = {
         }
     }
 };
-
-
 
 
 const fetcher3 = async (url: any) => {
@@ -85,9 +145,70 @@ export default function DashboardView() {
     const [selectedStudent, setSelectedStudent] = useState<any>(null);
     const [studentMap, setStudentMap] = useState({});
 
+    const [run, setRun] = useState(false);
+    const [steps, setSteps] = useState<any>([
+        {
+            target: '.sidebar-dashboard',
+            content: <StepOneContent />,
+            placement: 'right',
+        },
+        {
+            target: '.sidebar-students',
+            content: <StepTwoContent />,
+            placement: 'right',
+        },
+        {
+            target: '.sidebar-analytics',
+            content: <StepFourContent />,
+            placement: 'right',
+        },
+        {
+            target: '.sidebar-practice',
+            content: <StepFiveContent />,
+            placement: 'right',
+        },
+        {
+            target: '.sidebar-championchallenge',
+            content: <StepSixContent />,
+            placement: 'right',
+        },
+        {
+            target: '.sidebar-multiplayer',
+            content: <StepSevenContent />,
+            placement: 'right',
+        }
+    ]);
 
 
+    const mobileBreakpoint = 768;
 
+    useEffect(() => {
+        if (window.innerWidth > mobileBreakpoint) {
+            setRun(true);
+        } else {
+            setRun(false);
+        }
+
+        const handleResize = () => {
+            if (window.innerWidth > mobileBreakpoint) {
+                setRun(true);
+            } else {
+                setRun(false);
+            }
+        };
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const handleJoyrideCallback = (data: any) => {
+        const { action, index, status, type } = data;
+
+        if ([STATUS.FINISHED, STATUS.SKIPPED].includes(status)) {
+            setRun(false);
+        } else if (type === EVENTS.STEP_AFTER || type === EVENTS.TARGET_NOT_FOUND) {
+        }
+    };
 
     const dataFormatter = (number: any) =>
         `$${Intl.NumberFormat('us').format(number).toString()}`;
@@ -165,10 +286,46 @@ export default function DashboardView() {
     }, [studentsData]);
 
 
+    const locale = {
+        next: 'Next',
+        back: 'Previous',
+        last: 'Finish'
+    };
+
+    useEffect(() => {
+        setRun(true);
+        return () => setRun(false);
+    }, []);
+
+
 
     if (isLoading || isRecommendationLoading) {
         return (
             <div className="flex flex-col gap-4">
+                <Joyride
+                    run={run}
+                    steps={steps}
+                    disableScrolling={true}
+                    continuous={true}
+                    scrollToFirstStep={true}
+                    showProgress={true}
+                    showSkipButton={true}
+                    locale={{
+                        next: 'Next',
+                        back: 'Previous',
+                        last: 'Finish'
+                    }}
+                    callback={handleJoyrideCallback}
+                    styles={{
+                        options: {
+                            arrowColor: '#181d36',
+                            backgroundColor: '#077af9',
+                            primaryColor: '#181d36',
+                            textColor: '#fff',
+                            zIndex: 1000,
+                        }
+                    }}
+                />
                 <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
                 {Data?.data.account_type !== "facilitator" ?
                     <div className="flex items-center gap-3">
@@ -193,8 +350,33 @@ export default function DashboardView() {
         )
     }
 
+
     return (
         <div className="flex flex-col gap-4">
+            <Joyride
+                run={run}
+                steps={steps}
+                disableScrolling={true}
+                continuous={true}
+                scrollToFirstStep={true}
+                showProgress={true}
+                showSkipButton={true}
+                locale={{
+                    next: 'Next',
+                    back: 'Previous',
+                    last: 'Finish'
+                }}
+                callback={handleJoyrideCallback}
+                styles={{
+                    options: {
+                        arrowColor: '#181d36',
+                        backgroundColor: '#077af9',
+                        primaryColor: '#181d36',
+                        textColor: '#fff',
+                        zIndex: 1000,
+                    }
+                }}
+            />
             <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
             {Data?.data.account_type == "facilitator" ?
                 <SearchSelect
