@@ -21,7 +21,6 @@ type Contest = {
 const years = [
     { value: "2021", title: "2021" },
     { value: "2020", title: "2020" },
-    { value: "2019", title: "2019" }
 ];
 
 const PracticeCardView: FC = () => {

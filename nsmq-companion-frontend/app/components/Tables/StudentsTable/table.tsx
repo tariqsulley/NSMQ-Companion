@@ -12,7 +12,6 @@ interface SWROptions {
     revalidateOnReconnect: boolean;
 }
 
-
 interface TableHeader {
     label: string;
     className?: string;
@@ -33,6 +32,7 @@ interface TableProps {
 const Table: React.FC<TableProps> = ({ filter }) => {
     const [selectedStudent, setSelectedStudent] = useState<StudentData | null>(null);
     const { Data } = useAuth()
+
     const openModal = (student: StudentData) => {
         setSelectedStudent(student);
     };
@@ -46,8 +46,6 @@ const Table: React.FC<TableProps> = ({ filter }) => {
         { label: 'Last Name' },
         { label: 'Year' },
         { label: 'Email' },
-        // { label: 'Status' },
-        // { label: 'Date Created' },
         { label: 'Action' },
         { label: '', className: 'rounded-tr-xl' },
     ];
@@ -59,8 +57,6 @@ const Table: React.FC<TableProps> = ({ filter }) => {
         }).then((res) => res.json());
     };
 
-
-
     const { data, error, isLoading } = useSWR(
         `${API_BASE}/users/students/${Data?.data?.uuid}/`,
         fetcher,
@@ -71,8 +67,6 @@ const Table: React.FC<TableProps> = ({ filter }) => {
             // refreshInterval: 1000
         } as SWROptions
     );
-
-
 
     const filteredData = useMemo(() => {
         if (!isLoading && data) {
@@ -100,12 +94,9 @@ const Table: React.FC<TableProps> = ({ filter }) => {
         return [];
     }, [isLoading, data, filter]);
 
-
-
     if (error) {
         return <div></div>;
     }
-
 
     if (isLoading) {
         return (
