@@ -46,5 +46,5 @@ Extra Notes: A bug I noticed late but I would advice you use an earpiece or head
 Also if questions did not load for a round(kindly refresh the page and they would load)
 
 Press the letter b on your keyboard to ring the bell or the grey icon
-For the champion challenge, if you see there is no grey icon, it means the school got that question right so please don't prease b, just press next question
+For the champion challenge, if you see there is no grey icon, it means the school got that question right so please don't please b, just press next question
 On the dashboard of the facilitator, a knn is utlised to determine students who are similar in abilities and their strengths and weakness(there needs to be student data,(practice sessions))
