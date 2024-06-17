@@ -28,18 +28,17 @@ async def update_accuracies(
     except Exception as e:
         return send_internal_server_error(user_msg="Failed to update accuracies", error=str(e))
 
-@router.get("/{student_id}/{year}/{contest_id}", response_class=ORJSONResponse)
+
+@router.get("/by-student/{student_id}", response_class=ORJSONResponse)
 @inject
-async def get_accuracies(
+async def get_accuracies_by_student(
     student_id: str, 
-    year: int, 
-    contest_id: str, 
     accuracy_service: StudentAccuracyService = Depends(Provide[Container.student_accuracy_service])
 ):
     try:
-        accuracies = accuracy_service.fetch_accuracies(student_id, year, contest_id)
+        accuracies = accuracy_service.fetch_accuracies_by_student(student_id)
         if not accuracies:
             raise HTTPException(status_code=404, detail="Accuracies not found")
-        return send_data(accuracies)
+        return send_data(accuracies) 
     except Exception as e:
         return send_internal_server_error(user_msg="Failed to retrieve accuracies", error=str(e))

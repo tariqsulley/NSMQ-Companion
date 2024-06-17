@@ -76,6 +76,44 @@ export default function AnalyticsView() {
         return response?.data;
     };
 
+    const { data: studentAccuracies, error: studenterror } = useSWR(
+        `${API_BASE}/accuracies/by-student/${selectedStudent}`,
+        fetcher,
+        {
+            revalidateIfStale: true,
+            revalidateOnFocus: true,
+            revalidateOnReconnect: true,
+            refreshInterval: 1000
+        },
+    );
+
+    const [radarchartData, setRadarChartData] = useState({
+        labels: ['Maths', 'Biology', 'Chemistry', 'Physics'],
+        datasets: [
+            {
+                label: 'Strength Graph',
+                data: [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 3,
+            },
+        ],
+    });
+
+
+    useEffect(() => {
+        if (studentAccuracies && studentAccuracies.data) {
+            const roundedData = studentAccuracies.data.length ? studentAccuracies.data[0].map(score => Math.round(score)) : [];
+            setRadarChartData(prevData => ({
+                ...prevData,
+                datasets: [{
+                    ...prevData.datasets[0],
+                    data: roundedData
+                }]
+            }));
+        }
+    }, [studentAccuracies]);
+
     const { data: students, error: studentsError, isLoading: studentsLoading } =
         useSWR(`${API_BASE}/users/students/${Data?.data.uuid}`, fetcher);
 
@@ -212,7 +250,8 @@ export default function AnalyticsView() {
                     />
                 </div>
                 <div className="bg-white dark:bg-darkBgDeep rounded-xl shadow flex items-center justify-center" style={{ height: '400px' }}>
-                    <Radar data={data} options={options} />
+                    <Radar data={radarchartData} options={options} />
+
                 </div>
 
             </div>

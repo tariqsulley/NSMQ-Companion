@@ -195,6 +195,58 @@ export default function DashboardView() {
         return response?.data;
     };
 
+    const { data: studentAccuracies, error: studenterror } = useSWR(
+        `${API_BASE}/accuracies/by-student/${Data?.data.uuid}`,
+        fetcher,
+        {
+            revalidateIfStale: true,
+            revalidateOnFocus: true,
+            revalidateOnReconnect: true,
+            refreshInterval: 1000
+        },
+    );
+
+    const [radarchartData, setRadarChartData] = useState({
+        labels: ['Maths', 'Biology', 'Chemistry', 'Physics'],
+        datasets: [
+            {
+                label: 'Strength Graph',
+                data: [],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 3,
+            },
+        ],
+    });
+
+
+    useEffect(() => {
+        if (studentAccuracies && studentAccuracies.data) {
+            const roundedData = studentAccuracies.data.length ? studentAccuracies.data[0].map(score => Math.round(score)) : [];
+            setRadarChartData(prevData => ({
+                ...prevData,
+                datasets: [{
+                    ...prevData.datasets[0],
+                    data: roundedData
+                }]
+            }));
+        }
+    }, [studentAccuracies]);
+
+    const options = {
+        scales: {
+            r: {
+                angleLines: {
+                    display: true
+                },
+                suggestedMin: 0,
+                suggestedMax: 100
+            }
+        }
+    };
+
+
+
     const {
         data: chartData,
         error: Error,
@@ -236,10 +288,7 @@ export default function DashboardView() {
         data: recommendationData,
         error: recommendationError,
         isLoading: isRecommendationLoading,
-    } = useSWR(
-        selectedStudent
-            ? `${API_BASE}/performance/recommendations/${selectedStudent}`
-            : null,
+    } = useSWR(`${API_BASE}/performance/recommendations/${selectedStudent}`,
         fetcher,
         {
             revalidateIfStale: true,
@@ -248,6 +297,8 @@ export default function DashboardView() {
             refreshInterval: 1000,
         }
     );
+
+    console.log("recommednat", recommendationData)
 
 
     useEffect(() => {
@@ -473,7 +524,7 @@ export default function DashboardView() {
                         />
                     </div>
                     <div className="bg-white dark:bg-darkBgDeep rounded-xl shadow flex items-center justify-center" style={{ height: '400px' }}>
-                        <Radar data={data} options={options} />
+                        <Radar data={radarchartData} options={options} />
                     </div>
                 </> :
                 ""}

@@ -815,17 +815,15 @@ export default function ContestPage({ params }: any) {
     };
 
 
-    // Function to update scores based on whether the answer was correct
     const updateScores = (subject: Subject, correct: boolean) => {
         const index = ['Mathematics', 'Biology', 'Physics', 'Chemistry'].indexOf(subject);
         if (index !== -1) {
             const updatedScores = [...studentStrength];
-            updatedScores[index] += correct ? 1 : 0;  // Increment only if correct
+            updatedScores[index] += correct ? 1 : 0;
             setStudentStrength(updatedScores);
         }
     };
 
-    // Function to calculate accuracy for each subject at the end of the quiz or round
     const calculateAccuracy = () => {
         const accuracies = studentStrength.map((score, index) => {
             const subject = ['Mathematics', 'Biology', 'Physics', 'Chemistry'][index];
@@ -836,12 +834,6 @@ export default function ContestPage({ params }: any) {
         setStudentAccracy(accuracies)
         return accuracies;
     };
-
-    // useEffect(() => {
-    //     if (quizEnded) {
-    //         calculateAccuracy();
-    //     }
-    // }, [quizEnded, studentStrength, totalQuestions]);
 
 
     const formatTimeDifference = (startTime: Date, endTime: Date) => {

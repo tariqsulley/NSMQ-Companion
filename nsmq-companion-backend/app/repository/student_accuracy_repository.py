@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from app.models.student_accuracy import StudentAccuracy
-from typing import List
+from typing import List,Dict
 
 class StudentAccuracyRepository:
     def __init__(self, session_factory):
@@ -35,3 +35,16 @@ class StudentAccuracyRepository:
                 session.add(new_accuracy)
 
             session.commit()
+
+    def get_accuracies_by_student(self, student_id: str) -> Dict[str, List[int]]:
+        with self.session_factory() as session:
+            accuracies = session.query(
+                StudentAccuracy.maths_accuracy,
+                StudentAccuracy.biology_accuracy,
+                StudentAccuracy.chemistry_accuracy,
+                StudentAccuracy.physics_accuracy
+            ).filter(StudentAccuracy.student_id == student_id).all()
+
+            if accuracies:
+                return [list(accuracy) for accuracy in accuracies]
+            return [] 
