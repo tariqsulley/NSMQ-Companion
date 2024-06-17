@@ -23,7 +23,6 @@ import Link from 'next/link';
 import prempeh_logo from "../../../../../public/images/prempeh.jpg"
 
 
-
 interface Question {
     "S/N": number;
     "Subject": 'Mathematics' | 'Biology' | 'Chemistry' | 'Physics';
@@ -103,6 +102,10 @@ export default function ContestPage({ params }: any) {
     const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
     const [captureTime, setCapturedTime] = useState(0)
     const [student_accuracy, setStudentAccracy] = useState<any>([])
+    const [accuracySent, setAccuracySent] = useState(false);
+    const [roundDataSent, setRoundDataSent] = useState(false);
+    const [performanceDataSent, setPerformanceDataSent] = useState(false);
+
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
         'Round1': 0
@@ -565,6 +568,7 @@ export default function ContestPage({ params }: any) {
         }
     }, [quizEnded]);
 
+
     const handleNextQuestion = () => {
         resetTranscript();
         setClueStopped("play");
@@ -647,31 +651,6 @@ export default function ContestPage({ params }: any) {
         }
     };
 
-    const handleRecordAudio = async () => {
-        try {
-            setIsRecording(true);
-            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-            const mediaRecorder = new MediaRecorder(stream);
-            const chunks: any = [];
-
-            mediaRecorder.addEventListener('dataavailable', (event) => {
-                chunks.push(event.data);
-            });
-
-            mediaRecorder.addEventListener('stop', () => {
-                setIsRecording(false);
-                const audioBlob = new Blob(chunks, { type: 'audio/webm' });
-                sendAudioToBackend(audioBlob);
-            });
-
-            mediaRecorder.start();
-            setTimeout(() => {
-                mediaRecorder.stop();
-            }, 10000);
-        } catch (error) {
-            console.error('Error recording audio:', error);
-        }
-    };
 
     function levenshteinDistance(str1: any, str2: any) {
         const m = str1.length;
@@ -843,17 +822,6 @@ export default function ContestPage({ params }: any) {
         }
     };
 
-    // const calculateAccuracy = () => {
-    //     const accuracies = studentStrength.map((score, index) => {
-    //         const subject = ['Mathematics', 'Biology', 'Physics', 'Chemistry'][index];
-    //         const totalQuestionsForSubject = totalQuestions[subject];
-    //         return totalQuestionsForSubject > 0 ? (score / totalQuestionsForSubject) * 100 : 0;
-    //     });
-    //     console.log('Accuracies:', accuracies);
-    //     setStudentAccracy(accuracies)
-    //     return accuracies;
-    // };
-
     const calculateAccuracy = () => {
         const accuracies = studentStrength.map((score, index) => {
             const subject = ['Mathematics', 'Biology', 'Physics', 'Chemistry'][index] as Subject;
@@ -910,16 +878,20 @@ export default function ContestPage({ params }: any) {
             }
         };
         try {
+            setAccuracySent(true);
             const response = await axios.post(`${API_BASE}/accuracies/`, payload);
             console.log('Accuracy data sent successfully:', response.data);
         } catch (error) {
             console.error('Error sending accuracy data:', error);
+        } finally {
+            setAccuracySent(false)
         }
     };
 
 
     const sendRoundDataToBackend = async () => {
         try {
+            setRoundDataSent(true);
             const response = await axios.post(`${API_BASE}/questions/round-score`, {
                 Student_uuid: Data?.data.uuid,
                 Year: parseInt(year),
@@ -934,6 +906,8 @@ export default function ContestPage({ params }: any) {
             console.log('Round data sent successfully:', response.data);
         } catch (error) {
             console.error('Error sending round data:', error);
+        } finally {
+            setRoundDataSent(false)
         }
     };
 
@@ -957,6 +931,7 @@ export default function ContestPage({ params }: any) {
 
     const sendPerformanceDataToBackend = async () => {
         try {
+            setPerformanceDataSent(true);
             const performanceData = {
                 student_id: Data?.data.uuid,
                 topic: topicArray,
@@ -968,8 +943,18 @@ export default function ContestPage({ params }: any) {
             console.log('Performance data sent successfully:', response.data);
         } catch (error) {
             console.error('Error sending performance data:', error);
+        } finally {
+            setPerformanceDataSent(false)
         }
     };
+
+    const updateStudentChampionProgres = async () => {
+        try {
+
+        } catch (error) {
+            console.log("error posting data")
+        }
+    }
 
     if (!questions) {
         return <div>Loading questions...</div>;
@@ -980,8 +965,6 @@ export default function ContestPage({ params }: any) {
             <PracticeNavBar />
             <div className="mt-[100px]  flex flex-col w-full items-center justify-center bg-white shadow rounded-b-xl 
              dark:bg-darkBgLight">
-                <p>{year}</p>
-                <p>{contestId}</p>
                 {isReviewMode ?
                     <div className="w-full">
                         Review Mode
@@ -1208,7 +1191,7 @@ export default function ContestPage({ params }: any) {
                                             </div>
                                         </div>
                                         <div className="bg-[#3888ff] p-2 rounded-lg">
-                                            <p className="dark:text-darkBgLight text-center">BLAZING</p>
+                                            <p className="dark:text-darkBgLight text-center">Time</p>
                                             <div className="flex gap-1 items-center bg-gray-700 rounded-lg p-1  justify-center">
                                                 <Image src={clock_icon} width={30} height={30} alt="image" />
                                                 <p className="text-3xl text-blue-400 font-semibold">
@@ -1236,16 +1219,25 @@ export default function ContestPage({ params }: any) {
                                     </div>
                                 </div>
                                 <div>
-
                                     {quizCompleted ? (
-
                                         <Link href="/dashboard/practice" className='bg-white border-2 px-6
-                                         py-2 rounded-lg text-center dark:bg-blue-800 ' >
+                 py-2 rounded-lg text-center dark:bg-blue-800 ' >
                                             Go to Practice Page
                                         </Link>
                                     ) : (
-
-                                        <button onClick={handleGoToNextRound}>Go To Next Round</button>
+                                        accuracySent && roundDataSent && performanceDataSent ? (
+                                            <CgSpinner size={25} className="animate-spin text-blue-800 text-xl" />
+                                        ) : (
+                                            <div className='flex items-center gap-2'>
+                                                <Link href="/dashboard/practice" className='bg-white border-2 px-6
+                                                    py-2 rounded-lg text-center dark:bg-blue-800 ' >
+                                                    Go To Practice Page
+                                                </Link>
+                                                <button onClick={handleGoToNextRound}
+                                                    className='bg-blue-800 text-white px-6 py-2 rounded-lg text-center'>
+                                                    Go To Next Round</button>
+                                            </ div>
+                                        )
                                     )}
 
                                     {quizCompleted && (round_score > opponentScore) && mode == "Champion" ?
