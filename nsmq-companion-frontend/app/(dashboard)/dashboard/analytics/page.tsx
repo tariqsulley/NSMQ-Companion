@@ -5,7 +5,7 @@ export default function AnalyticsPage() {
     return (
         <div className="flex min-h-screen">
             <Sidebar />
-            <div className="bg-bgMain sm:ml-[256px] w-full">
+            <div className="bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full">
                 <div className="mt-[100px]  w-full flex flex-col items-center ">
                     <AnalyticsView />
                 </div>
