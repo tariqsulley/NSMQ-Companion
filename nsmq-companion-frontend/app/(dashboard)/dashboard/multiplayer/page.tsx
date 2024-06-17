@@ -71,7 +71,6 @@ export default function MultiplayerPage() {
 
             if (audioCtx.state === "running") {
                 audioCtx.suspend().then(() => {
-                    // Notify other client to suspend audio
                     socket?.send(JSON.stringify({ action: "suspend_audio" }));
                 });
             }
@@ -230,7 +229,6 @@ export default function MultiplayerPage() {
             } else {
                 console.log("wrong");
                 setIsAudioPaused(false);
-                // Notify other client to resume audio
                 audioCtx.resume().then(() => {
                     playRiddle(1);
                 });
@@ -245,11 +243,11 @@ export default function MultiplayerPage() {
     };
 
     const leaderboardData = [
-        { rank: 1, name: 'Alice', points: 100 },
-        { rank: 2, name: 'Bob', points: 95 },
-        { rank: 3, name: 'Charlie', points: 90 },
-        { rank: 4, name: 'Diana', points: 85 },
-        { rank: 5, name: 'Edward', points: 80 },
+        { rank: 1, name: 'Prince Debrah', points: 100 },
+        { rank: 2, name: 'Daniel Gakpetor', points: 95 },
+        { rank: 3, name: 'Francisca Lamini', points: 90 },
+        { rank: 4, name: 'Partey Dortey', points: 85 },
+        { rank: 5, name: 'Michael Obeng', points: 80 },
 
     ];
 
@@ -285,7 +283,7 @@ export default function MultiplayerPage() {
                                         </div>
                                         <div className="flex gap-2">
                                             <button
-                                                onClick={joinWaitingRoom}
+                                                // onClick={joinWaitingRoom}
                                                 className="bg-blue-800 text-white rounded-lg px-5 py-2"
                                             >
                                                 Join Waiting Room
