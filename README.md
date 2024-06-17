@@ -26,7 +26,7 @@ The command used to start the server is uvicorn app.main:app --reload
 [![Tailwind CSS](https://img.shields.io/badge/tailwindcss-0F172A?&logo=tailwindcss)](https://tailwindcss.com/)
 
 Before setting up the frontend, please make sure you have node js installed 
-[![Node JS](https://nodejs.org/en)
+[Node JS](https://nodejs.org/en)
 
 In order to setup the frontend, move into the frontend folder via cd nsmq-companion-frontend
 You would have to install the required libraries before starting the frontend server via the command
