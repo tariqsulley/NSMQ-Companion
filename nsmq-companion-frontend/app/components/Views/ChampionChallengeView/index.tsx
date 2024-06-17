@@ -157,7 +157,6 @@ export default function ChampionChallengeView() {
         refreshInterval: 1000
     });
 
-    if (error) return <div>Failed to load</div>;
     if (!progressData) return <div>Loading...</div>;
 
     const isPrempehComplete = progressData.filter((p: Progress) => p.school === "Prempeh College" && p.completed).length === 4;
