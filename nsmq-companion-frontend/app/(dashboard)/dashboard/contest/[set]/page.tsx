@@ -21,6 +21,7 @@ import useSWR from "swr";
 import { useAuth } from "@/app/context/AuthContext";
 import Link from 'next/link';
 import prempeh_logo from "../../../../../public/images/prempeh.jpg"
+import presec_logo from "../../../../../public/images/presec.jpg"
 
 
 interface Question {
@@ -1098,11 +1099,20 @@ export default function ContestPage({ params }: any) {
                                 <div className="flex w-full justify-evenly ">
                                     {mode == "Champion" ?
                                         <div className='flex items-center justify-center gap-2 mt-2 '>
-                                            <div className='flex flex-col items-center justify-center 
+                                            {school == "Prempeh College" ?
+                                                <div className='flex flex-col items-center justify-center 
                                     gap-2 bg-gray-100 shadow rounded-lg m-2'>
-                                                <Image src={prempeh_logo} alt='logo' className='w-[20%]' />
-                                                <p className='text-xl text-center font-bold'>{school} Score: {opponentScore}</p>
-                                            </div>
+
+                                                    <Image src={prempeh_logo} alt='logo' className='w-[20%]' />
+                                                    <p className='text-xl text-center font-bold'>{school} Score: {opponentScore}</p>
+                                                </div> :
+                                                <div className='flex flex-col items-center justify-center 
+                                             gap-2 bg-gray-100 shadow rounded-lg m-2 w-[40%]'>
+
+                                                    <Image src={presec_logo} alt='logo' className='w-[10%]' />
+                                                    <p className='text-xl text-center font-bold'>{school} Score: {opponentScore}</p>
+                                                </div>
+                                            }
                                             <div>
                                                 <p>VS</p>
                                             </div>

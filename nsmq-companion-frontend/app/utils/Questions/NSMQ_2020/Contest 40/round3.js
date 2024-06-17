@@ -11,6 +11,7 @@ const contest_40_3 = [
         "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry",
+        "Opponent_Answer": 3,
         "Topic Tag": ["Saponification", "Organic Chemistry"]
     },
     {
@@ -40,6 +41,7 @@ const contest_40_3 = [
         "Answer": "True",
         "calculations present": "No",
         "Subject": "Chemistry",
+        "Opponent_Answer": 3,
         "Topic Tag": ["Isomerism", "Organic Chemistry"]
     },
     {
@@ -67,6 +69,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "TRUE",
+        "Opponent_Answer": 3,
         "calculations present": "No",
         "Subject": "Mathematics",
         "Topic Tag": ["Logarithms", "Mathematics"]
@@ -96,6 +99,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "FALSE",
+        "Opponent_Answer": 3,
         "calculations present": "No",
         "Subject": "Mathematics",
         "Topic Tag": ["Functions", "Mathematics"]
@@ -127,6 +131,7 @@ const contest_40_3 = [
         "Answer": "True",
         "calculations present": "No",
         "Subject": "Physics",
+        "Opponent_Answer": 3,
         "Topic Tag": ["Electrostatics", "Physics"]
     },
     {
@@ -156,6 +161,7 @@ const contest_40_3 = [
         "Answer": "True",
         "calculations present": "No",
         "Subject": "Physics",
+        "Opponent_Answer": 3,
         "Topic Tag": ["Particle Physics", "Physics"]
     },
     {

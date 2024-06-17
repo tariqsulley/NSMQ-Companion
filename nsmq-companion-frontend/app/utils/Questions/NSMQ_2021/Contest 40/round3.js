@@ -8,7 +8,7 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Opponent_Answer": 2,
+        "Opponent_Answer": 3,
         "Answer": "False",
         "calculations present": "No",
         "Subject": "Chemistry",
@@ -38,7 +38,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "False",
-        "Opponent_Answer": 2,
+        "Opponent_Answer": 3,
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Organic Chemistry", "Hydrocarbons"]
@@ -67,7 +67,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "True",
-        "Opponent_Answer": 2,
+        "Opponent_Answer": 3,
         "calculations present": "No",
         "Subject": "Physics",
         "Topic Tag": ["Electrostatics", "Physics"]
@@ -96,7 +96,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "False",
-        "Opponent_Answer": 2,
+        "Opponent_Answer": 3,
         "calculations present": "No",
         "Subject": "Chemistry",
         "Topic Tag": ["Electrostatics", "Physics"]
@@ -124,7 +124,7 @@ const contest_40_3 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Opponent_Answer": 2,
+        "Opponent_Answer": 3,
         "Answer": "False",
         "calculations present": "No",
         "Subject": "Biology",
@@ -154,7 +154,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "True",
-        "Opponent_Answer": 2,
+        "Opponent_Answer": 3,
         "calculations present": "No",
         "Subject": "Biology",
         "Topic Tag": ["Evolution", "Comparative Anatomy"]
@@ -183,7 +183,7 @@ const contest_40_3 = [
         "Answer has figure": "No",
         "Answer figure name": null,
         "Answer": "True",
-        "Opponent_Answer": 2,
+        "Opponent_Answer": 3,
         "calculations present": "No",
         "Subject": "Mathematics",
         "Topic Tag": ["Rational Numbers", "Mathematics"]

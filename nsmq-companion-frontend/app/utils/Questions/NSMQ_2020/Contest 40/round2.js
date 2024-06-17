@@ -11,6 +11,8 @@ const contest_40_2 = [
         "Answer": "$2.72 \\mathrm{~K}, 1.06 \\mathrm{~mm}$",
         "calculations present": "Yes",
         "Subject": "Physics",
+        "Opponent_Answer": 3,
+        "Opponent_Time": 0,
         "Topic Tag": ["Cosmic Microwave Background", "Astrophysics"]
     },
     {
@@ -25,6 +27,8 @@ const contest_40_2 = [
         "Answer": "It is not; it is not in thermal equilibrium",
         "calculations present": "No",
         "Subject": "Physics",
+        "Opponent_Answer": 3,
+        "Opponent_Time": 0,
         "Topic Tag": ["Blackbody Radiation", "Physics"]
     },
     {
@@ -39,6 +43,8 @@ const contest_40_2 = [
         "Answer": "Low blood pressure in the capillaries slows blood down the flow of blood, so it gives enough time for diffusion of substances between the blood and cells. The walls of capillaries are also much thinner than those of arteries (squamous epithelium only), so they could rupture / break if the blood pressure is too high in them.",
         "calculations present": "No",
         "Subject": "Biology",
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Topic Tag": ["Circulatory System", "Biology"]
     },
     {
@@ -53,6 +59,8 @@ const contest_40_2 = [
         "Answer": "Glucose gives instant energy as it is absorbed and reaches the blood. Bread and margarine, however, requires time to digest and be absorbed. As sick people need immediate energy supply, they are fed with glucose or given fruit juice.",
         "calculations present": "No",
         "Subject": "Biology",
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Topic Tag": ["Metabolism", "Biology"]
     },
     {
@@ -67,6 +75,8 @@ const contest_40_2 = [
         "Answer": "Apical dominance of terminal bud is due to the secretion of auxin (IA.A) by apical bud. Hence the removal of apical bud causes sprouting of lateral buds with stimulation of intercalary meristem thereby facilitating better maintenance of grass.",
         "calculations present": "No",
         "Subject": "Biology",
+        "Opponent_Answer": 3,
+        "Opponent_Time": 0,
         "Topic Tag": ["Metabolism", "Biology"]
     },
     {
@@ -81,6 +91,8 @@ const contest_40_2 = [
         "Answer": "738 grams",
         "calculations present": "Yes",
         "Subject": "Chemistry",
+        "Opponent_Answer": 3,
+        "Opponent_Time": 0,
         "Topic Tag": ["Electrolysis", "Chemistry"]
     },
     {
@@ -95,6 +107,8 @@ const contest_40_2 = [
         "Answer": "A mixture of metallic iron and aluminium oxide.\n(Accept a mixture of metallic iron and various oxides)",
         "calculations present": "No",
         "Subject": "Chemistry",
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Topic Tag": ["Industrial Processes", "Chemistry"]
     },
     {
@@ -109,6 +123,8 @@ const contest_40_2 = [
         "Answer": "Any one of:\n2-Methylpentanal; 3-Methylpentanal; $\\quad$ 4-Methylpentanal",
         "calculations present": "No",
         "Subject": "Chemistry",
+        "Opponent_Answer": 3,
+        "Opponent_Time": 0,
         "Topic Tag": ["Organic Chemistry", "Nomenclature"]
     },
     {
@@ -123,6 +139,8 @@ const contest_40_2 = [
         "Answer": "1/2",
         "calculations present": "Yes",
         "Subject": "Mathematics",
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Topic Tag": ["Organic Chemistry", "Nomenclature"]
     },
     {
@@ -137,6 +155,8 @@ const contest_40_2 = [
         "Answer": "$g(x)=1 / 2(x-2)$ or $g(x)=1 / 2 x-1$\n[reflect in $\\mathrm{y}=\\mathrm{x}$ gives $\\mathrm{x}=2 \\mathrm{y}$ or $\\mathrm{y}=(1 / 2) \\mathrm{x}, 2$ units right gives $\\mathrm{y}=(1 / 2)(\\mathrm{x}-2)$ ]",
         "calculations present": "Yes",
         "Subject": "Mathematics",
+        "Opponent_Answer": 0,
+        "Opponent_Time": 0,
         "Topic Tag": ["Functions", "Mathematics"]
     }
 ]

@@ -187,7 +187,7 @@ const contest_40_2 = [
         "Answer": "0.150 mol",
         "calculations present": "Yes",
         "Opponent_Answer": 0,
-        "Opponent_Time": 0,
+        "Opponent_Time": -20,
         "Subject": "Chemistry",
         "Topic Tag": ["Gas Laws", "Partial Pressures"]
     }

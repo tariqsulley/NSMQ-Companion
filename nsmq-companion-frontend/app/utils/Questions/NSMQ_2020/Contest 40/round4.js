@@ -17,6 +17,7 @@ const contest_40_2 = [
         "Answer": "Chlorine gas (Do not accept Chlorine or Chlorine solution)",
         "calculations present": "No",
         "Subject": "Chemistry",
+        "Opponent_Answer": 3,
         "Topic Tag": ["Chemical Elements", "Disinfection"]
     },
     {
@@ -37,6 +38,7 @@ const contest_40_2 = [
         "Answer": "COMPOSITE",
         "calculations present": "No",
         "Subject": "Mathematics",
+        "Opponent_Answer": 3,
         "Topic Tag": ["Polynomials", "Materials Science"]
     },
     {
@@ -57,6 +59,7 @@ const contest_40_2 = [
         "Answer": "Corona",
         "calculations present": "No",
         "Subject": "Biology",
+        "Opponent_Answer": 3,
         "Topic Tag": ["Astronomy", "Biology"]
     },
     {
@@ -77,6 +80,7 @@ const contest_40_2 = [
         "Answer": "Kilogram",
         "calculations present": "No",
         "Subject": "Physics",
+        "Opponent_Answer": 0,
         "Topic Tag": ["Units of Measurement", "Physics"]
     }
 ]
