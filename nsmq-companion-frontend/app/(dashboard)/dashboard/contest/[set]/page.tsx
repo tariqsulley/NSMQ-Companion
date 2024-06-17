@@ -689,6 +689,8 @@ export default function ContestPage({ params }: any) {
         return similarity;
     }
 
+
+
     const handleCalculateSimilarity = async () => {
         try {
             setCheckingAnswer(true);

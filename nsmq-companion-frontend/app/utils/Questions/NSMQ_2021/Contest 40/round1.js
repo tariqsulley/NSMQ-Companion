@@ -155,7 +155,7 @@ const contest_40_1 = [
         "Subject": "Physics",
         "calculations present": "Yes",
         "Answer": "$1.8 \\times 10^{-35} \\mathrm{~kg}$\nAccept $1.82 \\times 10^{-35} \\mathrm{~kg}$.",
-        "Topic Name": ["Quantum Physics", "Atomic Mass Differences"]
+        "Topic Tag": ["Quantum Physics", "Atomic Mass Differences"]
     },
 
     {
@@ -175,7 +175,7 @@ const contest_40_1 = [
         "Subject": "Physics",
         "calculations present": "Yes",
         "Answer": "$11 Q / 32 \\pi \\epsilon_{0} R$",
-        "Topic Concerns": ["Electrostatics", "Spatial Potential"]
+        "Topic Tag": ["Electrostatics", "Spatial Potential"]
     },
 
     {
