@@ -33,5 +33,11 @@ You would have to install the required libraries before starting the frontend se
 npm install
 
 When the installation is done, you start the frontend server via npm run dev
+Note: If you want to use the backend you are hosting as the base url in the frontend, in app/utils/api.js, change uncomment the local host
+url and comment the other address
+Also, I hosted the frontend just to make it easier to test, if you happen to try logging in and it does not work, it probably
+means the server I am hosting locally is down, hence you would have to use the backend base url.
 
+NB: There was not enough time in the hackathon so I could not finish implementing the multiplayer feature so please if you click join waiting room and nothing happens, it is not
+a bug :)
 
