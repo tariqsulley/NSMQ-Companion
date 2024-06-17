@@ -37,21 +37,7 @@ const StepOneContent = () => (
     </div>
 );
 
-const StepTwoContent = () => (
-    <div className="flex flex-col items-center justify-center">
-        <p>Manage your profile and access personalized study materials.
-            Tailor your learning experience to suit your specific needs and preferences.</p>
-    </div>
-);
 
-const StepFourContent = () => (
-    <div className="flex flex-col items-center justify-center">
-        <div>
-            <p>Use the Analytics section to gain insights into your learning patterns.
-                Discover your strengths and areas for improvement with detailed subject analysis.</p>
-        </div>
-    </div>
-);
 
 const StepFiveContent = () => (
     <div className="flex flex-col items-center justify-center">
@@ -150,16 +136,6 @@ export default function DashboardView() {
         {
             target: '.sidebar-dashboard',
             content: <StepOneContent />,
-            placement: 'right',
-        },
-        {
-            target: '.sidebar-students',
-            content: <StepTwoContent />,
-            placement: 'right',
-        },
-        {
-            target: '.sidebar-analytics',
-            content: <StepFourContent />,
             placement: 'right',
         },
         {
