@@ -30,7 +30,7 @@ import prac2 from "../../../../public/images/prac.jpg"
 const StepOneContent = () => (
     <div className="flex flex-col justify-center items-center">
         <div>
-            <Image src={kauffman} alt="image" className=" rounded-lg shadow" />
+            <Image src={kauffman} alt="image" className=" rounded-lg shadow" priority />
             <p>Welcome to your NSMQ Companion dashboard! Here you can track your progress,
                 and analyze your performance in different subjects.</p>
         </div>
@@ -42,7 +42,7 @@ const StepOneContent = () => (
 const StepFiveContent = () => (
     <div className="flex flex-col items-center justify-center">
         <div>
-            <Image src={prac1} alt="image" className=" rounded-lg shadow" />
+            <Image src={prac1} alt="image" className=" rounded-lg shadow" priority />
             <p>Sharpen your skills with timed practice tests that mimic the NSMQ format</p>
         </div>
     </div>
@@ -51,7 +51,7 @@ const StepFiveContent = () => (
 const StepSixContent = () => (
     <div className="flex flex-col justify-center items-center">
         <div>
-            <Image src={champion} alt="image" className=" rounded-lg shadow" />
+            <Image src={champion} alt="image" className=" rounded-lg shadow" priority />
             <p>Do you have what it takes to take on the conquerors of the NSMQ?
                 This challenge is for you!
             </p>
@@ -62,7 +62,7 @@ const StepSixContent = () => (
 const StepSevenContent = () => (
     <div className="flex flex-col justify-center items-center">
         <div>
-            <Image src={prac2} alt="image" className=" rounded-lg shadow" />
+            <Image src={prac2} alt="image" className=" rounded-lg shadow" priority />
             <p>Join Multiplayer sessions to compete with fellow students across the Nation</p>
         </div>
     </div>

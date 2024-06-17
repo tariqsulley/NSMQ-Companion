@@ -24,6 +24,25 @@ import prempeh_logo from "../../../../../public/images/prempeh.jpg"
 
 
 
+interface Question {
+    "S/N": number;
+    "Subject": 'Mathematics' | 'Biology' | 'Chemistry' | 'Physics';
+    "Preamble Text": string;
+    "Question": string;
+    "Answer": string;
+    "calculations present": string;
+    "Topic Tag": string[];
+    "clue_nums"?: number;
+    "clue1"?: string;
+    "clue2"?: string;
+    "clue3"?: string;
+    "clue4"?: string;
+    "clue5"?: string;
+    "Opponent_Answer"?: number;
+}
+
+type Subject = 'Mathematics' | 'Biology' | 'Chemistry' | 'Physics';
+
 export default function ContestPage({ params }: any) {
     const { Data } = useAuth()
     const { set } = params;
@@ -195,7 +214,7 @@ export default function ContestPage({ params }: any) {
 
     const countQuestionsBySubject = (questions: any) => {
         const subjectCounts = { Mathematics: 0, Biology: 0, Chemistry: 0, Physics: 0 };
-        questions.forEach(question => {
+        questions.forEach((question: Question) => {
             if (question.Subject in subjectCounts) {
                 subjectCounts[question.Subject]++;
             }
@@ -824,17 +843,27 @@ export default function ContestPage({ params }: any) {
         }
     };
 
+    // const calculateAccuracy = () => {
+    //     const accuracies = studentStrength.map((score, index) => {
+    //         const subject = ['Mathematics', 'Biology', 'Physics', 'Chemistry'][index];
+    //         const totalQuestionsForSubject = totalQuestions[subject];
+    //         return totalQuestionsForSubject > 0 ? (score / totalQuestionsForSubject) * 100 : 0;
+    //     });
+    //     console.log('Accuracies:', accuracies);
+    //     setStudentAccracy(accuracies)
+    //     return accuracies;
+    // };
+
     const calculateAccuracy = () => {
         const accuracies = studentStrength.map((score, index) => {
-            const subject = ['Mathematics', 'Biology', 'Physics', 'Chemistry'][index];
+            const subject = ['Mathematics', 'Biology', 'Physics', 'Chemistry'][index] as Subject;
             const totalQuestionsForSubject = totalQuestions[subject];
             return totalQuestionsForSubject > 0 ? (score / totalQuestionsForSubject) * 100 : 0;
         });
         console.log('Accuracies:', accuracies);
-        setStudentAccracy(accuracies)
+        setStudentAccracy(accuracies);
         return accuracies;
     };
-
 
     const formatTimeDifference = (startTime: Date, endTime: Date) => {
         const timeDiff = endTime.getTime() - startTime.getTime();
