@@ -40,7 +40,7 @@ const contest_40_2 = [
         "Question figure name": null,
         "Answer has figure": "No",
         "Answer figure name": null,
-        "Answer": "$\\{x: x \\leq 3\\}$\n[function defined for $(3-x) \\geq 0,3 \\geq x$, or $x \\leq 3$ ]",
+        "Answer": "x is such that x is less than or equal to 3",
         "calculations present": "Yes",
         "Opponent_Answer": 0,
         "Opponent_Time": 0,

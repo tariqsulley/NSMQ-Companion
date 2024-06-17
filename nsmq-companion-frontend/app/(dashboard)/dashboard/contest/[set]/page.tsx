@@ -897,18 +897,18 @@ export default function ContestPage({ params }: any) {
     };
 
 
-    // useEffect(() => {
-    //     if (questions && currentQuestionIndex < questions?.length) {
-    //         const currentQuestion = questions[currentQuestionIndex];
-    //         if (timeLeft === currentQuestion.Opponent_Time) {
-    //             // Update the opponent's score
-    //             setOpponentScore((prevScore) => prevScore + currentQuestion.Opponent_Answer);
+    useEffect(() => {
+        if (questions && currentQuestionIndex < questions?.length) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (timeLeft === currentQuestion.Opponent_Time) {
+                // Update the opponent's score
+                setOpponentScore((prevScore) => prevScore + currentQuestion.Opponent_Answer);
 
-    //             // Move to the next question if possible
-    //             handleNextQuestion();
-    //         }
-    //     }
-    // }, [timeLeft, currentQuestionIndex, questions]);
+                // Move to the next question if possible
+                handleNextQuestion();
+            }
+        }
+    }, [timeLeft, currentQuestionIndex, questions]);
 
     const sendRoundDataToBackend = async () => {
         try {
@@ -937,7 +937,7 @@ export default function ContestPage({ params }: any) {
             const ChampionData = {
                 student_id: Data?.data.uuid,
                 year: year,
-                school: "Prempeh College",
+                school: school,
                 round_number: startRound,
                 "completed": true,
                 "score": round_score
@@ -1105,7 +1105,7 @@ export default function ContestPage({ params }: any) {
                                             <div className='flex flex-col items-center justify-center 
                                     gap-2 bg-gray-100 shadow rounded-lg m-2'>
                                                 <Image src={prempeh_logo} alt='logo' className='w-[20%]' />
-                                                <p className='text-xl text-center font-bold'>Prempeh Score: {opponentScore}</p>
+                                                <p className='text-xl text-center font-bold'>{school} Score: {opponentScore}</p>
                                             </div>
                                             <div>
                                                 <p>VS</p>
