@@ -192,11 +192,7 @@ export default function SettingsView() {
                     <p>Email</p>
                     <p className='rounded-xl border-2  p-2'>{Data?.data.email_address} </p>
                 </div>
-                <div className='mt-5'>
-                    <button className='rounded-lg bg-blue-800 p-2 mb-2'>
-                        <p className='text-white'>Change Password</p>
-                    </button>
-                </div>
+
             </div>
         </div>
     )
