@@ -132,6 +132,7 @@ export default function DashboardView() {
     const [studentMap, setStudentMap] = useState({});
 
     const [run, setRun] = useState(false);
+
     const [steps, setSteps] = useState<any>([
         {
             target: '.sidebar-dashboard',
@@ -249,8 +250,6 @@ export default function DashboardView() {
     );
 
 
-
-
     useEffect(() => {
         if (studentsData) {
             const map: Record<string, string> = {};
@@ -278,30 +277,32 @@ export default function DashboardView() {
     if (isLoading || isRecommendationLoading) {
         return (
             <div className="flex flex-col gap-4">
-                <Joyride
-                    run={run}
-                    steps={steps}
-                    disableScrolling={true}
-                    continuous={true}
-                    scrollToFirstStep={true}
-                    showProgress={true}
-                    showSkipButton={true}
-                    locale={{
-                        next: 'Next',
-                        back: 'Previous',
-                        last: 'Finish'
-                    }}
-                    callback={handleJoyrideCallback}
-                    styles={{
-                        options: {
-                            arrowColor: '#181d36',
-                            backgroundColor: '#077af9',
-                            primaryColor: '#181d36',
-                            textColor: '#fff',
-                            zIndex: 1000,
-                        }
-                    }}
-                />
+                {Data?.data.account_type === 'student' && (
+                    <Joyride
+                        run={run}
+                        steps={steps}
+                        disableScrolling={true}
+                        continuous={true}
+                        scrollToFirstStep={true}
+                        showProgress={true}
+                        showSkipButton={true}
+                        locale={{
+                            next: 'Next',
+                            back: 'Previous',
+                            last: 'Finish'
+                        }}
+                        callback={handleJoyrideCallback}
+                        styles={{
+                            options: {
+                                arrowColor: '#181d36',
+                                backgroundColor: '#077af9',
+                                primaryColor: '#181d36',
+                                textColor: '#fff',
+                                zIndex: 1000,
+                            }
+                        }}
+                    />
+                )}
                 <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
                 {Data?.data.account_type !== "facilitator" ?
                     <div className="flex items-center gap-3">
@@ -329,30 +330,32 @@ export default function DashboardView() {
 
     return (
         <div className="flex flex-col gap-4">
-            <Joyride
-                run={run}
-                steps={steps}
-                disableScrolling={true}
-                continuous={true}
-                scrollToFirstStep={true}
-                showProgress={true}
-                showSkipButton={true}
-                locale={{
-                    next: 'Next',
-                    back: 'Previous',
-                    last: 'Finish'
-                }}
-                callback={handleJoyrideCallback}
-                styles={{
-                    options: {
-                        arrowColor: '#181d36',
-                        backgroundColor: '#077af9',
-                        primaryColor: '#181d36',
-                        textColor: '#fff',
-                        zIndex: 1000,
-                    }
-                }}
-            />
+            {Data?.data.account_type === 'student' && (
+                <Joyride
+                    run={run}
+                    steps={steps}
+                    disableScrolling={true}
+                    continuous={true}
+                    scrollToFirstStep={true}
+                    showProgress={true}
+                    showSkipButton={true}
+                    locale={{
+                        next: 'Next',
+                        back: 'Previous',
+                        last: 'Finish'
+                    }}
+                    callback={handleJoyrideCallback}
+                    styles={{
+                        options: {
+                            arrowColor: '#181d36',
+                            backgroundColor: '#077af9',
+                            primaryColor: '#181d36',
+                            textColor: '#fff',
+                            zIndex: 1000,
+                        }
+                    }}
+                />
+            )}
             <p className="text-xl font-semibold"> Good Evening, {Data?.data?.first_name}</p>
             {Data?.data.account_type == "facilitator" ?
                 <SearchSelect
