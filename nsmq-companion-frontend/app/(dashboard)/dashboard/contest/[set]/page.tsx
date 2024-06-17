@@ -561,7 +561,6 @@ export default function ContestPage({ params }: any) {
 
     useEffect(() => {
         if (quizEnded && mode !== "Champion") {
-            // calculateAccuracy();
             sendRoundDataToBackend();
             sendPerformanceDataToBackend()
 
@@ -585,7 +584,6 @@ export default function ContestPage({ params }: any) {
             if (newIndex < questions.length) {
                 return newIndex;
             } else {
-                // { round_score > opponentScore ? sendChampionScoreToBackend() : "" }
                 setStudentAccracy([])
                 switch (startRound) {
                     case 1:
@@ -900,11 +898,9 @@ export default function ContestPage({ params }: any) {
     useEffect(() => {
         if (questions && currentQuestionIndex < questions?.length) {
             const currentQuestion = questions[currentQuestionIndex];
-            if (timeLeft === currentQuestion.Opponent_Time) {
-                // Update the opponent's score
+            if ((timeLeft === currentQuestion.Opponent_Time) && !quizEnded) {
                 setOpponentScore((prevScore) => prevScore + currentQuestion.Opponent_Answer);
 
-                // Move to the next question if possible
                 handleNextQuestion();
             }
         }
