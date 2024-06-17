@@ -83,7 +83,7 @@ export default function ContestPage({ params }: any) {
     const [quizCompleted, setQuizCompleted] = useState(false);
     const [numCorrectAnswers, setNumCorrectAnswers] = useState(0);
     const [captureTime, setCapturedTime] = useState(0)
-
+    const [student_accuracy, setStudentAccracy] = useState<any>([])
     const [totalRoundScore, setTotalRoundScore] = useState([{
         'Contest': 'Contest 1',
         'Round1': 0
@@ -159,10 +159,6 @@ export default function ContestPage({ params }: any) {
     };
 
 
-
-
-
-
     useEffect(() => {
         const fetchQuestions = async () => {
             try {
@@ -206,7 +202,7 @@ export default function ContestPage({ params }: any) {
         });
         setTotalQuestions(subjectCounts);
         console.log('subs', subjectCounts)
-        setStudentStrength([0, 0, 0, 0]); // Reset scores if needed
+        setStudentStrength([0, 0, 0, 0]);
     };
 
     useEffect(() => {
@@ -216,16 +212,6 @@ export default function ContestPage({ params }: any) {
     }, [questions]);
 
 
-    // const updateScores = (subject: any, correct: any) => {
-    //     const index = ['Mathematics', 'Biology', 'Physics', 'Chemistry'].indexOf(subject);
-    //     if (index !== -1) {
-    //         const updatedScores = [...studentStrength];
-    //         if (correct) {
-    //             updatedScores[index] += 1 / totalQuestions[subject];
-    //         }
-    //         setStudentStrength(updatedScores);
-    //     }
-    // };
 
 
     const getScoreForClueIndex = (clueIndex: any) => {
@@ -542,10 +528,21 @@ export default function ContestPage({ params }: any) {
         };
     }, [quizStarted]);
 
+
     useEffect(() => {
         if (quizEnded) {
+            const accuracies = calculateAccuracy();
+            sendAccuracyToBackend(accuracies);
+        }
+    }, [quizEnded]);
+
+
+    useEffect(() => {
+        if (quizEnded) {
+            // calculateAccuracy();
             sendRoundDataToBackend();
             sendPerformanceDataToBackend()
+
         }
     }, [quizEnded]);
 
@@ -566,6 +563,7 @@ export default function ContestPage({ params }: any) {
                 return newIndex;
             } else {
                 { round_score > opponentScore ? sendChampionScoreToBackend : "" }
+                setStudentAccracy([])
                 switch (startRound) {
                     case 1:
                         setRound1Ended(true);
@@ -835,16 +833,15 @@ export default function ContestPage({ params }: any) {
             return totalQuestionsForSubject > 0 ? (score / totalQuestionsForSubject) * 100 : 0;
         });
         console.log('Accuracies:', accuracies);
+        setStudentAccracy(accuracies)
         return accuracies;
     };
 
-    // Example of when to call calculateAccuracy
-    useEffect(() => {
-        if (quizEnded) {
-            const accuracies = calculateAccuracy();
-            // Here you can do something with the accuracies, like display them or save them
-        }
-    }, [quizEnded, studentStrength, totalQuestions]);
+    // useEffect(() => {
+    //     if (quizEnded) {
+    //         calculateAccuracy();
+    //     }
+    // }, [quizEnded, studentStrength, totalQuestions]);
 
 
     const formatTimeDifference = (startTime: Date, endTime: Date) => {
@@ -875,6 +872,27 @@ export default function ContestPage({ params }: any) {
             });
         } else {
             console.log("Quiz has ended");
+        }
+    };
+
+
+    const sendAccuracyToBackend = async (accuracies: any) => {
+        const payload = {
+            student_id: Data?.data.uuid,
+            year: 2021,
+            contest_id: "1",
+            accuracies: {
+                "Maths": accuracies[0],
+                "Biology": accuracies[1],
+                "Chemistry": accuracies[2],
+                "Physics": accuracies[3]
+            }
+        };
+        try {
+            const response = await axios.post(`${API_BASE}/accuracies/`, payload);
+            console.log('Accuracy data sent successfully:', response.data);
+        } catch (error) {
+            console.error('Error sending accuracy data:', error);
         }
     };
 
