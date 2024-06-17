@@ -585,7 +585,7 @@ export default function ContestPage({ params }: any) {
             if (newIndex < questions.length) {
                 return newIndex;
             } else {
-                { round_score > opponentScore ? sendChampionScoreToBackend : "" }
+                // { round_score > opponentScore ? sendChampionScoreToBackend() : "" }
                 setStudentAccracy([])
                 switch (startRound) {
                     case 1:
@@ -622,6 +622,12 @@ export default function ContestPage({ params }: any) {
             }
         });
     };
+
+    useEffect(() => {
+        if ((round_score > opponentScore) && quizEnded) {
+            sendChampionScoreToBackend();
+        }
+    }, [round_score, opponentScore, quizEnded]);
 
     useEffect(() => {
         if (quizStarted && currentQuestionIndex < questions?.length && cluestopped != "stop") {
@@ -918,7 +924,7 @@ export default function ContestPage({ params }: any) {
             const ChampionData = {
                 student_id: Data?.data.uuid,
                 year: year,
-                school: "Presec Legon",
+                school: "Prempeh College",
                 round_number: startRound,
                 "completed": true,
                 "score": round_score
