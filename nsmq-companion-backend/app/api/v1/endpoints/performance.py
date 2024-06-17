@@ -1,4 +1,3 @@
-# app/api/endpoints/performance.py
 from dependency_injector.wiring import Provide, inject
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import ORJSONResponse

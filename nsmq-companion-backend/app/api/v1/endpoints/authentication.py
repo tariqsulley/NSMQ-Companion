@@ -15,10 +15,6 @@ from sqlalchemy.orm import Session
 from app.routers.shared import get_db
 from app.core.security import extract_user_data
 from app.schemas.token import VerifyToken
-from app.core.security import (
-    generate_verification_token,
-    create_verification_token
-)
 from app.models.facilitator import Facilitator
 from app.models.email_verification import EmailVerification
 from app.schemas.email_verification import UserEmailVerification

@@ -70,15 +70,22 @@ export default function PracticeYear({ params }: PracticeYearProps) {
 
 
 
+    // const isRoundCompleted = (contestId: any, roundNumber: any) => {
+    //     const contestData = completedRounds?.find((item: ContestRoundData) => item.date === `Contest ${contestId}`);
+    //     return contestData ? !!contestData[`Round ${roundNumber}`] : false;
+    // };
+
     const isRoundCompleted = (contestId: any, roundNumber: any) => {
         const contestData = completedRounds?.find((item: ContestRoundData) => item.date === `Contest ${contestId}`);
-        return contestData ? !!contestData[`Round ${roundNumber}`] : false;
+        return contestData ? contestData.hasOwnProperty(`Round ${roundNumber}`) : false;
     };
 
     const [showReviewDropdown, setShowReviewDropdown] = useState(false);
 
+
     const handleReviewRound = (contest: any, roundNumber: any) => {
         const contestId = contest.split(' ')[1];
+        setShowReviewDropdown(false);  // Close the dropdown
         router.push(`/dashboard/contest/${year}?id=${contestId}&startRound=${roundNumber}&mode=review`);
     };
 
@@ -95,15 +102,18 @@ export default function PracticeYear({ params }: PracticeYearProps) {
 
     const currentContests = contests?.slice(indexOfFirstCard, indexOfLastCard);
 
+
+
     const getStartingRound = (completedRoundsForContest: any) => {
         if (!completedRoundsForContest) return 1;
         for (let i = 1; i <= 4; i++) {
-            if (!completedRoundsForContest[`Round ${i}`]) {
+            if (!completedRoundsForContest.hasOwnProperty(`Round ${i}`)) {
                 return i;
             }
         }
-        return 1;
-    }
+        return 5;
+    };
+
 
 
     const handleContestClick = (contest: any) => {
@@ -125,13 +135,14 @@ export default function PracticeYear({ params }: PracticeYearProps) {
 
         let completedRoundsCount = 0;
         for (let i = 1; i <= 4; i++) {
-            if (completedRoundsForContest[`Round ${i}`]) {
+            if (completedRoundsForContest.hasOwnProperty(`Round ${i}`)) {
                 completedRoundsCount++;
             }
         }
 
         return (completedRoundsCount / 4) * 100;
     }
+
 
     if (!contests) {
         return (
