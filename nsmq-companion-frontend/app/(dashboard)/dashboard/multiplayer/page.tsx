@@ -1,12 +1,9 @@
 "use client";
-import 'regenerator-runtime/runtime'
-
+import 'regenerator-runtime/runtime';
 import Sidebar from "@/app/components/Sidebar";
 import { useState, useEffect } from "react";
 import { useAuth } from "@/app/context/AuthContext";
-import SpeechRecognition, {
-    useSpeechRecognition,
-} from "react-speech-recognition";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 // @ts-ignore
 import useSound from "use-sound";
 import API_BASE from "@/app/utils/api";
@@ -16,17 +13,15 @@ import Image from "next/image";
 import img1 from "../../../../public/images/2018-winner.png";
 import img2 from "../../../../public/images/2021-winner.png";
 import ProfilePic from "../../../../public/images/avatar.svg";
-import multiplayericon from "../../../../public/images/mult.jpg"
+import multiplayericon from "../../../../public/images/mult.jpg";
 
 const riddles: any = {
     riddle_1: {
         line_1: "I am a metal halide",
         line_2: "My metal is in the oxidation state of three.",
         line_3: "I usually crystallise out of water as a hydrated salt.",
-        line_4:
-            "In my anhydrous state I dimerize to form a double molecule held by dative covalent bonds.",
-        line_5:
-            "My metal has atomic number 13 while my halogens have atomic number\nWho am I?",
+        line_4: "In my anhydrous state I dimerize to form a double molecule held by dative covalent bonds.",
+        line_5: "My metal has atomic number 13 while my halogens have atomic number\nWho am I?",
         answer: "Aluminium chloride",
     },
 };
@@ -42,12 +37,7 @@ export default function MultiplayerPage() {
     const [checkingAnswer, setCheckingAnswer] = useState<boolean>(false);
     const [similarityScore, setSimilarityScore] = useState();
     const [transcribedText, setTranscribedText] = useState("");
-    const {
-        transcript,
-        resetTranscript,
-        listening,
-        browserSupportsSpeechRecognition,
-    } = useSpeechRecognition();
+    const { transcript, resetTranscript, listening, browserSupportsSpeechRecognition } = useSpeechRecognition();
     const [isCircleGreen, setIsCircleGreen] = useState(false);
     const [isBellPlaying, setIsBellPlaying] = useState(false);
     const [play] = useSound("/Sounds/bell.wav");
@@ -56,22 +46,22 @@ export default function MultiplayerPage() {
     const [opponentImage, setOpponentImage] = useState("");
     const [currentAudio, setCurrentAudio] = useState<AudioBufferSourceNode | null>(null);
     const audioCtx = new (window.AudioContext)();
+    const [showLeaderBoard, setShowLeaderBoard] = useState(false);
+    const [countdown, setCountdown] = useState(3);
 
-    const [countdown, setCountdown] = useState(3); // Initialize countdown to 3 seconds
     const startCountdown = () => {
         const countdownInterval = setInterval(() => {
             setCountdown((prevCountdown) => {
                 if (prevCountdown === 1) {
                     clearInterval(countdownInterval);
-                    setQuizStarted(true); // Start the quiz immediately when countdown reaches 0
-                    playRiddle(1); // Start the riddle
-                    return 0; // Return 0 to prevent going into negative values
+                    setQuizStarted(true);
+                    playRiddle(1);
+                    return 0;
                 }
                 return prevCountdown - 1;
             });
         }, 1000);
     };
-
 
     const handleCircleClick = () => {
         if (!isBellPlaying && browserSupportsSpeechRecognition) {
@@ -121,9 +111,7 @@ export default function MultiplayerPage() {
     }, [transcript, listening]);
 
     const joinWaitingRoom = () => {
-        const newSocket = new WebSocket(
-            "ws://51.20.43.5/api/v1/multiplayer/ws"
-        );
+        const newSocket = new WebSocket("ws://51.20.43.5/api/v1/multiplayer/ws");
         setSocket(newSocket);
 
         newSocket.onopen = () => {
@@ -176,7 +164,6 @@ export default function MultiplayerPage() {
             setQuizStarted(false);
             setOpponentImage("");
         }
-
     };
 
     async function loadAudio(url: any) {
@@ -199,9 +186,7 @@ export default function MultiplayerPage() {
         });
     }
 
-
     const [currentLine, setCurrentLine] = useState(1);
-
 
     const playRiddle = async (riddleNumber: any) => {
         const riddleLines = riddles[`riddle_${riddleNumber}`];
@@ -221,8 +206,6 @@ export default function MultiplayerPage() {
             await playAudio(riddleNumber, lineNumber);
         }
     };
-
-
 
     const handleCalculateSimilarity = async () => {
         try {
@@ -261,127 +244,175 @@ export default function MultiplayerPage() {
         }
     };
 
+    const leaderboardData = [
+        { rank: 1, name: 'Alice', points: 100 },
+        { rank: 2, name: 'Bob', points: 95 },
+        { rank: 3, name: 'Charlie', points: 90 },
+        { rank: 4, name: 'Diana', points: 85 },
+        { rank: 5, name: 'Edward', points: 80 },
+
+    ];
+
+    const getBackgroundColor = (rank: number) => {
+        switch (rank) {
+            case 1:
+                return "bg-[#ffd700]";
+            case 2:
+                return "bg-[#C0C0C0]";
+            case 3:
+                return "bg-[#CD7F32]";
+            default:
+                return "bg-white dark:bg-darkBgLight";
+        }
+    };
+
     return (
         <div className="flex min-h-screen">
             <Sidebar />
             <div className="flex justify-center bg-bgMain dark:bg-darkBgLight sm:ml-[256px] w-full">
-                {/* <p className="mt-[100px]">Compete against friends in fast paced quizzes</p> */}
-                <div className="bg-white border-4 dark:bg-darkBgDeep relative mb-2 rounded-xl w-11/12 shadow-xl mt-[80px] ">
-                    {!quizStarted ? (
-                        <div>
-                            {waitingRoomStatus === "searching" ? (
-                                <p>Searching for an opponent...</p>
-                            ) : waitingRoomStatus === "paired" ? (
-                                <p>Quiz starts in {countdown} seconds...</p>
-                            ) : (
-                                <div className="flex flex-col gap-2 items-center justify-center  h-screen">
-                                    <div>
-                                        <Image src={multiplayericon} width={200} height={200} alt="image" />
-                                    </div>
-                                    <div className="flex gap-2">
-                                        <button
-                                            onClick={joinWaitingRoom}
-                                            className="bg-blue-800 text-white rounded-lg px-5 py-2"
-                                        >
-                                            Join Waiting Room
-                                        </button>
+                {!showLeaderBoard ? (
+                    <div className="bg-white border-4 dark:bg-darkBgDeep relative mb-2 rounded-xl w-11/12 shadow-xl mt-[80px] ">
+                        {!quizStarted ? (
+                            <div>
+                                {waitingRoomStatus === "searching" ? (
+                                    <p>Searching for an opponent...</p>
+                                ) : waitingRoomStatus === "paired" ? (
+                                    <p>Quiz starts in {countdown} seconds...</p>
+                                ) : (
+                                    <div className="flex flex-col gap-2 items-center justify-center  h-screen">
                                         <div>
-                                            <button className="bg-blue-800 text-white rounded-lg px-5 py-2">
-                                                View LeaderBoard
+                                            <Image src={multiplayericon} width={200} height={200} alt="image" />
+                                        </div>
+                                        <div className="flex gap-2">
+                                            <button
+                                                onClick={joinWaitingRoom}
+                                                className="bg-blue-800 text-white rounded-lg px-5 py-2"
+                                            >
+                                                Join Waiting Room
                                             </button>
+                                            <div>
+                                                <button className="bg-blue-800 text-white rounded-lg px-5 py-2"
+                                                    onClick={() => setShowLeaderBoard(true)}>
+                                                    View LeaderBoard
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )}
-                        </div>
-                    ) : (
-                        <>
-                            <div className="flex items-center justify-evenly bg-[#3b65d9] shadow p-3 rounded-b-3xl">
-                                <div className="flex items-center justify-evenly w-[90%] bg-gray-100 rounded-xl shadow">
-                                    <div className="flex items-center gap-2">
-                                        <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
-                                            <Image
-                                                src={Data?.data.avatar_url}
-                                                width={64}
-                                                height={64}
-                                                alt="Preview"
-                                                className="rounded-full sm:w-full sm:h-full  object-cover"
-                                            />
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <p>
-                                                {Data?.data.first_name} {Data?.data.last_name}
-                                            </p>
-                                            <p>Points: 0</p>
-                                        </div>
-                                    </div>
-
-                                    <div className="flex items-center">
-                                        <p className="sm:text-3xl">VS</p>
-                                    </div>
-
-                                    <div className="flex items-center sm:gap-2">
-                                        <div className="flex flex-col">
-                                            <p>{pairedStudent}</p>
-                                            <p>Points: 0</p>
-                                        </div>
-                                        <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
-                                            <Image
-                                                src={opponentImage}
-                                                width={64}
-                                                height={64}
-                                                alt="Preview"
-                                                className="rounded-full sm:w-full sm:h-full object-cover"
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
+                                )}
                             </div>
-                            <div className="flex flex-col items-center justify-center">
-                                <div className="flex items-center justify-between bg-[#3b65d9] w-1/2 rounded-lg py-2 p-2 mt-10 ">
-                                    <p className="text-white">Question</p>
-                                    <p className="text-white">3/5</p>
-                                </div>
-                                {riddleQuestion && <p className="text-xl">{riddleQuestion}</p>}
-                                <div>
-                                    <h2 className="font-semibold">Transcribed Answer</h2>
-                                    <p className="font-semibold text-black">{transcribedText}</p>
-                                </div>
-                            </div>
+                        ) : (
+                            <>
+                                <div className="flex items-center justify-evenly bg-[#3b65d9] shadow p-3 rounded-b-3xl">
+                                    <div className="flex items-center justify-evenly w-[90%] bg-gray-100 rounded-xl shadow">
+                                        <div className="flex items-center gap-2">
+                                            <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                                                <Image
+                                                    src={Data?.data.avatar_url}
+                                                    width={64}
+                                                    height={64}
+                                                    alt="Preview"
+                                                    className="rounded-full sm:w-full sm:h-full  object-cover"
+                                                />
+                                            </div>
+                                            <div className="flex flex-col">
+                                                <p>
+                                                    {Data?.data.first_name} {Data?.data.last_name}
+                                                </p>
+                                                <p>Points: 0</p>
+                                            </div>
+                                        </div>
 
-                            <div className="flex absolute bottom-0 w-full flex-col items-center h-[50%] shadow mt-[100px] bg-[#3b65d9] rounded-t-3xl justify-center">
-                                <div
-                                    className={`w-10 h-10 rounded-full ${isCircleGreen ? "bg-green-500" : "bg-gray-500"
-                                        }`}
-                                    onClick={handleCircleClick}
-                                />
-                                <div>
+                                        <div className="flex items-center">
+                                            <p className="sm:text-3xl">VS</p>
+                                        </div>
+
+                                        <div className="flex items-center sm:gap-2">
+                                            <div className="flex flex-col">
+                                                <p>{pairedStudent}</p>
+                                                <p>Points: 0</p>
+                                            </div>
+                                            <div className="bg-white sm:w-24 sm:h-24  rounded-full m-auto flex items-center justify-center p-2 shadow-sm">
+                                                <Image
+                                                    src={opponentImage}
+                                                    width={64}
+                                                    height={64}
+                                                    alt="Preview"
+                                                    className="rounded-full sm:w-full sm:h-full object-cover"
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col items-center justify-center">
+                                    <div className="flex items-center justify-between bg-[#3b65d9] w-1/2 rounded-lg py-2 p-2 mt-10 ">
+                                        <p className="text-white">Question</p>
+                                        <p className="text-white">3/5</p>
+                                    </div>
+                                    {riddleQuestion && <p className="text-xl">{riddleQuestion}</p>}
                                     <div>
-                                        {connecting && <div>{connecting}</div>}
-                                        <button onClick={disconnectFromQuiz}>Disconnect</button>
+                                        <h2 className="font-semibold">Transcribed Answer</h2>
+                                        <p className="font-semibold text-black">{transcribedText}</p>
                                     </div>
                                 </div>
-                                <button
-                                    onClick={handleCalculateSimilarity}
-                                    disabled={!isReadyToCalculate}
-                                    className="bg-white  px-6 py-2 rounded-lg w-1/2 shadow"
+
+                                <div className="flex absolute bottom-0 w-full flex-col items-center h-[50%] shadow mt-[100px] bg-[#3b65d9] rounded-t-3xl justify-center">
+                                    <div
+                                        className={`w-10 h-10 rounded-full ${isCircleGreen ? "bg-green-500" : "bg-gray-500"
+                                            }`}
+                                        onClick={handleCircleClick}
+                                    />
+                                    <div>
+                                        <div>
+                                            {connecting && <div>{connecting}</div>}
+                                            <button onClick={disconnectFromQuiz}>Disconnect</button>
+                                        </div>
+                                    </div>
+                                    <button
+                                        onClick={handleCalculateSimilarity}
+                                        disabled={!isReadyToCalculate}
+                                        className="bg-white  px-6 py-2 rounded-lg w-1/2 shadow"
+                                    >
+                                        <p className="font-semibold text-black">
+                                            {" "}
+                                            {checkingAnswer ? (
+                                                <CgSpinner
+                                                    size={25}
+                                                    className="animate-spin text-white"
+                                                />
+                                            ) : (
+                                                "Submit Answer"
+                                            )}{" "}
+                                        </p>
+                                    </button>
+                                </div>
+                            </>
+                        )}
+                    </div>
+                ) : (
+                    <div className="bg-white border-4 dark:bg-darkBgDeep relative mb-2 rounded-xl w-11/12 shadow-xl mt-[80px] p-6">
+                        <h1 className="text-2xl font-bold mb-4">Leaderboard</h1>
+                        <div className="flex flex-col gap-4">
+                            {leaderboardData.map((data, index) => (
+                                <div
+                                    key={index}
+                                    className={`flex items-center justify-between p-4 rounded-lg shadow ${getBackgroundColor(data.rank)}`}
                                 >
-                                    <p className="font-semibold text-black">
-                                        {" "}
-                                        {checkingAnswer ? (
-                                            <CgSpinner
-                                                size={25}
-                                                className="animate-spin text-white"
-                                            />
-                                        ) : (
-                                            "Submit Answer"
-                                        )}{" "}
-                                    </p>
-                                </button>
-                            </div>
-                        </>
-                    )}
-                </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="text-xl font-semibold">{data.rank}</div>
+                                        <div className="text-lg font-medium">{data.name}</div>
+                                    </div>
+                                    <div className="text-lg font-medium">{data.points} pts</div>
+                                </div>
+                            ))}
+                        </div>
+                        <button
+                            onClick={() => setShowLeaderBoard(false)}
+                            className="bg-blue-800 text-white rounded-lg px-5 py-2 mt-4"
+                        >
+                            Back to Quiz
+                        </button>
+                    </div>
+                )}
             </div>
         </div>
     );
