@@ -103,7 +103,7 @@ export default function AnalyticsView() {
 
     useEffect(() => {
         if (studentAccuracies && studentAccuracies.data) {
-            const roundedData = studentAccuracies.data.length ? studentAccuracies.data[0].map(score => Math.round(score)) : [];
+            const roundedData = studentAccuracies.data.length ? studentAccuracies.data[0].map((score: number) => Math.round(score)) : [];
             setRadarChartData(prevData => ({
                 ...prevData,
                 datasets: [{
