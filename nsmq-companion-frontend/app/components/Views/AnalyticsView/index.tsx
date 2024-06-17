@@ -204,19 +204,19 @@ export default function AnalyticsView() {
                     <div className="flex flex-col sm:flex-row items-center gap-10 mx-10 mt-2">
                         <div className="flex flex-col gap-2">
                             <p className="text-[#889096] font-semibold">Total Questions</p>
-                            <p className="font-bold text-xl">9440</p>
+                            <p className="font-bold text-xl">384</p>
                         </div>
                         <div className="flex flex-col gap-2">
                             <p className="text-[#40C4AA] font-semibold">Correct Answers</p>
-                            <p className="font-bold text-xl">5223</p>
+                            <p className="font-bold text-xl">250</p>
                         </div>
                         <div className="flex flex-col gap-2">
                             <p className="text-[#E44283] font-semibold">Wrong Answers</p>
-                            <p className="font-bold text-xl">2667</p>
+                            <p className="font-bold text-xl">124</p>
                         </div>
                         <div className="flex flex-col gap-2">
                             <p className="text-[#889096] font-semibold">Unanswered Questions</p>
-                            <p className="font-bold text-xl">1550</p>
+                            <p className="font-bold text-xl">10</p>
                         </div>
                     </div>
                     <AreaChart
