@@ -552,7 +552,7 @@ export default function ContestPage({ params }: any) {
 
 
     useEffect(() => {
-        if (quizEnded) {
+        if (quizEnded && mode !== 'Champion') {
             const accuracies = calculateAccuracy();
             sendAccuracyToBackend(accuracies);
         }
@@ -560,7 +560,7 @@ export default function ContestPage({ params }: any) {
 
 
     useEffect(() => {
-        if (quizEnded) {
+        if (quizEnded && mode !== "Champion") {
             // calculateAccuracy();
             sendRoundDataToBackend();
             sendPerformanceDataToBackend()
@@ -956,6 +956,18 @@ export default function ContestPage({ params }: any) {
         }
     }
 
+
+    const getInitials = (name: string) => {
+        const nameArray = name?.split(" ");
+        const initials = nameArray
+            ?.map((namePart: string) => namePart.charAt(0))
+            ?.slice(0, 2)
+            ?.join("")
+            ?.toUpperCase();
+        return initials;
+    };
+
+
     if (!questions) {
         return <div>Loading questions...</div>;
     }
@@ -1066,22 +1078,46 @@ export default function ContestPage({ params }: any) {
                                     <p className="shadow px-6 py-2 rounded-xl border-2 bg-gray-100 font-bold dark:bg-blue-800 ">Round {startRound}</p>
                                 </div>
 
-                                <div className="flex w-full ">
+                                <div className="flex w-full justify-evenly ">
                                     {mode == "Champion" ?
-                                        <div className='flex flex-col items-center justify-center 
+                                        <div className='flex items-center justify-center gap-2 mt-2 '>
+                                            <div className='flex flex-col items-center justify-center 
                                     gap-2 bg-gray-100 shadow rounded-lg m-2'>
-                                            <Image src={prempeh_logo} alt='logo' className='w-[50%]' />
-                                            <p className='text-xl text-center font-bold'>Prempeh Score: {opponentScore}</p>
+                                                <Image src={prempeh_logo} alt='logo' className='w-[20%]' />
+                                                <p className='text-xl text-center font-bold'>Prempeh Score: {opponentScore}</p>
+                                            </div>
+                                            <div>
+                                                <p>VS</p>
+                                            </div>
+                                            <div className='flex flex-col gap-2 items-center bg-gray-100 shadow rounded-lg p-5'>
+                                                <button type="button" className="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600">
+                                                    <div className="flex items-center justify-center rounded-full bg-primary border-2 border-blue-100 h-8 w-8">
+                                                        {!Data?.data.avatar_url ?
+                                                            <p className="text-white text-md">{getInitials(Data?.data?.first_name)}</p> :
+                                                            <Image
+                                                                src={Data?.data.avatar_url}
+                                                                alt="profile"
+                                                                width={34}
+                                                                height={34}
+                                                                priority
+                                                                className="rounded-full w-full h-full  object-cover"
+                                                            />
+                                                        }
+                                                    </div>
+                                                </button>
+                                                <p className='font-bold text-xl'>{Data?.data.first_name}'s Score: {round_score}</p>
+                                            </div>
                                         </div> : ""}
 
-                                    <div className="flex items-center gap-1 p-2 w-full justify-start">
-                                        <p className="font-semibold text-2xl">Points: {round_score}</p>
-                                    </div>
+                                    {mode == "Champion" ? "" :
+                                        <div className="flex items-center gap-1 p-2  justify-start">
+                                            <p className="font-semibold text-2xl">Points: {round_score}</p>
+                                        </div>}
 
-                                    {isAudioPlaying ? <div className="flex items-center gap-1 p-2 w-full justify-end">
+                                    {isAudioPlaying ? <div className="flex items-center gap-1 p-2 ">
                                         <Image src={clock_icon} alt="clock icon" width={20} height={20} />
                                         <p className="font-semibold text-2xl">Time left:</p>
-                                    </div> : <div className="flex items-center gap-1 p-2 w-full justify-end">
+                                    </div> : <div className="flex items-center gap-1 p-2 ">
                                         <Image src={clock_icon} alt="clock icon" width={20} height={20} />
                                         <p className="font-semibold text-2xl">Time left: {timeLeft}s</p>
                                     </div>
@@ -1169,7 +1205,7 @@ export default function ContestPage({ params }: any) {
                                                 <p className="font-semibold text-white">Next Question</p></button>
                                         )}
                                     </div>
-                                    <p>Similarity:{similarityScore}</p>
+                                    {/* <p>Similarity:{similarityScore}</p> */}
                                 </div>
                             </div> : ""}
 
@@ -1219,6 +1255,8 @@ export default function ContestPage({ params }: any) {
                                     </div>
                                 </div>
                                 <div>
+
+                                    {/* 
                                     {quizCompleted ? (
                                         <Link href="/dashboard/practice" className='bg-white border-2 px-6
                  py-2 rounded-lg text-center dark:bg-blue-800 ' >
@@ -1238,7 +1276,33 @@ export default function ContestPage({ params }: any) {
                                                     Go To Next Round</button>
                                             </ div>
                                         )
+                                    )} */}
+
+                                    {quizCompleted ? (
+                                        <Link href="/dashboard/practice" className='bg-white border-2 px-6 py-2 rounded-lg text-center dark:bg-blue-800'>
+                                            Go to Practice Page
+                                        </Link>
+                                    ) : (
+                                        mode !== "Champion" ? (
+                                            accuracySent && roundDataSent && performanceDataSent ? (
+                                                <CgSpinner size={25} className="animate-spin text-blue-800 text-xl" />
+                                            ) : (
+                                                <div className='flex items-center gap-2'>
+                                                    <Link href="/dashboard/practice" className='bg-white border-2 px-6 py-2 rounded-lg text-center dark:bg-blue-800'>
+                                                        Go To Practice Page
+                                                    </Link>
+                                                    <button onClick={handleGoToNextRound} className='bg-blue-800 text-white px-6 py-2 rounded-lg text-center'>
+                                                        Go To Next Round
+                                                    </button>
+                                                </div>
+                                            )
+                                        ) : (
+                                            <Link href="/dashboard/champion-challenge" className='bg-white border-2 px-6 py-2 rounded-lg text-center dark:bg-blue-800'>
+                                                Go to Dashboard
+                                            </Link>
+                                        )
                                     )}
+
 
                                     {quizCompleted && (round_score > opponentScore) && mode == "Champion" ?
                                         <button onClick={handleGoToNextRound}>Go To Next Round</button> : ""}
